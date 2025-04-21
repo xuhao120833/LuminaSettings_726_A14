@@ -44,6 +44,7 @@ import com.htc.luminaos.receiver.AppReceiver;
 import com.htc.luminaos.receiver.BatteryReceiver;
 import com.htc.luminaos.receiver.DisplaySettingsReceiver;
 import com.htc.luminaos.receiver.UsbDeviceCallBack;
+import com.htc.luminaos.service.TimeOffService;
 import com.htc.luminaos.utils.BatteryCallBack;
 import com.htc.luminaos.utils.BlurImageView;
 import com.htc.luminaos.utils.FileUtils;
@@ -316,6 +317,7 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
             //以太网检测
             isEthernetConnect(getApplicationContext());
             StartupTimer.mark("onCreate完成");
+            startRebootService();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -341,6 +343,23 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
         StartupTimer.mark("onResume完成");
 
         StartupTimer.print(" MainActivity StartupTime");
+    }
+
+    private void startRebootService() {
+        int[] time_off_value = getResources().getIntArray(R.array.time_off_value);
+        int cur_time_off_index = (int) ShareUtil.get(this, Contants.TimeOffIndex, 0);
+        Intent intent = new Intent(this, TimeOffService.class);
+        if (cur_time_off_index == 0) {
+            ShareUtil.put(this, Contants.TimeOffStatus, false);
+            intent.putExtra(Contants.TimeOffStatus, false);
+            intent.putExtra(Contants.TimeOffTime, -1);
+        } else {
+            ShareUtil.put(this, Contants.TimeOffStatus, true);
+            ShareUtil.put(this, Contants.TimeOffTime, time_off_value[cur_time_off_index]);
+            intent.putExtra(Contants.TimeOffStatus, true);
+            intent.putExtra(Contants.TimeOffTime, time_off_value[cur_time_off_index]);
+        }
+        startService(intent);
     }
 
     private void chooseLayout() {
@@ -707,7 +726,7 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
         displaySettingsReceiver = new DisplaySettingsReceiver(getApplicationContext());
         IntentFilter displayFilter = new IntentFilter();
         displayFilter.addAction(DisplaySettingsReceiver.DisplayAction);
-        registerReceiver(displaySettingsReceiver,displayFilter);
+        registerReceiver(displaySettingsReceiver, displayFilter);
     }
 
     ShortcutsAdapter.ItemCallBack itemCallBack = new ShortcutsAdapter.ItemCallBack() {
@@ -1156,7 +1175,7 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
                     String appName = jsonobject.getString("appName");
                     String packageName = jsonobject.getString("packageName");
 
-                    Utils.specialAppsList +=packageName;
+                    Utils.specialAppsList += packageName;
 
                     String iconPath = jsonobject.getString("iconPath");
                     String continent = jsonobject.getString("continent");
@@ -1170,7 +1189,7 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
 
 //                    Log.d(TAG," Utils.specialAppsList "+Utils.specialAppsList);
                 }
-                Log.d(TAG," Utils.specialAppsList "+Utils.specialAppsList);
+                Log.d(TAG, " Utils.specialAppsList " + Utils.specialAppsList);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -1737,22 +1756,22 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
         Log.d(TAG, " setDefaultBackground number " + number);
         Log.d(TAG, " setDefaultBackground defaultbg " + defaultbg);
         StartupTimer.mark("Integer.parseInt(defaultbg)完成");
-        if(Utils.customBackground) {
-            String path = (String) Utils.drawables.get(number-1);
+        if (Utils.customBackground) {
+            String path = (String) Utils.drawables.get(number - 1);
             Log.d(TAG, " loadImageFromPath path " + path);
-            Drawable drawable = ImageUtils.loadImageFromPath(path,getApplicationContext());
+            Drawable drawable = ImageUtils.loadImageFromPath(path, getApplicationContext());
             MyApplication.mainDrawable = (BitmapDrawable) drawable;
             setDefaultBg(drawable);
-        }else {
+        } else {
             if (number > Utils.drawablesId.length) {
                 Log.d(TAG, " setDefaultBackground 用户设置的默认背景，超出了范围");
                 return;
             }
-            if(number == 1) {
+            if (number == 1) {
                 Drawable drawable = (Drawable) Utils.drawables.get(0);
                 MyApplication.mainDrawable = (BitmapDrawable) drawable;
                 setDefaultBg(drawable);
-            }else if(number>1) {
+            } else if (number > 1) {
                 setWallPaper(Utils.drawablesId[number - 1]);
                 Drawable drawable = getResources().getDrawable(Utils.drawablesId[number - 1]);
                 MyApplication.mainDrawable = (BitmapDrawable) drawable;
@@ -2149,7 +2168,7 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
                 layout.addView(source_item);
                 source_title.setSelected(true);
             } else {
-                String title = Utils.sourceListTitle[i-1];
+                String title = Utils.sourceListTitle[i - 1];
                 // 获取 LayoutInflater 对象
                 source_title.setText(title);
                 // 设置上下外边距
@@ -2165,7 +2184,7 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
                 source_item.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        startSource(Utils.sourceList[finalI-1]);
+                        startSource(Utils.sourceList[finalI - 1]);
                     }
                 });
                 source_item.setOnHoverListener(this);
@@ -2180,29 +2199,29 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
     @Override
     public void onFocusChange(View v, boolean hasFocus) {
         int id = v.getId();
-        if(hasFocus) {
-            if(id == R.id.home_eshare) {
+        if (hasFocus) {
+            if (id == R.id.home_eshare) {
                 customBinding.eshareText.setSelected(true);
-            } else if(id == R.id.rl_usb) {
+            } else if (id == R.id.rl_usb) {
                 customBinding.fileText.setSelected(true);
-            } else if(id == R.id.rl_hdmi1){
+            } else if (id == R.id.rl_hdmi1) {
                 customBinding.hdmiText.setSelected(true);
-            } else if(id == R.id.rl_settings) {
+            } else if (id == R.id.rl_settings) {
                 customBinding.settingsText.setSelected(true);
             }
-        }else {
-            if(id == R.id.home_eshare) {
+        } else {
+            if (id == R.id.home_eshare) {
                 customBinding.eshareText.setSelected(false);
-            } else if(id == R.id.rl_usb) {
+            } else if (id == R.id.rl_usb) {
                 customBinding.fileText.setSelected(false);
-            } else if(id == R.id.rl_hdmi1){
+            } else if (id == R.id.rl_hdmi1) {
                 customBinding.hdmiText.setSelected(false);
-            } else if(id == R.id.rl_settings) {
+            } else if (id == R.id.rl_settings) {
                 customBinding.settingsText.setSelected(false);
             }
         }
 
-        if(hasFocus && (MyApplication.config.layout_select==2 || MyApplication.config.layout_select==3)) {
+        if (hasFocus && (MyApplication.config.layout_select == 2 || MyApplication.config.layout_select == 3)) {
             if (id == R.id.home_netflix) {
                 customBinding.icon1border.setVisibility(View.VISIBLE);
             } else if (id == R.id.home_youtube) {
@@ -2213,7 +2232,7 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
                 customBinding.icon4border.setVisibility(View.VISIBLE);
             }
 
-        } else if(!hasFocus && (MyApplication.config.layout_select==2 || MyApplication.config.layout_select==3)) {
+        } else if (!hasFocus && (MyApplication.config.layout_select == 2 || MyApplication.config.layout_select == 3)) {
             if (id == R.id.home_netflix) {
                 customBinding.icon1border.setVisibility(View.GONE);
             } else if (id == R.id.home_youtube) {
@@ -2225,7 +2244,7 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
             }
         }
 
-        super.onFocusChange(v,hasFocus);
+        super.onFocusChange(v, hasFocus);
     }
 
 }

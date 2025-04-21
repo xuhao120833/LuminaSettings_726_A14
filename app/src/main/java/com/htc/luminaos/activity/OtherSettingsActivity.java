@@ -117,6 +117,7 @@ public class OtherSettingsActivity extends BaseActivity implements View.OnKeyLis
         time_off_title =  getResources().getStringArray(R.array.time_off_title);
         time_off_value = getResources().getIntArray(R.array.time_off_value);
         cur_time_off_index =(int) ShareUtil.get(this, Contants.TimeOffIndex,0);
+        Log.d(TAG," initData cur_time_off_index "+cur_time_off_index);
         otherSettingsBinding.timerOffTv.setText(time_off_title[cur_time_off_index]);
         /*if ((boolean) ShareUtil.get(this, Contants.TimeOffStatus,false)){
             int  timeOffTime =(int) ShareUtil.get(this, Contants.TimeOffTime,0);

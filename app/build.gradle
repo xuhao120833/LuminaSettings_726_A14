@@ -86,7 +86,7 @@ android {
 }
 
 static def getVersionNames() {
-    return "1.0.06"
+    return "1.0.08"
 }
 
 static def releaseTime() {

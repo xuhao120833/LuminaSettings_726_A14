@@ -349,15 +349,12 @@ public class HotspotActivity extends BaseActivity implements View.OnKeyListener 
             hotspotBinding.passwordTv.setText(password);
             hotspotBinding.securityTv.setText(securityArray[mSecurityType]);
         } else {
-//            password="12345678";
-//            hotspotBinding.passwordTv.setText(password);
-
             WifiConfiguration configuration = wifiHotUtil.getWifiConfig();
             if (configuration.preSharedKey != null) {
                 hotspotBinding.passwordTv.setText(configuration.preSharedKey);
             } else {
-                password = "12345678";
-                hotspotBinding.passwordTv.setText(password);
+//                password = "12345678";
+//                hotspotBinding.passwordTv.setText(password);
             }
         }
         hotspotBinding.securityTv.setText(securityArray[mSecurityType]);

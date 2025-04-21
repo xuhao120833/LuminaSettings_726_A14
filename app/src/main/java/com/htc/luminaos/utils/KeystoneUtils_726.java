@@ -405,7 +405,8 @@ public class KeystoneUtils_726 {
         rb_Y = rb_y;
         lb_X = lb_x;
         lb_Y = lb_y;
-        UpdateKeystoneZOOM(true);
+//        UpdateKeystoneZOOM(true);
+        writeParcelToFlinger(lt_x,lt_y,rt_x,rt_y,lb_x,lb_y,rb_x,rb_y);
         lt_xy = getKeystoneHtcLeftAndTopXY();
         rt_xy = getKeystoneHtcRightAndTopXY();
         lb_xy = getKeystoneHtcLeftAndBottomXY();
