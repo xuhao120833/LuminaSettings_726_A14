@@ -104,6 +104,21 @@ public class OtherSettingsActivity extends BaseActivity implements View.OnKeyLis
         if ((boolean)ShareUtil.get(this,Contants.KEY_DEVELOPER_MODE,false)){
             otherSettingsBinding.rlDeveloper.setVisibility(View.VISIBLE);
         }
+
+        requestFirstItemFocus();
+    }
+
+    private void requestFirstItemFocus() {
+        if (MyApplication.config.bootSource) {
+            otherSettingsBinding.rlBootInput.requestFocus();
+            otherSettingsBinding.rlBootInput.requestFocusFromTouch();
+        } else if (MyApplication.config.powerMode) {
+            otherSettingsBinding.rlPowerMode.requestFocus();
+            otherSettingsBinding.rlPowerMode.requestFocusFromTouch();
+        } else {
+            otherSettingsBinding.rlButtonSound.requestFocus();
+            otherSettingsBinding.rlButtonSound.requestFocusFromTouch();
+        }
     }
 
     private void initData(){
