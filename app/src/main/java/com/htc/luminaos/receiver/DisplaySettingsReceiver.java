@@ -69,8 +69,6 @@ public class DisplaySettingsReceiver extends BroadcastReceiver implements View.O
     DisplaySettingsReceiver() {
     }
 
-    ;
-
     @Override
     public void onReceive(Context context, Intent intent) {
         String action = intent.getAction();

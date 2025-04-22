@@ -92,8 +92,8 @@ public class OtherSettingsActivity extends BaseActivity implements View.OnKeyLis
         otherSettingsBinding.rlBootInput.setOnKeyListener(this);
         otherSettingsBinding.rlPowerMode.setOnKeyListener(this);
 
-        otherSettingsBinding.rlBootInput.requestFocus();
-        otherSettingsBinding.rlBootInput.requestFocusFromTouch();
+//        otherSettingsBinding.rlBootInput.requestFocus();
+//        otherSettingsBinding.rlBootInput.requestFocusFromTouch();
 
 //        otherSettingsBinding.rlAudioMode.setVisibility(MyApplication.config.AudioMode?View.VISIBLE:View.GONE);
         otherSettingsBinding.rlPowerMode.setVisibility(MyApplication.config.powerMode?View.VISIBLE:View.GONE);
