@@ -14,17 +14,12 @@ public class AddViewToScreen {
     public void addView(View v, WindowManager.LayoutParams p) {
         // 添加一个view之前先尝试删除这个view, 避免重复添加
         Log.d(TAG, "v.isAttachedToWindow() " + String.valueOf(v.isAttachedToWindow()));
-        if (v.isAttachedToWindow()) {
-            // 视图已经添加到屏幕上
-            try {
-                v.clearFocus();
-                wm.removeViewImmediate(v);
-            } catch (Exception e) {
-                Log.d(TAG, "addView : removeView has Error： " + e.getMessage());
-            }
+        try {
+            v.clearFocus();
+            wm.addView(v, p);
+        }catch (Exception e) {
+            e.printStackTrace();
         }
-        v.clearFocus();
-        wm.addView(v, p);
     }
 
     public void setContext(Context context) {

@@ -22,11 +22,11 @@ import com.htc.luminaos.utils.ReflectUtil;
 import com.softwinner.PQControl;
 import com.softwinner.tv.AwTvDisplayManager;
 
-public class DisplaySettingsReceiver extends BroadcastReceiver implements View.OnClickListener,View.OnKeyListener,View.OnHoverListener{
+public class DisplaySettingsReceiver extends BroadcastReceiver implements View.OnClickListener, View.OnKeyListener, View.OnHoverListener {
     private Context mContext;
     ActivityDisplaySettingsBinding displaySettingsBinding;
     private static String TAG = "DisplaySettingsReceiver";
-    public static final String DisplayAction ="com.htc.DISPLAY_SETTINGS";
+    public static final String DisplayAction = "com.htc.DISPLAY_SETTINGS";
     private AddViewToScreen mavts = new AddViewToScreen();
     public WindowManager.LayoutParams lp;
     private String[] picture_mode_choices;
@@ -47,6 +47,7 @@ public class DisplaySettingsReceiver extends BroadcastReceiver implements View.O
     private long cur_time = 0;
 
     private int curPosition = 0;//当前图像模式
+
     public DisplaySettingsReceiver(Context context) {
         mContext = context;
         mavts.setContext(mContext);
@@ -65,18 +66,25 @@ public class DisplaySettingsReceiver extends BroadcastReceiver implements View.O
         pqControl = new PQControl();
     }
 
-   DisplaySettingsReceiver(){};
+    DisplaySettingsReceiver() {
+    }
+
+    ;
 
     @Override
     public void onReceive(Context context, Intent intent) {
         String action = intent.getAction();
-        if(action.equals(DisplayAction)) {
-            initData();
-//            mavts.addView(displaySettingsBinding.getRoot(),lp);
-            if (displaySettingsBinding.getRoot().getParent() == null) {
-                mavts.addView(displaySettingsBinding.getRoot(), lp);
-            } else {
-                Log.d("DisplayReceiver", "悬浮窗已存在，不再重复添加");
+        if (action.equals(DisplayAction)) {
+            try {
+                initData();
+                boolean show = intent.getBooleanExtra("show", false);
+                if (show && !displaySettingsBinding.getRoot().isAttachedToWindow()) {
+                    mavts.addView(displaySettingsBinding.getRoot(), lp);
+                } else if (!show && displaySettingsBinding.getRoot().isAttachedToWindow()) {
+                    mavts.clearView(displaySettingsBinding.getRoot());
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
     }
@@ -93,10 +101,10 @@ public class DisplaySettingsReceiver extends BroadcastReceiver implements View.O
         } else {
             lp.type = WindowManager.LayoutParams.TYPE_SYSTEM_ALERT;
         }
-        lp.width = (int)mContext.getResources().getDimension(R.dimen.x_400);
-        lp.height = (int)mContext.getResources().getDimension(R.dimen.y_640);
+        lp.width = (int) mContext.getResources().getDimension(R.dimen.x_400);
+        lp.height = (int) mContext.getResources().getDimension(R.dimen.y_640);
         lp.gravity = Gravity.START;
-        lp.x = (int)mContext.getResources().getDimension(R.dimen.x_27);
+        lp.x = (int) mContext.getResources().getDimension(R.dimen.x_27);
     }
 
     private void initView() {
@@ -187,7 +195,7 @@ public class DisplaySettingsReceiver extends BroadcastReceiver implements View.O
             mavts.clearView(displaySettingsBinding.main);
             return true;
         }
-        if ((event.getAction() == KeyEvent.ACTION_UP) && (keyCode == KeyEvent.KEYCODE_DPAD_LEFT || keyCode == KeyEvent.KEYCODE_DPAD_RIGHT )) {
+        if ((event.getAction() == KeyEvent.ACTION_UP) && (keyCode == KeyEvent.KEYCODE_DPAD_LEFT || keyCode == KeyEvent.KEYCODE_DPAD_RIGHT)) {
             return true;
         }
         AudioManager audioManager = (AudioManager) v.getContext().getSystemService(Context.AUDIO_SERVICE);
