@@ -43,6 +43,7 @@ import com.htc.luminaos.receiver.AppCallBack;
 import com.htc.luminaos.receiver.AppReceiver;
 import com.htc.luminaos.receiver.BatteryReceiver;
 import com.htc.luminaos.receiver.DisplaySettingsReceiver;
+import com.htc.luminaos.receiver.InitAngleReceiver;
 import com.htc.luminaos.receiver.UsbDeviceCallBack;
 import com.htc.luminaos.service.TimeOffService;
 import com.htc.luminaos.utils.BatteryCallBack;
@@ -183,6 +184,7 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
     private BatteryReceiver batteryReceiver = null;
     //Display Settings 悬浮窗
     private DisplaySettingsReceiver displaySettingsReceiver = null;
+    private InitAngleReceiver initAngleReceiver = null;
 
     private static String TAG = "MainActivity";
 
@@ -727,6 +729,13 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
         IntentFilter displayFilter = new IntentFilter();
         displayFilter.addAction(DisplaySettingsReceiver.DisplayAction);
         registerReceiver(displaySettingsReceiver, displayFilter);
+
+        //初始角度矫正
+        initAngleReceiver = new InitAngleReceiver(getApplicationContext());
+        IntentFilter initAngleFilter = new IntentFilter();
+        initAngleFilter.addAction("com.htc.INITANGLE");
+        registerReceiver(initAngleReceiver, initAngleFilter);
+
     }
 
     ShortcutsAdapter.ItemCallBack itemCallBack = new ShortcutsAdapter.ItemCallBack() {
@@ -1419,6 +1428,7 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
         unregisterReceiver(appReceiver);
         unregisterReceiver(batteryReceiver);
         unregisterReceiver(displaySettingsReceiver);
+        unregisterReceiver(initAngleReceiver);
         super.onDestroy();
     }
 

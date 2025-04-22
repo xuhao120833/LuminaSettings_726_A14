@@ -117,6 +117,8 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
         super.onResume();
         All = KeystoneUtils_726.readGlobalSettings(this, KeystoneUtils_726.ZOOM_VALUE, 0);
         updateZoomView();
+        //16:9 16:10 4:3 画面缩放
+        updateSzoomTv();
     }
 
     @Override
@@ -320,11 +322,13 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
         projectBinding.autoFocusSwitch.setChecked(get_auto_focus());
 
         //16:9 16:10 4:3 画面缩放
-        updateSzoomTv();
+//        updateSzoomTv();
     }
 
     private void updateSzoomTv() {
-        zoom_scale = KeystoneUtils_726.readGlobalSettings(this, KeystoneUtils_726.ZOOM_SCALE, 0);
+        Log.d(TAG,"updateSzoomTv zoom_scale"+zoom_scale);
+        zoom_scale = KeystoneUtils.readSystemProperties(KeystoneUtils.PROP_ZOOM_SCALE,zoom_scale);
+        Log.d(TAG,"updateSzoomTv zoom_scale"+zoom_scale);
         switch (zoom_scale) {
             case 0:
                 projectBinding.screenZoomeTv.setText(screen_zoom[0]);
@@ -444,8 +448,10 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
 //                });
 //                builder.setNegativeButton(getString(R.string.cancel), null);
 //                builder.show();
-            InitAngleDialog initAngleDialog = new InitAngleDialog(this, R.style.DialogTheme);
-            initAngleDialog.show();
+
+//            InitAngleDialog initAngleDialog = new InitAngleDialog(this, R.style.DialogTheme);
+//            initAngleDialog.show();
+            startNewActivity(InitAngleActivity.class);
         } else if (id == R.id.rl_project_mode) {
             old_project_mode = cur_project_mode;
             Log.d(TAG, "onClick向右切换安装模式");
@@ -488,7 +494,8 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
                 set_screen_zoom(All, All, All, All, zoom_scale);
             else
                 updateScaleZoom(zoom_scale);
-            KeystoneUtils_726.writeGlobalSettings(this, KeystoneUtils_726.ZOOM_SCALE, zoom_scale);
+            Log.d(TAG, " writeSystemProperties KeystoneUtils.PROP_ZOOM_SCALE ");
+            KeystoneUtils.writeSystemProperties(KeystoneUtils.PROP_ZOOM_SCALE,zoom_scale);
             updateSzoomTv();
         } else if (id == R.id.screen_zoom_left) {
             zoom_scale--;
@@ -579,7 +586,8 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
                     set_screen_zoom(All, All, All, All, zoom_scale);
                 else
                     updateScaleZoom(zoom_scale);
-                KeystoneUtils_726.writeGlobalSettings(this, KeystoneUtils_726.ZOOM_SCALE, zoom_scale);
+                Log.d(TAG, " KEYCODE_DPAD_LEFT writeSystemProperties KeystoneUtils.PROP_ZOOM_SCALE ");
+                KeystoneUtils.writeSystemProperties(KeystoneUtils.PROP_ZOOM_SCALE,zoom_scale);
                 updateSzoomTv();
 //                    break;
                 return true;
@@ -636,7 +644,8 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
                     set_screen_zoom(All, All, All, All, zoom_scale);
                 else
                     updateScaleZoom(zoom_scale);
-                KeystoneUtils_726.writeGlobalSettings(this, KeystoneUtils_726.ZOOM_SCALE, zoom_scale);
+                Log.d(TAG, " KEYCODE_DPAD_RIGHT writeSystemProperties KeystoneUtils.PROP_ZOOM_SCALE ");
+                KeystoneUtils.writeSystemProperties(KeystoneUtils.PROP_ZOOM_SCALE,zoom_scale);
                 updateSzoomTv();
 //                    break;
                 return true;

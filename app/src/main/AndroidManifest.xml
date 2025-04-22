@@ -48,14 +48,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-
-        <activity
-            android:name=".activity.AccountActivity"
-            android:exported="false" />
-        <activity
-            android:name=".activity.WifiIpSetActivity"
-            android:exported="false" />
-
+        <receiver
+            android:name=".receiver.InitAngleReceiver"
+            android:enabled="true"
+            android:exported="true"></receiver>
         <receiver
             android:name=".receiver.refreshApps"
             android:enabled="true"
@@ -69,7 +65,7 @@
             android:enabled="true"
             android:exported="true">
             <intent-filter>
-                <action android:name="com.htc.DISPLAY_SETTINGS"/>
+                <action android:name="com.htc.DISPLAY_SETTINGS" />
             </intent-filter>
         </receiver>
         <receiver
@@ -98,6 +94,15 @@
             android:name="BaiduMobAd_WIFI_LOCATION"
             android:value="true" />
 
+        <activity
+            android:name=".activity.InitAngleActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.AccountActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.WifiIpSetActivity"
+            android:exported="false" />
         <activity
             android:name=".activity.BluetoothIncomingFileConfirmActivity"
             android:configChanges="keyboard|keyboardHidden|navigation"

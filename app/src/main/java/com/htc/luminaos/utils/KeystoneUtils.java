@@ -27,6 +27,7 @@ public class KeystoneUtils {
 
 	public static final String ZOOM_VALUE = "zoom_value";
 	public static final String ZOOM_SCALE = "zoom_scale";
+	public static final String PROP_ZOOM_SCALE = "persist.sys.zoom_scale";
 	public static final String ZOOM_SCALE_OLD = "zoom_scale_old";
 
 	public static final String PROP_HTC_KEYSTONE_LB_X = "persist.htc.keystone.lbx";
@@ -612,6 +613,15 @@ public class KeystoneUtils {
 
 	public static int readGlobalSettings(Context context,String key,int def){
 		return   Settings.Global.getInt(context.getContentResolver(),key,def);
+	}
+
+	public static void writeSystemProperties(String key, int value) {
+//        Settings.Global.putInt(context.getContentResolver(), key, value);
+		SystemProperties.set(key,String.valueOf(value));
+	}
+
+	public static int readSystemProperties(String key, int def) {
+		return SystemProperties.getInt(key,def);
 	}
 
 }

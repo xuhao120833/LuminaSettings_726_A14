@@ -169,5 +169,4 @@ public class InitAngleDialog extends BaseDialog implements View.OnClickListener 
             }
         }, 3000);
     }
-
 }
