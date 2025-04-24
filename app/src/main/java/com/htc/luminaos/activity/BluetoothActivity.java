@@ -156,8 +156,7 @@ public class BluetoothActivity extends BaseActivity implements BluetoothCallBcak
                 // 搜索到的不是已经绑定的蓝牙设备
                 if (device.getBondState() != BluetoothDevice.BOND_BONDED && device.getName() != null) {
                     Log.i(TAG, "device " + device.getName());
-                    if (!scanList.contains(device) && !device.getName().equals("")) {
-//						if(device!=null&&!isHtcRemote(device)){
+                    if (!scanList.contains(device) && !device.getName().isEmpty()) {
                         scanList.add(device);
                         Message message = handler.obtainMessage();
                         message.what = Contants.REFRESH_FOUND;
@@ -192,16 +191,17 @@ public class BluetoothActivity extends BaseActivity implements BluetoothCallBcak
                     }
                     updatePairList();
                     // 音频设备，配对成功后需要进行连接
-                    if (device.getBluetoothClass().getMajorDeviceClass() == BluetoothClass.Device.Major.AUDIO_VIDEO) {
-                        connectDeviceFromA2DP(device);
-                    } else if (device.getBluetoothClass().getMajorDeviceClass() == BluetoothClass.Device.Major.PERIPHERAL) {
-                        if (isKeyboardDevice(device.getUuids())) {
-                            Log.i("zouguanrong", "-----connectKeyboard----");
-                            connectKeyboard(device);
-                        } else {
-                            connectDeviceFromA2DP(device);
-                        }
-                    }
+//                    if (device.getBluetoothClass().getMajorDeviceClass() == BluetoothClass.Device.Major.AUDIO_VIDEO) {
+//                        connectDeviceFromA2DP(device);
+//                    } else if (device.getBluetoothClass().getMajorDeviceClass() == BluetoothClass.Device.Major.PERIPHERAL) {
+//                        if (isKeyboardDevice(device.getUuids())) {
+//                            Log.i("zouguanrong", "-----connectKeyboard----");
+//                            connectKeyboard(device);
+//                        } else {
+//                            connectDeviceFromA2DP(device);
+//                        }
+//                    }
+                    connectDevice(device);
                     break;
                 case Contants.BONDING:
                     if (scanList.contains(device)) {
@@ -218,7 +218,7 @@ public class BluetoothActivity extends BaseActivity implements BluetoothCallBcak
                     break;
                 case Contants.REFRESH_FOUND:
                     if (foundAdapter == null) {
-                        foundAdapter = new BluetoothFoundAdapter(scanList, BluetoothActivity.this);
+                        foundAdapter = new BluetoothFoundAdapter(scanList, BluetoothActivity.this,bluetoothAdapter);
                         foundAdapter.setHasStableIds(true);
                         bluetoothBinding.availableRv.setAdapter(foundAdapter);
                     } else {
@@ -237,6 +237,36 @@ public class BluetoothActivity extends BaseActivity implements BluetoothCallBcak
         }
     });
 
+    private void connectDevice(BluetoothDevice mDevice) {
+        if (!ensurePaired(mDevice)) {
+            return;
+        }
+        synchronized (this) {
+            Log.d(TAG, "connect " + this);
+            mDevice.connect();
+        }
+    }
+
+    private boolean ensurePaired(BluetoothDevice mDevice) {
+        if (mDevice.getBondState() == BluetoothDevice.BOND_NONE) {
+            startPairing(mDevice);
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public boolean startPairing(BluetoothDevice mDevice) {
+        // Pairing is unreliable while scanning, so cancel discovery
+        if (bluetoothAdapter.isDiscovering()) {
+            bluetoothAdapter.cancelDiscovery();
+        }
+        if (!mDevice.createBond()) {
+            return false;
+        }
+        return true;
+    }
+
     Runnable discoveryRunnable = new Runnable() {
         @Override
         public void run() {
@@ -248,7 +278,7 @@ public class BluetoothActivity extends BaseActivity implements BluetoothCallBcak
     private void updatePairList() {
         bondList = getPairList();
         if (bondAdapter == null) {
-            bondAdapter = new BluetoothBondAdapter(bondList, BluetoothActivity.this);
+            bondAdapter = new BluetoothBondAdapter(bondList, BluetoothActivity.this,bluetoothAdapter);
             setConnectedState();
             bondAdapter.setHasStableIds(true);
             bluetoothBinding.pairRv.setAdapter(bondAdapter);
@@ -287,7 +317,6 @@ public class BluetoothActivity extends BaseActivity implements BluetoothCallBcak
         /**
          * 获取搜索列表 使用广播
          */
-
         mCanFilter.addAction(BluetoothDevice.ACTION_FOUND);
         mCanFilter.addAction(BluetoothAdapter.ACTION_DISCOVERY_FINISHED);
         registerReceiver(mCanReceiver, mCanFilter);
@@ -301,12 +330,10 @@ public class BluetoothActivity extends BaseActivity implements BluetoothCallBcak
         /**
          * 蓝牙连接状态监听
          */
-        blueFilter.addAction("android.bluetooth.device.action.ACL_CONNECTED");
-        blueFilter
-                .addAction("android.bluetooth.device.action.ACL_DISCONNECTED");
-        blueFilter.addAction("android.bluetooth.device.action.FOUND");
-        blueFilter
-                .addAction("android.bluetooth.device.action.ACL_DISCONNECT_REQUESTED");
+        blueFilter.addAction(BluetoothDevice.ACTION_ACL_CONNECTED);
+        blueFilter.addAction(BluetoothDevice.ACTION_ACL_DISCONNECTED);
+        blueFilter.addAction(BluetoothDevice.ACTION_FOUND);
+        blueFilter.addAction(BluetoothDevice.ACTION_ACL_DISCONNECT_REQUESTED);
         blueReceiver = new BluetoothReceiver(this);
         registerReceiver(blueReceiver, blueFilter);
 
@@ -319,16 +346,16 @@ public class BluetoothActivity extends BaseActivity implements BluetoothCallBcak
 
     private void DestroyReceiver() {
         if (mCanReceiver != null) {
-            BluetoothActivity.this.unregisterReceiver(mCanReceiver);
+            unregisterReceiver(mCanReceiver);
         }
         if (blueReceiver != null) {
-            BluetoothActivity.this.unregisterReceiver(blueReceiver);
+            unregisterReceiver(blueReceiver);
         }
         if (blueBoothReceiver != null) {
-            BluetoothActivity.this.unregisterReceiver(blueBoothReceiver);
+            unregisterReceiver(blueBoothReceiver);
         }
         if (bondReceiver != null) {
-            BluetoothActivity.this.unregisterReceiver(bondReceiver);
+            unregisterReceiver(bondReceiver);
         }
     }
 
@@ -562,12 +589,7 @@ public class BluetoothActivity extends BaseActivity implements BluetoothCallBcak
         if (id == R.id.rl_bluetooth_switch || id == R.id.bluetooth_switch) {
             bluetoothBinding.bluetoothSwitch.setChecked(!bluetoothBinding.bluetoothSwitch.isChecked());
         } else if (id == R.id.rl_search_ble) {
-            if (!bluetoothAdapter.isDiscovering()) {
-                scanList.clear();
-                bluetoothAdapter.startDiscovery();
-                updatePairList();
-                searchAnim(true);
-            }
+            startScanning(bluetoothAdapter);
         }
     }
 
@@ -592,6 +614,12 @@ public class BluetoothActivity extends BaseActivity implements BluetoothCallBcak
 
 
     @Override
+    protected void onStop() {
+        super.onStop();
+        stopScanning(bluetoothAdapter);
+    }
+
+    @Override
     protected void onDestroy() {
         DestroyReceiver();
         bluetoothAdapter.closeProfileProxy(BluetoothProfile.A2DP, a2dp);
@@ -600,4 +628,19 @@ public class BluetoothActivity extends BaseActivity implements BluetoothCallBcak
         super.onDestroy();
     }
 
+    //开始扫描
+    void startScanning(BluetoothAdapter mBluetoothAdapter) {
+        if (!mBluetoothAdapter.isDiscovering()) {
+            mBluetoothAdapter.startDiscovery();
+            updatePairList();
+            searchAnim(true);
+        }
+    }
+
+    //停止扫描
+    void stopScanning(BluetoothAdapter mBluetoothAdapter) {
+        if (mBluetoothAdapter.isDiscovering()) {
+            mBluetoothAdapter.cancelDiscovery();
+        }
+    }
 }

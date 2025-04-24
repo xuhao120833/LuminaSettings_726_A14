@@ -1,5 +1,6 @@
 package com.htc.luminaos.adapter;
 
+import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothClass;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
@@ -31,10 +32,12 @@ public class BluetoothFoundAdapter extends RecyclerView.Adapter<BluetoothFoundAd
     private Context mContext;
     private BluetoothDevice CurrentPair;
     private static String TAG = "BluetoothFoundAdapter";
+    private BluetoothAdapter bluetoothAdapter;
 
-    public BluetoothFoundAdapter(List<BluetoothDevice> deviceList, Context mContext){
+    public BluetoothFoundAdapter(List<BluetoothDevice> deviceList, Context mContext ,BluetoothAdapter bluetoothAdapter){
         this.deviceList = deviceList;
         this.mContext = mContext;
+        this.bluetoothAdapter = bluetoothAdapter;
     }
 
     public void updateList(List<BluetoothDevice> deviceList){
@@ -84,8 +87,9 @@ public class BluetoothFoundAdapter extends RecyclerView.Adapter<BluetoothFoundAd
             @Override
             public void onClick(View v) {
                 try {
-                    boolean result = ClsUtils.createBond(device.getClass(),
-                            device);
+//                    boolean result = ClsUtils.createBond(device.getClass(),
+//                            device);
+                    boolean result =startPairing(device);
                     if (result) {
                         Log.i(TAG, "配对成功!");
                     } else {
@@ -105,6 +109,17 @@ public class BluetoothFoundAdapter extends RecyclerView.Adapter<BluetoothFoundAd
         }
 
         myViewHolder.rl_item.setOnHoverListener(this);
+    }
+
+    public boolean startPairing(BluetoothDevice mDevice) {
+        // Pairing is unreliable while scanning, so cancel discovery
+        if (bluetoothAdapter.isDiscovering()) {
+            bluetoothAdapter.cancelDiscovery();
+        }
+        if (!mDevice.createBond()) {
+            return false;
+        }
+        return true;
     }
 
     @Override
@@ -144,5 +159,11 @@ public class BluetoothFoundAdapter extends RecyclerView.Adapter<BluetoothFoundAd
                 break;
         }
         return false;
+    }
+
+    void stopScanning(BluetoothAdapter mBluetoothAdapter) {
+        if (mBluetoothAdapter.isDiscovering()) {
+            mBluetoothAdapter.cancelDiscovery();
+        }
     }
 }

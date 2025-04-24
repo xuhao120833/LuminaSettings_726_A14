@@ -8,6 +8,7 @@ import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothGatt;
 import android.bluetooth.BluetoothGattCallback;
 import android.bluetooth.BluetoothGattCharacteristic;
+import android.bluetooth.BluetoothPbap;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -51,14 +52,15 @@ public class BluetoothBondAdapter extends RecyclerView.Adapter<BluetoothBondAdap
     private static String TAG = "BluetoothBondAdapter";
     private List<BluetoothDevice> deviceList = new ArrayList<>();
     private Activity mContext;
-
     private Map<String, Integer> stateMap = new HashMap<String, Integer>();
     BluetoothDevice CurDevice = null;
+    private BluetoothPbap mService;
+    private BluetoothAdapter bluetoothAdapter;
 
-    public BluetoothBondAdapter(List<BluetoothDevice> deviceList, Activity mContext) {
+    public BluetoothBondAdapter(List<BluetoothDevice> deviceList, Activity mContext, BluetoothAdapter bluetoothAdapter) {
         this.deviceList = deviceList;
         this.mContext = mContext;
-
+        this.bluetoothAdapter = bluetoothAdapter;
     }
 
     public void updateList(List<BluetoothDevice> deviceList) {
@@ -97,34 +99,34 @@ public class BluetoothBondAdapter extends RecyclerView.Adapter<BluetoothBondAdap
         } else {
             myViewHolder.ble_name.setText(device.getName());
         }
+//        if (device.getBluetoothClass()
+//                .getMajorDeviceClass() == BluetoothClass.Device.Major.PHONE) {
+//            myViewHolder.ble_type.setImageResource(R.drawable.bluetooth);
+//        } else if (device.getBluetoothClass()
+//                .getMajorDeviceClass() == BluetoothClass.Device.Major.COMPUTER) {
+//            myViewHolder.ble_type.setImageResource(R.drawable.bluetooth);
+//        } else if (device.getBluetoothClass().getMajorDeviceClass() == BluetoothClass.Device.Major.AUDIO_VIDEO) {
+//            myViewHolder.ble_type.setImageResource(R.drawable.bluetooth);
+//        } else if (device.getBluetoothClass().getMajorDeviceClass() == BluetoothClass.Device.Major.PERIPHERAL) {
+//            switch (device.getBluetoothClass().getDeviceClass()) {
+//                case BluetoothClass.Device.PERIPHERAL_KEYBOARD:
+//                case BluetoothClass.Device.PERIPHERAL_KEYBOARD_POINTING:
+//                    // viewHolder.pair_iv.setImageResource(R.drawable.ic_lockscreen_ime);
+//                    myViewHolder.ble_type.setImageResource(R.drawable.bluetooth);
+//                    break;
+//                case BluetoothClass.Device.PERIPHERAL_POINTING:
+//                    myViewHolder.ble_type
+//                            .setImageResource(R.drawable.bluetooth);
+//                    break;
+//                default:
+//                    myViewHolder.ble_type.setImageResource(R.drawable.bluetooth);
+//                    break;
+//            }
+//        } else {
+//            myViewHolder.ble_type.setImageResource(R.drawable.bluetooth);
+//        }
 
-        if (device.getBluetoothClass()
-                .getMajorDeviceClass() == BluetoothClass.Device.Major.PHONE) {
-            myViewHolder.ble_type.setImageResource(R.drawable.bluetooth);
-        } else if (device.getBluetoothClass()
-                .getMajorDeviceClass() == BluetoothClass.Device.Major.COMPUTER) {
-            myViewHolder.ble_type.setImageResource(R.drawable.bluetooth);
-        } else if (device.getBluetoothClass().getMajorDeviceClass() == BluetoothClass.Device.Major.AUDIO_VIDEO) {
-            myViewHolder.ble_type.setImageResource(R.drawable.bluetooth);
-        } else if (device.getBluetoothClass().getMajorDeviceClass() == BluetoothClass.Device.Major.PERIPHERAL) {
-            switch (device.getBluetoothClass().getDeviceClass()) {
-                case BluetoothClass.Device.PERIPHERAL_KEYBOARD:
-                case BluetoothClass.Device.PERIPHERAL_KEYBOARD_POINTING:
-                    // viewHolder.pair_iv.setImageResource(R.drawable.ic_lockscreen_ime);
-                    myViewHolder.ble_type.setImageResource(R.drawable.bluetooth);
-                    break;
-                case BluetoothClass.Device.PERIPHERAL_POINTING:
-                    myViewHolder.ble_type
-                            .setImageResource(R.drawable.bluetooth);
-                    break;
-                default:
-                    myViewHolder.ble_type.setImageResource(R.drawable.bluetooth);
-                    break;
-            }
-        } else {
-            myViewHolder.ble_type.setImageResource(R.drawable.bluetooth);
-        }
-
+        myViewHolder.ble_type.setImageResource(R.drawable.bluetooth);
         //myViewHolder.ble_status.setVisibility(View.GONE);
         if (stateMap.containsKey(device.getAddress())) {
             int state = stateMap.get(device.getAddress());
@@ -135,15 +137,12 @@ public class BluetoothBondAdapter extends RecyclerView.Adapter<BluetoothBondAdap
                 case 1:
                     myViewHolder.ble_status.setVisibility(View.VISIBLE);
                     myViewHolder.ble_status.setText(mContext.getString(R.string.connected));
-
                     break;
-
                 case 2:
                     myViewHolder.ble_status.setVisibility(View.VISIBLE);
                     myViewHolder.ble_status.setText(mContext
                             .getString(R.string.connecting));
                     break;
-
                 case 3:
                     myViewHolder.ble_status.setVisibility(View.VISIBLE);
                     myViewHolder.ble_status.setText(mContext
@@ -168,27 +167,29 @@ public class BluetoothBondAdapter extends RecyclerView.Adapter<BluetoothBondAdap
                             if (view != null)
                                 view.clearFocus();
 
-                            delPairDevice(device);
+//                            delPairDevice(device);
+                            unpair(device);
                         }
 
                         @Override
                         public void onConnectClick() {
                             updateConnectMap(device.getAddress(), 2);
                             notifyDataSetChanged();
-                            if (device.getBluetoothClass().getMajorDeviceClass() == BluetoothClass.Device.Major.AUDIO_VIDEO) {
-                                if (a2dp.getConnectionState(device) == BluetoothProfile.STATE_CONNECTED) {
-                                    a2dp.setActiveDevice(device);
-                                    return;
-                                }
-                            }
-                            if (isKeyboardDevice(device.getUuids())) {
-                                if (mBluetoothProfile != null
-                                        && mBluetoothProfile.getConnectionState(device) != BluetoothProfile.STATE_CONNECTED) {
-                                    connectKeyboard(device);
-                                }
-                            } else {
-                                connectDeviceFromA2DP(device);
-                            }
+                            connectDevice(device);
+//                            if (device.getBluetoothClass().getMajorDeviceClass() == BluetoothClass.Device.Major.AUDIO_VIDEO) {
+//                                if (a2dp.getConnectionState(device) == BluetoothProfile.STATE_CONNECTED) {
+//                                    a2dp.setActiveDevice(device);
+//                                    return;
+//                                }
+//                            }
+//                            if (isKeyboardDevice(device.getUuids())) {
+//                                if (mBluetoothProfile != null
+//                                        && mBluetoothProfile.getConnectionState(device) != BluetoothProfile.STATE_CONNECTED) {
+//                                    connectKeyboard(device);
+//                                }
+//                            } else {
+//                                connectDeviceFromA2DP(device);
+//                            }
                         }
                     });
                     delpairDeviceDialog.show();
@@ -200,30 +201,9 @@ public class BluetoothBondAdapter extends RecyclerView.Adapter<BluetoothBondAdap
                     disDeviceDialog.setOnClickCallBack(new DisDeviceDialog.OnDisDeviceCallBack() {
                         @Override
                         public void onEnterClick() {
-//                            synchronized (this) { // 加锁，确保在断开连接时线程安全
-//                                if (getGroupId() != BluetoothCsipSetCoordinator.GROUP_ID_INVALID) {  // 如果当前设备属于一个有效的蓝牙设备组
-//                                    for (CachedBluetoothDevice member : getMemberDevice()) {  // 遍历当前设备组的所有成员设备
-//                                        Log.d(TAG, "Disconnect the member:" + member);  // 打印日志，显示正在断开成员设备
-//                                        member.disconnect();  // 断开每个成员设备的连接
-//                                    }
-//                                }
-//                                Log.d(TAG, "Disconnect " + this);  // 打印日志，显示正在断开当前设备的连接
-//                                mDevice.disconnect();  // 断开当前设备的连接
-//                            }
-                            device.disconnect();
-                            // Disconnect  PBAP server in case its connected
-                            // This is to ensure all the profiles are disconnected as some CK/Hs do not
-                            // disconnect  PBAP connection when HF connection is brought down
-//                            PbapServerProfile PbapProfile = mProfileManager.getPbapProfile();
-//                            if (PbapProfile != null && isConnectedProfile(PbapProfile))
-//                            {
-//                                PbapProfile.setEnabled(mDevice, false);
-//                            }
-
+                            disconnect(device);
                             updateConnectMap(device.getAddress(), 3);
                             notifyDataSetChanged();
-                            /*if (mBluetoothProfile!=null)
-                            mBluetoothProfile.disconnect(device);*/
                         }
 
                         @Override
@@ -231,8 +211,8 @@ public class BluetoothBondAdapter extends RecyclerView.Adapter<BluetoothBondAdap
                             View view = mContext.getCurrentFocus();
                             if (view != null)
                                 view.clearFocus();
-
-                            delPairDevice(device);
+//                            delPairDevice(device);
+                            unpair(device);
                         }
                     });
                     disDeviceDialog.show();
@@ -242,6 +222,24 @@ public class BluetoothBondAdapter extends RecyclerView.Adapter<BluetoothBondAdap
         });
         myViewHolder.rl_item.setOnHoverListener(this);
     }
+
+    public void disconnect(BluetoothDevice mDevice) {
+        synchronized (this) {
+
+            Log.d(TAG, "Disconnect " + this);
+            mDevice.disconnect();
+        }
+        // Disconnect  PBAP server in case its connected
+        // This is to ensure all the profiles are disconnected as some CK/Hs do not
+        // disconnect  PBAP connection when HF connection is brought down
+        //断开 PBAP（电话簿访问）连接，因为某些车载系统在断开 HFP 后并不会自动断开 PBAP，投影仪不用管这个。
+//        PbapServerProfile PbapProfile = mProfileManager.getPbapProfile();
+//        if (PbapProfile != null && isConnectedProfile(PbapProfile))
+//        {
+//            PbapProfile.setEnabled(mDevice, false);
+//        }
+    }
+
 
     /**
      * 清楚已配对设备信息
@@ -255,6 +253,58 @@ public class BluetoothBondAdapter extends RecyclerView.Adapter<BluetoothBondAdap
                 e.printStackTrace();
             }
         }
+    }
+
+    public void unpair(BluetoothDevice mDevice) {
+        if (mDevice != null) {
+            int state = getBondState(mDevice);
+            if (state == BluetoothDevice.BOND_BONDING) {
+                mDevice.cancelBondProcess();
+            }
+            if (state != BluetoothDevice.BOND_NONE) {
+                final boolean successful = mDevice.removeBond();
+                if (successful) {
+                    Log.d(TAG, "蓝牙解绑成功 " + mDevice.getName());
+                } else {
+                    Log.d(TAG, "蓝牙解绑失败 " + mDevice.getName());
+                }
+            }
+        }
+    }
+
+    private void connectDevice(BluetoothDevice mDevice) {
+        if (!ensurePaired(mDevice)) {
+            return;
+        }
+        synchronized (this) {
+            Log.d(TAG, "connect " + this);
+            mDevice.connect();
+        }
+    }
+
+    private boolean ensurePaired(BluetoothDevice mDevice) {
+        if (mDevice.getBondState() == BluetoothDevice.BOND_NONE) {
+            startPairing(mDevice);
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public boolean startPairing(BluetoothDevice mDevice) {
+        // Pairing is unreliable while scanning, so cancel discovery
+        if (bluetoothAdapter.isDiscovering()) {
+            bluetoothAdapter.cancelDiscovery();
+        }
+        if (!mDevice.createBond()) {
+            return false;
+        }
+        return true;
+    }
+
+
+    public int getBondState(BluetoothDevice mDevice) {
+        return mDevice.getBondState();
     }
 
     @Override
