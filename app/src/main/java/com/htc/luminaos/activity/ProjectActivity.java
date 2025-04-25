@@ -743,19 +743,20 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
     public void set_screen_zoom(int l, int t, int r, int b) {
         KeystoneUtils_726.writeGlobalSettings(this, KeystoneUtils_726.ZOOM_VALUE, l);
 
-//        if (zoom_scale == 0) {
-//            scale = 1D;
-//            step_x = 16;
-//            step_y = 9;
-//        } else if (zoom_scale == 2) {
-//            scale = 0.875D;
-//            step_x = 12;
-//            step_y = 9;
-//        } else if (zoom_scale == 1) {
-//            scale = 0.95D;
-//            step_x = 16;
-//            step_y = 10;
-//        }
+        zoom_scale = KeystoneUtils_726.readSystemProperties(KeystoneUtils_726.PROP_ZOOM_SCALE,zoom_scale);
+        if (zoom_scale == 0) {
+            scale = 1D;
+            step_x = 16;
+            step_y = 9;
+        } else if (zoom_scale == 2) {
+            scale = 0.875D;
+            step_x = 12;
+            step_y = 9;
+        } else if (zoom_scale == 1) {
+            scale = 0.95D;
+            step_x = 16;
+            step_y = 10;
+        }
 
         l = max_value - l;
         t = max_value - t;
@@ -769,7 +770,9 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
     }
 
     public void changeform(int l, int t, int right, int bottom) {
-        Log.d(TAG," changeform ");
+        Log.d("changeform before ", KeystoneUtils_726.lt_X + "," + KeystoneUtils_726.lt_Y + "," + KeystoneUtils_726.lb_X  + "," + KeystoneUtils_726.lb_Y
+                + "," + KeystoneUtils_726.rt_X + "," + KeystoneUtils_726.rt_Y + "," + KeystoneUtils_726.rb_X + "," + KeystoneUtils_726.rb_Y);
+
         KeystoneUtils_726.lt_X = Integer.parseInt(df.format(((100 - 100 * scale) * zoom_step_x + (100 - l) * step_x) * 1000 / KeystoneUtils_726.lcd_w));
         KeystoneUtils_726.lt_Y = 1000 - Integer.parseInt(df.format((KeystoneUtils_726.lcd_h - (100 - t) * step_y) * 1000 / KeystoneUtils_726.lcd_h));
 
@@ -781,6 +784,9 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
 
         KeystoneUtils_726.rb_X = 1000 - Integer.parseInt(df.format((KeystoneUtils_726.lcd_w * scale - (100 - right) * step_x) * 1000 / KeystoneUtils_726.lcd_w));
         KeystoneUtils_726.rb_Y = Integer.parseInt(df.format(((100 - bottom) * step_y) * 1000 / KeystoneUtils_726.lcd_h));
+
+        Log.d("changeform after ", KeystoneUtils_726.lt_X + "," + KeystoneUtils_726.lt_Y + "," + KeystoneUtils_726.lb_X  + "," + KeystoneUtils_726.lb_Y
+                + "," + KeystoneUtils_726.rt_X + "," + KeystoneUtils_726.rt_Y + "," + KeystoneUtils_726.rb_X + "," + KeystoneUtils_726.rb_Y);
 
         if (getAuto()) {
             Log.d(TAG," UpdateKeystoneZOOM(false) ");
