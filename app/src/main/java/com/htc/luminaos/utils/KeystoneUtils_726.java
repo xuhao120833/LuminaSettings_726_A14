@@ -42,6 +42,7 @@ public class KeystoneUtils_726 {
     public static final String ZOOM_VALUE = "zoom_value";
     //画面比例
     public static final String ZOOM_SCALE = "zoom_scale";
+    public static final String PROP_ZOOM_SCALE = "persist.sys.zoom_scale";
     public static final String ZOOM_SCALE_OLD = "zoom_scale_old";
 
     public static final int minX = 0;
@@ -282,6 +283,7 @@ public class KeystoneUtils_726 {
     private static void writeParcelToFlinger(int ltx, int lty, int rtx, int rty, int lbx, int lby, int rbx, int rby) {
         try {
 //            AwTvDisplayManager.getInstance().setKeystoreValue(100.0f,100.0f,ltx, lty, rtx, rty, lbx, lby, rbx, rby);
+            Log.d(TAG," writeParcelToFlinger ");
             AwTvDisplayManager.getInstance().setKeystoreValue(100.0f,100.0f,lbx, lby, rbx, rby,ltx, lty, rtx, rty);
         } catch (Exception ex) {
             Log.i(TAG, "error talk with surfaceflinger service");
@@ -577,5 +579,15 @@ public class KeystoneUtils_726 {
     public static int readGlobalSettings(Context context, String key, int def) {
         return Settings.Global.getInt(context.getContentResolver(), key, def);
     }
+
+    public static void writeSystemProperties(String key, int value) {
+//        Settings.Global.putInt(context.getContentResolver(), key, value);
+        SystemProperties.set(key,String.valueOf(value));
+    }
+
+    public static int readSystemProperties(String key, int def) {
+        return SystemProperties.getInt(key,def);
+    }
+
 
 }

@@ -23,6 +23,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.hardware.usb.UsbManager;
 import android.media.AudioManager;
@@ -211,6 +212,7 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
     private ConnectivityManager.NetworkCallback networkCallback;
 
     private boolean isEther = false;
+    private Dialog loadingDialog;
 
     Handler handler = new Handler(new Handler.Callback() {
         @Override
@@ -343,7 +345,6 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
             e.printStackTrace();
         }
         StartupTimer.mark("onResume完成");
-
         StartupTimer.print(" MainActivity StartupTime");
     }
 

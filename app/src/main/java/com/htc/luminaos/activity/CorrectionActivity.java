@@ -977,6 +977,9 @@ public class CorrectionActivity extends BaseActivity {
             public void onClick(View v) {
                 KeystoneUtils_726.resetKeystone();
                 KeystoneUtils_726.writeGlobalSettings(getApplicationContext(), KeystoneUtils_726.ZOOM_VALUE, 0);
+
+                KeystoneUtils_726.writeSystemProperties(KeystoneUtils_726.PROP_ZOOM_SCALE,0);
+
                 dialoge.dismiss();
                 direction_value_x.setText("0");
                 direction_value_y.setText("0");

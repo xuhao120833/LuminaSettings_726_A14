@@ -327,7 +327,7 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
 
     private void updateSzoomTv() {
         Log.d(TAG,"updateSzoomTv zoom_scale"+zoom_scale);
-        zoom_scale = KeystoneUtils.readSystemProperties(KeystoneUtils.PROP_ZOOM_SCALE,zoom_scale);
+        zoom_scale = KeystoneUtils_726.readSystemProperties(KeystoneUtils_726.PROP_ZOOM_SCALE,zoom_scale);
         Log.d(TAG,"updateSzoomTv zoom_scale"+zoom_scale);
         switch (zoom_scale) {
             case 0:
@@ -494,8 +494,8 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
                 set_screen_zoom(All, All, All, All, zoom_scale);
             else
                 updateScaleZoom(zoom_scale);
-            Log.d(TAG, " writeSystemProperties KeystoneUtils.PROP_ZOOM_SCALE ");
-            KeystoneUtils.writeSystemProperties(KeystoneUtils.PROP_ZOOM_SCALE,zoom_scale);
+            Log.d(TAG, " writeSystemProperties KeystoneUtils_726.PROP_ZOOM_SCALE ");
+            KeystoneUtils_726.writeSystemProperties(KeystoneUtils_726.PROP_ZOOM_SCALE,zoom_scale);
             updateSzoomTv();
         } else if (id == R.id.screen_zoom_left) {
             zoom_scale--;
@@ -586,8 +586,8 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
                     set_screen_zoom(All, All, All, All, zoom_scale);
                 else
                     updateScaleZoom(zoom_scale);
-                Log.d(TAG, " KEYCODE_DPAD_LEFT writeSystemProperties KeystoneUtils.PROP_ZOOM_SCALE ");
-                KeystoneUtils.writeSystemProperties(KeystoneUtils.PROP_ZOOM_SCALE,zoom_scale);
+                Log.d(TAG, " KEYCODE_DPAD_LEFT writeSystemProperties KeystoneUtils_726.PROP_ZOOM_SCALE ");
+                KeystoneUtils_726.writeSystemProperties(KeystoneUtils_726.PROP_ZOOM_SCALE,zoom_scale);
                 updateSzoomTv();
 //                    break;
                 return true;
@@ -644,8 +644,8 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
                     set_screen_zoom(All, All, All, All, zoom_scale);
                 else
                     updateScaleZoom(zoom_scale);
-                Log.d(TAG, " KEYCODE_DPAD_RIGHT writeSystemProperties KeystoneUtils.PROP_ZOOM_SCALE ");
-                KeystoneUtils.writeSystemProperties(KeystoneUtils.PROP_ZOOM_SCALE,zoom_scale);
+                Log.d(TAG, " KEYCODE_DPAD_RIGHT writeSystemProperties KeystoneUtils_726.PROP_ZOOM_SCALE ");
+                KeystoneUtils_726.writeSystemProperties(KeystoneUtils_726.PROP_ZOOM_SCALE,zoom_scale);
                 updateSzoomTv();
 //                    break;
                 return true;
@@ -769,6 +769,7 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
     }
 
     public void changeform(int l, int t, int right, int bottom) {
+        Log.d(TAG," changeform ");
         KeystoneUtils_726.lt_X = Integer.parseInt(df.format(((100 - 100 * scale) * zoom_step_x + (100 - l) * step_x) * 1000 / KeystoneUtils_726.lcd_w));
         KeystoneUtils_726.lt_Y = 1000 - Integer.parseInt(df.format((KeystoneUtils_726.lcd_h - (100 - t) * step_y) * 1000 / KeystoneUtils_726.lcd_h));
 
@@ -782,9 +783,11 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
         KeystoneUtils_726.rb_Y = Integer.parseInt(df.format(((100 - bottom) * step_y) * 1000 / KeystoneUtils_726.lcd_h));
 
         if (getAuto()) {
+            Log.d(TAG," UpdateKeystoneZOOM(false) ");
             KeystoneUtils_726.UpdateKeystoneZOOM(false);
             sendKeystoneBroadcast();
         } else {
+            Log.d(TAG," UpdateKeystoneZOOM(true) ");
             KeystoneUtils_726.UpdateKeystoneZOOM(true);
         }
     }
@@ -816,6 +819,7 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
     }
 
     private void sendKeystoneBroadcast() {
+        Log.d(TAG," 发送自动梯形校正的广播 ");
         Intent intent = new Intent("android.intent.hotack_keystone");
         intent.addFlags(Intent.FLAG_RECEIVER_FOREGROUND);
         intent.putExtra("ratio", 1);
@@ -954,9 +958,15 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
             @Override
             public void onClick(View v) {
                 KeystoneUtils_726.resetKeystone();
+
+                //数字缩放复位
                 KeystoneUtils_726.writeGlobalSettings(getApplicationContext(), KeystoneUtils_726.ZOOM_VALUE, 0);
                 All = 0;
                 updateZoomView();
+
+                //画面比例复位
+                KeystoneUtils_726.writeSystemProperties(KeystoneUtils_726.PROP_ZOOM_SCALE,0);
+                updateSzoomTv();
                 dialoge.dismiss();
             }
         });
