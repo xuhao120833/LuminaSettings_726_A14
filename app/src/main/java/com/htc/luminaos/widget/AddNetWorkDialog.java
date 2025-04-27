@@ -47,7 +47,7 @@ public class AddNetWorkDialog extends BaseDialog {
 	private Context mContext;
 	private WifiManager mWifiManager;
 	private List<WifiConfiguration> wifiConfigurationList = new ArrayList<>();
-
+	private static String TAG = "AddNetWorkDialog";
 
 	public AddNetWorkDialog(Context context) {
 		super(context);
@@ -127,11 +127,13 @@ public class AddNetWorkDialog extends BaseDialog {
 							||actionId==EditorInfo.IME_ACTION_SEND||actionId== EditorInfo.IME_ACTION_GO){
 						InputMethodManager inputMethodManager = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
 						inputMethodManager.hideSoftInputFromWindow(networkName_et.getWindowToken(), 0);
-
+						networkName_et.clearFocus();
+						wifi_security.requestFocus();
 					}
 					return false;
 				}
 			});
+
 			password_et.setOnKeyListener(new View.OnKeyListener() {
 				@Override
 				public boolean onKey(View v, int keyCode, KeyEvent event) {
