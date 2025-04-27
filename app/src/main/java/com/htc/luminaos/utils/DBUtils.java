@@ -964,12 +964,12 @@ public class DBUtils extends SQLiteOpenHelper {
     public void deleteTable() {
         synchronized (this) {
             SQLiteDatabase db = getWritableDatabase();
-            int rowsAffected = -1;
             try {
-                rowsAffected = db.delete(TABLENAME_FAVORITES, null, null);
-                rowsAffected = db.delete(TABLENAME_MAINAPP, null, null);
-                rowsAffected = db.delete(TABLENAME_LISTMODULES, null, null);
-                rowsAffected = db.delete(TABLENAME_BRANDLOGO, null, null);
+                db.delete(TABLENAME_FAVORITES, null, null);
+                db.delete(TABLENAME_FILTERAPPS,null,null);
+                db.delete(TABLENAME_MAINAPP, null, null);
+                db.delete(TABLENAME_LISTMODULES, null, null);
+                db.delete(TABLENAME_BRANDLOGO, null, null);
             } catch (Exception e) {
                 e.printStackTrace();
             }
