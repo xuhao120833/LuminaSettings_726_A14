@@ -142,6 +142,7 @@ import java.util.concurrent.TimeUnit;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -151,7 +152,8 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class MainActivity extends BaseMainActivity implements BluetoothCallBcak, MyWifiCallBack, MyTimeCallBack, NetWorkCallBack, UsbDeviceCallBack, AppCallBack, BatteryCallBack {
+public class MainActivity extends BaseMainActivity implements BluetoothCallBcak, MyWifiCallBack, MyTimeCallBack,
+        NetWorkCallBack, UsbDeviceCallBack, AppCallBack, BatteryCallBack, View.OnKeyListener {
 
     private ActivityMainBinding mainBinding;
 
@@ -422,6 +424,7 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
         customBinding.rlSettings.setOnClickListener(this);
         customBinding.rlSettings.setOnHoverListener(this);
         customBinding.rlSettings.setOnFocusChangeListener(this);
+        customBinding.rlSettings.setOnKeyListener(this);
         //文件管理
         customBinding.rlUsb.setOnClickListener(this);
         customBinding.rlUsb.setOnHoverListener(this);
@@ -430,6 +433,7 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
         customBinding.rlHdmi1.setOnClickListener(this);
         customBinding.rlHdmi1.setOnHoverListener(this);
         customBinding.rlHdmi1.setOnFocusChangeListener(this);
+        customBinding.rlHdmi1.setOnKeyListener(this);
         //rl_av
         //rl_hdmi2
         //rl_vga
@@ -2258,4 +2262,27 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
         super.onFocusChange(v, hasFocus);
     }
 
+    @Override
+    public boolean onKey(View v, int keyCode, KeyEvent event) {
+        int id = v.getId();
+        if ((id == R.id.rl_settings || id == R.id.rl_hdmi1) && keyCode == KeyEvent.KEYCODE_DPAD_DOWN && MyApplication.config.layout_select == 3) {
+            Log.d(TAG, " keCode " + keyCode + " " + event.getEventTime());
+            if ((customBinding.rlSettings.hasFocus() || customBinding.rlHdmi1.hasFocus()) && event.getAction() == KeyEvent.ACTION_DOWN) {
+                int itemCount = customBinding.shortcutsRv.getAdapter().getItemCount();
+                if (itemCount > 4) {
+                    return false;
+                } else {
+                    customBinding.shortcutsRv.post(() -> {
+                        int lastPosition = itemCount - 1;
+                        RecyclerView.ViewHolder viewHolder = customBinding.shortcutsRv.findViewHolderForAdapterPosition(lastPosition);
+                        if (viewHolder != null && viewHolder.itemView != null) {
+                            viewHolder.itemView.requestFocus();
+                        }
+                    });
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 }

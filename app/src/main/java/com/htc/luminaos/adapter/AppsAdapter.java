@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.net.Uri;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -20,6 +21,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.htc.luminaos.MyApplication;
 import com.htc.luminaos.R;
 import com.htc.luminaos.entry.AppInfoBean;
 import com.htc.luminaos.utils.AppUtils;
@@ -265,6 +267,14 @@ public class AppsAdapter extends RecyclerView.Adapter<AppsAdapter.MyViewHolder> 
             name = itemView.findViewById(R.id.app_name);
             rl_item = itemView.findViewById(R.id.rl_item);
             icon = itemView.findViewById(R.id.app_icon);
+
+            setLayout(name);
+        }
+    }
+
+    private static void setLayout(TextView name) {
+        if (MyApplication.config.layout_select == 2 || MyApplication.config.layout_select == 3) {
+            name.setTextColor(Color.BLACK);
         }
     }
 
