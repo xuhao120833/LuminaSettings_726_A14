@@ -15,16 +15,32 @@ public class ShareUtil {
 
     private static String TAG = "ShareUtil";
 
+//    public static SharedPreferences getInstans(Context context) {
+//        if (preferences == null) {
+//            synchronized (ShareUtil.class) {
+//                if (preferences == null) {
+//                    preferences = context.getSharedPreferences(Contants.FILE_NAME, Context.MODE_PRIVATE);
+//                }
+//            }
+//        }
+//        return preferences;
+//    }
+
     public static SharedPreferences getInstans(Context context) {
         if (preferences == null) {
             synchronized (ShareUtil.class) {
                 if (preferences == null) {
-                    preferences = context.getSharedPreferences(Contants.FILE_NAME, Context.MODE_PRIVATE);
+                    Context safeContext = context;
+                    if (!context.isDeviceProtectedStorage()) {
+                        safeContext = context.createDeviceProtectedStorageContext();
+                    }
+                    preferences = safeContext.getSharedPreferences(Contants.FILE_NAME, Context.MODE_PRIVATE);
                 }
             }
         }
         return preferences;
     }
+
 
 
     /**
