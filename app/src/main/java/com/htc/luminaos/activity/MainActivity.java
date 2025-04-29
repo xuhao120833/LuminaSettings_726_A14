@@ -2270,6 +2270,7 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
     @Override
     public boolean onKey(View v, int keyCode, KeyEvent event) {
         int id = v.getId();
+        //解决按下键焦点跑到文件管理器的问题
         if ((id == R.id.rl_settings || id == R.id.rl_hdmi1) && keyCode == KeyEvent.KEYCODE_DPAD_DOWN && MyApplication.config.layout_select == 3) {
             Log.d(TAG, " keCode " + keyCode + " " + event.getEventTime());
             if ((customBinding.rlSettings.hasFocus() || customBinding.rlHdmi1.hasFocus()) && event.getAction() == KeyEvent.ACTION_DOWN) {
@@ -2286,6 +2287,12 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
                     });
                     return true;
                 }
+            }
+        }
+        //解决按右键焦点跑到AppStore的问题
+        if(id == R.id.rl_settings && keyCode == KeyEvent.KEYCODE_DPAD_RIGHT && MyApplication.config.layout_select == 3) {
+            if(customBinding.rlSettings.hasFocus() && event.getAction() == KeyEvent.ACTION_DOWN){
+                return true;
             }
         }
         return false;
