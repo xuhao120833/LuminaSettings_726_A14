@@ -301,7 +301,7 @@ public class MainSettingActivity extends BaseActivity {
         if (id == R.id.rl_wifi) {
             startNewActivity(NetworkActivity.class);
         } else if (id == R.id.rl_bluetooth) {
-            startNewActivity(BluetoothActivity.class);
+            startNewActivityBlue(BluetoothActivity.class);
         } else if (id == R.id.rl_project) {
             startNewActivity(ProjectActivity.class);
         } else if (id == R.id.rl_apps_manager) {
