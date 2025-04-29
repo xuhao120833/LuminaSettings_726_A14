@@ -360,9 +360,10 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
         if (!auto) {
 //            sendKeystoneBroadcast();
             sendKeystoneBroadcastByAuto();
-        } else {
-            updateZoomValue();
         }
+//        else {
+//            updateZoomValue();
+//        }
         initAuto();
     }
 
