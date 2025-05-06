@@ -16,6 +16,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
@@ -38,7 +39,11 @@ import android.net.wifi.WifiManager;
 import android.os.Bundle;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.CustomTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.htc.luminaos.MyApplication;
+import com.htc.luminaos.databinding.DialogSupportBinding;
 import com.htc.luminaos.entry.SpecialApps;
 import com.htc.luminaos.receiver.AppCallBack;
 import com.htc.luminaos.receiver.AppReceiver;
@@ -60,10 +65,13 @@ import android.os.storage.StorageVolume;
 import android.provider.Settings;
 import android.util.Base64;
 import android.util.Log;
+import android.view.Display;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
 import android.view.animation.ScaleAnimation;
@@ -140,6 +148,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -305,6 +314,8 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
             setContentView(customBinding.root);
             StartupTimer.mark("setContentView(customBinding.getRoot())完成");
             setDefaultBackgroundById();
+            //加载support图片
+            loadSupport();
             StartupTimer.mark("setDefaultBackgroundById完成");
             initViewCustom();
             initDataCustom();
@@ -354,15 +365,14 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
         int[] time_off_value = getResources().getIntArray(R.array.time_off_value);
         int cur_time_off_index = (int) ShareUtil.get(this, Contants.TimeOffIndex, 0);
         Intent intent = new Intent(this, TimeOffService.class);
-        if (cur_time_off_index == 0) {
-            ShareUtil.put(this, Contants.TimeOffStatus, false);
-            intent.putExtra(Contants.TimeOffStatus, false);
-            intent.putExtra(Contants.TimeOffTime, -1);
-        } else {
-            ShareUtil.put(this, Contants.TimeOffStatus, true);
-            ShareUtil.put(this, Contants.TimeOffTime, time_off_value[cur_time_off_index]);
-            intent.putExtra(Contants.TimeOffStatus, true);
-            intent.putExtra(Contants.TimeOffTime, time_off_value[cur_time_off_index]);
+        if (cur_time_off_index==0){
+            ShareUtil.put(this,Contants.TimeOffStatus,false);
+            ShareUtil.put(this,Contants.TimeOffTime,time_off_value[cur_time_off_index]);
+            intent.putExtra(Contants.TimeOffStatus,false);
+        }else {
+            ShareUtil.put(this,Contants.TimeOffStatus,true);
+            ShareUtil.put(this,Contants.TimeOffTime,time_off_value[cur_time_off_index]);
+            intent.putExtra(Contants.TimeOffStatus,true);
         }
         startService(intent);
     }
@@ -472,6 +482,11 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
         customBinding.homeDisney.setOnFocusChangeListener(this);
         //首页Usb插入、拔出图标
 //        customBinding.usbConnect
+        //support
+        customBinding.rlSupport.setOnClickListener(this);
+        customBinding.rlSupport.setOnHoverListener(this);
+        customBinding.rlSupport.setOnFocusChangeListener(this);
+        customBinding.rlSupport.setVisibility((MyApplication.config.support && !Utils.support_image_path.isEmpty()) ? View.VISIBLE : View.INVISIBLE);
         //电池状态
         initBattery();
         //U盘插入
@@ -853,7 +868,9 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
         String appname = null;
         String action = null;
         int id = v.getId();
-        if (id == R.id.rl_clear_memory) {
+        if(id == R.id.rl_support) {
+            showSupportDialog();
+        }else if (id == R.id.rl_clear_memory) {
             goAction("com.htc.clearmemory/com.htc.clearmemory.MainActivity");
         } else if (id == R.id.rl_wallpapers) {
             startNewActivity(WallPaperActivity.class);
@@ -2296,5 +2313,79 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
             }
         }
         return false;
+    }
+
+    private void loadSupport() {
+        if (MyApplication.config.support_directory.isEmpty() || !MyApplication.config.support)
+            return;
+        Log.d(TAG, "loadSupport");
+        String[] imageExtensions = {".jpg", ".jpeg", ".png", ".bmp", ".webp"};
+        File directory = new File(MyApplication.config.support_directory);
+        if (directory.exists() && directory.isDirectory()) {
+            File[] files = directory.listFiles();
+            if (files != null) {
+                for (File file : files) {
+                    if (file.isFile()) {
+                        if (judgeLanguage(file)) {
+                            Log.d(TAG, "找到当前语言的support图片路径 " + file.getAbsolutePath());
+                            break; // 找到一个匹配后就跳出循环
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private boolean judgeLanguage(File file) {
+        String name = file.getName();
+        Locale currentLocale;
+        currentLocale = Resources.getSystem().getConfiguration().getLocales().get(0);
+        String languageCode = "_" + currentLocale.getLanguage();
+        Log.d("JudgeLanguage", "当前语言码: " + languageCode);
+        if (name.contains(languageCode)) {
+            Utils.support_image_path = file.getAbsolutePath();
+            return true;
+        }
+        return false;
+    }
+
+    private void showSupportDialog() {
+        Dialog dialog = new Dialog(this,R.style.DialogTheme);
+        DialogSupportBinding supportBinding = DialogSupportBinding.inflate(LayoutInflater.from(this));
+        dialog.setContentView(supportBinding.getRoot());
+        File file = new File(Utils.support_image_path);
+        if (file.exists()) {
+            Glide.with(this)
+                    .load(file)
+                    .into(new CustomTarget<Drawable>() {
+                        @Override
+                        public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
+                            supportBinding.rlMain.setBackground(resource);
+                        }
+
+                        @Override
+                        public void onLoadCleared(@Nullable Drawable placeholder) {
+                            // 可选：清除背景或设置占位图
+                        }
+                    });
+        } else {
+            Log.e("ImageLoad", "File not found: " + Utils.support_image_path);
+        }
+        Window window = dialog.getWindow();
+        if (window != null) {
+            //去除系统自带的margin
+            window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            //设置dialog在界面中的属性
+            window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
+            //背景全透明
+            window.setDimAmount(0f);
+        }
+        WindowManager manager = getWindowManager();
+        Display d = manager.getDefaultDisplay(); // 获取屏幕宽、高度
+        WindowManager.LayoutParams params = window.getAttributes(); // 获取对话框当前的参数值
+        params.width = d.getWidth();
+        params.height = d.getHeight();
+        window.setAttributes(params);
+        dialog.show();
     }
 }

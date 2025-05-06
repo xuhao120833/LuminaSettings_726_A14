@@ -26,6 +26,7 @@ public class Utils {
 
     //默认背景使用的ArrayList
     public static ArrayList<Object> drawables = new ArrayList<>();
+    public static String support_image_path = "";
 
     public static final int REQUEST_CODE_PICK_IMAGE = 1;
 

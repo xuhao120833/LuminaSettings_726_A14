@@ -25,6 +25,10 @@ public class Config {
     public boolean displayPictureModeShowCustom = true;
     //用户自定义背景目录
     public String custombackground = "";
+    //状态栏support图标开关
+    public boolean support = false;
+    //support多语言目录
+    public String support_directory = "";
     //配置首页状态栏蓝牙、Wifi的跳转
     public String statusbar_bt = "";
     public String statusbar_wifi = "";
@@ -65,6 +69,8 @@ public class Config {
 
     //上电信源
     public boolean bootSource = true;
+    //屏幕保护
+    public boolean screenSaver = true;
 
     public  String sourceList ="HDMI1";
     public  String sourceListTitle ="HDMI";

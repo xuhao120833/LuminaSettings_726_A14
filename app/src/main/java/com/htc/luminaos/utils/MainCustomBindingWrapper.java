@@ -28,6 +28,8 @@ public class MainCustomBindingWrapper {
     public RelativeLayout homeYoutube;
     public RelativeLayout homeDisney;
     public RelativeLayout rlUsbConnect;
+    public RelativeLayout rlSupport;
+    public ImageView support;
     public RelativeLayout rlBattery;
     public ImageView battery;
     public ImageView homeBluetooth;
@@ -70,6 +72,8 @@ public class MainCustomBindingWrapper {
         homeYoutube = b.homeYoutube;
         homeDisney = b.homeDisney;
         rlUsbConnect = b.rlUsbConnect;
+        rlSupport = b.rlSupport;
+        support = b.support;
         rlBattery = b.rlBattery;
         battery = b.battery;
         homeBluetooth = b.homeBluetooth;
@@ -107,6 +111,8 @@ public class MainCustomBindingWrapper {
         homeYoutube = b.homeYoutube;
         homeDisney = b.homeDisney;
         rlUsbConnect = b.rlUsbConnect;
+        rlSupport = b.rlSupport;
+        support = b.support;
         rlBattery = b.rlBattery;
         battery = b.battery;
         homeBluetooth = b.homeBluetooth;
@@ -148,6 +154,8 @@ public class MainCustomBindingWrapper {
         homeYoutube = b.homeYoutube;
         homeDisney = b.homeDisney;
         rlUsbConnect = b.rlUsbConnect;
+        rlSupport = b.rlSupport;
+        support = b.support;
         rlBattery = b.rlBattery;
         battery = b.battery;
         homeBluetooth = b.homeBluetooth;

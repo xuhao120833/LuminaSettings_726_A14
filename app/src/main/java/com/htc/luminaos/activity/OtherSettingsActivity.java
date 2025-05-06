@@ -100,6 +100,7 @@ public class OtherSettingsActivity extends BaseActivity implements View.OnKeyLis
         otherSettingsBinding.rlAccount.setVisibility(MyApplication.config.account?View.VISIBLE:View.GONE);
         otherSettingsBinding.rlBootInput.setVisibility(MyApplication.config.bootSource?View.VISIBLE:View.GONE);
         otherSettingsBinding.rlSetPassword.setVisibility(MyApplication.config.set_password?View.VISIBLE:View.GONE);
+        otherSettingsBinding.rlScreenSaver.setVisibility(MyApplication.config.screenSaver?View.VISIBLE:View.GONE);
 
         if ((boolean)ShareUtil.get(this,Contants.KEY_DEVELOPER_MODE,false)){
             otherSettingsBinding.rlDeveloper.setVisibility(View.VISIBLE);
