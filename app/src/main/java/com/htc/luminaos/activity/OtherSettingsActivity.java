@@ -207,13 +207,12 @@ public class OtherSettingsActivity extends BaseActivity implements View.OnKeyLis
         Intent intent = new Intent(this, TimeOffService.class);
         if (index==0){
             ShareUtil.put(this,Contants.TimeOffStatus,false);
+            ShareUtil.put(this,Contants.TimeOffTime,time_off_value[index]);
             intent.putExtra(Contants.TimeOffStatus,false);
-            intent.putExtra(Contants.TimeOffTime,-1);
         }else {
             ShareUtil.put(this,Contants.TimeOffStatus,true);
             ShareUtil.put(this,Contants.TimeOffTime,time_off_value[index]);
             intent.putExtra(Contants.TimeOffStatus,true);
-            intent.putExtra(Contants.TimeOffTime,time_off_value[index]);
         }
         startService(intent);
     }

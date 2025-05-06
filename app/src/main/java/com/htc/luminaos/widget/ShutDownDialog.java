@@ -30,10 +30,17 @@ public class ShutDownDialog extends Dialog implements View.OnClickListener {
     int count = 15;
     Handler handler = new Handler();
 
+    private boolean confirmedShutdown = false;
+
+    public boolean isConfirmedShutdown() {
+        return confirmedShutdown;
+    }
+
     @Override
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.enter) {
+            confirmedShutdown = true; // 标记为确认关机
             dismiss();
             DeviceUtils.ShutDown(mContext);
         } else if (id == R.id.cancel) {
