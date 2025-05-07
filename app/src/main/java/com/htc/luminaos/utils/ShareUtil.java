@@ -15,33 +15,31 @@ public class ShareUtil {
 
     private static String TAG = "ShareUtil";
 
-//    public static SharedPreferences getInstans(Context context) {
-//        if (preferences == null) {
-//            synchronized (ShareUtil.class) {
-//                if (preferences == null) {
-//                    preferences = context.getSharedPreferences(Contants.FILE_NAME, Context.MODE_PRIVATE);
-//                }
-//            }
-//        }
-//        return preferences;
-//    }
-
     public static SharedPreferences getInstans(Context context) {
         if (preferences == null) {
             synchronized (ShareUtil.class) {
                 if (preferences == null) {
-                    Context safeContext = context;
-                    if (!context.isDeviceProtectedStorage()) {
-                        safeContext = context.createDeviceProtectedStorageContext();
-                    }
-                    preferences = safeContext.getSharedPreferences(Contants.FILE_NAME, Context.MODE_PRIVATE);
+                    preferences = context.getSharedPreferences(Contants.FILE_NAME, Context.MODE_PRIVATE);
                 }
             }
         }
         return preferences;
     }
 
-
+//    public static SharedPreferences getInstans(Context context) {
+//        if (preferences == null) {
+//            synchronized (ShareUtil.class) {
+//                if (preferences == null) {
+//                    Context safeContext = context;
+//                    if (!context.isDeviceProtectedStorage()) {
+//                        safeContext = context.createDeviceProtectedStorageContext();
+//                    }
+//                    preferences = safeContext.getSharedPreferences(Contants.FILE_NAME, Context.MODE_PRIVATE);
+//                }
+//            }
+//        }
+//        return preferences;
+//    }
 
     /**
      * 保存数据的方法，我们需要拿到保存数据的具体类型，然后根据类型调用不同的保存方法

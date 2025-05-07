@@ -57,10 +57,30 @@ public class LanguageAdapter  extends RecyclerView.Adapter<LanguageAdapter.MyVie
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int i) {
         final Language language = languageList.get(i);
+        String locale = null;
+        if(Locale.getDefault().getLanguage().equals("zh") || Locale.getDefault().getLanguage().equals("en") ){ //英文、中文单独拉出来处理，因为中英文附带了国家码。
+            cur_language = Locale.getDefault().getLanguage()+ Locale.getDefault().getCountry();
+            locale = language.getLocale().getLanguage()+ language.getLocale().getCountry();
+        } else {
+            cur_language = Locale.getDefault().getLanguage();
+            locale = language.getLocale().getLanguage();
+        }
+        Log.d(TAG," 语言环境 "+cur_language+" "+locale);
+        if (cur_language.equals(locale)){
+            myViewHolder.status.setVisibility(View.VISIBLE);
+        }else {
+            myViewHolder.status.setVisibility(View.GONE);
+        }
         myViewHolder.language_name.setText(language.getLabel());
         myViewHolder.rl_item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                if(Locale.getDefault().getLanguage().equals("zh") || Locale.getDefault().getLanguage().equals("en") ){ //英文、中文单独拉出来处理，因为中英文附带了国家码。
+//                    cur_language = Locale.getDefault().getLanguage()+ Locale.getDefault().getCountry();
+//                } else {
+//                    cur_language = Locale.getDefault().getLanguage();
+//                }
+                Log.d(TAG,"cur_language "+cur_language+" language.get "+language.getLocale().getLanguage()+language.getLocale().getCountry());
                 if (!cur_language.equals(language.getLocale().getLanguage()+language.getLocale().getCountry())) {
                     LocalePicker.updateLocale(language.getLocale());
                     setCur_language(language.getLocale().getLanguage()+language.getLocale().getCountry());
@@ -80,22 +100,6 @@ public class LanguageAdapter  extends RecyclerView.Adapter<LanguageAdapter.MyVie
                 }
             }
         });
-        String locale = null;
-        if(language.getLocale().getLanguage().equals("zh") || language.getLocale().getLanguage().equals("en") ){ //英文、中文单独拉出来处理，因为中英文附带了国家码。
-            cur_language = Locale.getDefault().getLanguage()+ Locale.getDefault().getCountry();
-            locale = language.getLocale().getLanguage()+ language.getLocale().getCountry();
-        } else {
-            cur_language = Locale.getDefault().getLanguage();
-            locale = language.getLocale().getLanguage();
-        }
-
-        Log.d(TAG," 语言环境 "+cur_language+" "+locale);
-        if (cur_language.equals(locale)){
-            myViewHolder.status.setVisibility(View.VISIBLE);
-        }else {
-            myViewHolder.status.setVisibility(View.GONE);
-        }
-
         myViewHolder.rl_item.setOnHoverListener(this);
 
     }
