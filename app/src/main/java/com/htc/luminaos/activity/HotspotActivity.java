@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.os.SystemProperties;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
@@ -38,7 +39,7 @@ public class HotspotActivity extends BaseActivity implements View.OnKeyListener 
     private WifiHotUtil wifiHotUtil = null;
 
     private String ssid = "AndroidAP";
-    private String password = "12345678";
+    private String password = "";
     private int mSecurityType = 0;
     private IntentFilter hotspotFilter = new IntentFilter(
             "android.net.wifi.WIFI_AP_STATE_CHANGED");
@@ -211,6 +212,7 @@ public class HotspotActivity extends BaseActivity implements View.OnKeyListener 
                 @Override
                 public void onClick(String password) {
                     hotspotBinding.passwordTv.setText(password);
+                    SystemProperties.set("persist.htc.hotpassword", password);
                     writeConfig();
                 }
             });
@@ -345,17 +347,12 @@ public class HotspotActivity extends BaseActivity implements View.OnKeyListener 
 
     private void updateSecurity() {
         if (mSecurityType == 0) {
-            password = "";
-            hotspotBinding.passwordTv.setText(password);
+//            password = "";
+            hotspotBinding.passwordTv.setText("");
             hotspotBinding.securityTv.setText(securityArray[mSecurityType]);
         } else {
-            WifiConfiguration configuration = wifiHotUtil.getWifiConfig();
-            if (configuration.preSharedKey != null) {
-                hotspotBinding.passwordTv.setText(configuration.preSharedKey);
-            } else {
-//                password = "12345678";
-//                hotspotBinding.passwordTv.setText(password);
-            }
+            password = SystemProperties.get("persist.htc.hotpassword", "12345678");
+            hotspotBinding.passwordTv.setText(password);
         }
         hotspotBinding.securityTv.setText(securityArray[mSecurityType]);
         writeConfig();
@@ -364,7 +361,7 @@ public class HotspotActivity extends BaseActivity implements View.OnKeyListener 
     @Override
     public boolean onKey(View v, int keyCode, KeyEvent event) {
 
-        if ((event.getAction() == KeyEvent.ACTION_UP) && (keyCode == KeyEvent.KEYCODE_DPAD_LEFT || keyCode == KeyEvent.KEYCODE_DPAD_RIGHT )) {
+        if ((event.getAction() == KeyEvent.ACTION_UP) && (keyCode == KeyEvent.KEYCODE_DPAD_LEFT || keyCode == KeyEvent.KEYCODE_DPAD_RIGHT)) {
             return true;
         }
 
@@ -433,6 +430,7 @@ public class HotspotActivity extends BaseActivity implements View.OnKeyListener 
 
                 if (mSecurityType == WPA_INDEX || mSecurityType == WPA2_INDEX) {
                     password = configuration.preSharedKey;
+                    SystemProperties.set("persist.htc.hotpassword", configuration.preSharedKey);
                 } else {
                     password = "";
                 }

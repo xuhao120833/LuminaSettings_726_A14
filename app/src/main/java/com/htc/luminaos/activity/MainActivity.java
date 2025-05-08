@@ -34,6 +34,7 @@ import android.net.NetworkCapabilities;
 import android.net.NetworkInfo;
 import android.net.NetworkRequest;
 import android.net.wifi.ScanResult;
+import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
@@ -121,6 +122,7 @@ import com.htc.luminaos.utils.Uri;
 import com.htc.luminaos.utils.Utils;
 import com.htc.luminaos.utils.VerifyUtil;
 import com.htc.luminaos.utils.MainCustomBindingWrapper;
+import com.htc.luminaos.utils.WifiHotUtil;
 import com.htc.luminaos.widget.ManualQrDialog;
 import com.htc.luminaos.widget.SpacesItemDecoration;
 
@@ -223,7 +225,7 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
     private ConnectivityManager.NetworkCallback networkCallback;
 
     private boolean isEther = false;
-    private Dialog loadingDialog;
+    private WifiHotUtil wifiHotUtil = null;
 
     Handler handler = new Handler(new Handler.Callback() {
         @Override
