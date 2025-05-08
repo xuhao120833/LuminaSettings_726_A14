@@ -254,8 +254,10 @@ public class OtherSettingsActivity extends BaseActivity implements View.OnKeyLis
         } else if (id == R.id.rl_power_mode) {
             curPowerMode = curPowerMode == 1 ? 0 : 1;
             otherSettingsBinding.powerModeTv.setText(powerModes[curPowerMode]);
+//            mAwTvSystemManager.setPowerOnMode(curPowerMode == 1 ?
+//                    AwTvSystemTypes.EnumPowerMode.E_AW_POWER_MODE_DIRECT : AwTvSystemTypes.EnumPowerMode.E_AW_POWER_MODE_STANDBY);
             mAwTvSystemManager.setPowerOnMode(curPowerMode == 1 ?
-                    AwTvSystemTypes.EnumPowerMode.E_AW_POWER_MODE_DIRECT : AwTvSystemTypes.EnumPowerMode.E_AW_POWER_MODE_STANDBY);
+                    AwTvSystemTypes.EnumPowerMode.valueOf(1): AwTvSystemTypes.EnumPowerMode.valueOf(0));
         } else if (id == R.id.rl_account) {
             Log.d(TAG, "打开Google账号切换界面");
 //            Intent intent = new Intent(Settings.ACTION_SYNC_SETTINGS);
