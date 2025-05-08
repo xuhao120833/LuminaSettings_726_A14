@@ -1,5 +1,7 @@
 package com.htc.luminaos.widget;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.app.Activity;
@@ -376,20 +378,18 @@ public class WifiConnectDialog extends BaseDialog implements View.OnClickListene
         LayoutInflater inflater = LayoutInflater.from(context);
         View v = inflater.inflate(R.layout.loading_dialog, null);// 得到加载view
         RelativeLayout layout = (RelativeLayout) v.findViewById(R.id.loadding_layout);// 加载布局
+
+        //改成用ProgressBar来实现旋转动画，不用原来的ImageView旋转方案，原来的会卡。2025/5/8
         // main.xml中的ImageView
-        ImageView spaceshipImage = (ImageView) v.findViewById(R.id.loadding_iv);
+//        ImageView spaceshipImage = (ImageView) v.findViewById(R.id.loadding_iv);
         TextView tipTextView = (TextView) v.findViewById(R.id.loadding_tv);// 提示文字
         // 加载动画
-        Animation hyperspaceJumpAnimation = AnimationUtils.loadAnimation(
-                context, R.anim.loading_animation);
-        // 使用ImageView显示动画
-        hyperspaceJumpAnimation.setInterpolator(new LinearInterpolator());
-        spaceshipImage.startAnimation(hyperspaceJumpAnimation);
-//        ObjectAnimator rotateAnim = ObjectAnimator.ofFloat(spaceshipImage, "rotation", 0f, 360f);
-//        rotateAnim.setDuration(1500);
-//        rotateAnim.setRepeatCount(ValueAnimator.INFINITE);
-//        rotateAnim.setInterpolator(new LinearInterpolator());
-//        rotateAnim.start();
+//        Animation hyperspaceJumpAnimation = AnimationUtils.loadAnimation(
+//                context, R.anim.loading_animation);
+//        // 使用ImageView显示动画
+//        hyperspaceJumpAnimation.setInterpolator(new LinearInterpolator());
+//        spaceshipImage.startAnimation(hyperspaceJumpAnimation);
+//        startanim(true,spaceshipImage);
 
         tipTextView.setText(msg);// 设置加载信息
         Dialog connectingDialog = new Dialog(context, R.style.DialogTheme);// 创建自定义样式dialog
@@ -403,7 +403,6 @@ public class WifiConnectDialog extends BaseDialog implements View.OnClickListene
                 RelativeLayout.LayoutParams.FILL_PARENT,
                 RelativeLayout.LayoutParams.FILL_PARENT));// 设置布局
         return connectingDialog;
-
     }
 
     public void hideConnectingDialog() {
@@ -459,4 +458,58 @@ public class WifiConnectDialog extends BaseDialog implements View.OnClickListene
 
         dialog.show();
     }
+
+    private void startanim(boolean startornot,ImageView spaceshipImage ) {
+        if (!startornot) {
+            // 使用属性动画实现平滑过渡
+            animateViewVisibility(spaceshipImage, View.GONE);
+            return;
+        }
+
+        // 改用属性动画
+        animateViewVisibility(spaceshipImage, View.VISIBLE);
+        startPropertyAnimation(spaceshipImage);
+    }
+
+    private void animateViewVisibility(View view, int visibility) {
+        if (view.getVisibility() == visibility) return;
+
+        float startAlpha = visibility == View.VISIBLE ? 0f : 1f;
+        float endAlpha = visibility == View.VISIBLE ? 1f : 0f;
+
+        ObjectAnimator animator = ObjectAnimator.ofFloat(view, "alpha", startAlpha, endAlpha);
+        animator.setDuration(200); // 适当缩短过渡时间
+        animator.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                view.setVisibility(visibility);
+            }
+        });
+        animator.start();
+    }
+
+    private void startPropertyAnimation(ImageView spaceshipImage) {
+        // 使用性能更好的属性动画
+        ObjectAnimator rotationAnim = ObjectAnimator.ofFloat(
+                spaceshipImage,
+                "rotation",
+                0f,
+                360f
+        );
+
+        rotationAnim.setDuration(1000); // 适当调整持续时间
+        rotationAnim.setInterpolator(new LinearInterpolator());
+        rotationAnim.setRepeatCount(ValueAnimator.INFINITE);
+
+        // 启用硬件加速层
+        spaceshipImage.setLayerType(View.LAYER_TYPE_HARDWARE, null);
+        rotationAnim.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                spaceshipImage.setLayerType(View.LAYER_TYPE_NONE, null);
+            }
+        });
+        rotationAnim.start();
+    }
+
 }

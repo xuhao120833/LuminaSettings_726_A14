@@ -15,14 +15,25 @@
         android:layout_marginTop="@dimen/y_30"
         android:gravity="center" >
 
-        <ImageView
+<!--        <ImageView-->
+<!--            android:id="@+id/loadding_iv"-->
+<!--            android:layout_width="@dimen/x_90"-->
+<!--            android:layout_height="@dimen/y_90"-->
+<!--            android:layout_centerHorizontal="true"-->
+<!--            android:background="@drawable/icon_loadding"-->
+<!--            skin:enable="true"-->
+<!--            />-->
+
+        <ProgressBar
+            style="@android:style/Widget.Material.Light.ProgressBar.Large"
             android:id="@+id/loadding_iv"
             android:layout_width="@dimen/x_90"
             android:layout_height="@dimen/y_90"
+            android:indeterminate="true"
             android:layout_centerHorizontal="true"
-            android:background="@drawable/icon_loadding"
-            skin:enable="true"
-            />
+            android:indeterminateTintMode="src_in"
+            android:indeterminateTint="#FFFFFFFF" />
+
 
         <TextView
             android:id="@+id/loadding_tv"
