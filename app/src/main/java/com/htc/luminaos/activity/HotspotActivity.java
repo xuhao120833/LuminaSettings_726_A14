@@ -205,7 +205,7 @@ public class HotspotActivity extends BaseActivity implements View.OnKeyListener 
             hotspotBinding.hotspotSwitch.setChecked(!hotspotBinding.hotspotSwitch.isChecked());
         } else if (id == R.id.rl_show_password || id == R.id.show_password_switch) {
             hotspotBinding.showPasswordSwitch.setChecked(!hotspotBinding.showPasswordSwitch.isChecked());
-        } else if (id == R.id.rl_hotspot_password) {
+        } else if (id == R.id.rl_hotspot_password && mSecurityType != 0) {
             HotspotPasswordDialog passwordDialog = new HotspotPasswordDialog(this, R.style.DialogTheme);
             passwordDialog.HotspotConfig(wifiHotUtil);
             passwordDialog.setOnClickCallBack(new HotspotPasswordDialog.HotspotPasswordCallBack() {
