@@ -64,6 +64,7 @@ import android.os.SystemProperties;
 import android.os.storage.StorageManager;
 import android.os.storage.StorageVolume;
 import android.provider.Settings;
+import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
 import android.view.Display;
@@ -2309,11 +2310,22 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
             }
         }
         //解决按右键焦点跑到AppStore的问题
-        if(id == R.id.rl_settings && keyCode == KeyEvent.KEYCODE_DPAD_RIGHT && MyApplication.config.layout_select == 3) {
-            if(customBinding.rlSettings.hasFocus() && event.getAction() == KeyEvent.ACTION_DOWN){
-                return true;
+//        if(id == R.id.rl_settings && keyCode == KeyEvent.KEYCODE_DPAD_RIGHT && MyApplication.config.layout_select == 3) {
+//            if(customBinding.rlSettings.hasFocus() && event.getAction() == KeyEvent.ACTION_DOWN){
+//                return true;
+//            }
+//        }
+
+        // 解决按右键焦点跑到AppStore的问题，同时兼容RTL语言（如阿拉伯语）
+        if (id == R.id.rl_settings && MyApplication.config.layout_select == 3) {
+            boolean isRtl = TextUtils.getLayoutDirectionFromLocale(Locale.getDefault()) == View.LAYOUT_DIRECTION_RTL;
+            int blockedKey = isRtl ? KeyEvent.KEYCODE_DPAD_LEFT : KeyEvent.KEYCODE_DPAD_RIGHT;
+
+            if (customBinding.rlSettings.hasFocus() && keyCode == blockedKey && event.getAction() == KeyEvent.ACTION_DOWN) {
+                return true; // 屏蔽方向键，防止焦点穿透
             }
         }
+
         return false;
     }
 
