@@ -1,6 +1,7 @@
 package com.htc.luminaos.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.htc.luminaos.MyApplication;
 import com.htc.luminaos.R;
 import com.htc.luminaos.entry.AppInfoBean;
 import com.htc.luminaos.utils.ScrollUtils;
@@ -69,6 +71,7 @@ public class AppFavoritesAdapter extends BaseAdapter {
 //				viewholder.addapp_name.setTypeface(fontFace);
 //			}
             convertView.setTag(viewholder);
+            setLayout(viewholder.addapp_name);
         } else {
             viewholder = (ViewHolder) convertView.getTag();
         }
@@ -81,6 +84,12 @@ public class AppFavoritesAdapter extends BaseAdapter {
             viewholder.appapp_iv.setVisibility(View.GONE);
         }
         return convertView;
+    }
+
+    private void setLayout(TextView name) {
+        if (MyApplication.config.layout_select == 3) {
+            name.setTextColor(Color.BLACK);
+        }
     }
 
     static class ViewHolder {

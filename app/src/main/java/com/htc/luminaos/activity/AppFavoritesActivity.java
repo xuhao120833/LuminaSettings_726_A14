@@ -8,12 +8,15 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.InputDevice;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -28,6 +31,7 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.GridView;
 import android.widget.TextView;
 
+import com.htc.luminaos.MyApplication;
 import com.htc.luminaos.R;
 import com.htc.luminaos.adapter.AppFavoritesAdapter;
 import com.htc.luminaos.entry.AppInfoBean;
@@ -45,6 +49,7 @@ import java.io.File;
 import java.util.ArrayList;
 
 import androidx.annotation.Nullable;
+import androidx.core.content.res.ResourcesCompat;
 
 
 /**
@@ -67,6 +72,7 @@ public class AppFavoritesActivity extends BaseActivity implements AppCallBack {
     private GridView appfavorites_gridview;
     private AppFavoritesAdapter adapter;
     private TextView select_number_tv;
+    private TextView title;
 
     private IntentFilter appFilter = new IntentFilter();
     private AppReceiver appReceiver = null;
@@ -88,6 +94,7 @@ public class AppFavoritesActivity extends BaseActivity implements AppCallBack {
     public void initView() {
         appfavorites_gridview = findViewById(R.id.appfavorites_gridview);
         select_number_tv = findViewById(R.id.select_number_tv);
+        title = findViewById(R.id.title);
     }
 
     public void initData() {
@@ -102,6 +109,17 @@ public class AppFavoritesActivity extends BaseActivity implements AppCallBack {
     @Override
     protected void onResume() {
         super.onResume();
+        setLayout();
+    }
+
+    private void setLayout() {
+        if (MyApplication.config.layout_select == 3) {
+            Typeface typeface = ResourcesCompat.getFont(this, R.font.arial);
+            title.setTextColor(Color.BLACK);
+            title.setTypeface(typeface,Typeface.BOLD);
+            title.setTextSize(TypedValue.COMPLEX_UNIT_PX,getResources().getDimensionPixelSize(R.dimen.y_40));
+            title.setLetterSpacing(0.05f);
+        }
     }
 
     @Override
