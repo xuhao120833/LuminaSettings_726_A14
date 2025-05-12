@@ -52,7 +52,8 @@ public class DBUtils extends SQLiteOpenHelper {
 
     public static DBUtils getInstance(Context context) {
         if (mInstance == null) {
-            mInstance = new DBUtils(context);
+            Context deContext = context.createDeviceProtectedStorageContext();
+            mInstance = new DBUtils(deContext);
         }
         return mInstance;
     }

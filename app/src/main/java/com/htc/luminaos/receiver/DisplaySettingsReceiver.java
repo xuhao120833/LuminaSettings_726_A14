@@ -71,6 +71,7 @@ public class DisplaySettingsReceiver extends BroadcastReceiver implements View.O
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        Log.d(TAG," 收到DisplaySettings的广播 ");
         String action = intent.getAction();
         if (action.equals(DisplayAction)) {
             try {

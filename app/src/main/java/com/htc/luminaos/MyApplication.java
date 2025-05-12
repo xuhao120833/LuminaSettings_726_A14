@@ -33,6 +33,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -215,25 +217,61 @@ public class MyApplication extends Application {
         }
     }
 
+//    private void copyMyWallpaper() {
+//        String[] imageExtensions = {".jpg", ".jpeg", ".png", ".bmp", ".webp"};
+//        File directory = new File("/data/user_de/0/com.htc.luminaos/files/.mywallpaper");
+//        if (directory.exists() && directory.isDirectory()) {
+//            File[] files = directory.listFiles();
+//            if (files != null) {
+//                for (File file : files) {
+//                    if (file.isFile()) {
+//                        for (String extension : imageExtensions) {
+//                            if (file.getName().toLowerCase().endsWith(extension)) {
+//                                Utils.drawables.add(file.getAbsolutePath());
+//                                break; // 找到一个匹配后就跳出循环
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//    }
+
     private void copyMyWallpaper() {
         String[] imageExtensions = {".jpg", ".jpeg", ".png", ".bmp", ".webp"};
-        File directory = new File("/sdcard/.mywallpaper");
+        File directory = new File("/data/user_de/0/com.htc.luminaos/files/.mywallpaper");
         if (directory.exists() && directory.isDirectory()) {
             File[] files = directory.listFiles();
             if (files != null) {
+                // 过滤出图片文件
+                List<File> imageFiles = new ArrayList<>();
                 for (File file : files) {
                     if (file.isFile()) {
                         for (String extension : imageExtensions) {
                             if (file.getName().toLowerCase().endsWith(extension)) {
-                                Utils.drawables.add(file.getAbsolutePath());
-                                break; // 找到一个匹配后就跳出循环
+                                imageFiles.add(file);
+                                break;
                             }
                         }
                     }
                 }
+
+                // 按 lastModified 时间升序排序
+                Collections.sort(imageFiles, new Comparator<File>() {
+                    @Override
+                    public int compare(File f1, File f2) {
+                        return Long.compare(f1.lastModified(), f2.lastModified());
+                    }
+                });
+
+                // 添加到 Utils.drawables
+                for (File file : imageFiles) {
+                    Utils.drawables.add(file.getAbsolutePath());
+                }
             }
         }
     }
+
 
     private boolean copyCustomBg() {
         String[] imageExtensions = {".jpg", ".jpeg", ".png", ".bmp", ".webp"};

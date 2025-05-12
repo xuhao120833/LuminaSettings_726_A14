@@ -638,7 +638,7 @@ public class WallPaperActivity extends BaseActivity {
 
     public String copyFileToWallpaperFolder(String sourcePath) {
         // 目标文件夹路径
-        String targetDirPath = Environment.getExternalStorageDirectory() + "/.mywallpaper/";
+        String targetDirPath = "/data/user_de/0/com.htc.luminaos/files/.mywallpaper";
         File targetDir = new File(targetDirPath);
         // 检查并创建目标文件夹
         if (!targetDir.exists() && !targetDir.mkdirs()) {

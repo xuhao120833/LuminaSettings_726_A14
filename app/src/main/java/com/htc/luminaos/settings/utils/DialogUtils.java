@@ -23,7 +23,7 @@ public class DialogUtils {
 	 public static  Dialog createLoadingDialog(Context context, String msg) {  
 		  
 	        LayoutInflater inflater = LayoutInflater.from(context);  
-	        View v = inflater.inflate(R.layout.loading_dialog, null);// 得到加载view
+	        View v = inflater.inflate(R.layout.loading_dialog3, null);// 得到加载view
 	        RelativeLayout layout = (RelativeLayout) v.findViewById(R.id.loadding_layout);// 加载布局
 	        // main.xml中的ImageView  
 	        ImageView spaceshipImage = (ImageView) v.findViewById(R.id.loadding_iv);  
