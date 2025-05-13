@@ -116,8 +116,8 @@ public class AppFavoritesActivity extends BaseActivity implements AppCallBack {
         if (MyApplication.config.layout_select == 3) {
             Typeface typeface = ResourcesCompat.getFont(this, R.font.arial);
             title.setTextColor(Color.BLACK);
-            title.setTypeface(typeface,Typeface.BOLD);
-            title.setTextSize(TypedValue.COMPLEX_UNIT_PX,getResources().getDimensionPixelSize(R.dimen.y_40));
+            title.setTypeface(typeface, Typeface.BOLD);
+            title.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimensionPixelSize(R.dimen.y_40));
             title.setLetterSpacing(0.05f);
         }
     }
@@ -162,7 +162,7 @@ public class AppFavoritesActivity extends BaseActivity implements AppCallBack {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //特定IP Special
                 String specialPackage = "";
-                if(Utils.specialApps != null) {
+                if (Utils.specialApps != null) {
                     specialPackage = Utils.specialApps.getPackageName();
                 }
                 Log.d(tag, " setOnItemClickListener specialPackage " + specialPackage);
@@ -202,26 +202,26 @@ public class AppFavoritesActivity extends BaseActivity implements AppCallBack {
                     } else {
                         boolean isCheck = list.get(position).isCheck();
                         if (isCheck) {
-                            if (!DBUtils.getInstance(AppFavoritesActivity.this).isExistData(list.get(position).getApppackagename())
-                            ) {
+                            if (!DBUtils.getInstance(AppFavoritesActivity.this).isExistData(list.get(position).getApppackagename())) {
                                 DBUtils.getInstance(AppFavoritesActivity.this)
-                                        .addFavorites("", list.get(position).getApppackagename(), null);
+                                        .addFavorites(list.get(position).getAppname(),
+                                                list.get(position).getApppackagename(),
+                                                list.get(position).getAppicon());
                                 adapter.notifyDataSetChanged();
                             }
                         } else {
                             DBUtils.getInstance(AppFavoritesActivity.this)
-                                    .deleteFavorites(
-                                            list.get(position).getApppackagename());
+                                    .deleteFavorites(list.get(position).getApppackagename());
                             adapter.notifyDataSetChanged();
                         }
                     }
                 } else {
                     favorites = DBUtils.getInstance(getApplicationContext()).getFavoritesCount();
                     if (Utils.specialApps != null) {
-						favorites++;
+                        favorites++;
                     }
                     max = 6;
-                    Log.d(tag, " 快捷栏数量 file.exists() "+favorites);
+                    Log.d(tag, " 快捷栏数量 file.exists() " + favorites);
                     if (favorites > max && list.get(position).isCheck()) {
                         list.get(position).setCheck(!list.get(position).isCheck());
                         ToastUtil.showShortToast(AppFavoritesActivity.this, getString(R.string.short_max_tips));
@@ -230,11 +230,9 @@ public class AppFavoritesActivity extends BaseActivity implements AppCallBack {
                         if (isCheck) {
                             if (!DBUtils.getInstance(AppFavoritesActivity.this).isExistData(list.get(position).getApppackagename())) {
                                 DBUtils.getInstance(AppFavoritesActivity.this)
-                                        .addFavorites(
-                                                "",
+                                        .addFavorites(list.get(position).getAppname(),
                                                 list.get(position).getApppackagename(),
-                                                null
-                                        );
+                                                list.get(position).getAppicon());
                                 adapter.notifyDataSetChanged();
                             }
                         } else {
@@ -337,7 +335,7 @@ public class AppFavoritesActivity extends BaseActivity implements AppCallBack {
         ArrayList<AppInfoBean> mList = AppUtils.getApplicationMsg(AppFavoritesActivity.this);
         ArrayList<AppSimpleBean> simpleList = DBUtils.getInstance(AppFavoritesActivity.this).getFavorites();
         //特定IP Special APP
-        if(Utils.specialApps !=null) {
+        if (Utils.specialApps != null) {
             AppSimpleBean appSimpleBean = new AppSimpleBean();
             appSimpleBean.setId(simpleList.size());
             appSimpleBean.setPackagename(Utils.specialApps.getPackageName());

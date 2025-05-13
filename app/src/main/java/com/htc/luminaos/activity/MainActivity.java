@@ -51,6 +51,8 @@ import com.htc.luminaos.receiver.AppReceiver;
 import com.htc.luminaos.receiver.BatteryReceiver;
 import com.htc.luminaos.receiver.DisplaySettingsReceiver;
 import com.htc.luminaos.receiver.InitAngleReceiver;
+import com.htc.luminaos.receiver.UnlockCallBack;
+import com.htc.luminaos.receiver.UnlockReceiver;
 import com.htc.luminaos.receiver.UsbDeviceCallBack;
 import com.htc.luminaos.service.TimeOffService;
 import com.htc.luminaos.utils.BatteryCallBack;
@@ -165,7 +167,7 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class MainActivity extends BaseMainActivity implements BluetoothCallBcak, MyWifiCallBack, MyTimeCallBack,
-        NetWorkCallBack, UsbDeviceCallBack, AppCallBack, BatteryCallBack, View.OnKeyListener {
+        NetWorkCallBack, UsbDeviceCallBack, AppCallBack, BatteryCallBack, View.OnKeyListener, UnlockCallBack {
 
     private ActivityMainBinding mainBinding;
 
@@ -200,6 +202,7 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
     //Display Settings 悬浮窗
     private DisplaySettingsReceiver displaySettingsReceiver = null;
     private InitAngleReceiver initAngleReceiver = null;
+    private UnlockReceiver unlockReceiver = null;
 
     private static String TAG = "MainActivity";
 
@@ -759,6 +762,10 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
         initAngleFilter.addAction("com.htc.INITANGLE");
         registerReceiver(initAngleReceiver, initAngleFilter);
 
+        //监听解锁
+//        unlockReceiver = new UnlockReceiver(this);
+//        IntentFilter filter = new IntentFilter(Intent.ACTION_USER_UNLOCKED);
+//        registerReceiver(unlockReceiver, filter);
     }
 
     ShortcutsAdapter.ItemCallBack itemCallBack = new ShortcutsAdapter.ItemCallBack() {
@@ -1364,11 +1371,13 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
             ShortInfoBean shortInfoBean = new ShortInfoBean();
             shortInfoBean.setPackageName(appSimpleBeans.get(i).getPackagename());
 
+            Log.d(TAG, " loadHomeAppData快捷图标 appSimpleBeans.get(i) " + appSimpleBeans.get(i).getPackagename());
             for (int j = 0; j < appList.size(); j++) {
                 if (appSimpleBeans.get(i).getPackagename()
                         .equals(appList.get(j).getApppackagename())) {
                     shortInfoBean.setAppicon(appList.get(j).getAppicon());
                     shortInfoBean.setAppname(appList.get(j).getAppname());
+                    Log.d(TAG, " loadHomeAppData快捷图标 setAppname " + appList.get(j).getAppname());
                     break;
                 }
             }
@@ -1459,6 +1468,7 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
         unregisterReceiver(batteryReceiver);
         unregisterReceiver(displaySettingsReceiver);
         unregisterReceiver(initAngleReceiver);
+//        unregisterReceiver(unlockReceiver);
         super.onDestroy();
     }
 
@@ -2401,5 +2411,11 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
         params.height = d.getHeight();
         window.setAttributes(params);
         dialog.show();
+    }
+
+    @Override
+    public void unLock() {
+        short_list = loadHomeAppData();
+        handler.sendEmptyMessage(204);
     }
 }

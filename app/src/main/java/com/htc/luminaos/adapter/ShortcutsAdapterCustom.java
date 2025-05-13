@@ -223,6 +223,8 @@ public class ShortcutsAdapterCustom extends RecyclerView.Adapter<ShortcutsAdapte
                 return R.drawable.chrome;
             case "com.amazon.avod.thirdpartyclient":
                 return R.drawable.primevideo;
+            case "com.amazon.amazonvideo.livingroom":
+                return R.drawable.primevideo;
             case "net.cj.cjhv.gs.tving":
                 return R.drawable.tving;
             case "com.wbd.stream":

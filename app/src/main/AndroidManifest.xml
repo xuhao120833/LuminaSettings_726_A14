@@ -41,20 +41,24 @@
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
+        android:configChanges="fontScale|orientation|screenSize|keyboardHidden|smallestScreenSize|screenLayout"
+        android:defaultToDeviceProtectedStorage="true"
+        android:directBootAware="true"
         android:icon="@drawable/luminaos"
         android:label="@string/app_name"
         android:largeHeap="true"
-        android:directBootAware="true"
-        android:defaultToDeviceProtectedStorage="true"
         android:roundIcon="@drawable/luminaos"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:configChanges="fontScale|orientation|screenSize|keyboardHidden|smallestScreenSize|screenLayout"
         android:usesCleartextTraffic="true">
+        <receiver
+            android:name=".receiver.UnlockReceiver"
+            android:enabled="true"
+            android:exported="true"></receiver>
         <receiver
             android:name=".receiver.InitAngleReceiver"
             android:enabled="true"
-            android:exported="true"></receiver>
+            android:exported="true" />
         <receiver
             android:name=".receiver.refreshApps"
             android:enabled="true"
@@ -200,6 +204,7 @@
             android:launchMode="singleInstance">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.HOME" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -207,8 +212,10 @@
             <!-- 按如下格式添加整个intent-filter块，其中data字段只能有一个，其内容是mtj拼接上您的appkey -->
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
+
                 <data android:scheme="mtj5dd227fad8" />
             </intent-filter>
         </activity>

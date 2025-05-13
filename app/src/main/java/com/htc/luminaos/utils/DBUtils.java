@@ -977,9 +977,36 @@ public class DBUtils extends SQLiteOpenHelper {
         }
     }
 
-    public Bitmap getBitmapFromDrawable(Drawable drawable) {
+//    public Bitmap getBitmapFromDrawable(Drawable drawable) {
+//
+//        return ((BitmapDrawable) drawable).getBitmap();
+//    }
 
-        return ((BitmapDrawable) drawable).getBitmap();
+    public static Bitmap getBitmapFromDrawable(Drawable drawable) {
+        if (drawable instanceof BitmapDrawable) {
+            return ((BitmapDrawable) drawable).getBitmap();
+        } else if (drawable instanceof AdaptiveIconDrawable) {
+            Drawable newDrawable = drawable.getConstantState().newDrawable().mutate();
+            // 对 AdaptiveIconDrawable 进行处理
+            int width = newDrawable.getIntrinsicWidth();
+            int height = newDrawable.getIntrinsicHeight();
+            Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+            Canvas canvas = new Canvas(bitmap);
+            newDrawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+            newDrawable.draw(canvas);
+            return bitmap;
+        } else {
+            Drawable newDrawable = drawable.getConstantState().newDrawable().mutate();
+            // 兜底方案：对其他类型 Drawable 的处理
+            int width = newDrawable.getIntrinsicWidth() > 0 ? newDrawable.getIntrinsicWidth() : 1;
+            int height = newDrawable.getIntrinsicHeight() > 0 ? newDrawable.getIntrinsicHeight() : 1;
+            Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+            Canvas canvas = new Canvas(bitmap);
+            newDrawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+            newDrawable.draw(canvas);
+            return bitmap;
+        }
     }
+
 
 }
