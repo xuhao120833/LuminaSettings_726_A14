@@ -110,11 +110,11 @@ public class DisplaySettingsReceiver extends BroadcastReceiver implements View.O
         displaySettingsBinding = ActivityDisplaySettingsBinding.inflate(LayoutInflater.from(mContext));
 
         displaySettingsBinding.rlPictureMode.setOnClickListener(this);
-        displaySettingsBinding.rlBrightness.setOnClickListener(this);
-        displaySettingsBinding.rlContrast.setOnClickListener(this);
-        displaySettingsBinding.rlHue.setOnClickListener(this);
-        displaySettingsBinding.rlSaturation.setOnClickListener(this);
-        displaySettingsBinding.rlSharpness.setOnClickListener(this);
+//        displaySettingsBinding.rlBrightness.setOnClickListener(this);
+//        displaySettingsBinding.rlContrast.setOnClickListener(this);
+//        displaySettingsBinding.rlHue.setOnClickListener(this);
+//        displaySettingsBinding.rlSaturation.setOnClickListener(this);
+//        displaySettingsBinding.rlSharpness.setOnClickListener(this);
         displaySettingsBinding.brightnessLeft.setOnClickListener(this);
         displaySettingsBinding.brightnessRight.setOnClickListener(this);
         displaySettingsBinding.contrastLeft.setOnClickListener(this);
