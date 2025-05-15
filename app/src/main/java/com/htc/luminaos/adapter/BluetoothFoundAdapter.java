@@ -1,9 +1,11 @@
 package com.htc.luminaos.adapter;
 
+import android.Manifest;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothClass;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -20,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 /**
@@ -57,60 +60,60 @@ public class BluetoothFoundAdapter extends RecyclerView.Adapter<BluetoothFoundAd
 
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder myViewHolder, int i) {
-        final BluetoothDevice device = deviceList.get(i);
-        myViewHolder.ble_name.setText(device.getName());
-        if (device.getBluetoothClass()
-                .getMajorDeviceClass() == BluetoothClass.Device.Major.PHONE) {
-            myViewHolder.ble_type.setImageResource(R.drawable.bluetooth);
-        } else if (device.getBluetoothClass()
-                .getMajorDeviceClass() == BluetoothClass.Device.Major.COMPUTER) {
-            myViewHolder.ble_type.setImageResource(R.drawable.bluetooth);
-        } else if (device.getBluetoothClass().getMajorDeviceClass() == BluetoothClass.Device.Major.AUDIO_VIDEO) {
-            myViewHolder.ble_type.setImageResource(R.drawable.bluetooth);
-        } else if (device.getBluetoothClass().getMajorDeviceClass() == BluetoothClass.Device.Major.PERIPHERAL) {
-            switch (device.getBluetoothClass().getDeviceClass()) {
-                case BluetoothClass.Device.PERIPHERAL_KEYBOARD:
-                case BluetoothClass.Device.PERIPHERAL_KEYBOARD_POINTING:
-                    // viewHolder.pair_iv.setImageResource(R.drawable.ic_lockscreen_ime);
-                    myViewHolder.ble_type.setImageResource(R.drawable.bluetooth);
-                    break;
-                case BluetoothClass.Device.PERIPHERAL_POINTING:
-                    myViewHolder.ble_type
-                            .setImageResource(R.drawable.bluetooth);
-                    break;
-                default:
-                    myViewHolder.ble_type.setImageResource(R.drawable.bluetooth);
-                    break;
+        try {
+            final BluetoothDevice device = deviceList.get(i);
+            myViewHolder.ble_name.setText(device.getName());
+            if (device.getBluetoothClass().getMajorDeviceClass() == BluetoothClass.Device.Major.PHONE) {
+                myViewHolder.ble_type.setImageResource(R.drawable.bluetooth);
+            } else if (device.getBluetoothClass().getMajorDeviceClass() == BluetoothClass.Device.Major.COMPUTER) {
+                myViewHolder.ble_type.setImageResource(R.drawable.bluetooth);
+            } else if (device.getBluetoothClass().getMajorDeviceClass() == BluetoothClass.Device.Major.AUDIO_VIDEO) {
+                myViewHolder.ble_type.setImageResource(R.drawable.bluetooth);
+            } else if (device.getBluetoothClass().getMajorDeviceClass() == BluetoothClass.Device.Major.PERIPHERAL) {
+                switch (device.getBluetoothClass().getDeviceClass()) {
+                    case BluetoothClass.Device.PERIPHERAL_KEYBOARD:
+                    case BluetoothClass.Device.PERIPHERAL_KEYBOARD_POINTING:
+                        // viewHolder.pair_iv.setImageResource(R.drawable.ic_lockscreen_ime);
+                        myViewHolder.ble_type.setImageResource(R.drawable.bluetooth);
+                        break;
+                    case BluetoothClass.Device.PERIPHERAL_POINTING:
+                        myViewHolder.ble_type
+                                .setImageResource(R.drawable.bluetooth);
+                        break;
+                    default:
+                        myViewHolder.ble_type.setImageResource(R.drawable.bluetooth);
+                        break;
+                }
+            } else {
+                myViewHolder.ble_type.setImageResource(R.drawable.bluetooth);
             }
-        } else {
-            myViewHolder.ble_type.setImageResource(R.drawable.bluetooth);
-        }
-        myViewHolder.rl_item.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
+            myViewHolder.rl_item.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    try {
 //                    boolean result = ClsUtils.createBond(device.getClass(),
 //                            device);
-                    boolean result = startPairing(device);
-                    if (result) {
-                        Log.i(TAG, "配对成功!");
-                    } else {
-                        Log.i(TAG, "配对失败!");
+                        boolean result = startPairing(device);
+                        if (result) {
+                            Log.i(TAG, "配对成功!");
+                        } else {
+                            Log.i(TAG, "配对失败!");
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
-                } catch (Exception e) {
-                    e.printStackTrace();
                 }
+            });
+            if (CurrentPair != null && CurrentPair.getAddress().equals(device.getAddress())) {
+                myViewHolder.ble_status.setText(mContext.getString(R.string.pairing));
+                myViewHolder.ble_status.setVisibility(View.VISIBLE);
+            } else {
+                myViewHolder.ble_status.setVisibility(View.GONE);
             }
-        });
-
-        if (CurrentPair != null && CurrentPair.getAddress().equals(device.getAddress())) {
-            myViewHolder.ble_status.setText(mContext.getString(R.string.pairing));
-            myViewHolder.ble_status.setVisibility(View.VISIBLE);
-        } else {
-            myViewHolder.ble_status.setVisibility(View.GONE);
+            myViewHolder.rl_item.setOnHoverListener(this);
+        }catch (Exception e) {
+            e.printStackTrace();
         }
-
-        myViewHolder.rl_item.setOnHoverListener(this);
     }
 
     public boolean startPairing(BluetoothDevice mDevice) {

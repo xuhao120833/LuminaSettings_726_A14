@@ -151,21 +151,23 @@ public class BluetoothActivity extends BaseActivity implements BluetoothCallBcak
             String action = intent.getAction();
             // 获得已经搜索到的蓝牙设备
             if (BluetoothDevice.ACTION_FOUND.equals(action)) {
-                BluetoothDevice device = intent
-                        .getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+                BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
                 // 搜索到的不是已经绑定的蓝牙设备
-                if (device.getBondState() != BluetoothDevice.BOND_BONDED && device.getName() != null) {
-                    Log.i(TAG, "device " + device.getName());
-                    if (!scanList.contains(device) && !device.getName().isEmpty()) {
-                        scanList.add(device);
-                        Message message = handler.obtainMessage();
-                        message.what = Contants.REFRESH_FOUND;
-                        handler.sendMessage(message);
+                try {
+                    if (device.getBondState() != BluetoothDevice.BOND_BONDED && device.getName() != null) {
+                        Log.i(TAG, "device " + device.getName());
+                        if (!scanList.contains(device) && !device.getName().isEmpty()) {
+                            scanList.add(device);
+                            Message message = handler.obtainMessage();
+                            message.what = Contants.REFRESH_FOUND;
+                            handler.sendMessage(message);
+                        }
                     }
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
                 // 搜索完成
-            } else if (BluetoothAdapter.ACTION_DISCOVERY_FINISHED
-                    .equals(action)) {
+            } else if (BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(action)) {
                 searchAnim(false);
             }
         }
@@ -175,22 +177,23 @@ public class BluetoothActivity extends BaseActivity implements BluetoothCallBcak
     Handler handler = new Handler(new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
-            BluetoothDevice device = (BluetoothDevice) msg.obj;
-            switch (msg.what) {
-                case Contants.BOND_SUCCESSFUL:
-                    if (scanList.contains(device)) {
-                        View view = getCurrentFocus();
-                        if (view != null)
-                            view.clearFocus();
+            try {
+                BluetoothDevice device = (BluetoothDevice) msg.obj;
+                switch (msg.what) {
+                    case Contants.BOND_SUCCESSFUL:
+                        if (scanList.contains(device)) {
+                            View view = getCurrentFocus();
+                            if (view != null)
+                                view.clearFocus();
 
-                        scanList.remove(device);
-                        foundAdapter.notifyDataSetChanged();
-                    }
-                    if (device.getBluetoothClass().getMajorDeviceClass() == BluetoothClass.Device.Major.AUDIO_VIDEO) {
-                        currentDevice = device;
-                    }
-                    updatePairList();
-                    // 音频设备，配对成功后需要进行连接
+                            scanList.remove(device);
+                            foundAdapter.notifyDataSetChanged();
+                        }
+                        if (device.getBluetoothClass().getMajorDeviceClass() == BluetoothClass.Device.Major.AUDIO_VIDEO) {
+                            currentDevice = device;
+                        }
+                        updatePairList();
+                        // 音频设备，配对成功后需要进行连接
 //                    if (device.getBluetoothClass().getMajorDeviceClass() == BluetoothClass.Device.Major.AUDIO_VIDEO) {
 //                        connectDeviceFromA2DP(device);
 //                    } else if (device.getBluetoothClass().getMajorDeviceClass() == BluetoothClass.Device.Major.PERIPHERAL) {
@@ -201,38 +204,40 @@ public class BluetoothActivity extends BaseActivity implements BluetoothCallBcak
 //                            connectDeviceFromA2DP(device);
 //                        }
 //                    }
-                    connectDevice(device);
-                    break;
-                case Contants.BONDING:
-                    if (scanList.contains(device)) {
-                        foundAdapter.setCurrentPair(device);
-                        foundAdapter.notifyDataSetChanged();
-                    }
-                    break;
-                case Contants.BOND_FAIL:
-                    if (foundAdapter != null) {
-                        foundAdapter.setCurrentPair(null);
-                        foundAdapter.notifyDataSetChanged();
-                    }
-                    updatePairList();
-                    break;
-                case Contants.REFRESH_FOUND:
-                    if (foundAdapter == null) {
-                        foundAdapter = new BluetoothFoundAdapter(scanList, BluetoothActivity.this,bluetoothAdapter);
-                        foundAdapter.setHasStableIds(true);
-                        bluetoothBinding.availableRv.setAdapter(foundAdapter);
-                    } else {
-                        foundAdapter.updateList(scanList);
-                        foundAdapter.notifyDataSetChanged();
-                    }
-                    break;
-                case Contants.REFRESH_PAIR:
-                    updatePairList();
-                    handler.sendEmptyMessageDelayed(Contants.REFRESH_PAIR, 5000);
-                    break;
+                        connectDevice(device);
+                        break;
+                    case Contants.BONDING:
+                        if (scanList.contains(device)) {
+                            foundAdapter.setCurrentPair(device);
+                            foundAdapter.notifyDataSetChanged();
+                        }
+                        break;
+                    case Contants.BOND_FAIL:
+                        if (foundAdapter != null) {
+                            foundAdapter.setCurrentPair(null);
+                            foundAdapter.notifyDataSetChanged();
+                        }
+                        updatePairList();
+                        break;
+                    case Contants.REFRESH_FOUND:
+                        if (foundAdapter == null) {
+                            foundAdapter = new BluetoothFoundAdapter(scanList, BluetoothActivity.this, bluetoothAdapter);
+                            foundAdapter.setHasStableIds(true);
+                            bluetoothBinding.availableRv.setAdapter(foundAdapter);
+                        } else {
+                            foundAdapter.updateList(scanList);
+                            foundAdapter.notifyDataSetChanged();
+                        }
+                        break;
+                    case Contants.REFRESH_PAIR:
+                        updatePairList();
+                        handler.sendEmptyMessageDelayed(Contants.REFRESH_PAIR, 5000);
+                        break;
 
+                }
+            }catch (Exception e) {
+                e.printStackTrace();
             }
-
             return false;
         }
     });
@@ -278,7 +283,7 @@ public class BluetoothActivity extends BaseActivity implements BluetoothCallBcak
     private void updatePairList() {
         bondList = getPairList();
         if (bondAdapter == null) {
-            bondAdapter = new BluetoothBondAdapter(bondList, BluetoothActivity.this,bluetoothAdapter);
+            bondAdapter = new BluetoothBondAdapter(bondList, BluetoothActivity.this, bluetoothAdapter);
             setConnectedState();
             bondAdapter.setHasStableIds(true);
             bluetoothBinding.pairRv.setAdapter(bondAdapter);
@@ -421,24 +426,26 @@ public class BluetoothActivity extends BaseActivity implements BluetoothCallBcak
      * @return
      */
     private void setConnectedState() {
-
-        //重置状态
-        bondAdapter.clearConnectMap();
-        if (a2dp == null)
-            return;
-        List<BluetoothDevice> deviceList = getCurrentConnectDevice();
-        BluetoothDevice activeDevice = null;
-        activeDevice = a2dp.getActiveDevice();
-        if (deviceList != null && deviceList.size() > 0) {
-            for (int i = 0; i < deviceList.size(); i++) {
-                if (deviceList.get(i).getBluetoothClass().getMajorDeviceClass() == BluetoothClass.Device.Major.AUDIO_VIDEO
-                        && activeDevice != null) {
-                    if (!deviceList.get(i).getAddress().equals(activeDevice.getAddress()))
-                        continue;
+        try {
+            //重置状态
+            bondAdapter.clearConnectMap();
+            if (a2dp == null)
+                return;
+            List<BluetoothDevice> deviceList = getCurrentConnectDevice();
+            BluetoothDevice activeDevice = null;
+            activeDevice = a2dp.getActiveDevice();
+            if (deviceList != null && deviceList.size() > 0) {
+                for (int i = 0; i < deviceList.size(); i++) {
+                    if (deviceList.get(i).getBluetoothClass().getMajorDeviceClass() == BluetoothClass.Device.Major.AUDIO_VIDEO
+                            && activeDevice != null) {
+                        if (!deviceList.get(i).getAddress().equals(activeDevice.getAddress()))
+                            continue;
+                    }
+                    bondAdapter.updateConnectMap(deviceList.get(i).getAddress(), 1);
                 }
-                bondAdapter
-                        .updateConnectMap(deviceList.get(i).getAddress(), 1);
             }
+        }catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
