@@ -152,8 +152,10 @@ public class WifiActivity extends BaseActivity implements WifiEnabledReceiver.Wi
             AddNetWorkDialog addNetWorkDialog = new AddNetWorkDialog(this, R.style.DialogTheme);
             addNetWorkDialog.show();
         } else if (id == R.id.rl_refresh_network) {
-            mWifiManager.startScan();
-            startanim(true);
+            if(mWifiManager.isWifiEnabled()) {
+                mWifiManager.startScan();
+                startanim(true);
+            }
         } else if (id == R.id.rl_ip_settings) {
             if (isWifiConnected()) {
                 startNewActivity(WifiIpSetActivity.class);
