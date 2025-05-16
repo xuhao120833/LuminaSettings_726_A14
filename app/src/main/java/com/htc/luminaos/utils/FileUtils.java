@@ -186,32 +186,44 @@ public class FileUtils {
 		}
 	}
 
-	public static Drawable loadImageAsDrawable(Context context, String filePath){
-		FileInputStream fileInputStream = null;
-		try {
-			// 读取图像文件
-			File file = new File(filePath);
-			if(!file.exists()){
-				return null;
-			}
-			fileInputStream = new FileInputStream(file);
-			Bitmap bitmap = BitmapFactory.decodeStream(fileInputStream);
+//	public static Drawable loadImageAsDrawable(Context context, String filePath){
+//		FileInputStream fileInputStream = null;
+//		try {
+//			// 读取图像文件
+//			File file = new File(filePath);
+//			if(!file.exists()){
+//				return null;
+//			}
+//			fileInputStream = new FileInputStream(file);
+//			Bitmap bitmap = BitmapFactory.decodeStream(fileInputStream);
+//
+//			// 转换为Drawable
+//			Drawable drawable = new BitmapDrawable(context.getResources(), bitmap);
+//			return drawable;
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			return null;
+//		} finally {
+//			if (fileInputStream != null) {
+//				try {
+//					fileInputStream.close();
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		}
+//	}
 
-			// 转换为Drawable
-			Drawable drawable = new BitmapDrawable(context.getResources(), bitmap);
-			return drawable;
-		} catch (Exception e) {
-			e.printStackTrace();
+	public static Drawable loadImageAsDrawable(Context context, String filePath) {
+		File file = new File(filePath);
+		if (!file.exists()) {
 			return null;
-		} finally {
-			if (fileInputStream != null) {
-				try {
-					fileInputStream.close();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
 		}
+		Bitmap bitmap = BitmapFactory.decodeFile(filePath);
+		if (bitmap == null) {
+			return null;
+		}
+		return new BitmapDrawable(context.getResources(), bitmap);
 	}
 
 }

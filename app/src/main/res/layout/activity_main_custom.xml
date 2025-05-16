@@ -236,8 +236,7 @@
         <ImageView
             android:id="@+id/icon1"
             android:layout_width="@dimen/x_313"
-            android:layout_height="@dimen/y_167"
-            android:src="@drawable/home_app_netflix" />
+            android:layout_height="@dimen/y_167"/>
     </RelativeLayout>
 
     <RelativeLayout
@@ -252,8 +251,7 @@
         <ImageView
             android:id="@+id/icon2"
             android:layout_width="@dimen/x_313"
-            android:layout_height="@dimen/y_167"
-            android:src="@drawable/home_app_youtube" />
+            android:layout_height="@dimen/y_167"/>
     </RelativeLayout>
 
     <RelativeLayout
@@ -268,8 +266,7 @@
         <ImageView
             android:id="@+id/icon3"
             android:layout_width="@dimen/x_313"
-            android:layout_height="@dimen/y_167"
-            android:src="@drawable/home_app_disney" />
+            android:layout_height="@dimen/y_167"/>
     </RelativeLayout>
 
     <RelativeLayout
@@ -285,8 +282,7 @@
         <ImageView
             android:id="@+id/icon4"
             android:layout_width="@dimen/x_313"
-            android:layout_height="@dimen/y_167"
-            android:src="@drawable/appstore" />
+            android:layout_height="@dimen/y_167"/>
     </RelativeLayout>
 
     <RelativeLayout

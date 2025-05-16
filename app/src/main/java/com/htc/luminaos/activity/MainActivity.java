@@ -79,6 +79,7 @@ import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
 import android.view.animation.ScaleAnimation;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
@@ -1084,17 +1085,17 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
                 editor.putInt("code", 1);
                 editor.apply();
 
-//                runOnUiThread(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        // 设置首页的配置图标
-//                        try {
-//                            setDefaultBackground();
-//                        } catch (Exception e) {
-//                            e.printStackTrace();
-//                        }
-//                    }
-//                });
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        // 设置首页的配置图标
+                        try {
+                            setDefaultMainIcon();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
 
                 return false;
             }
@@ -1198,10 +1199,24 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
                     //从iconPath中把png读出来赋值给drawable
                     Drawable drawable = FileUtils.loadImageAsDrawable(this, iconPath);
 
+                    setMainIcon(tag, drawable);
+
                     //把读到的数据放入db数据库
                     DBUtils.getInstance(this).insertMainAppData(tag, appName, drawable, action);
 
                 }
+            } else {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        // 设置首页的配置图标
+                        try {
+                            setDefaultMainIcon();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
             }
 
         } catch (Exception e) {
@@ -1689,22 +1704,81 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
         Drawable drawable = DBUtils.getInstance(this).getIconDataByTag("icon1");
         if (drawable != null) {
             customBinding.icon1.setImageDrawable(drawable);
+        } else {
+            customBinding.icon1.setImageResource(R.drawable.home_app_netflix);
         }
 
         drawable = DBUtils.getInstance(this).getIconDataByTag("icon2");
         if (drawable != null) {
             customBinding.icon2.setImageDrawable(drawable);
+        } else {
+            customBinding.icon2.setImageResource(R.drawable.home_app_youtube);
         }
-
         drawable = DBUtils.getInstance(this).getIconDataByTag("icon3");
         if (drawable != null) {
             customBinding.icon3.setImageDrawable(drawable);
+        } else {
+            customBinding.icon3.setImageResource(R.drawable.home_app_disney);
         }
 
         drawable = DBUtils.getInstance(this).getIconDataByTag("icon4");
         if (drawable != null) {
             customBinding.icon4.setImageDrawable(drawable);
+        } else {
+            if (MyApplication.config.layout_select == 2 || MyApplication.config.layout_select == 3) {
+                customBinding.icon4.setImageResource(R.drawable.appstore2);
+            } else {
+                customBinding.icon4.setImageResource(R.drawable.appstore);
+            }
         }
+    }
+
+    private void setMainIcon(String tag, Drawable drawable) {
+        Log.d(TAG, " setMainIcon " + tag);
+        switch (tag) {
+            case "icon1":
+                setIcon(customBinding.icon1, drawable, R.drawable.home_app_netflix);
+                break;
+            case "icon2":
+                setIcon(customBinding.icon2, drawable, R.drawable.home_app_youtube);
+                break;
+            case "icon3":
+                setIcon(customBinding.icon3, drawable, R.drawable.home_app_disney);
+                break;
+            case "icon4":
+                int id = (MyApplication.config.layout_select == 2 || MyApplication.config.layout_select == 3) ? R.drawable.appstore2 : R.drawable.appstore;
+                setIcon(customBinding.icon4, drawable, id);
+                break;
+        }
+    }
+
+    private void setDefaultMainIcon() {
+        customBinding.icon1.setImageResource(R.drawable.home_app_netflix);
+        customBinding.icon2.setImageResource(R.drawable.home_app_youtube);
+        customBinding.icon3.setImageResource(R.drawable.home_app_disney);
+        if (MyApplication.config.layout_select == 2 || MyApplication.config.layout_select == 3) {
+            customBinding.icon4.setImageResource(R.drawable.appstore2);
+        } else {
+            customBinding.icon4.setImageResource(R.drawable.appstore);
+        }
+    }
+
+    private void setIcon(ImageView view, Drawable drawable, int defaultId) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                // 设置首页的配置图标
+                try {
+                    if(drawable != null) {
+                        view.setImageDrawable(drawable);
+                    } else {
+                        view.setImageResource(defaultId);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
     private void setListModules() {

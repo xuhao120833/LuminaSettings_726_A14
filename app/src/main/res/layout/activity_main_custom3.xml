@@ -236,8 +236,7 @@
             android:layout_width="@dimen/x_277"
             android:layout_height="@dimen/y_167"
             android:scaleType="fitXY"
-            android:layout_centerInParent="true"
-            android:src="@drawable/home_app_netflix" />
+            android:layout_centerInParent="true"/>
 
         <View
             android:id="@+id/icon1_border"
@@ -263,8 +262,7 @@
             android:layout_width="@dimen/x_277"
             android:layout_height="@dimen/y_167"
             android:scaleType="fitXY"
-            android:layout_centerInParent="true"
-            android:src="@drawable/home_app_youtube" />
+            android:layout_centerInParent="true"/>
 
         <View
             android:id="@+id/icon2_border"
@@ -290,8 +288,7 @@
             android:layout_width="@dimen/x_277"
             android:layout_height="@dimen/y_167"
             android:scaleType="fitXY"
-            android:layout_centerInParent="true"
-            android:src="@drawable/home_app_disney" />
+            android:layout_centerInParent="true"/>
 
         <View
             android:id="@+id/icon3_border"
@@ -317,8 +314,7 @@
             android:layout_width="@dimen/x_277"
             android:layout_height="@dimen/y_167"
             android:scaleType="fitXY"
-            android:layout_centerInParent="true"
-            android:src="@drawable/appstore2" />
+            android:layout_centerInParent="true"/>
 
         <View
             android:id="@+id/icon4_border"
