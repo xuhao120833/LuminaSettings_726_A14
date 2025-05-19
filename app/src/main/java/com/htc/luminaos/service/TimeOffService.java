@@ -1,6 +1,9 @@
 package com.htc.luminaos.service;
 
+import android.app.ActivityManager;
 import android.app.Service;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -16,6 +19,7 @@ import com.htc.luminaos.widget.ShutDownDialog;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -25,8 +29,8 @@ public class TimeOffService extends Service {
     Timer timer;
     SharedPreferences sharedPreferences;
     Handler handler = new Handler();
-
     TimerTask timerTask ;
+    ActivityManager am;
 
     public TimeOffService() {
     }
@@ -91,35 +95,44 @@ public class TimeOffService extends Service {
         return new TimerTask() {
             @Override
             public void run() {
-                if (offTime <= 10) {
-                    handler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            ShutDownDialog shutDownDialog = new ShutDownDialog(getBaseContext(), R.style.DialogTheme);
-                            shutDownDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-                                @Override
-                                public void onDismiss(DialogInterface dialog) {
-                                    if (shutDownDialog.isConfirmedShutdown()) {
-                                        ShareUtil.put(getApplicationContext(), Contants.TimeOffTime, 0);
-                                        ShareUtil.put(getApplicationContext(), Contants.TimeOffStatus, false);
+                String topActivity = getTopActivity();
+                if(!topActivity.isEmpty() && !topActivity.contains("com.htc.hyk_test")) {
+                    Log.d(TAG, "createNewTimerTask topActivity " + topActivity);
+                    if (0 < offTime && offTime <= 10) {
+                        Log.d(TAG, " createNewTimerTask offTime " + offTime);
+                        handler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                ShutDownDialog shutDownDialog = new ShutDownDialog(getBaseContext(), R.style.DialogTheme);
+                                shutDownDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                                    @Override
+                                    public void onDismiss(DialogInterface dialog) {
+                                        if (shutDownDialog.isConfirmedShutdown()) {
+                                            ShareUtil.put(getApplicationContext(), Contants.TimeOffTime, 0);
+                                            ShareUtil.put(getApplicationContext(), Contants.TimeOffStatus, false);
 //                                        ShareUtil.put(getApplicationContext(), Contants.TimeOffIndex, 0);
-                                        if (timer != null) {
-                                            timer.cancel();
-                                            timer = null;
+                                            if (timer != null) {
+                                                timer.cancel();
+                                                timer = null;
+                                            }
+                                            stopSelf(); // 用户点击了“确认”，才结束服务
+                                        } else {
+                                            // 重新启动定时器，继续倒计时
+                                            restartTimer();
                                         }
-                                        stopSelf(); // 用户点击了“确认”，才结束服务
-                                    } else {
-                                        // 重新启动定时器，继续倒计时
-                                        restartTimer();
                                     }
-                                }
-                            });
-                            shutDownDialog.show();
-                        }
-                    });
-                    return;
+                                });
+                                shutDownDialog.show();
+                            }
+                        });
+                        offTime -= 10;
+                        return;
+                    }
+                    offTime -= 10;
+                } else {
+                    //do nothing
+                    Log.d(TAG,"createNewTimerTask com.htc.hyk_test do nothing");
                 }
-                offTime -= 10;
             }
         };
     }
@@ -144,5 +157,20 @@ public class TimeOffService extends Service {
             timer = null;
         }
         super.onDestroy();
+    }
+
+    private String getTopActivity() {
+        if(am == null)
+            am = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        List<ActivityManager.RunningTaskInfo> taskList = am.getRunningTasks(1);
+        if (taskList == null || taskList.isEmpty()) {
+            Log.e(TAG, "No running tasks found");
+            return "";
+        }
+        ComponentName cn = taskList.get(0).topActivity;
+        if(cn == null)
+            return "";
+        Log.d(TAG, "getTopActivity = " + cn.getClassName());
+        return cn.getClassName();
     }
 }
