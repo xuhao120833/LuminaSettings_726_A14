@@ -6,6 +6,7 @@ import android.app.ActivityManager.RunningAppProcessInfo;
 import android.content.Context;
 import android.os.Environment;
 import android.os.StatFs;
+import android.os.SystemProperties;
 import android.text.format.Formatter;
 import android.util.Log;
 
@@ -16,6 +17,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * 内存清理
@@ -25,7 +27,7 @@ import java.util.List;
  */
 public class ClearMemoryUtils {
 
-	private String TAG = "ClearMemoryUtils";
+	private static String TAG = "ClearMemoryUtils";
 
 	/**
 	 * 获取android当前可用内存大小
@@ -278,10 +280,48 @@ public class ClearMemoryUtils {
 		StatFs stat = new StatFs(path.getPath());
 		long blockSize = stat.getBlockSize();
 		long availableBlocks = stat.getAvailableBlocks();
-		return Formatter.formatFileSize(context, blockSize
-				* availableBlocks * scale);
+
+		Log.d(TAG," getRomAvailableSize " + blockSize * availableBlocks * scale);
+
+//		return Formatter.formatFileSize(context, blockSize //使用的是10进制，和文件管理器有误差，弃用。
+//				* availableBlocks * scale);git
+
+		int size = SystemProperties.getInt("persist.sys.mem_reserve", 0);
+		final long RESERVED_BYTES = (long) size * 1024 * 1024;
+
+		long Available = blockSize * availableBlocks * scale - RESERVED_BYTES * scale;
+		if(Available <= 0) {
+			return "0B";
+		} else {
+			return formatSizeBinary(Available);
+		}
+//		return formatSizeBinary(blockSize
+//				* availableBlocks * scale - RESERVED_BYTES * scale);
 	}
 
+	/**
+	 * 将字节数格式化为带单位的字符串（使用二进制单位：1024）
+	 *
+	 * @param bytes 要格式化的字节数
+	 * @return 格式化字符串（如 "204.6 MB", "1.2 GB"）
+	 */
+	public static String formatSizeBinary(long bytes) {
+		final long KB = 1024;
+		final long MB = KB * 1024;
+		final long GB = MB * 1024;
+
+		Log.d(TAG,"formatSizeBinary "+bytes);
+
+		if (bytes >= GB) {
+			return String.format(Locale.US, "%.1f GB", bytes / (double) GB);
+		} else if (bytes >= MB) {
+			return String.format(Locale.US, "%.1f MB", bytes / (double) MB);
+		} else if (bytes >= KB) {
+			return String.format(Locale.US, "%.1f KB", bytes / (double) KB);
+		} else {
+			return bytes + " B";
+		}
+	}
 
 	/**
 	 * 获取系统总内存

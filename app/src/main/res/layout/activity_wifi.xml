@@ -137,7 +137,7 @@
             android:layout_height="@dimen/y_40"
             android:id="@+id/refresh_net"
             android:layout_alignParentEnd="true"
-            android:layout_marginEnd="@dimen/x_130"
+            android:layout_marginEnd="@dimen/x_55"
             android:layout_centerVertical="true"
             android:background="@drawable/menu_loader_bg"
             android:duplicateParentState="true"
