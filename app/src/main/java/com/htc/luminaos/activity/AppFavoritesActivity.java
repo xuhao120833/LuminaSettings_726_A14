@@ -113,7 +113,7 @@ public class AppFavoritesActivity extends BaseActivity implements AppCallBack {
     }
 
     private void setLayout() {
-        if (MyApplication.config.layout_select == 3) {
+        if (MyApplication.config.layout_select == 2 || MyApplication.config.layout_select == 3) {
             Typeface typeface = ResourcesCompat.getFont(this, R.font.arial);
             title.setTextColor(Color.BLACK);
             title.setTypeface(typeface, Typeface.BOLD);

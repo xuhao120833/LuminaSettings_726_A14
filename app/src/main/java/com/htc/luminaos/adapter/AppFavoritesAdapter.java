@@ -87,7 +87,7 @@ public class AppFavoritesAdapter extends BaseAdapter {
     }
 
     private void setLayout(TextView name) {
-        if (MyApplication.config.layout_select == 3) {
+        if (MyApplication.config.layout_select == 2 || MyApplication.config.layout_select == 3) {
             name.setTextColor(Color.BLACK);
         }
     }

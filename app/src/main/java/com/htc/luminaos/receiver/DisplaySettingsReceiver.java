@@ -22,6 +22,10 @@ import com.htc.luminaos.utils.ReflectUtil;
 import com.softwinner.PQControl;
 import com.softwinner.tv.AwTvDisplayManager;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 public class DisplaySettingsReceiver extends BroadcastReceiver implements View.OnClickListener, View.OnKeyListener, View.OnHoverListener {
     private Context mContext;
     ActivityDisplaySettingsBinding displaySettingsBinding;
@@ -78,8 +82,14 @@ public class DisplaySettingsReceiver extends BroadcastReceiver implements View.O
                 initData();
                 boolean show = intent.getBooleanExtra("show", false);
                 if (show && !displaySettingsBinding.getRoot().isAttachedToWindow()) {
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+                    String currentTime = sdf.format(new Date());
+                    Log.d(TAG, "mavts.addView " + currentTime);
                     mavts.addView(displaySettingsBinding.getRoot(), lp);
                 } else if (!show && displaySettingsBinding.getRoot().isAttachedToWindow()) {
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+                    String currentTime = sdf.format(new Date());
+                    Log.d(TAG, "mavts.clearView " + currentTime);
                     mavts.clearView(displaySettingsBinding.getRoot());
                 }
             } catch (Exception e) {

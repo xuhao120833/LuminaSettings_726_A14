@@ -18,7 +18,7 @@ public class WifiChanagerReceiver extends BroadcastReceiver {
 	private String TAG="WifiChanagerReceiver";
 	
 	public interface WifiChanagerCallBack{
-		public void refreshWifi();
+		public void refreshWifi(String action);
 		public void wifiStatueChange(int state);
 		void WifiConnectOrLose();
 	}
@@ -37,9 +37,8 @@ public class WifiChanagerReceiver extends BroadcastReceiver {
 			Log.i("hxdwifi"," onReceive :" +action);
 			if(action.equals(WifiManager.SUPPLICANT_CONNECTION_CHANGE_ACTION)){
 				//请求的连接已经建立或者丢失
-				mcallback.refreshWifi();
+				mcallback.refreshWifi(WifiManager.SUPPLICANT_CONNECTION_CHANGE_ACTION);
 			}else if(action.equals(WifiManager.NETWORK_STATE_CHANGED_ACTION)){
-
 				mcallback.wifiStatueChange(0);
 			}else if(action.equals(WifiManager.SUPPLICANT_STATE_CHANGED_ACTION)){
 				//请求连接的状态发生改变，（已经加入到一个接入点）
@@ -48,20 +47,18 @@ public class WifiChanagerReceiver extends BroadcastReceiver {
 				if (supl_error == WifiManager.ERROR_AUTHENTICATING ) {
 					//ToastUtil.showShortToast(context, context.getString(R.string.Authentication_error));
 				}
-				mcallback.refreshWifi();
+				mcallback.refreshWifi(WifiManager.SUPPLICANT_STATE_CHANGED_ACTION);
 			}else if(action.equals(WifiManager.CONFIGURED_NETWORKS_CHANGED_ACTION)){
-
 				//已经添加到配置的网络发生改变
-				mcallback.refreshWifi();
+				mcallback.refreshWifi(WifiManager.CONFIGURED_NETWORKS_CHANGED_ACTION);
 			}else if(action.equals(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION)){
 				//WiFi扫描完成，可以调用mWifiManager.getScanResults()
-				mcallback.refreshWifi();
-
+				mcallback.refreshWifi(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION);
 			}else if(action.equals(WifiManager.RSSI_CHANGED_ACTION)){
 
 			}else if(action.equals(WifiManager.WIFI_STATE_CHANGED_ACTION)){
 				//wifi连接网络状态变化
-				mcallback.refreshWifi();
+				mcallback.refreshWifi(WifiManager.WIFI_STATE_CHANGED_ACTION);
 			}
 			
 		}

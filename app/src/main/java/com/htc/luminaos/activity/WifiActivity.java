@@ -57,6 +57,7 @@ public class WifiActivity extends BaseActivity implements WifiEnabledReceiver.Wi
     private WifiManager mWifiManager;
     private ExecutorService singer = Executors.newFixedThreadPool(3);
     private static String TAG = "WifiActivity";
+    private String action = "";
 
     private Handler handler = new Handler(new Handler.Callback() {
         @Override
@@ -75,10 +76,15 @@ public class WifiActivity extends BaseActivity implements WifiEnabledReceiver.Wi
                     wifiFoundAdapter.setCurrentScanResult(null);
                     wifiFoundAdapter.notifyDataSetChanged();
                 }
+
+                //wifi已经刷新完毕
+                if (!action.isEmpty() && action.equals(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION) && !newWifiList.isEmpty()) {
+                    Log.d(TAG,"startanim(false) "+action);
+                    startanim(false);
+                    action = "";
+                }
             }
 
-            //wifi已经刷新完毕
-            startanim(false);
 
             return false;
         }
@@ -92,6 +98,9 @@ public class WifiActivity extends BaseActivity implements WifiEnabledReceiver.Wi
         initReceiver();
         initView();
         initData();
+        if (mWifiManager.isWifiEnabled()) {
+            startanim(true);
+        }
     }
 
     private void initView() {
@@ -147,7 +156,14 @@ public class WifiActivity extends BaseActivity implements WifiEnabledReceiver.Wi
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.rl_wifi_switch || id == R.id.wifi_switch) {
-            wifiBinding.wifiSwitch.setChecked(!wifiBinding.wifiSwitch.isChecked());
+            boolean check = wifiBinding.wifiSwitch.isChecked();
+            wifiBinding.wifiSwitch.setChecked(!check);
+            if (!check) {
+                startanim(true);
+            } else {
+                startanim(false);
+                action = "";
+            }
         } else if (id == R.id.rl_add_network) {
             AddNetWorkDialog addNetWorkDialog = new AddNetWorkDialog(this, R.style.DialogTheme);
             addNetWorkDialog.show();
@@ -334,10 +350,10 @@ public class WifiActivity extends BaseActivity implements WifiEnabledReceiver.Wi
     }
 
     @Override
-    public void refreshWifi() {
+    public void refreshWifi(String action) {
+        this.action = action;
         singer.execute(RefreshRunnable);
     }
-
 
     boolean connectingFlag = false;
 
