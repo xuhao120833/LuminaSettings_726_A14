@@ -17,7 +17,6 @@
     <timezone id="Asia/Aqtau">ააქტაუ</timezone>
     <timezone id="Asia/Aqtobe">ააქტობე</timezone>
     <timezone id="Asia/Ashgabat">აშხაბადი</timezone>
-    <timezone id="Asia/Ashkhabad">აშხაბადი</timezone>
     <timezone id="Asia/Atyrau">ატირაუ</timezone>
     <timezone id="Asia/Baghdad">ბაღდადი</timezone>
     <timezone id="Asia/Bahrain">ბაჰრეინი</timezone>
@@ -27,7 +26,6 @@
     <timezone id="Asia/Beirut">ბეირუტი</timezone>
     <timezone id="Asia/Bishkek">ბიშკეკი</timezone>
     <timezone id="Asia/Brunei">ბრუნეი</timezone>
-    <timezone id="Asia/Calcutta">კალკუტა</timezone>
     <timezone id="Asia/Chita">ჩიტა</timezone>
     <timezone id="Asia/Choibalsan">ჩოიბალთან</timezone>
     <timezone id="Asia/Chongqing">ჩონგჩინი (ჩინეთი)</timezone>
@@ -241,7 +239,6 @@
     <timezone id="Japan">იაპონია</timezone>
     <timezone id="Kwajalein">კვაჯალეინი</timezone>
     <timezone id="Libya">ლიბია</timezone>
-    <timezone id="MET">ცენტრალური ევროპული დრო</timezone>
     <timezone id="MST">მთიანი დრო</timezone>
     <timezone id="MST7MDT">მთიანი დრო7/ზაფხულის დრო</timezone>
     <timezone id="Mexico/BajaNorte">მექსიკა/ბაჟა ჩრდილოეთი</timezone>
@@ -250,7 +247,7 @@
     <timezone id="NZ">ახალი ზელანდია</timezone>
     <timezone id="NZ-CHAT">ახალი ზელანდია/ჩათამის კუნძულები</timezone>
     <timezone id="Navajo">ნავახო</timezone>
-    <timezone id="PRC">ჩინეთის სტანდარტული დრო</timezone>
+    <timezone id="PRC">ჩინეთის სტანდარტული დრო (პეკინი)</timezone>
     <timezone id="PST8PDT">პასიფიკური დრო/ზაფხულის დრო</timezone>
     <timezone id="Pacific/Apia">პასიფიკური/აპია</timezone>
     <timezone id="Pacific/Auckland">პასიფიკური/აოკლენდი</timezone>
@@ -296,7 +293,6 @@
     <timezone id="Pacific/Yap">პასიფიკური/იააპი კუნძული</timezone>
     <timezone id="Poland">პოლონეთი</timezone>
     <timezone id="Portugal">პორტუგალია</timezone>
-    <timezone id="Singapore">სინგაპური</timezone>
     <timezone id="Turkey">თურქეთი</timezone>
     <timezone id="US/Alaska">აშშ/ალასკა</timezone>
     <timezone id="US/Aleutian">აშშ/ალეუტის კუნძულები</timezone>

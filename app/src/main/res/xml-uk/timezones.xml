@@ -17,7 +17,6 @@
     <timezone id="Asia/Aqtau">Актау</timezone>
     <timezone id="Asia/Aqtobe">Актобе</timezone>
     <timezone id="Asia/Ashgabat">Ашгабат</timezone>
-    <timezone id="Asia/Ashkhabad">Ашхабад</timezone>
     <timezone id="Asia/Atyrau">Атирау</timezone>
     <timezone id="Asia/Baghdad">Багдад</timezone>
     <timezone id="Asia/Bahrain">Бахрейн</timezone>
@@ -27,7 +26,6 @@
     <timezone id="Asia/Beirut">Бейрут</timezone>
     <timezone id="Asia/Bishkek">Бішкек</timezone>
     <timezone id="Asia/Brunei">Бруней</timezone>
-    <timezone id="Asia/Calcutta">Калькутта</timezone>
     <timezone id="Asia/Chita">Чита</timezone>
     <timezone id="Asia/Choibalsan">Чойбалсан</timezone>
     <timezone id="Asia/Chongqing">Чунцін (Китай)</timezone>
@@ -241,7 +239,6 @@
     <timezone id="Japan">Японія</timezone>
     <timezone id="Kwajalein">Кваджалейн</timezone>
     <timezone id="Libya">Лівія</timezone>
-    <timezone id="MET">Центральноєвропейський час</timezone>
     <timezone id="MST">Гірський стандартний час</timezone>
     <timezone id="MST7MDT">Гірський стандартний час 7/Літній час</timezone>
     <timezone id="Mexico/BajaNorte">Мексика/Північне Нижнє Каліфорнійське узбережжя</timezone>
@@ -250,7 +247,7 @@
     <timezone id="NZ">Нова Зеландія</timezone>
     <timezone id="NZ-CHAT">Нова Зеландія/Чатемські острови</timezone>
     <timezone id="Navajo">Навахо</timezone>
-    <timezone id="PRC">Китайський стандартний час</timezone>
+    <timezone id="PRC">Китайський стандартний час (Пекін)</timezone>
     <timezone id="PST8PDT">Тихоокеанський стандартний час/Літній час</timezone>
     <timezone id="Pacific/Apia">Тихий океан/Апіа</timezone>
     <timezone id="Pacific/Auckland">Тихий океан/Окленд</timezone>
@@ -296,7 +293,6 @@
     <timezone id="Pacific/Yap">Тихий океан/Яп</timezone>
     <timezone id="Poland">Польща</timezone>
     <timezone id="Portugal">Португалія</timezone>
-    <timezone id="Singapore">Сінгапур</timezone>
     <timezone id="Turkey">Туреччина</timezone>
     <timezone id="US/Alaska">США/Аляска</timezone>
     <timezone id="US/Aleutian">США/Алеутські острови</timezone>

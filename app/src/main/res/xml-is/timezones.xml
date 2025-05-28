@@ -17,7 +17,6 @@
     <timezone id="Asia/Aqtau">Aktau</timezone>
     <timezone id="Asia/Aqtobe">Aktobe</timezone>
     <timezone id="Asia/Ashgabat">Ashgabat</timezone>
-    <timezone id="Asia/Ashkhabad">Ashgabat</timezone>
     <timezone id="Asia/Atyrau">Atyrau</timezone>
     <timezone id="Asia/Baghdad">Bagdad</timezone>
     <timezone id="Asia/Bahrain">Barein</timezone>
@@ -27,7 +26,6 @@
     <timezone id="Asia/Beirut">Beirut</timezone>
     <timezone id="Asia/Bishkek">Biskek</timezone>
     <timezone id="Asia/Brunei">Brúnei</timezone>
-    <timezone id="Asia/Calcutta">Kalkútta</timezone>
     <timezone id="Asia/Chita">Chita</timezone>
     <timezone id="Asia/Choibalsan">Choibalsan</timezone>
     <timezone id="Asia/Chongqing">Chongqing (Kína)</timezone>
@@ -241,7 +239,6 @@
     <timezone id="Japan">Japan</timezone>
     <timezone id="Kwajalein">Kwajalein</timezone>
     <timezone id="Libya">Líbía</timezone>
-    <timezone id="MET">Mið-Evróputími</timezone>
     <timezone id="MST">Fjallatími</timezone>
     <timezone id="MST7MDT">Fjallatími / Sumar</timezone>
     <timezone id="Mexico/BajaNorte">Mexíkó / Norður-Baja</timezone>
@@ -250,7 +247,7 @@
     <timezone id="NZ">Nýja-Sjáland</timezone>
     <timezone id="NZ-CHAT">Nýja-Sjáland / Chatham-eyjar</timezone>
     <timezone id="Navajo">Navajo</timezone>
-    <timezone id="PRC">Kínverskur staðaltími</timezone>
+    <timezone id="PRC">Kínverskur staðaltími (Peking)</timezone>
     <timezone id="PST8PDT">Kyrrahafstími / Sumar</timezone>
     <timezone id="Pacific/Apia">Apía</timezone>
     <timezone id="Pacific/Auckland">Auckland</timezone>
@@ -296,7 +293,6 @@
     <timezone id="Pacific/Yap">Yap</timezone>
     <timezone id="Poland">Pólland</timezone>
     <timezone id="Portugal">Portúgal</timezone>
-    <timezone id="Singapore">Singapúr</timezone>
     <timezone id="Turkey">Tyrkland</timezone>
     <timezone id="US/Alaska">Bandaríkin/Alaska</timezone>
     <timezone id="US/Aleutian">Bandaríkin/Aleutian-eyjar</timezone>

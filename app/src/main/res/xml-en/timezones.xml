@@ -17,7 +17,6 @@
     <timezone id="Asia/Aqtau">Aqtau</timezone>
     <timezone id="Asia/Aqtobe">Aqtobe</timezone>
     <timezone id="Asia/Ashgabat">Ashgabat</timezone>
-    <timezone id="Asia/Ashkhabad">Ashkhabad</timezone>
     <timezone id="Asia/Atyrau">Atyrau</timezone>
     <timezone id="Asia/Baghdad">Baghdad</timezone>
     <timezone id="Asia/Bahrain">Bahrain</timezone>
@@ -27,7 +26,6 @@
     <timezone id="Asia/Beirut">Beirut</timezone>
     <timezone id="Asia/Bishkek">Bishkek</timezone>
     <timezone id="Asia/Brunei">Brunei</timezone>
-    <timezone id="Asia/Calcutta">Calcutta</timezone>
     <timezone id="Asia/Chita">Chita</timezone>
     <timezone id="Asia/Choibalsan">Choibalsan</timezone>
     <timezone id="Asia/Chongqing">Chongqing (China)</timezone>
@@ -241,7 +239,6 @@
     <timezone id="Japan">Japan</timezone>
     <timezone id="Kwajalein">Kwajalein</timezone>
     <timezone id="Libya">Libya</timezone>
-    <timezone id="MET">Middle European Time</timezone>
     <timezone id="MST">Mountain Standard Time</timezone>
     <timezone id="MST7MDT">Mountain Standard Time 7/Daylight Saving Time</timezone>
     <timezone id="Mexico/BajaNorte">Mexico/North Baja California</timezone>
@@ -250,7 +247,7 @@
     <timezone id="NZ">New Zealand</timezone>
     <timezone id="NZ-CHAT">New Zealand/Chatham Islands</timezone>
     <timezone id="Navajo">Navajo</timezone>
-    <timezone id="PRC">China Standard Time</timezone>
+    <timezone id="PRC">China Standard Time (Beijing)</timezone>
     <timezone id="PST8PDT">Pacific Standard Time/Daylight Saving Time</timezone>
     <timezone id="Pacific/Apia">Pacific/Apia</timezone>
     <timezone id="Pacific/Auckland">Pacific/Auckland</timezone>
@@ -296,7 +293,6 @@
     <timezone id="Pacific/Yap">Pacific/Yap Island</timezone>
     <timezone id="Poland">Poland</timezone>
     <timezone id="Portugal">Portugal</timezone>
-    <timezone id="Singapore">Singapore</timezone>
     <timezone id="Turkey">Turkey</timezone>
     <timezone id="US/Alaska">US/Alaska</timezone>
     <timezone id="US/Aleutian">US/Aleutian Islands</timezone>

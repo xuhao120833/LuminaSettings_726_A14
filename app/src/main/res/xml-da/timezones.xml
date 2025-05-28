@@ -17,7 +17,6 @@
     <timezone id="Asia/Aqtau">Aqtau</timezone>
     <timezone id="Asia/Aqtobe">Aqtobe</timezone>
     <timezone id="Asia/Ashgabat">Ashgabat</timezone>
-    <timezone id="Asia/Ashkhabad">Ashkhabad</timezone>
     <timezone id="Asia/Atyrau">Atyrau</timezone>
     <timezone id="Asia/Baghdad">Bagdad</timezone>
     <timezone id="Asia/Bahrain">Bahrain</timezone>
@@ -27,7 +26,6 @@
     <timezone id="Asia/Beirut">Beirut</timezone>
     <timezone id="Asia/Bishkek">Bishkek</timezone>
     <timezone id="Asia/Brunei">Brunei</timezone>
-    <timezone id="Asia/Calcutta">Kolkata</timezone>
     <timezone id="Asia/Chita">Chita</timezone>
     <timezone id="Asia/Choibalsan">Choibalsan</timezone>
     <timezone id="Asia/Chongqing">Chongqing (Kina)</timezone>
@@ -241,7 +239,6 @@
     <timezone id="Japan">Japan</timezone>
     <timezone id="Kwajalein">Kwajalein</timezone>
     <timezone id="Libya">Libyen</timezone>
-    <timezone id="MET">Central Europæisk Tid</timezone>
     <timezone id="MST">Bjergrig Standard Tid</timezone>
     <timezone id="MST7MDT">Bjergrig Standard Tid 7/Daylight Saving Time</timezone>
     <timezone id="Mexico/BajaNorte">Mexico/Nordlige Baja Californien</timezone>
@@ -250,7 +247,7 @@
     <timezone id="NZ">New Zealand</timezone>
     <timezone id="NZ-CHAT">New Zealand/Chatham Øerne</timezone>
     <timezone id="Navajo">Navajo</timezone>
-    <timezone id="PRC">Kina Standard Tid</timezone>
+    <timezone id="PRC">Kinesisk standardtid (Beijing)</timezone>
     <timezone id="PST8PDT">Stillehav Standard Tid/Daylight Saving Time</timezone>
     <timezone id="Pacific/Apia">Stillehavet/Apia</timezone>
     <timezone id="Pacific/Auckland">Stillehavet/Auckland</timezone>
@@ -296,7 +293,6 @@
     <timezone id="Pacific/Yap">Stillehavet/Yap Øen</timezone>
     <timezone id="Poland">Polen</timezone>
     <timezone id="Portugal">Portugal</timezone>
-    <timezone id="Singapore">Singapore</timezone>
     <timezone id="Turkey">Tyrkiet</timezone>
     <timezone id="US/Alaska">USA/Alaska</timezone>
     <timezone id="US/Aleutian">USA/Aleutian Øerne</timezone>

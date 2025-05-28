@@ -17,7 +17,6 @@
     <timezone id="Asia/Aqtau">Aqtau</timezone>
     <timezone id="Asia/Aqtobe">Aqtobe</timezone>
     <timezone id="Asia/Ashgabat">Ashgabat</timezone>
-    <timezone id="Asia/Ashkhabad">Ashkhabad</timezone>
     <timezone id="Asia/Atyrau">Atyrau</timezone>
     <timezone id="Asia/Baghdad">Bagdá</timezone>
     <timezone id="Asia/Bahrain">Bahrein</timezone>
@@ -27,7 +26,6 @@
     <timezone id="Asia/Beirut">Beirute</timezone>
     <timezone id="Asia/Bishkek">Bishkek</timezone>
     <timezone id="Asia/Brunei">Brunei</timezone>
-    <timezone id="Asia/Calcutta">Calcutá</timezone>
     <timezone id="Asia/Chita">Chita</timezone>
     <timezone id="Asia/Choibalsan">Choibalsan</timezone>
     <timezone id="Asia/Chongqing">Chongqing (China)</timezone>
@@ -242,7 +240,6 @@
     <timezone id="Japan">Japão</timezone>
     <timezone id="Kwajalein">Kwajalein</timezone>
     <timezone id="Libya">Líbia</timezone>
-    <timezone id="MET">Horário da Europa Central</timezone>
     <timezone id="MST">Horário Padrão das Montanhas</timezone>
     <timezone id="MST7MDT">Horário Padrão das Montanhas 7/Verão</timezone>
     <timezone id="Mexico/BajaNorte">México/Baja California Norte</timezone>
@@ -251,7 +248,7 @@
     <timezone id="NZ">Nova Zelândia</timezone>
     <timezone id="NZ-CHAT">Nova Zelândia/Ilhas Chatham</timezone>
     <timezone id="Navajo">Navajo</timezone>
-    <timezone id="PRC">Hora Padrão da China</timezone>
+    <timezone id="PRC">Hora Padrão da China (Pequim)</timezone>
     <timezone id="PST8PDT">Horário Padrão do Pacífico/Verão</timezone>
     <timezone id="Pacific/Apia">Pacífico/Apia</timezone>
     <timezone id="Pacific/Auckland">Pacífico/Auckland</timezone>
@@ -297,7 +294,6 @@
     <timezone id="Pacific/Yap">Pacífico/Yap</timezone>
     <timezone id="Poland">Polônia</timezone>
     <timezone id="Portugal">Portugal</timezone>
-    <timezone id="Singapore">Cingapura</timezone>
     <timezone id="Turkey">Turquia</timezone>
     <timezone id="US/Alaska">EUA/Alasca</timezone>
     <timezone id="US/Aleutian">EUA/Ilhas Aleúteas</timezone>

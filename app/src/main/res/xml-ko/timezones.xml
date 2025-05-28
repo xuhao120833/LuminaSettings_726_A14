@@ -17,7 +17,6 @@
     <timezone id="Asia/Aqtau">악타우</timezone>
     <timezone id="Asia/Aqtobe">악토베</timezone>
     <timezone id="Asia/Ashgabat">아쉬가바트</timezone>
-    <timezone id="Asia/Ashkhabad">아쉬가바드</timezone>
     <timezone id="Asia/Atyrau">아티라우</timezone>
     <timezone id="Asia/Baghdad">바그다드</timezone>
     <timezone id="Asia/Bahrain">바레인</timezone>
@@ -27,7 +26,6 @@
     <timezone id="Asia/Beirut">베이루트</timezone>
     <timezone id="Asia/Bishkek">비슈케크</timezone>
     <timezone id="Asia/Brunei">브루나이</timezone>
-    <timezone id="Asia/Calcutta">콜카타</timezone>
     <timezone id="Asia/Chita">치타</timezone>
     <timezone id="Asia/Choibalsan">초이발산</timezone>
     <timezone id="Asia/Chongqing">충칭 (중국)</timezone>
@@ -241,7 +239,6 @@
     <timezone id="Japan">일본</timezone>
     <timezone id="Kwajalein">콰잘린</timezone>
     <timezone id="Libya">리비아</timezone>
-    <timezone id="MET">중유럽 시간</timezone>
     <timezone id="MST">산악 표준 시간</timezone>
     <timezone id="MST7MDT">산악 표준 시간 7/여름 시간</timezone>
     <timezone id="Mexico/BajaNorte">멕시코/바하 칼리포르니아 북부</timezone>
@@ -250,7 +247,7 @@
     <timezone id="NZ">뉴질랜드</timezone>
     <timezone id="NZ-CHAT">뉴질랜드/차텀 제도</timezone>
     <timezone id="Navajo">나바호</timezone>
-    <timezone id="PRC">중국 표준 시간</timezone>
+    <timezone id="PRC">중국 표준시(베이징)</timezone>
     <timezone id="PST8PDT">태평양 표준 시간/여름 시간</timezone>
     <timezone id="Pacific/Apia">태평양/아피아</timezone>
     <timezone id="Pacific/Auckland">태평양/오클랜드</timezone>
@@ -296,7 +293,6 @@
     <timezone id="Pacific/Yap">태평양/얍 섬</timezone>
     <timezone id="Poland">폴란드</timezone>
     <timezone id="Portugal">포르투갈</timezone>
-    <timezone id="Singapore">싱가포르</timezone>
     <timezone id="Turkey">터키</timezone>
     <timezone id="US/Alaska">미국/알래스카</timezone>
     <timezone id="US/Aleutian">미국/알류션 제도</timezone>

@@ -17,7 +17,6 @@
     <timezone id="Asia/Aqtau">Aqtau</timezone>
     <timezone id="Asia/Aqtobe">Aqtobe</timezone>
     <timezone id="Asia/Ashgabat">Aszchabad</timezone>
-    <timezone id="Asia/Ashkhabad">Aszchabad</timezone>
     <timezone id="Asia/Atyrau">Atyrau</timezone>
     <timezone id="Asia/Baghdad">Bagdad</timezone>
     <timezone id="Asia/Bahrain">Bahrajn</timezone>
@@ -27,7 +26,6 @@
     <timezone id="Asia/Beirut">Bejrut</timezone>
     <timezone id="Asia/Bishkek">Biszkek</timezone>
     <timezone id="Asia/Brunei">Brunei</timezone>
-    <timezone id="Asia/Calcutta">Kalkuta</timezone>
     <timezone id="Asia/Chita">Czita</timezone>
     <timezone id="Asia/Choibalsan">Choibalsan</timezone>
     <timezone id="Asia/Chongqing">Chongqing (Chiny)</timezone>
@@ -241,7 +239,6 @@
     <timezone id="Japan">Japonia</timezone>
     <timezone id="Kwajalein">Kwajalein</timezone>
     <timezone id="Libya">Libia</timezone>
-    <timezone id="MET">Czas Środkowoeuropejski</timezone>
     <timezone id="MST">Czas standardowy górski</timezone>
     <timezone id="MST7MDT">Czas standardowy górski 7/Letni</timezone>
     <timezone id="Mexico/BajaNorte">Meksyk/Północna Baja Kalifornia</timezone>
@@ -250,7 +247,7 @@
     <timezone id="NZ">Nowa Zelandia</timezone>
     <timezone id="NZ-CHAT">Nowa Zelandia/Chatham Islands</timezone>
     <timezone id="Navajo">Navajo</timezone>
-    <timezone id="PRC">Czas Standardowy Chin</timezone>
+    <timezone id="PRC">Chiński czas standardowy (Pekin)</timezone>
     <timezone id="PST8PDT">Czas standardowy pacyficzny/letni</timezone>
     <timezone id="Pacific/Apia">Pacyfik/Apia</timezone>
     <timezone id="Pacific/Auckland">Pacyfik/Auckland</timezone>
@@ -296,7 +293,6 @@
     <timezone id="Pacific/Yap">Pacyfik/Yap</timezone>
     <timezone id="Poland">Polska</timezone>
     <timezone id="Portugal">Portugalia</timezone>
-    <timezone id="Singapore">Singapur</timezone>
     <timezone id="Turkey">Turcja</timezone>
     <timezone id="US/Alaska">USA/Alaska</timezone>
     <timezone id="US/Aleutian">USA/Wyspy Aleuckie</timezone>

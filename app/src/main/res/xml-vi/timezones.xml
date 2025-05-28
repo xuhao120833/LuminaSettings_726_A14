@@ -17,7 +17,6 @@
     <timezone id="Asia/Aqtau">Aqtau</timezone>
     <timezone id="Asia/Aqtobe">Aqtobe</timezone>
     <timezone id="Asia/Ashgabat">Ashgabat</timezone>
-    <timezone id="Asia/Ashkhabad">Ashkhabad</timezone>
     <timezone id="Asia/Atyrau">Atyrau</timezone>
     <timezone id="Asia/Baghdad">Baghdad</timezone>
     <timezone id="Asia/Bahrain">Bahrain</timezone>
@@ -27,7 +26,6 @@
     <timezone id="Asia/Beirut">Beirut</timezone>
     <timezone id="Asia/Bishkek">Bishkek</timezone>
     <timezone id="Asia/Brunei">Brunei</timezone>
-    <timezone id="Asia/Calcutta">Kolkata</timezone>
     <timezone id="Asia/Chita">Chita</timezone>
     <timezone id="Asia/Choibalsan">Choibalsan</timezone>
     <timezone id="Asia/Chongqing">Trùng Khánh (Trung Quốc)</timezone>
@@ -241,7 +239,6 @@
     <timezone id="Japan">Nhật Bản</timezone>
     <timezone id="Kwajalein">Kwajalein</timezone>
     <timezone id="Libya">Libya</timezone>
-    <timezone id="MET">Giờ Trung Âu</timezone>
     <timezone id="MST">Giờ Chuẩn Núi</timezone>
     <timezone id="MST7MDT">Giờ Chuẩn Núi 7/Giờ mùa hè</timezone>
     <timezone id="Mexico/BajaNorte">Mexico/Baja California Bắc</timezone>
@@ -250,7 +247,7 @@
     <timezone id="NZ">New Zealand</timezone>
     <timezone id="NZ-CHAT">New Zealand/Quần đảo Chatham</timezone>
     <timezone id="Navajo">Navajo</timezone>
-    <timezone id="PRC">Giờ Chuẩn Trung Quốc</timezone>
+    <timezone id="PRC">Giờ chuẩn Trung Quốc (Bắc Kinh)</timezone>
     <timezone id="PST8PDT">Giờ Chuẩn Thái Bình Dương/Giờ mùa hè</timezone>
     <timezone id="Pacific/Apia">Thái Bình Dương/Apia</timezone>
     <timezone id="Pacific/Auckland">Thái Bình Dương/Auckland</timezone>
@@ -296,7 +293,6 @@
     <timezone id="Pacific/Yap">Thái Bình Dương/Yap</timezone>
     <timezone id="Poland">Ba Lan</timezone>
     <timezone id="Portugal">Bồ Đào Nha</timezone>
-    <timezone id="Singapore">Singapore</timezone>
     <timezone id="Turkey">Thổ Nhĩ Kỳ</timezone>
     <timezone id="US/Alaska">Mỹ/Alaska</timezone>
     <timezone id="US/Aleutian">Mỹ/Quần đảo Aleutian</timezone>

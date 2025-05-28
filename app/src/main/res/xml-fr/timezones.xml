@@ -17,7 +17,6 @@
     <timezone id="Asia/Aqtau">Asie / Aqtau</timezone>
     <timezone id="Asia/Aqtobe">Asie / Aqtobe</timezone>
     <timezone id="Asia/Ashgabat">Asie / Achgabat</timezone>
-    <timezone id="Asia/Ashkhabad">Asie / Achkhabad</timezone>
     <timezone id="Asia/Atyrau">Asie / Atyraou</timezone>
     <timezone id="Asia/Baghdad">Asie / Bagdad</timezone>
     <timezone id="Asia/Bahrain">Asie / Bahreïn</timezone>
@@ -27,7 +26,6 @@
     <timezone id="Asia/Beirut">Asie / Beyrouth</timezone>
     <timezone id="Asia/Bishkek">Asie / Bichkek</timezone>
     <timezone id="Asia/Brunei">Asie / Brunei</timezone>
-    <timezone id="Asia/Calcutta">Asie / Calcutta</timezone>
     <timezone id="Asia/Chita">Asie / Tchita</timezone>
     <timezone id="Asia/Choibalsan">Asie / Choïbalsan</timezone>
     <timezone id="Asia/Chongqing">Asie / Chongqing (Chine)</timezone>
@@ -241,7 +239,6 @@
     <timezone id="Japan">Japon</timezone>
     <timezone id="Kwajalein">Kwajalein</timezone>
     <timezone id="Libya">Libye</timezone>
-    <timezone id="MET">Heure d'Europe Centrale</timezone>
     <timezone id="MST">Heure Standard des Montagnes</timezone>
     <timezone id="MST7MDT">Heure Standard des Montagnes 7 / Heure d'Été</timezone>
     <timezone id="Mexico/BajaNorte">Mexique / Basse Californie du Nord</timezone>
@@ -250,7 +247,7 @@
     <timezone id="NZ">Nouvelle-Zélande</timezone>
     <timezone id="NZ-CHAT">Nouvelle-Zélande / Îles Chatham</timezone>
     <timezone id="Navajo">Navajo</timezone>
-    <timezone id="PRC">Heure Standard de Chine</timezone>
+    <timezone id="PRC">Heure standard de Chine (Pékin)</timezone>
     <timezone id="PST8PDT">Heure Standard du Pacifique / Heure d'Été</timezone>
     <timezone id="Pacific/Apia">Pacifique / Apia</timezone>
     <timezone id="Pacific/Auckland">Pacifique / Auckland</timezone>
@@ -296,7 +293,6 @@
     <timezone id="Pacific/Yap">Pacifique / Yap</timezone>
     <timezone id="Poland">Pologne</timezone>
     <timezone id="Portugal">Portugal</timezone>
-    <timezone id="Singapore">Singapour</timezone>
     <timezone id="Turkey">Turquie</timezone>
     <timezone id="US/Alaska">États-Unis / Alaska</timezone>
     <timezone id="US/Aleutian">États-Unis / Îles Aléoutiennes</timezone>

@@ -17,7 +17,6 @@
     <timezone id="Asia/Aqtau">Aqtau</timezone>
     <timezone id="Asia/Aqtobe">Aqtobe</timezone>
     <timezone id="Asia/Ashgabat">Asjchabad</timezone>
-    <timezone id="Asia/Ashkhabad">Asjchabad</timezone>
     <timezone id="Asia/Atyrau">Atyrau</timezone>
     <timezone id="Asia/Baghdad">Bagdad</timezone>
     <timezone id="Asia/Bahrain">Bahrein</timezone>
@@ -27,7 +26,6 @@
     <timezone id="Asia/Beirut">Beiroet</timezone>
     <timezone id="Asia/Bishkek">Bisjkek</timezone>
     <timezone id="Asia/Brunei">Brunei</timezone>
-    <timezone id="Asia/Calcutta">Calcutta</timezone>
     <timezone id="Asia/Chita">Chita</timezone>
     <timezone id="Asia/Choibalsan">Choibalsan</timezone>
     <timezone id="Asia/Chongqing">Chongqing (China)</timezone>
@@ -241,7 +239,6 @@
     <timezone id="Japan">Japan</timezone>
     <timezone id="Kwajalein">Kwajalein</timezone>
     <timezone id="Libya">Libië</timezone>
-    <timezone id="MET">Midden-Europese Tijd</timezone>
     <timezone id="MST">Montaansetijd</timezone>
     <timezone id="MST7MDT">Montaansetijd 7/Zomertijd</timezone>
     <timezone id="Mexico/BajaNorte">Mexico/Baja Noord</timezone>
@@ -250,7 +247,7 @@
     <timezone id="NZ">Nieuw-Zeeland</timezone>
     <timezone id="NZ-CHAT">Nieuw-Zeeland/Chatham Eilanden</timezone>
     <timezone id="Navajo">Navajo</timezone>
-    <timezone id="PRC">China Standaardtijd</timezone>
+    <timezone id="PRC">Chinese Standaardtijd (Peking)</timezone>
     <timezone id="PST8PDT">Pacific Standaardtijd/Zomertijd</timezone>
     <timezone id="Pacific/Apia">Pacifisch/Apia</timezone>
     <timezone id="Pacific/Auckland">Pacifisch/Auckland</timezone>
@@ -296,7 +293,6 @@
     <timezone id="Pacific/Yap">Pacifisch/Yap Eiland</timezone>
     <timezone id="Poland">Polen</timezone>
     <timezone id="Portugal">Portugal</timezone>
-    <timezone id="Singapore">Singapore</timezone>
     <timezone id="Turkey">Turkije</timezone>
     <timezone id="US/Alaska">VS/Alaska</timezone>
     <timezone id="US/Aleutian">VS/Aleoetische Eilanden</timezone>

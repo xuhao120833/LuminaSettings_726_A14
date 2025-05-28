@@ -17,7 +17,6 @@
     <timezone id="Asia/Aqtau">Aqtau</timezone>
     <timezone id="Asia/Aqtobe">Aqtobe</timezone>
     <timezone id="Asia/Ashgabat">Aşkabat</timezone>
-    <timezone id="Asia/Ashkhabad">Aşkabat</timezone>
     <timezone id="Asia/Atyrau">Atyrau</timezone>
     <timezone id="Asia/Baghdad">Bağdat</timezone>
     <timezone id="Asia/Bahrain">Bahreyn</timezone>
@@ -27,7 +26,6 @@
     <timezone id="Asia/Beirut">Beyrut</timezone>
     <timezone id="Asia/Bishkek">Bişkek</timezone>
     <timezone id="Asia/Brunei">Brunei</timezone>
-    <timezone id="Asia/Calcutta">Kalküta</timezone>
     <timezone id="Asia/Chita">Chita</timezone>
     <timezone id="Asia/Choibalsan">Choibalsan</timezone>
     <timezone id="Asia/Chongqing">Çongçing (Çin)</timezone>
@@ -241,7 +239,6 @@
     <timezone id="Japan">Japonya</timezone>
     <timezone id="Kwajalein">Kwajalein</timezone>
     <timezone id="Libya">Libya</timezone>
-    <timezone id="MET">Orta Avrupa Zamanı</timezone>
     <timezone id="MST">Dağ Standart Zamanı</timezone>
     <timezone id="MST7MDT">Dağ Standart Zamanı/Daylight Saving Time</timezone>
     <timezone id="Mexico/BajaNorte">Meksika/Baja California Norte</timezone>
@@ -250,7 +247,7 @@
     <timezone id="NZ">Yeni Zelanda</timezone>
     <timezone id="NZ-CHAT">Yeni Zelanda/Chatham Adaları</timezone>
     <timezone id="Navajo">Navajo</timezone>
-    <timezone id="PRC">Çin Standart Zamanı</timezone>
+    <timezone id="PRC">Çin Standart Saati (Pekin)</timezone>
     <timezone id="PST8PDT">Pasifik Standart Zamanı/Yaz Saati</timezone>
     <timezone id="Pacific/Apia">Pasifik/Apia</timezone>
     <timezone id="Pacific/Auckland">Pasifik/Auckland</timezone>
@@ -296,7 +293,6 @@
     <timezone id="Pacific/Yap">Pasifik/Yap Adası</timezone>
     <timezone id="Poland">Polonya</timezone>
     <timezone id="Portugal">Portekiz</timezone>
-    <timezone id="Singapore">Singapur</timezone>
     <timezone id="Turkey">Türkiye</timezone>
     <timezone id="US/Alaska">Amerika/Bering Adaları</timezone>
     <timezone id="US/Aleutian">Amerika/Aleut Adaları</timezone>

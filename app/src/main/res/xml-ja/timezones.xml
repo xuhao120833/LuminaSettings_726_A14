@@ -17,7 +17,6 @@
     <timezone id="Asia/Aqtau">アクタウ</timezone>
     <timezone id="Asia/Aqtobe">アクチョベ</timezone>
     <timezone id="Asia/Ashgabat">アシュガバート</timezone>
-    <timezone id="Asia/Ashkhabad">アシュガバード</timezone>
     <timezone id="Asia/Atyrau">アティラウ</timezone>
     <timezone id="Asia/Baghdad">バグダッド</timezone>
     <timezone id="Asia/Bahrain">バーレーン</timezone>
@@ -27,7 +26,6 @@
     <timezone id="Asia/Beirut">ベイルート</timezone>
     <timezone id="Asia/Bishkek">ビシュケク</timezone>
     <timezone id="Asia/Brunei">ブルネイ</timezone>
-    <timezone id="Asia/Calcutta">カルカッタ</timezone>
     <timezone id="Asia/Chita">チタ</timezone>
     <timezone id="Asia/Choibalsan">チョイバルサン</timezone>
     <timezone id="Asia/Chongqing">重慶（中国）</timezone>
@@ -241,7 +239,6 @@
     <timezone id="Japan">日本</timezone>
     <timezone id="Kwajalein">クワジャライン</timezone>
     <timezone id="Libya">リビア</timezone>
-    <timezone id="MET">中央ヨーロッパ時間</timezone>
     <timezone id="MST">山岳標準時</timezone>
     <timezone id="MST7MDT">山岳標準時7/夏時間</timezone>
     <timezone id="Mexico/BajaNorte">メキシコ/北下カリフォルニア</timezone>
@@ -250,7 +247,7 @@
     <timezone id="NZ">ニュージーランド</timezone>
     <timezone id="NZ-CHAT">ニュージーランド/チャタム諸島</timezone>
     <timezone id="Navajo">ナバホ</timezone>
-    <timezone id="PRC">中国標準時間</timezone>
+    <timezone id="PRC">中国標準時（北京）</timezone>
     <timezone id="PST8PDT">太平洋標準時/夏時間</timezone>
     <timezone id="Pacific/Apia">太平洋/アピア</timezone>
     <timezone id="Pacific/Auckland">太平洋/オークランド</timezone>
@@ -296,7 +293,6 @@
     <timezone id="Pacific/Yap">太平洋/ヤップ島</timezone>
     <timezone id="Poland">ポーランド</timezone>
     <timezone id="Portugal">ポルトガル</timezone>
-    <timezone id="Singapore">シンガポール</timezone>
     <timezone id="Turkey">トルコ</timezone>
     <timezone id="US/Alaska">アメリカ/アラスカ</timezone>
     <timezone id="US/Aleutian">アメリカ/アリューシャン列島</timezone>

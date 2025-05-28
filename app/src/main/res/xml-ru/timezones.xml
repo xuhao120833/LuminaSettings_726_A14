@@ -17,7 +17,6 @@
     <timezone id="Asia/Aqtau">Актау</timezone>
     <timezone id="Asia/Aqtobe">Актобе</timezone>
     <timezone id="Asia/Ashgabat">Ашхабад</timezone>
-    <timezone id="Asia/Ashkhabad">Ашхабад</timezone>
     <timezone id="Asia/Atyrau">Атырау</timezone>
     <timezone id="Asia/Baghdad">Багдад</timezone>
     <timezone id="Asia/Bahrain">Бахрейн</timezone>
@@ -27,7 +26,6 @@
     <timezone id="Asia/Beirut">Бейрут</timezone>
     <timezone id="Asia/Bishkek">Бишкек</timezone>
     <timezone id="Asia/Brunei">Бруней</timezone>
-    <timezone id="Asia/Calcutta">Калькутта</timezone>
     <timezone id="Asia/Chita">Чита</timezone>
     <timezone id="Asia/Choibalsan">Чойбалсан</timezone>
     <timezone id="Asia/Chongqing">Чунцин (Китай)</timezone>
@@ -241,7 +239,6 @@
     <timezone id="Japan">Япония</timezone>
     <timezone id="Kwajalein">Кваджалейн</timezone>
     <timezone id="Libya">Ливия</timezone>
-    <timezone id="MET">Среднеевропейское время</timezone>
     <timezone id="MST">Горное стандартное время</timezone>
     <timezone id="MST7MDT">Горное стандартное время 7/Летнее время</timezone>
     <timezone id="Mexico/BajaNorte">Мексика/Северная Нижняя Калифорния</timezone>
@@ -250,7 +247,7 @@
     <timezone id="NZ">Новая Зеландия</timezone>
     <timezone id="NZ-CHAT">Новая Зеландия/Чатамские острова</timezone>
     <timezone id="Navajo">Навахо</timezone>
-    <timezone id="PRC">Китайское стандартное время</timezone>
+    <timezone id="PRC">Китайское стандартное время (Пекин)</timezone>
     <timezone id="PST8PDT">Тихоокеанское стандартное время/Летнее время</timezone>
     <timezone id="Pacific/Apia">Тихий океан/Апиа</timezone>
     <timezone id="Pacific/Auckland">Тихий океан/Окленд</timezone>
@@ -296,7 +293,6 @@
     <timezone id="Pacific/Yap">Тихий океан/Яп</timezone>
     <timezone id="Poland">Польша</timezone>
     <timezone id="Portugal">Португалия</timezone>
-    <timezone id="Singapore">Сингапур</timezone>
     <timezone id="Turkey">Турция</timezone>
     <timezone id="US/Alaska">США/Аляска</timezone>
     <timezone id="US/Aleutian">США/Алеутские острова</timezone>

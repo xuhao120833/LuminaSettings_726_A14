@@ -17,7 +17,6 @@
     <timezone id="Asia/Aqtau">Aktau</timezone>
     <timezone id="Asia/Aqtobe">Aktobe</timezone>
     <timezone id="Asia/Ashgabat">Așgabat</timezone>
-    <timezone id="Asia/Ashkhabad">Așgabat</timezone>
     <timezone id="Asia/Atyrau">Atyrau</timezone>
     <timezone id="Asia/Baghdad">Bagdad</timezone>
     <timezone id="Asia/Bahrain">Bahrain</timezone>
@@ -27,7 +26,6 @@
     <timezone id="Asia/Beirut">Beirut</timezone>
     <timezone id="Asia/Bishkek">Bișkek</timezone>
     <timezone id="Asia/Brunei">Brunei</timezone>
-    <timezone id="Asia/Calcutta">Calcutta</timezone>
     <timezone id="Asia/Chita">Chita</timezone>
     <timezone id="Asia/Choibalsan">Choibalsan</timezone>
     <timezone id="Asia/Chongqing">Chongqing (China)</timezone>
@@ -241,7 +239,6 @@
     <timezone id="Japan">Japonia</timezone>
     <timezone id="Kwajalein">Kwajalein</timezone>
     <timezone id="Libya">Libia</timezone>
-    <timezone id="MET">Timpul din Europa Centrală</timezone>
     <timezone id="MST">Timpul standard al munților</timezone>
     <timezone id="MST7MDT">Timpul standard al munților 7/Verile</timezone>
     <timezone id="Mexico/BajaNorte">Mexic/Baja California de Nord</timezone>
@@ -250,7 +247,7 @@
     <timezone id="NZ">Noua Zeelandă</timezone>
     <timezone id="NZ-CHAT">Noua Zeelandă/Insulele Chatham</timezone>
     <timezone id="Navajo">Navajo</timezone>
-    <timezone id="PRC">Timpul standard al Chinei</timezone>
+    <timezone id="PRC">Ora standard a Chinei (Beijing)</timezone>
     <timezone id="PST8PDT">Timpul standard al Pacificului/Verile</timezone>
     <timezone id="Pacific/Apia">Pacific/Apia</timezone>
     <timezone id="Pacific/Auckland">Pacific/Auckland</timezone>
@@ -296,7 +293,6 @@
     <timezone id="Pacific/Yap">Pacific/Insula Yap</timezone>
     <timezone id="Poland">Polonia</timezone>
     <timezone id="Portugal">Portugalia</timezone>
-    <timezone id="Singapore">Singapore</timezone>
     <timezone id="Turkey">Turcia</timezone>
     <timezone id="US/Alaska">SUA/Alaska</timezone>
     <timezone id="US/Aleutian">SUA/Insulele Aleutine</timezone>

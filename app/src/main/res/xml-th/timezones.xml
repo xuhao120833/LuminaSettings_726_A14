@@ -17,7 +17,6 @@
     <timezone id="Asia/Aqtau">อัคเทา</timezone>
     <timezone id="Asia/Aqtobe">อัคโตเบ</timezone>
     <timezone id="Asia/Ashgabat">อัชกาบัต</timezone>
-    <timezone id="Asia/Ashkhabad">อัชกาบัต</timezone>
     <timezone id="Asia/Atyrau">อัตเรา</timezone>
     <timezone id="Asia/Baghdad">แบกแดด</timezone>
     <timezone id="Asia/Bahrain">บาห์เรน</timezone>
@@ -27,7 +26,6 @@
     <timezone id="Asia/Beirut">เบรุต</timezone>
     <timezone id="Asia/Bishkek">บิชเคก</timezone>
     <timezone id="Asia/Brunei">บรูไน</timezone>
-    <timezone id="Asia/Calcutta">โกลกาตา</timezone>
     <timezone id="Asia/Chita">ชิตา</timezone>
     <timezone id="Asia/Choibalsan">โชยบาลซาน</timezone>
     <timezone id="Asia/Chongqing">ฉงชิ่ง (จีน)</timezone>
@@ -241,7 +239,6 @@
     <timezone id="Japan">ญี่ปุ่น</timezone>
     <timezone id="Kwajalein">คูวาจาเลน</timezone>
     <timezone id="Libya">ลิเบีย</timezone>
-    <timezone id="MET">เวลาในยุโรปกลาง</timezone>
     <timezone id="MST">เวลามาตรฐานภูมิภาคเทือกเขา</timezone>
     <timezone id="MST7MDT">เวลามาตรฐานภูมิภาคเทือกเขา 7/เวลาออมแสง</timezone>
     <timezone id="Mexico/BajaNorte">เม็กซิโก/แคลิฟอร์เนียเหนือ</timezone>
@@ -250,7 +247,7 @@
     <timezone id="NZ">นิวซีแลนด์</timezone>
     <timezone id="NZ-CHAT">นิวซีแลนด์/หมู่เกาะชาตัม</timezone>
     <timezone id="Navajo">นาวาโฮ</timezone>
-    <timezone id="PRC">เวลาในจีน</timezone>
+    <timezone id="PRC">เวลามาตรฐานของจีน (ปักกิ่ง)</timezone>
     <timezone id="PST8PDT">เวลาแปซิฟิกมาตรฐาน/เวลาออมแสง</timezone>
     <timezone id="Pacific/Apia">แปซิฟิก/อาเปีย</timezone>
     <timezone id="Pacific/Auckland">แปซิฟิก/โอ๊คแลนด์</timezone>
@@ -296,7 +293,6 @@
     <timezone id="Pacific/Yap">แปซิฟิก/เกาะยัป</timezone>
     <timezone id="Poland">โปแลนด์</timezone>
     <timezone id="Portugal">โปรตุเกส</timezone>
-    <timezone id="Singapore">สิงคโปร์</timezone>
     <timezone id="Turkey">ตุรกี</timezone>
     <timezone id="US/Alaska">สหรัฐอเมริกา/อลาสก้า</timezone>
     <timezone id="US/Aleutian">สหรัฐอเมริกา/หมู่เกาะอะลูเชียน</timezone>

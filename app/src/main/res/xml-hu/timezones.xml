@@ -17,7 +17,6 @@
     <timezone id="Asia/Aqtau">Aktau</timezone>
     <timezone id="Asia/Aqtobe">Aqtöbe</timezone>
     <timezone id="Asia/Ashgabat">Asgabat</timezone>
-    <timezone id="Asia/Ashkhabad">Asgabat</timezone>
     <timezone id="Asia/Atyrau">Atyrau</timezone>
     <timezone id="Asia/Baghdad">Bagdad</timezone>
     <timezone id="Asia/Bahrain">Bahrein</timezone>
@@ -27,7 +26,6 @@
     <timezone id="Asia/Beirut">Bejrút</timezone>
     <timezone id="Asia/Bishkek">Biskek</timezone>
     <timezone id="Asia/Brunei">Brunei</timezone>
-    <timezone id="Asia/Calcutta">Kalkutta</timezone>
     <timezone id="Asia/Chita">Csita</timezone>
     <timezone id="Asia/Choibalsan">Csojbalszan</timezone>
     <timezone id="Asia/Chongqing">Csungking (Kína)</timezone>
@@ -241,7 +239,6 @@
     <timezone id="Japan">Japán</timezone>
     <timezone id="Kwajalein">Kwajalein</timezone>
     <timezone id="Libya">Líbia</timezone>
-    <timezone id="MET">Közép-európai idő</timezone>
     <timezone id="MST">Hegyi idő</timezone>
     <timezone id="MST7MDT">Hegyi idő 7/nyári időszámítás</timezone>
     <timezone id="Mexico/BajaNorte">Mexikó/Alsó-Kalifornia északi</timezone>
@@ -250,7 +247,7 @@
     <timezone id="NZ">Új-Zéland</timezone>
     <timezone id="NZ-CHAT">Új-Zéland/Chatham-szigetek</timezone>
     <timezone id="Navajo">Navajo</timezone>
-    <timezone id="PRC">Kínai szabványidő</timezone>
+    <timezone id="PRC">Kínai szabványidő (Peking)</timezone>
     <timezone id="PST8PDT">Csendes-óceáni idő/nyári időszámítás</timezone>
     <timezone id="Pacific/Apia">Csendes-óceáni/Apia</timezone>
     <timezone id="Pacific/Auckland">Csendes-óceáni/Auckland</timezone>
@@ -296,7 +293,6 @@
     <timezone id="Pacific/Yap">Csendes-óceáni/Yap-sziget</timezone>
     <timezone id="Poland">Lengyelország</timezone>
     <timezone id="Portugal">Portugália</timezone>
-    <timezone id="Singapore">Szingapúr</timezone>
     <timezone id="Turkey">Törökország</timezone>
     <timezone id="US/Alaska">Amerika/Alaszka</timezone>
     <timezone id="US/Aleutian">Amerika/Aleut-szigetek</timezone>

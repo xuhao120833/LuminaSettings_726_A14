@@ -17,7 +17,6 @@
     <timezone id="Asia/Aqtau">Asia/Aqtau</timezone>
     <timezone id="Asia/Aqtobe">Asia/Aqtobe</timezone>
     <timezone id="Asia/Ashgabat">Asia/Ashgabat</timezone>
-    <timezone id="Asia/Ashkhabad">Asia/Ashkhabad</timezone>
     <timezone id="Asia/Atyrau">Asia/Atyrau</timezone>
     <timezone id="Asia/Baghdad">Asia/Baghdad</timezone>
     <timezone id="Asia/Bahrain">Asia/Bahrain</timezone>
@@ -27,7 +26,6 @@
     <timezone id="Asia/Beirut">Asia/Beirut</timezone>
     <timezone id="Asia/Bishkek">Asia/Bishkek</timezone>
     <timezone id="Asia/Brunei">Asia/Brunei</timezone>
-    <timezone id="Asia/Calcutta">Asia/Calcutta</timezone>
     <timezone id="Asia/Chita">Asia/Chita</timezone>
     <timezone id="Asia/Choibalsan">Asia/Choibalsan</timezone>
     <timezone id="Asia/Chongqing">Asia/Chongqing (Cina)</timezone>
@@ -241,7 +239,6 @@
     <timezone id="Japan">Giappone</timezone>
     <timezone id="Kwajalein">Kwajalein</timezone>
     <timezone id="Libya">Libia</timezone>
-    <timezone id="MET">Tempo dell'Europa Centrale</timezone>
     <timezone id="MST">Tempo Standard delle Montagne</timezone>
     <timezone id="MST7MDT">Tempo Standard delle Montagne 7/Tempo Estivo</timezone>
     <timezone id="Mexico/BajaNorte">Messico/Baja California Nord</timezone>
@@ -250,7 +247,7 @@
     <timezone id="NZ">Nuova Zelanda</timezone>
     <timezone id="NZ-CHAT">Nuova Zelanda/Isole Chatham</timezone>
     <timezone id="Navajo">Navajo</timezone>
-    <timezone id="PRC">Ora Standard Cinese</timezone>
+    <timezone id="PRC">Ora standard cinese (Pechino)</timezone>
     <timezone id="PST8PDT">Tempo Standard del Pacifico/Tempo Estivo</timezone>
     <timezone id="Pacific/Apia">Pacifico/Apia</timezone>
     <timezone id="Pacific/Auckland">Pacifico/Auckland</timezone>
@@ -296,7 +293,6 @@
     <timezone id="Pacific/Yap">Pacifico/Yap</timezone>
     <timezone id="Poland">Polonia</timezone>
     <timezone id="Portugal">Portogallo</timezone>
-    <timezone id="Singapore">Singapore</timezone>
     <timezone id="Turkey">Turchia</timezone>
     <timezone id="US/Alaska">USA/Alaska</timezone>
     <timezone id="US/Aleutian">USA/Isole Aleutine</timezone>
