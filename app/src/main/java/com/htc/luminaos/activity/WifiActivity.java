@@ -84,8 +84,6 @@ public class WifiActivity extends BaseActivity implements WifiEnabledReceiver.Wi
                     action = "";
                 }
             }
-
-
             return false;
         }
     });
@@ -140,7 +138,7 @@ public class WifiActivity extends BaseActivity implements WifiEnabledReceiver.Wi
         try {
             if (mWifiManager == null)
                 mWifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
-                wifiBinding.wifiSwitch.setChecked(mWifiManager.isWifiEnabled());
+            wifiBinding.wifiSwitch.setChecked(mWifiManager.isWifiEnabled());
             if (mWifiManager.isWifiEnabled()) {
                 mWifiManager.startScan();
                 singer.execute(RefreshRunnable);

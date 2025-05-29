@@ -2430,6 +2430,18 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
                         }
                     }
                 }
+
+                // 如果当前语言没找到，尝试找英文
+                Log.d(TAG,"loadSupport Utils.support_image_path "+Utils.support_image_path);
+                if (Utils.support_image_path.isEmpty()) {
+                    for (File file : files) {
+                        if (file.isFile() && file.getName().contains("_en")) {
+                            Utils.support_image_path = file.getAbsolutePath();
+                            Log.d(TAG, "找不到当前语言，使用英文support图片路径: " + file.getAbsolutePath());
+                            break;
+                        }
+                    }
+                }
             }
         }
     }

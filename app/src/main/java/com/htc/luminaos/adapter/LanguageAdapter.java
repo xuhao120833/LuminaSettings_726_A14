@@ -13,6 +13,7 @@ import com.android.internal.app.LocalePicker;
 import com.htc.luminaos.R;
 import com.htc.luminaos.entry.Language;
 import com.htc.luminaos.utils.ScrollUtils;
+import com.htc.luminaos.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -85,6 +86,8 @@ public class LanguageAdapter  extends RecyclerView.Adapter<LanguageAdapter.MyVie
                     LocalePicker.updateLocale(language.getLocale());
                     setCur_language(language.getLocale().getLanguage()+language.getLocale().getCountry());
                     notifyDataSetChanged();
+
+                    Utils.support_image_path = "";
                 }
             }
         });

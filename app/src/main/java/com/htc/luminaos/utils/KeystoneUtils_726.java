@@ -7,6 +7,7 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.SystemProperties;
 import android.provider.Settings;
+import android.util.DisplayMetrics;
 import android.util.Log;
 
 import java.text.DecimalFormat;
@@ -311,7 +312,10 @@ public class KeystoneUtils_726 {
         float oflby = lb_Y / 1000.000f;
         float ofrbx = rb_X / 1000.000f;
         float ofrby = rb_Y / 1000.000f;
+
         writeParcelToFlinger((int) (ofltx * 1920), (int) (oflty * 1080), (int) (ofrtx * 1920), (int) (ofrty * 1080), (int) (oflbx * 1920), (int) (oflby * 1080), (int) (ofrbx * 1920), (int) (ofrby * 1080));
+
+//        writeParcelToFlinger((int) (ofltx * lcd_w), (int) (oflty * lcd_h), (int) (ofrtx * lcd_w), (int) (ofrty * lcd_h), (int) (oflbx * lcd_w), (int) (oflby * lcd_h), (int) (ofrbx * lcd_w), (int) (ofrby * lcd_h));
         SystemProperties.set("persist.sys.zoom.value", lb_X + "," + lb_Y + "," + lt_X + "," + lt_Y + "," + rt_X + "," + rt_Y + "," + rb_X + "," + rb_Y);
     }
 
