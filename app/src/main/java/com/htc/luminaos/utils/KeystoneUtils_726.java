@@ -297,7 +297,12 @@ public class KeystoneUtils_726 {
         writeParcelToFlinger(lt_X, lt_Y, rt_X, rt_Y, lb_X, lb_Y, rb_X, rb_Y);
     }
 
-    public static void UpdateKeystoneZOOM(boolean write) {
+    public static void UpdateKeystoneZOOMNC() { //无摄像头只设置属性
+        SystemProperties.set("persist.sys.zoom.value", lb_X + "," + lb_Y + "," + lt_X + "," + lt_Y + "," + rt_X + "," + rt_Y + "," + rb_X + "," + rb_Y);
+        Log.d("UpdateKeystoneZOOMNC ", lb_X + "," + lb_Y + "," + lt_X + "," + lt_Y + "," + rt_X + "," + rt_Y + "," + rb_X + "," + rb_Y);
+    }
+
+    public static void UpdateKeystoneZOOM(boolean write) { //有摄像头
         Log.d("UpdateKeystoneZOOM before ", lb_X + "," + lb_Y + "," + lt_X + "," + lt_Y + "," + rt_X + "," + rt_Y + "," + rb_X + "," + rb_Y);
         if (!write) {
             SystemProperties.set("persist.sys.zoom.value", lb_X + "," + lb_Y + "," + lt_X + "," + lt_Y + "," + rt_X + "," + rt_Y + "," + rb_X + "," + rb_Y);
@@ -312,11 +317,11 @@ public class KeystoneUtils_726 {
         float oflby = lb_Y / 1000.000f;
         float ofrbx = rb_X / 1000.000f;
         float ofrby = rb_Y / 1000.000f;
+        Log.d("UpdateKeystoneZOOM", " lcd_w " + lcd_w + " lcd_h " + lcd_h);
 
-        writeParcelToFlinger((int) (ofltx * 1920), (int) (oflty * 1080), (int) (ofrtx * 1920), (int) (ofrty * 1080), (int) (oflbx * 1920), (int) (oflby * 1080), (int) (ofrbx * 1920), (int) (ofrby * 1080));
-
-//        writeParcelToFlinger((int) (ofltx * lcd_w), (int) (oflty * lcd_h), (int) (ofrtx * lcd_w), (int) (ofrty * lcd_h), (int) (oflbx * lcd_w), (int) (oflby * lcd_h), (int) (ofrbx * lcd_w), (int) (ofrby * lcd_h));
+        writeParcelToFlinger((int) (ofltx * lcd_w), (int) (oflty * lcd_h), (int) (ofrtx * lcd_w), (int) (ofrty * lcd_h), (int) (oflbx * lcd_w), (int) (oflby * lcd_h), (int) (ofrbx * lcd_w), (int) (ofrby * lcd_h));
         SystemProperties.set("persist.sys.zoom.value", lb_X + "," + lb_Y + "," + lt_X + "," + lt_Y + "," + rt_X + "," + rt_Y + "," + rb_X + "," + rb_Y);
+        Log.d("UpdateKeystoneZOOM after ", lb_X + "," + lb_Y + "," + lt_X + "," + lt_Y + "," + rt_X + "," + rt_Y + "," + rb_X + "," + rb_Y);
     }
 
     public static void setKeystoneNormalXY(int cur_mode, int new_mode) {

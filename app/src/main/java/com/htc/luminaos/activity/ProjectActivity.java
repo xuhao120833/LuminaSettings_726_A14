@@ -741,7 +741,7 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
     }
 
 
-    public void set_screen_zoom(int l, int t, int r, int b) {
+    public void set_screen_zoom(int l, int t, int r, int b) {//数字缩放
         KeystoneUtils_726.writeGlobalSettings(this, KeystoneUtils_726.ZOOM_VALUE, l);
 
         zoom_scale = KeystoneUtils_726.readSystemProperties(KeystoneUtils_726.PROP_ZOOM_SCALE,zoom_scale);
@@ -765,12 +765,12 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
         b = max_value - b;
 //        changeform(l, t, r, b);
 
-        if (!SystemProperties.get("persist.sys.camok", "0").equals("1") || getAuto()) {
-            changeform(l, t, r, b);
-        } else updateZoom(max_value - l);
+        if (!SystemProperties.get("persist.sys.camok", "0").equals("1") || getAuto()) { //无摄像头
+            changeform(l, t, r, b, "zoom");
+        } else updateZoom(max_value - l); //有摄像头
     }
 
-    public void changeform(int l, int t, int right, int bottom) {
+    public void changeform(int l, int t, int right, int bottom, String key) {
         Log.d("changeform before ", KeystoneUtils_726.lt_X + "," + KeystoneUtils_726.lt_Y + "," + KeystoneUtils_726.lb_X  + "," + KeystoneUtils_726.lb_Y
                 + "," + KeystoneUtils_726.rt_X + "," + KeystoneUtils_726.rt_Y + "," + KeystoneUtils_726.rb_X + "," + KeystoneUtils_726.rb_Y);
 
@@ -789,17 +789,19 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
         Log.d("changeform after ", KeystoneUtils_726.lt_X + "," + KeystoneUtils_726.lt_Y + "," + KeystoneUtils_726.lb_X  + "," + KeystoneUtils_726.lb_Y
                 + "," + KeystoneUtils_726.rt_X + "," + KeystoneUtils_726.rt_Y + "," + KeystoneUtils_726.rb_X + "," + KeystoneUtils_726.rb_Y);
 
-        if (getAuto()) {
-            Log.d(TAG," UpdateKeystoneZOOM(false) ");
-            KeystoneUtils_726.UpdateKeystoneZOOM(false);
-            sendKeystoneBroadcast();
-        } else {
-            Log.d(TAG," UpdateKeystoneZOOM(true) ");
-            KeystoneUtils_726.UpdateKeystoneZOOM(true);
-        }
+//        if (getAuto()) {
+//            Log.d(TAG," UpdateKeystoneZOOM(false) ");
+//            KeystoneUtils_726.UpdateKeystoneZOOM(false);
+////            sendKeystoneBroadcast();
+//        } else {
+//            Log.d(TAG," UpdateKeystoneZOOM(true) ");
+//            KeystoneUtils_726.UpdateKeystoneZOOM(true);
+//        }
+        KeystoneUtils_726.UpdateKeystoneZOOMNC();
+        sendKeystoneBroadcast(key);
     }
 
-    public void updateZoom(int zoom) {
+    public void updateZoom(int zoom) {//数字缩放有摄像头
         lt_xy = KeystoneUtils_726.getKeystoneHtcLeftAndTopXY();
         rt_xy = KeystoneUtils_726.getKeystoneHtcRightAndTopXY();
         lb_xy = KeystoneUtils_726.getKeystoneHtcLeftAndBottomXY();
@@ -825,11 +827,11 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
         }
     }
 
-    private void sendKeystoneBroadcast() {
+    private void sendKeystoneBroadcast(String key) {
         Log.d(TAG," 发送自动梯形校正的广播 ");
         Intent intent = new Intent("android.intent.hotack_keystone");
         intent.addFlags(Intent.FLAG_RECEIVER_FOREGROUND);
-        intent.putExtra("ratio", 1);
+        intent.putExtra(key, 1);
         sendBroadcast(intent);
     }
 
@@ -1026,7 +1028,7 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
     }
 
     //全局缩放和比例兼容
-    public void set_screen_zoom(int l, int t, int r, int b, int scaleMode) {
+    public void set_screen_zoom(int l, int t, int r, int b, int scaleMode) { //画面比例无摄像头
         if (scaleMode == 0) {
             scale = 1D;
             step_x = 16;
@@ -1045,12 +1047,12 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
         t = 100 - t;
         r = 100 - r;
         b = 100 - b;
-        changeform(l, t, r, b);
+        changeform(l, t, r, b, "ratio");
         String modify_value = "overscan " + df.format((double) l * scale) + "," + t + "," + df.format((double) r * scale) + "," + b;
         SystemProperties.set("persist.vendor.overscan.main", modify_value);
     }
 
-    public void updateScaleZoom(int scale) {
+    public void updateScaleZoom(int scale) {//画面比例有摄像头
         lt_xy = KeystoneUtils_726.getKeystoneHtcLeftAndTopXY();
         rt_xy = KeystoneUtils_726.getKeystoneHtcRightAndTopXY();
         lb_xy = KeystoneUtils_726.getKeystoneHtcLeftAndBottomXY();

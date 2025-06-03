@@ -34,6 +34,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.htc.luminaos.R;
+import com.htc.luminaos.receiver.AddWifiCallBack;
 import com.htc.luminaos.utils.InputMethodUtil;
 import com.htc.luminaos.utils.LinkWifi;
 
@@ -48,6 +49,7 @@ public class AddNetWorkDialog extends BaseDialog {
 	private WifiManager mWifiManager;
 	private List<WifiConfiguration> wifiConfigurationList = new ArrayList<>();
 	private static String TAG = "AddNetWorkDialog";
+	private AddWifiCallBack addWifiCallBack;
 
 	public AddNetWorkDialog(Context context) {
 		super(context);
@@ -61,10 +63,11 @@ public class AddNetWorkDialog extends BaseDialog {
 		this.mContext = context;
 	}
 
-	public AddNetWorkDialog(Context context, int theme) {
+	public AddNetWorkDialog(Context context, int theme, AddWifiCallBack addWifiCallBack) {
 		super(context, theme);
 		this.mContext = context;
 		mWifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+		this.addWifiCallBack = addWifiCallBack;
 	}
 
 	@Override
@@ -234,13 +237,11 @@ public class AddNetWorkDialog extends BaseDialog {
 			});
 
 			ok.setOnClickListener(new View.OnClickListener() {
-
 				@Override
 				public void onClick(View arg0) {
 					String security = wifi_security.getText().toString();
 					String msiid = networkName_et.getText().toString();
 					String password=password_et.getText().toString();
-
 					if (TextUtils.isEmpty(msiid)) {
 						Toast.makeText(mContext,
 								mContext.getString(R.string.ssidmsg),
@@ -258,7 +259,6 @@ public class AddNetWorkDialog extends BaseDialog {
 							return;
 						}
 					}
-
 					WifiConfiguration isExitConf =  linkWifi.IsExsits(msiid);
 					if (isExitConf!=null)
 						mWifiManager.removeNetwork(isExitConf.networkId);
@@ -271,12 +271,13 @@ public class AddNetWorkDialog extends BaseDialog {
 
 					}
 					linkWifi.ConnectToNetID(netID);
+
+					//执行一个callback
+					addWifiCallBack.addWifi(netID,msiid);
 					dismiss();
 				}
 			});
-
 		}
-
 	}
 
 
@@ -342,9 +343,7 @@ public class AddNetWorkDialog extends BaseDialog {
 			popupwindow.setContentView(view);
 			// 设置显示的位置
 			popupwindow.showAsDropDown(showview);
-
 			wpalistview.setOnItemClickListener(new OnItemClickListener() {
-
 				@Override
 				public void onItemClick(AdapterView<?> arg0, View arg1,
 						int arg2, long arg3) {
@@ -358,12 +357,9 @@ public class AddNetWorkDialog extends BaseDialog {
 					} else {
 						lay.setVisibility(View.VISIBLE);
 					}
-
 					popupwindow.dismiss();
 				}
 			});
 		}
-
 	}
-
 }
