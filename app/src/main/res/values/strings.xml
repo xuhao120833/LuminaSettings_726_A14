@@ -320,4 +320,6 @@
     <string name="password_error4">New passwords do not match, please try again</string>
     <string name="password_reboot_useful">Password set successfully, takes effect after reboot</string>
     <string name="email_title">After-sales service email</string>
+    <string name="wifi_connect_success">Connected successfully:</string>
+    <string name="wifi_ssid_not_found">Unable to connect to this Wi-Fi. Please check if the network exists.</string>
 </resources>

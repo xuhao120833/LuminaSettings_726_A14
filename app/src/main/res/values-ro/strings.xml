@@ -320,5 +320,7 @@
     <string name="password_error4">Cele două parole noi nu se potrivesc, vă rugăm să le introduceți din nou</string>
     <string name="password_reboot_useful">Parola a fost setată cu succes, reboot necesar pentru aplicare</string>
     <string name="email_title">E-mail pentru serviciul post-vânzare</string>
+    <string name="wifi_connect_success">Conectare reușită:</string>
+    <string name="wifi_ssid_not_found">Nu se poate conecta la acest Wi-Fi, vă rugăm să verificați dacă rețeaua există</string>
 </resources>
 

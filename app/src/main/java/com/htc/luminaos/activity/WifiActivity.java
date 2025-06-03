@@ -37,7 +37,6 @@ import com.htc.luminaos.MyApplication;
 import com.htc.luminaos.R;
 import com.htc.luminaos.adapter.WifiFoundAdapter;
 import com.htc.luminaos.databinding.ActivityWifiBinding;
-import com.htc.luminaos.receiver.AddWifiCallBack;
 import com.htc.luminaos.receiver.WifiChanagerReceiver;
 import com.htc.luminaos.receiver.WifiEnabledReceiver;
 import com.htc.luminaos.utils.ShareUtil;
@@ -52,7 +51,7 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class WifiActivity extends BaseActivity implements WifiEnabledReceiver.WifiEnabledCallBack, WifiChanagerReceiver.WifiChanagerCallBack, AddWifiCallBack {
+public class WifiActivity extends BaseActivity implements WifiEnabledReceiver.WifiEnabledCallBack, WifiChanagerReceiver.WifiChanagerCallBack {
 
     private ActivityWifiBinding wifiBinding;
 
@@ -69,8 +68,6 @@ public class WifiActivity extends BaseActivity implements WifiEnabledReceiver.Wi
     private ExecutorService singer = Executors.newFixedThreadPool(3);
     private static String TAG = "WifiActivity";
     private String action = "";
-    private int addWifiId = -1;
-    Dialog connectingDialog = null;
 
     private Handler handler = new Handler(new Handler.Callback() {
         @Override
@@ -176,7 +173,7 @@ public class WifiActivity extends BaseActivity implements WifiEnabledReceiver.Wi
                 action = "";
             }
         } else if (id == R.id.rl_add_network) {
-            AddNetWorkDialog addNetWorkDialog = new AddNetWorkDialog(this, R.style.DialogTheme, this);
+            AddNetWorkDialog addNetWorkDialog = new AddNetWorkDialog(this, R.style.DialogTheme);
             addNetWorkDialog.show();
         } else if (id == R.id.rl_refresh_network) {
             if(mWifiManager.isWifiEnabled()) {
@@ -208,50 +205,6 @@ public class WifiActivity extends BaseActivity implements WifiEnabledReceiver.Wi
         @Override
         public void run() {
             refreshWifiList();
-        }
-    };
-
-    BroadcastReceiver receiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            if (isInitialStickyBroadcast()) {//把注册完就发送的粘性(初始状态)广播过滤掉。
-                return;
-            }
-            String action = intent.getAction();
-            if (WifiManager.SUPPLICANT_STATE_CHANGED_ACTION.equals(action)) {
-                Log.d(TAG, " 收到SUPPLICANT_STATE_CHANGED_ACTION");
-                //请求连接的状态发生改变，（已经加入到一个接入点）
-                int supl_error = intent.getIntExtra(WifiManager.EXTRA_SUPPLICANT_ERROR, -1);
-                Log.d(TAG," supl_error "+supl_error);
-                if (supl_error == WifiManager.ERROR_AUTHENTICATING) {
-                    Utils.logIntentExtras(intent, TAG);
-                    Log.d(TAG, " 收到SUPPLICANT_STATE_CHANGED_ACTION,执行passwordErrorDialog " + supl_error);
-                    if(connectingDialog!=null && connectingDialog.isShowing()) {
-                        connectingDialog.dismiss();
-                    }
-                    showErrorDialog();
-                    mWifiManager.removeNetwork(addWifiId);
-                    addWifiId = -1;
-                }
-            } else if (WifiManager.NETWORK_STATE_CHANGED_ACTION.equals(action)) {
-                Log.d(TAG, " 收到NETWORK_STATE_CHANGED_ACTION");
-                NetworkInfo networkInfo = intent.getParcelableExtra(WifiManager.EXTRA_NETWORK_INFO);
-                if (networkInfo != null) {
-                    switch (networkInfo.getState()) {
-                        case CONNECTING:
-                            break;
-                        case CONNECTED:
-                            if(connectingDialog!=null && connectingDialog.isShowing()) {
-                                connectingDialog.dismiss();
-                            }
-                            break;
-                        case DISCONNECTED:
-                            break;
-                    }
-                    Log.d("WIFI", "state " + networkInfo.getState());
-                }
-
-            }
         }
     };
 
@@ -298,10 +251,9 @@ public class WifiActivity extends BaseActivity implements WifiEnabledReceiver.Wi
         chanagerReceiver = new WifiChanagerReceiver(this);
         registerReceiver(chanagerReceiver, wifichanager);
 
-//        IntentFilter intentFilter = new IntentFilter();
-//        intentFilter.addAction(WifiManager.SUPPLICANT_STATE_CHANGED_ACTION);
-//        intentFilter.addAction(WifiManager.NETWORK_STATE_CHANGED_ACTION);
-//        registerReceiver(receiver, intentFilter);
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(WifiManager.SUPPLICANT_STATE_CHANGED_ACTION);
+        intentFilter.addAction(WifiManager.NETWORK_STATE_CHANGED_ACTION);
     }
 
     private void destroyReceiver() {
@@ -310,9 +262,6 @@ public class WifiActivity extends BaseActivity implements WifiEnabledReceiver.Wi
         }
         if (chanagerReceiver != null) {
             unregisterReceiver(chanagerReceiver);
-        }
-        if (receiver != null) {
-            unregisterReceiver(receiver);
         }
     }
 
@@ -555,32 +504,5 @@ public class WifiActivity extends BaseActivity implements WifiEnabledReceiver.Wi
             }
         }
         return null;
-    }
-
-    @Override
-    public void addWifi(int netId, String ssid) {
-//        addWifiId = netId;
-//        connectingDialog = ConectingDialog(this,getString(R.string.connecting_ssid, ssid));
-//        connectingDialog.show();
-    }
-
-    public Dialog ConectingDialog(Context context, String msg) {
-        LayoutInflater inflater = LayoutInflater.from(context);
-        View v = inflater.inflate(R.layout.loading_dialog, null);// 得到加载view
-        RelativeLayout layout = (RelativeLayout) v.findViewById(R.id.loadding_layout);// 加载布局
-        //改成用ProgressBar来实现旋转动画，不用原来的ImageView旋转方案，原来的会卡。2025/5/8
-        TextView tipTextView = (TextView) v.findViewById(R.id.loadding_tv);// 提示文字
-        tipTextView.setText(msg);// 设置加载信息
-        Dialog connectingDialog = new Dialog(context, R.style.DialogTheme);// 创建自定义样式dialog
-        connectingDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-            @Override
-            public void onDismiss(DialogInterface dialog) {
-                handler.sendEmptyMessage(1);
-            }
-        });
-        connectingDialog.setContentView(layout, new RelativeLayout.LayoutParams(
-                RelativeLayout.LayoutParams.FILL_PARENT,
-                RelativeLayout.LayoutParams.FILL_PARENT));// 设置布局
-        return connectingDialog;
     }
 }

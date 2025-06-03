@@ -320,5 +320,7 @@
     <string name="password_error4">รหัสผ่านใหม่ทั้งสองไม่ตรงกัน กรุณากรอกใหม่</string>
     <string name="password_reboot_useful">ตั้งรหัสผ่านใหม่เรียบร้อยแล้ว ต้องรีสตาร์ทถึงจะมีผล</string>
     <string name="email_title">อีเมลบริการหลังการขาย</string>
+    <string name="wifi_connect_success">เชื่อมต่อสำเร็จ:</string>
+    <string name="wifi_ssid_not_found">ไม่สามารถเชื่อมต่อ Wi-Fi นี้ได้ กรุณาตรวจสอบว่าเครือข่ายมีอยู่จริงหรือไม่</string>
 </resources>
 

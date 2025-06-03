@@ -320,4 +320,6 @@
     <string name="password_error4">새 비밀번호가 일치하지 않습니다. 다시 입력하십시오</string>
     <string name="password_reboot_useful">새 비밀번호가 설정되었습니다. 재부팅 후 적용됩니다</string>
     <string name="email_title">A/S 서비스 이메일</string>
+    <string name="wifi_connect_success">연결 성공：</string>
+    <string name="wifi_ssid_not_found">이 Wi-Fi에 연결할 수 없습니다. 네트워크가 존재하는지 확인하세요.</string>
 </resources>

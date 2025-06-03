@@ -1,12 +1,24 @@
 package com.htc.luminaos.widget;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.drawable.BitmapDrawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.net.wifi.SupplicantState;
 import android.net.wifi.WifiConfiguration;
+import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.text.TextUtils;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
@@ -30,336 +42,417 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+
 import com.htc.luminaos.R;
-import com.htc.luminaos.receiver.AddWifiCallBack;
 import com.htc.luminaos.utils.InputMethodUtil;
 import com.htc.luminaos.utils.LinkWifi;
+import com.htc.luminaos.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class AddNetWorkDialog extends BaseDialog {
+    private LinkWifi linkWifi;
+    private Context mContext;
+    private WifiManager mWifiManager;
+    private List<WifiConfiguration> wifiConfigurationList = new ArrayList<>();
+    private static String TAG = "AddNetWorkDialog";
+    private String ssid = "";
+    Dialog connectingDialog = null;
 
-	private LinkWifi linkWifi;
-	
-	private Context mContext;
-	private WifiManager mWifiManager;
-	private List<WifiConfiguration> wifiConfigurationList = new ArrayList<>();
-	private static String TAG = "AddNetWorkDialog";
-	private AddWifiCallBack addWifiCallBack;
+    public AddNetWorkDialog(Context context) {
+        super(context);
+        mWifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+        this.mContext = context;
+    }
 
-	public AddNetWorkDialog(Context context) {
-		super(context);
-		mWifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
-		this.mContext = context;
-	}
-
-	public AddNetWorkDialog(Context context, boolean cancelable,
+    public AddNetWorkDialog(Context context, boolean cancelable,
                             OnCancelListener cancelListener) {
-		super(context, cancelable, cancelListener);
-		this.mContext = context;
-	}
+        super(context, cancelable, cancelListener);
+        this.mContext = context;
+    }
 
-	public AddNetWorkDialog(Context context, int theme, AddWifiCallBack addWifiCallBack) {
-		super(context, theme);
-		this.mContext = context;
-		mWifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
-		this.addWifiCallBack = addWifiCallBack;
-	}
+    public AddNetWorkDialog(Context context, int theme) {
+        super(context, theme);
+        this.mContext = context;
+        mWifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+    }
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		init();
-	}
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        init();
 
-	private void init() {
-		linkWifi=new LinkWifi(mContext);
-		View view = LayoutInflater.from(mContext).inflate(
-				R.layout.layout_addnetwork, null);
-		if (view != null) {
-			setContentView(view);
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(WifiManager.NETWORK_STATE_CHANGED_ACTION);
+        mContext.registerReceiver(wifiConnectReceiver, filter);
+    }
 
-			// 设置dialog大小 模块好的控件大小设置
-			Window dialogWindow = getWindow();
-			assert dialogWindow != null;
-			dialogWindow.setWindowAnimations(R.style.right_in_right_out_anim);
-			WindowManager manager = ((Activity) mContext).getWindowManager();
-			WindowManager.LayoutParams params = dialogWindow.getAttributes();
-			dialogWindow.setGravity(Gravity.CENTER);
-			Display d = manager.getDefaultDisplay();
-			params.width = (int) (d.getWidth()*0.4);
-			params.height = (int) (d.getHeight()*0.6);
-			dialogWindow.setAttributes(params);
+    private BroadcastReceiver wifiConnectReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            NetworkInfo info = intent.getParcelableExtra(WifiManager.EXTRA_NETWORK_INFO);
+            if (info == null) return;
+            WifiInfo wifiInfo = mWifiManager.getConnectionInfo();
+            if (wifiInfo == null || wifiInfo.getSSID() == null) return;
+            String currentSsid = wifiInfo.getSSID().replace("\"", "");
+            Log.d(TAG, "收到 NETWORK_STATE_CHANGED_ACTION: " + currentSsid);
+            if (currentSsid.equals(ssid)) {
+                if (info.isConnected()) {
+                    Log.d(TAG, "连接成功: " + currentSsid);
+                    Toast.makeText(mContext, mContext.getString(R.string.wifi_connect_success) + currentSsid, Toast.LENGTH_SHORT).show();
+                    if(connectingDialog != null & connectingDialog.isShowing())
+                        connectingDialog.dismiss();
+                    dismiss();
+                }
+            }
+        }
+    };
 
-			final EditText networkName_et = (EditText) view
-					.findViewById(R.id.networkName_et);
-			final EditText password_et = (EditText) view
-					.findViewById(R.id.password_et);
-			final TextView wifi_security = (TextView) view
-					.findViewById(R.id.wifi_security);
-			CheckBox wifi_password_checkbox = (CheckBox) view
-					.findViewById(R.id.wifi_password_checkbox);
-			TextView ok =  view.findViewById(R.id.ok);
-			TextView cancel =  view.findViewById(R.id.cancel);
-			final LinearLayout password_layout = (LinearLayout) view
-					.findViewById(R.id.password_layout);
-			wifi_security.setText(mContext.getString(R.string.none));
-			password_layout.setVisibility(View.GONE);
-			networkName_et.setOnKeyListener(new View.OnKeyListener() {
-				@Override
-				public boolean onKey(View v, int keyCode, KeyEvent event) {
-					if (keyCode==KeyEvent.KEYCODE_DPAD_DOWN && event.getAction() ==KeyEvent.ACTION_DOWN){
-						wifi_security.requestFocus();
-						wifi_security.requestFocusFromTouch();
-						return true;
-					}
-					return false;
-				}
-			});
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mContext.unregisterReceiver(wifiConnectReceiver);
+    }
 
-			InputMethodUtil.openInputMethod(mContext,networkName_et,new Handler());
-			networkName_et.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-				@Override
-				public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-					Log.d("editor","actionId "+actionId);
-					if (actionId==EditorInfo.IME_ACTION_NEXT || actionId==EditorInfo.IME_ACTION_DONE
-							||actionId==EditorInfo.IME_ACTION_SEND||actionId== EditorInfo.IME_ACTION_GO){
-						InputMethodManager inputMethodManager = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-						inputMethodManager.hideSoftInputFromWindow(networkName_et.getWindowToken(), 0);
-						networkName_et.clearFocus();
-						wifi_security.requestFocus();
-					}
-					return false;
-				}
-			});
+    private void init() {
+        linkWifi = new LinkWifi(mContext);
+        View view = LayoutInflater.from(mContext).inflate(
+                R.layout.layout_addnetwork, null);
+        if (view != null) {
+            setContentView(view);
 
-			password_et.setOnKeyListener(new View.OnKeyListener() {
-				@Override
-				public boolean onKey(View v, int keyCode, KeyEvent event) {
-					if (keyCode==KeyEvent.KEYCODE_DPAD_UP && event.getAction() ==KeyEvent.ACTION_DOWN){
-						wifi_security.requestFocus();
-						wifi_security.requestFocusFromTouch();
-						return true;
-					}else if (keyCode==KeyEvent.KEYCODE_DPAD_DOWN && event.getAction() ==KeyEvent.ACTION_DOWN){
-						wifi_password_checkbox.requestFocus();
-						wifi_password_checkbox.requestFocusFromTouch();
-						return true;
-					}
-					return false;
-				}
-			});
-			password_et.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-				@Override
-				public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-					Log.d("editor","actionId "+actionId);
-					if (actionId==EditorInfo.IME_ACTION_NEXT || actionId==EditorInfo.IME_ACTION_DONE
-							||actionId==EditorInfo.IME_ACTION_SEND||actionId== EditorInfo.IME_ACTION_GO){
+            // 设置dialog大小 模块好的控件大小设置
+            Window dialogWindow = getWindow();
+            assert dialogWindow != null;
+            dialogWindow.setWindowAnimations(R.style.right_in_right_out_anim);
+            WindowManager manager = ((Activity) mContext).getWindowManager();
+            WindowManager.LayoutParams params = dialogWindow.getAttributes();
+            dialogWindow.setGravity(Gravity.CENTER);
+            Display d = manager.getDefaultDisplay();
+            params.width = (int) (d.getWidth() * 0.4);
+            params.height = (int) (d.getHeight() * 0.7);
+            dialogWindow.setAttributes(params);
 
-						String security = wifi_security.getText().toString();
-						String msiid = networkName_et.getText().toString();
-						String password=password_et.getText().toString();
+            final EditText networkName_et = (EditText) view
+                    .findViewById(R.id.networkName_et);
+            final EditText password_et = (EditText) view
+                    .findViewById(R.id.password_et);
+            final TextView wifi_security = (TextView) view
+                    .findViewById(R.id.wifi_security);
+            CheckBox wifi_password_checkbox = (CheckBox) view
+                    .findViewById(R.id.wifi_password_checkbox);
+            TextView ok = view.findViewById(R.id.ok);
+            TextView cancel = view.findViewById(R.id.cancel);
+            final LinearLayout password_layout = (LinearLayout) view
+                    .findViewById(R.id.password_layout);
+            wifi_security.setText(mContext.getString(R.string.none));
+            password_layout.setVisibility(View.GONE);
+            networkName_et.setOnKeyListener(new View.OnKeyListener() {
+                @Override
+                public boolean onKey(View v, int keyCode, KeyEvent event) {
+                    if (keyCode == KeyEvent.KEYCODE_DPAD_DOWN && event.getAction() == KeyEvent.ACTION_DOWN) {
+                        wifi_security.requestFocus();
+                        wifi_security.requestFocusFromTouch();
+                        return true;
+                    }
+                    return false;
+                }
+            });
 
-						if (TextUtils.isEmpty(msiid)) {
-							Toast.makeText(mContext,
-									mContext.getString(R.string.ssidmsg),
-									Toast.LENGTH_SHORT).show();
-							return true;
-						}
-						if (!security.equals(mContext.getString(R.string.none))) {
-							// 有密码
-							if (password.length() < 8) {
-								Toast.makeText(
-										mContext,
-										mContext.getResources().getString(
-												R.string.passwordmessage),
-										Toast.LENGTH_LONG).show();
-								return true;
-							}
-						}
+            InputMethodUtil.openInputMethod(mContext, networkName_et, new Handler());
+            networkName_et.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+                @Override
+                public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                    Log.d("editor", "actionId " + actionId);
+                    if (actionId == EditorInfo.IME_ACTION_NEXT || actionId == EditorInfo.IME_ACTION_DONE
+                            || actionId == EditorInfo.IME_ACTION_SEND || actionId == EditorInfo.IME_ACTION_GO) {
+                        InputMethodManager inputMethodManager = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                        inputMethodManager.hideSoftInputFromWindow(networkName_et.getWindowToken(), 0);
+                        networkName_et.clearFocus();
+                        wifi_security.requestFocus();
+                    }
+                    return false;
+                }
+            });
 
-						WifiConfiguration isExitConf =  linkWifi.IsExsits(msiid);
-						if (isExitConf!=null)
-							mWifiManager.removeNetwork(isExitConf.networkId);
+            password_et.setOnKeyListener(new View.OnKeyListener() {
+                @Override
+                public boolean onKey(View v, int keyCode, KeyEvent event) {
+                    if (keyCode == KeyEvent.KEYCODE_DPAD_UP && event.getAction() == KeyEvent.ACTION_DOWN) {
+                        wifi_security.requestFocus();
+                        wifi_security.requestFocusFromTouch();
+                        return true;
+                    } else if (keyCode == KeyEvent.KEYCODE_DPAD_DOWN && event.getAction() == KeyEvent.ACTION_DOWN) {
+                        wifi_password_checkbox.requestFocus();
+                        wifi_password_checkbox.requestFocusFromTouch();
+                        return true;
+                    }
+                    return false;
+                }
+            });
+            password_et.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+                @Override
+                public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                    Log.d("editor", "actionId " + actionId);
+                    if (actionId == EditorInfo.IME_ACTION_NEXT || actionId == EditorInfo.IME_ACTION_DONE
+                            || actionId == EditorInfo.IME_ACTION_SEND || actionId == EditorInfo.IME_ACTION_GO) {
 
-						int netID=linkWifi.CreateWifiInfo3(security, msiid, password);
-						//L.d("netID ===> "+netID);
-						wifiConfigurationList = mWifiManager.getConfiguredNetworks();
-						for (WifiConfiguration c : wifiConfigurationList){
-							mWifiManager.disableNetwork(c.networkId);
+                        String security = wifi_security.getText().toString();
+                        String msiid = networkName_et.getText().toString();
+                        String password = password_et.getText().toString();
 
-						}
-						linkWifi.ConnectToNetID(netID);
-						dismiss();
-						return true;
-					}
-					return false;
-				}
-			});
-			wifi_password_checkbox.setChecked(true);
-			password_et.setTransformationMethod(HideReturnsTransformationMethod
-					.getInstance());
-			wifi_password_checkbox
-					.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-						@Override
-						public void onCheckedChanged(CompoundButton arg0,
-								boolean isChecked) {
-							if (isChecked) {
-								password_et
-										.setTransformationMethod(HideReturnsTransformationMethod
-												.getInstance());
-							} else {
-								password_et
-										.setTransformationMethod(PasswordTransformationMethod
-												.getInstance());
-							}
-						}
-					});
+                        if (TextUtils.isEmpty(msiid)) {
+                            Toast.makeText(mContext,
+                                    mContext.getString(R.string.ssidmsg),
+                                    Toast.LENGTH_SHORT).show();
+                            return true;
+                        }
+                        if (!security.equals(mContext.getString(R.string.none))) {
+                            // 有密码
+                            if (password.length() < 8) {
+                                Toast.makeText(
+                                        mContext,
+                                        mContext.getResources().getString(
+                                                R.string.passwordmessage),
+                                        Toast.LENGTH_LONG).show();
+                                return true;
+                            }
+                        }
+                        ssid = msiid;
 
-			wifi_security.setOnClickListener(new View.OnClickListener() {
+                        WifiConfiguration isExitConf = linkWifi.IsExsits(msiid);
+                        if (isExitConf != null)
+                            mWifiManager.removeNetwork(isExitConf.networkId);
 
-				@Override
-				public void onClick(View arg0) {
-					initPopupWindow(wifi_security, wifi_security,
-							password_layout);
-				}
-			});
+                        int netID = linkWifi.CreateWifiInfo3(security, msiid, password);
+                        //L.d("netID ===> "+netID);
+                        wifiConfigurationList = mWifiManager.getConfiguredNetworks();
+                        for (WifiConfiguration c : wifiConfigurationList) {
+                            mWifiManager.disableNetwork(c.networkId);
 
-			cancel.setOnClickListener(new View.OnClickListener() {
+                        }
+                        if(connectingDialog == null) {
+                            connectingDialog = ConectingDialog(mContext, mContext.getString(R.string.connecting_ssid, ssid));
+                        }
+                        connectingDialog.show();
+                        linkWifi.ConnectToNetID(netID);
+                        new Handler(Looper.getMainLooper()).postDelayed(() -> {
+                            WifiInfo wifiInfo = mWifiManager.getConnectionInfo();
+                            if (wifiInfo != null &&
+                                    wifiInfo.getSupplicantState() == SupplicantState.COMPLETED &&
+                                    wifiInfo.getSSID() != null &&
+                                    wifiInfo.getSSID().equals("\"" + ssid + "\"")) {
+                                Log.d(TAG, " 隐藏网络连接成功");
+                            } else {
+                                Log.d(TAG, " 隐藏网络连接失败，可能不存在");
+                                Toast.makeText(mContext, mContext.getString(R.string.wifi_ssid_not_found), Toast.LENGTH_SHORT).show();
+                                mWifiManager.removeNetwork(netID);
+                                mWifiManager.saveConfiguration();
+                                if(connectingDialog != null & connectingDialog.isShowing())
+                                    connectingDialog.dismiss();
+                                dismiss();
+                            }
+                        }, 6000); // 等待6秒再判断
+                        return true;
+                    }
+                    return false;
+                }
+            });
+            wifi_password_checkbox.setChecked(true);
+            password_et.setTransformationMethod(HideReturnsTransformationMethod
+                    .getInstance());
+            wifi_password_checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton arg0,
+                                             boolean isChecked) {
+                    if (isChecked) {
+                        password_et
+                                .setTransformationMethod(HideReturnsTransformationMethod
+                                        .getInstance());
+                    } else {
+                        password_et
+                                .setTransformationMethod(PasswordTransformationMethod
+                                        .getInstance());
+                    }
+                }
+            });
 
-				@Override
-				public void onClick(View arg0) {
-					dismiss();
-				}
-			});
+            wifi_security.setOnClickListener(new View.OnClickListener() {
 
-			ok.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View arg0) {
-					String security = wifi_security.getText().toString();
-					String msiid = networkName_et.getText().toString();
-					String password=password_et.getText().toString();
-					if (TextUtils.isEmpty(msiid)) {
-						Toast.makeText(mContext,
-								mContext.getString(R.string.ssidmsg),
-								Toast.LENGTH_SHORT).show();
-						return;
-					}
-					if (!security.equals(mContext.getString(R.string.none))) {
-						// 有密码
-						if (password.length() < 8) {
-							Toast.makeText(
-									mContext,
-									mContext.getResources().getString(
-											R.string.passwordmessage),
-											Toast.LENGTH_LONG).show();
-							return;
-						}
-					}
-					WifiConfiguration isExitConf =  linkWifi.IsExsits(msiid);
-					if (isExitConf!=null)
-						mWifiManager.removeNetwork(isExitConf.networkId);
+                @Override
+                public void onClick(View arg0) {
+                    initPopupWindow(wifi_security, wifi_security,
+                            password_layout);
+                }
+            });
 
-					int netID=linkWifi.CreateWifiInfo3(security, msiid, password);
-					//L.d("netID ===> "+netID);
-					wifiConfigurationList = mWifiManager.getConfiguredNetworks();
-					for (WifiConfiguration c : wifiConfigurationList){
-						mWifiManager.disableNetwork(c.networkId);
+            cancel.setOnClickListener(new View.OnClickListener() {
 
-					}
-					linkWifi.ConnectToNetID(netID);
+                @Override
+                public void onClick(View arg0) {
+                    dismiss();
+                }
+            });
 
-					//执行一个callback
-					addWifiCallBack.addWifi(netID,msiid);
-					dismiss();
-				}
-			});
-		}
-	}
+            ok.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View arg0) {
+                    String security = wifi_security.getText().toString();
+                    String msiid = networkName_et.getText().toString();
+                    String password = password_et.getText().toString();
+                    if (TextUtils.isEmpty(msiid)) {
+                        Toast.makeText(mContext,
+                                mContext.getString(R.string.ssidmsg),
+                                Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    if (!security.equals(mContext.getString(R.string.none))) {
+                        // 有密码
+                        if (password.length() < 8) {
+                            Toast.makeText(
+                                    mContext,
+                                    mContext.getResources().getString(
+                                            R.string.passwordmessage),
+                                    Toast.LENGTH_LONG).show();
+                            return;
+                        }
+                    }
+                    ssid = msiid;
 
+                    WifiConfiguration isExitConf = linkWifi.IsExsits(msiid);
+                    if (isExitConf != null)
+                        mWifiManager.removeNetwork(isExitConf.networkId);
 
+                    int netID = linkWifi.CreateWifiInfo3(security, msiid, password);
+                    wifiConfigurationList = mWifiManager.getConfiguredNetworks();
+                    for (WifiConfiguration c : wifiConfigurationList) {
+                        mWifiManager.disableNetwork(c.networkId);
+                    }
+                    if(connectingDialog == null) {
+                        connectingDialog = ConectingDialog(mContext, mContext.getString(R.string.connecting_ssid, ssid));
+                    }
+                    connectingDialog.show();
+                    linkWifi.ConnectToNetID(netID);
+                    new Handler(Looper.getMainLooper()).postDelayed(() -> {
+                        WifiInfo wifiInfo = mWifiManager.getConnectionInfo();
+                        if (wifiInfo != null &&
+                                wifiInfo.getSupplicantState() == SupplicantState.COMPLETED &&
+                                wifiInfo.getSSID() != null &&
+                                wifiInfo.getSSID().equals("\"" + ssid + "\"")) {
+                            Log.d(TAG, " 网络连接成功");
+                        } else {
+                            Log.d(TAG, " 网络连接失败，可能不存在");
+                            Toast.makeText(mContext, mContext.getString(R.string.wifi_ssid_not_found), Toast.LENGTH_SHORT).show();
+                            mWifiManager.removeNetwork(netID);
+                            mWifiManager.saveConfiguration();
+                            if(connectingDialog != null & connectingDialog.isShowing())
+                                connectingDialog.dismiss();
+                            dismiss();
+                        }
+                    }, 6000); // 等待6秒再判断
+                }
+            });
+        }
+    }
 
-	public class Wpaadapter extends BaseAdapter {
+    public Dialog ConectingDialog(Context context, String msg) {
+        LayoutInflater inflater = LayoutInflater.from(context);
+        View v = inflater.inflate(R.layout.loading_dialog, null);// 得到加载view
+        RelativeLayout layout = (RelativeLayout) v.findViewById(R.id.loadding_layout);// 加载布局
+        //改成用ProgressBar来实现旋转动画，不用原来的ImageView旋转方案，原来的会卡。2025/5/8
+        TextView tipTextView = (TextView) v.findViewById(R.id.loadding_tv);// 提示文字
+        tipTextView.setText(msg);// 设置加载信息
+        Dialog connectingDialog = new Dialog(context, R.style.DialogTheme);// 创建自定义样式dialog
+        connectingDialog.setContentView(layout, new RelativeLayout.LayoutParams(
+                RelativeLayout.LayoutParams.FILL_PARENT,
+                RelativeLayout.LayoutParams.FILL_PARENT));// 设置布局
+        return connectingDialog;
+    }
 
-		private ArrayList<String> wpalist = new ArrayList<String>();
-		private LayoutInflater mInflater;
+    public class Wpaadapter extends BaseAdapter {
 
-		public Wpaadapter(Context context) {
-			mInflater = LayoutInflater.from(context);
-			wpalist.add(context.getString(R.string.none));
-			wpalist.add("WPA2-PSK");
-			wpalist.add("WPA3-PSK");
-			wpalist.add("WPA-PSK");
-		}
+        private ArrayList<String> wpalist = new ArrayList<String>();
+        private LayoutInflater mInflater;
 
-		@Override
-		public int getCount() {
-			return wpalist.size();
-		}
+        public Wpaadapter(Context context) {
+            mInflater = LayoutInflater.from(context);
+            wpalist.add(context.getString(R.string.none));
+            wpalist.add("WPA2-PSK");
+            wpalist.add("WPA3-PSK");
+            wpalist.add("WPA-PSK");
+        }
 
-		@Override
-		public String getItem(int arg0) {
-			return wpalist.get(arg0);
-		}
+        @Override
+        public int getCount() {
+            return wpalist.size();
+        }
 
-		@Override
-		public long getItemId(int arg0) {
-			return arg0;
-		}
+        @Override
+        public String getItem(int arg0) {
+            return wpalist.get(arg0);
+        }
 
-		@Override
-		public View getView(int arg0, View convertview, ViewGroup arg2) {
-			convertview = mInflater.inflate(
-					R.layout.layout_wpa_popupwindow_item, null);
-			TextView wpa_tv = (TextView) convertview.findViewById(R.id.wpa_tv);
-			wpa_tv.setText(getItem(arg0));
-			return convertview;
-		}
+        @Override
+        public long getItemId(int arg0) {
+            return arg0;
+        }
 
-	}
+        @Override
+        public View getView(int arg0, View convertview, ViewGroup arg2) {
+            convertview = mInflater.inflate(
+                    R.layout.layout_wpa_popupwindow_item, null);
+            TextView wpa_tv = (TextView) convertview.findViewById(R.id.wpa_tv);
+            wpa_tv.setText(getItem(arg0));
+            return convertview;
+        }
 
-	private PopupWindow popupwindow = null;
+    }
 
-	public void initPopupWindow(View showview, final TextView tv,
-			final LinearLayout lay) {
-		View view = LayoutInflater.from(mContext).inflate(
-				R.layout.layout_wpa_popupwindow, null);
-		if (view != null) {
-			ListView wpalistview = (ListView) view
-					.findViewById(R.id.apwpa_listview);
+    private PopupWindow popupwindow = null;
 
-			final Wpaadapter adapter = new Wpaadapter(mContext);
-			wpalistview.setAdapter(adapter);
+    public void initPopupWindow(View showview, final TextView tv,
+                                final LinearLayout lay) {
+        View view = LayoutInflater.from(mContext).inflate(
+                R.layout.layout_wpa_popupwindow, null);
+        if (view != null) {
+            ListView wpalistview = (ListView) view
+                    .findViewById(R.id.apwpa_listview);
 
-			popupwindow = new PopupWindow(view, showview.getWidth(),
-					WindowManager.LayoutParams.WRAP_CONTENT);
-			// 聚焦，设置点击可取消
-			popupwindow.setFocusable(true);
-			popupwindow.setOutsideTouchable(true);
-			popupwindow.setBackgroundDrawable(new BitmapDrawable());
-			popupwindow.setContentView(view);
-			// 设置显示的位置
-			popupwindow.showAsDropDown(showview);
-			wpalistview.setOnItemClickListener(new OnItemClickListener() {
-				@Override
-				public void onItemClick(AdapterView<?> arg0, View arg1,
-						int arg2, long arg3) {
+            final Wpaadapter adapter = new Wpaadapter(mContext);
+            wpalistview.setAdapter(adapter);
 
-					String security = adapter.getItem(arg2);
+            popupwindow = new PopupWindow(view, showview.getWidth(),
+                    WindowManager.LayoutParams.WRAP_CONTENT);
+            // 聚焦，设置点击可取消
+            popupwindow.setFocusable(true);
+            popupwindow.setOutsideTouchable(true);
+            popupwindow.setBackgroundDrawable(new BitmapDrawable());
+            popupwindow.setContentView(view);
+            // 设置显示的位置
+            popupwindow.showAsDropDown(showview);
+            wpalistview.setOnItemClickListener(new OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> arg0, View arg1,
+                                        int arg2, long arg3) {
 
-					tv.setText(security);
+                    String security = adapter.getItem(arg2);
 
-					if (security.equals(mContext.getString(R.string.none))) {
-						lay.setVisibility(View.GONE);
-					} else {
-						lay.setVisibility(View.VISIBLE);
-					}
-					popupwindow.dismiss();
-				}
-			});
-		}
-	}
+                    tv.setText(security);
+
+                    if (security.equals(mContext.getString(R.string.none))) {
+                        lay.setVisibility(View.GONE);
+                    } else {
+                        lay.setVisibility(View.VISIBLE);
+                    }
+                    popupwindow.dismiss();
+                }
+            });
+        }
+    }
 }

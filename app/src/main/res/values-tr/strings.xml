@@ -320,5 +320,7 @@
     <string name="password_error4">Yeni şifre iki kez farklı girildi, lütfen tekrar girin</string>
     <string name="password_reboot_useful">Yeni şifre başarıyla ayarlandı, yeniden başlatma geçerli olacak</string>
     <string name="email_title">Satış sonrası hizmet e-postası</string>
+    <string name="wifi_connect_success">Bağlantı başarılı:</string>
+    <string name="wifi_ssid_not_found">Bu Wi-Fi ağına bağlanılamıyor, lütfen ağın mevcut olduğunu doğrulayın</string>
 </resources>
 

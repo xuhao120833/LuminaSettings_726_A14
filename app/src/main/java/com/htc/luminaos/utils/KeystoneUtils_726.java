@@ -39,11 +39,12 @@ public class KeystoneUtils_726 {
     public static final String PROP_HTC_KEYSTONE_RT_X = "persist.htc.keystone.rtx";
     public static final String PROP_HTC_KEYSTONE_RT_Y = "persist.htc.keystone.rty";
 
-    //全局缩放
+    //数字缩放
     public static final String ZOOM_VALUE = "zoom_value";
     //画面比例
     public static final String ZOOM_SCALE = "zoom_scale";
     public static final String PROP_ZOOM_SCALE = "persist.sys.zoom_scale";
+    public static final String PROP_ZOOM_SCALE_OLD = "persist.sys.zoom_scale_old";
     public static final String ZOOM_SCALE_OLD = "zoom_scale_old";
 
     public static final int minX = 0;
@@ -300,6 +301,8 @@ public class KeystoneUtils_726 {
     public static void UpdateKeystoneZOOMNC() { //无摄像头只设置属性
         SystemProperties.set("persist.sys.zoom.value", lb_X + "," + lb_Y + "," + lt_X + "," + lt_Y + "," + rt_X + "," + rt_Y + "," + rb_X + "," + rb_Y);
         Log.d("UpdateKeystoneZOOMNC ", lb_X + "," + lb_Y + "," + lt_X + "," + lt_Y + "," + rt_X + "," + rt_Y + "," + rb_X + "," + rb_Y);
+
+        writeParcelToFlinger(lt_X, lt_Y, rt_X, rt_Y, lb_X, lb_Y, rb_X, rb_Y);
     }
 
     public static void UpdateKeystoneZOOM(boolean write) { //有摄像头

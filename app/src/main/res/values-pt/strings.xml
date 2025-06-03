@@ -320,6 +320,8 @@
     <string name="password_error4">As duas novas senhas não coincidem. Por favor, digite novamente</string>
     <string name="password_reboot_useful">Nova senha configurada com sucesso. Reiniciar para aplicar</string>
     <string name="email_title">Email de serviço pós-venda</string>
+    <string name="wifi_connect_success">Conexão bem-sucedida:</string>
+    <string name="wifi_ssid_not_found">Não foi possível conectar a este Wi-Fi, por favor verifique se a rede existe</string>
 </resources>
 
 

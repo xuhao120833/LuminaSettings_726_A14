@@ -488,6 +488,7 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
             set_screen_zoom(All, All, All, All);
             updateZoomView();
         } else if (id == R.id.rl_screen_zoom) {
+            KeystoneUtils_726.writeSystemProperties(KeystoneUtils_726.PROP_ZOOM_SCALE_OLD,zoom_scale);
             zoom_scale++;
             if (zoom_scale > 2)
                 zoom_scale = 0;
@@ -499,6 +500,7 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
             KeystoneUtils_726.writeSystemProperties(KeystoneUtils_726.PROP_ZOOM_SCALE,zoom_scale);
             updateSzoomTv();
         } else if (id == R.id.screen_zoom_left) {
+            KeystoneUtils_726.writeSystemProperties(KeystoneUtils_726.PROP_ZOOM_SCALE_OLD,zoom_scale);
             zoom_scale--;
             if (zoom_scale < 0)
                 zoom_scale = 2;
@@ -506,9 +508,11 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
                 set_screen_zoom(All, All, All, All, zoom_scale);
             else
                 updateScaleZoom(zoom_scale);
-            KeystoneUtils_726.writeGlobalSettings(this, KeystoneUtils_726.ZOOM_SCALE, zoom_scale);
+//            KeystoneUtils_726.writeGlobalSettings(this, KeystoneUtils_726.ZOOM_SCALE, zoom_scale);
+            KeystoneUtils_726.writeSystemProperties(KeystoneUtils_726.PROP_ZOOM_SCALE,zoom_scale);
             updateSzoomTv();
         } else if (id == R.id.screen_zoom_right) {
+            KeystoneUtils_726.writeSystemProperties(KeystoneUtils_726.PROP_ZOOM_SCALE_OLD,zoom_scale);
             zoom_scale++;
             if (zoom_scale > 2)
                 zoom_scale = 0;
@@ -516,7 +520,8 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
                 set_screen_zoom(All, All, All, All, zoom_scale);
             else
                 updateScaleZoom(zoom_scale);
-            KeystoneUtils_726.writeGlobalSettings(this, KeystoneUtils_726.ZOOM_SCALE, zoom_scale);
+//            KeystoneUtils_726.writeGlobalSettings(this, KeystoneUtils_726.ZOOM_SCALE, zoom_scale);
+            KeystoneUtils_726.writeSystemProperties(KeystoneUtils_726.PROP_ZOOM_SCALE,zoom_scale);
             updateSzoomTv();
         }
     }
@@ -580,6 +585,7 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
             } else if (id == R.id.rl_screen_zoom) {
                 if (event.getAction() != KeyEvent.ACTION_DOWN)
                     return false;
+                KeystoneUtils_726.writeSystemProperties(KeystoneUtils_726.PROP_ZOOM_SCALE_OLD,zoom_scale);
                 zoom_scale--;
                 if (zoom_scale < 0)
                     zoom_scale = 2;
@@ -638,6 +644,7 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
             } else if (id == R.id.rl_screen_zoom) {
                 if (event.getAction() != KeyEvent.ACTION_DOWN)
                     return false;
+                KeystoneUtils_726.writeSystemProperties(KeystoneUtils_726.PROP_ZOOM_SCALE_OLD,zoom_scale);
                 zoom_scale++;
                 if (zoom_scale > 2)
                     zoom_scale = 0;
@@ -798,7 +805,9 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
 //            KeystoneUtils_726.UpdateKeystoneZOOM(true);
 //        }
         KeystoneUtils_726.UpdateKeystoneZOOMNC();
-        sendKeystoneBroadcast(key);
+        if(key.equals("ratio")) {
+            sendKeystoneBroadcast(key);
+        }
     }
 
     public void updateZoom(int zoom) {//数字缩放有摄像头
@@ -819,8 +828,10 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
         DecimalFormat df = new DecimalFormat("0.00", DecimalFormatSymbols.getInstance(Locale.CHINA));
         float a = Float.parseFloat(df.format((max_value - zoom * 2) * 0.01).replace(",", "."));
         Log.d(TAG, "float  a =" + a);
-        int old_ratio = KeystoneUtils_726.readGlobalSettings(this, "zoom_scale_old", 0);
-        int ratio = KeystoneUtils_726.readGlobalSettings(this, "zoom_scale", 0);
+//        int old_ratio = KeystoneUtils_726.readGlobalSettings(this, "zoom_scale_old", 0);
+//        int ratio = KeystoneUtils_726.readGlobalSettings(this, "zoom_scale", 0);
+        int old_ratio = KeystoneUtils_726.readSystemProperties(KeystoneUtils_726.PROP_ZOOM_SCALE_OLD,0);
+        int ratio = KeystoneUtils_726.readSystemProperties(KeystoneUtils_726.PROP_ZOOM_SCALE,0);
         int[] tpData = scUtils.getpxRatioxy(px4, py4, old_ratio, ratio, a, KeystoneUtils_726.lcd_w, KeystoneUtils_726.lcd_h);
         if (tpData != null && tpData[8] == 1) {
             KeystoneUtils_726.optKeystoneFun(tpData);
@@ -1070,9 +1081,10 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
         LogUtils.d("px4 = " + Arrays.toString(px4) + "  py4 = " + Arrays.toString(py4));
         DecimalFormat df = new DecimalFormat("0.00", DecimalFormatSymbols.getInstance(Locale.CHINA));
         float a = Float.parseFloat(df.format((100 - KeystoneUtils_726.readGlobalSettings(this, "zoom_value", 0) * 2) * 0.01).replace(",", "."));
-        int oldScale = KeystoneUtils_726.readGlobalSettings(this, "zoom_scale_old", 0);
-        Log.d(TAG, "a=" + a + " oldScale=" + oldScale + " scale=" + scale);
-        int[] tpData = scUtils.getpxRatioxy(px4, py4, oldScale,
+//        int oldScale = KeystoneUtils_726.readGlobalSettings(this, "zoom_scale_old", 0);
+        int old_ratio = KeystoneUtils_726.readSystemProperties(KeystoneUtils_726.PROP_ZOOM_SCALE_OLD,0);
+        Log.d(TAG, "a=" + a + " oldScale=" + old_ratio + " scale=" + scale);
+        int[] tpData = scUtils.getpxRatioxy(px4, py4, old_ratio,
                 scale, a, KeystoneUtils_726.lcd_w, KeystoneUtils_726.lcd_h);
         if (tpData[8] == 1) {
             KeystoneUtils_726.optKeystoneFun(tpData);

@@ -320,5 +320,7 @@
     <string name="password_error4">Новый пароль не совпадает, пожалуйста, введите его снова</string>
     <string name="password_reboot_useful">Новый пароль успешно установлен, требуется перезагрузка для применения</string>
     <string name="email_title">Электронная почта послепродажного обслуживания</string>
+    <string name="wifi_connect_success">Подключение успешно:</string>
+    <string name="wifi_ssid_not_found">Не удаётся подключиться к Wi-Fi, проверьте, существует ли сеть</string>
 </resources>
 

@@ -320,5 +320,7 @@
     <string name="password_error4">Паролі не збігаються, будь ласка, спробуйте ще раз</string>
     <string name="password_reboot_useful">Налаштування нового пароля успішне, зміни наберуть чинності після перезавантаження</string>
     <string name="email_title">Електронна пошта післяпродажного обслуговування</string>
+    <string name="wifi_connect_success">Підключено успішно:</string>
+    <string name="wifi_ssid_not_found">Не вдається підключитися до цього Wi-Fi, будь ласка, переконайтеся, що мережа існує</string>
 </resources>
 

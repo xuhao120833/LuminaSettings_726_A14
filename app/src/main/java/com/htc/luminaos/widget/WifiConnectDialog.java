@@ -116,7 +116,7 @@ public class WifiConnectDialog extends BaseDialog implements View.OnClickListene
                     disEnableNetwork();
                 }
             });
-            handler.sendEmptyMessageDelayed(2, 1500);
+            handler.sendEmptyMessageDelayed(2, 1500); //1.5s之后去连接网络
         } else if (id == R.id.cancel) {
             dismiss();
         } else if (id == R.id.password_visibility) {
@@ -243,9 +243,9 @@ public class WifiConnectDialog extends BaseDialog implements View.OnClickListene
             }
             String action = intent.getAction();
             if (WifiManager.SUPPLICANT_STATE_CHANGED_ACTION.equals(action)) {
-                Log.d(TAG, " 收到SUPPLICANT_STATE_CHANGED_ACTION");
                 //请求连接的状态发生改变，（已经加入到一个接入点）
                 int supl_error = intent.getIntExtra(WifiManager.EXTRA_SUPPLICANT_ERROR, -1);
+                Log.d(TAG, " 收到SUPPLICANT_STATE_CHANGED_ACTION "+supl_error);
                 if (supl_error == WifiManager.ERROR_AUTHENTICATING) {
                     Utils.logIntentExtras(intent, TAG);
                     Log.d(TAG, " 收到SUPPLICANT_STATE_CHANGED_ACTION,执行passwordErrorDialog " + supl_error);
@@ -281,7 +281,6 @@ public class WifiConnectDialog extends BaseDialog implements View.OnClickListene
                                 hasRemove = false;
                                 connectFlag = false;
                             }
-
                             break;
                     }
 

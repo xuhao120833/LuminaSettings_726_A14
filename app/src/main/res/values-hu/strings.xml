@@ -320,6 +320,8 @@
     <string name="password_error4">A két új jelszó nem egyezik, kérjük, adja meg újra</string>
     <string name="password_reboot_useful">Az új jelszó sikeresen beállítva, újraindítás után lép érvénybe</string>
     <string name="email_title">Ügyfélszolgálati e-mail</string>
+    <string name="wifi_connect_success">Csatlakozás sikeres:</string>
+    <string name="wifi_ssid_not_found">Nem lehet csatlakozni ehhez a Wi-Fi hálózathoz, kérjük, ellenőrizze, hogy a hálózat létezik-e</string>
 </resources>
 
 

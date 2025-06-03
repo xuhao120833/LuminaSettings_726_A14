@@ -320,4 +320,6 @@
     <string name="password_error4">Dua entri kata sandi baru tidak cocok, silakan coba lagi</string>
     <string name="password_reboot_useful">Kata sandi baru berhasil disetel, akan berlaku setelah restart</string>
     <string name="email_title">Email layanan purna jual</string>
+    <string name="wifi_connect_success">Berhasil terhubung:</string>
+    <string name="wifi_ssid_not_found">Tidak dapat terhubung ke Wi-Fi ini, harap periksa apakah jaringan tersedia</string>
 </resources>

@@ -320,4 +320,6 @@
 	<string name="password_error4">两次输入的新密码不一致，请重新输入</string>
 	<string name="password_reboot_useful">新密码设置成功，重启生效</string>
 	<string name="email_title">售后服务邮箱</string>
+	<string name="wifi_connect_success">连接成功：</string>
+	<string name="wifi_ssid_not_found">无法连接此Wi-Fi，请确认网络是否存在</string>
 </resources>

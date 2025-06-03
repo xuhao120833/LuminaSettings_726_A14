@@ -320,5 +320,7 @@
 	<string name="password_error4">Die beiden neuen Passwörter stimmen nicht überein. Bitte erneut eingeben.</string>
 	<string name="password_reboot_useful">Neues Passwort erfolgreich festgelegt. Wird nach dem Neustart wirksam.</string>
 	<string name="email_title">E-Mail für Kundendienst</string>
+	<string name="wifi_connect_success">Verbindung erfolgreich:</string>
+	<string name="wifi_ssid_not_found">Verbindung zu diesem WLAN konnte nicht hergestellt werden. Bitte prüfen Sie, ob das Netzwerk vorhanden ist.</string>
 </resources>
 

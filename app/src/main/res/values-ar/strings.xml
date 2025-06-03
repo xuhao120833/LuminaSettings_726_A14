@@ -320,6 +320,8 @@
     <string name="password_error4">كلمتا المرور الجديدتان غير متطابقتين، يرجى إعادة الإدخال</string>
     <string name="password_reboot_useful">تم تعيين كلمة المرور الجديدة بنجاح، سيتم تطبيقها بعد إعادة التشغيل</string>
     <string name="email_title">البريد الإلكتروني لخدمة ما بعد البيع</string>
+    <string name="wifi_connect_success">تم الاتصال بنجاح:</string>
+    <string name="wifi_ssid_not_found">تعذر الاتصال بشبكة Wi-Fi، يرجى التأكد من وجود الشبكة</string>
 </resources>
 
 

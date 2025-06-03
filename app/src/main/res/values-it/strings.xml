@@ -320,4 +320,6 @@
 	<string name="password_error4">Le due nuove password non coincidono, riprova</string>
 	<string name="password_reboot_useful">Nuova password impostata con successo, riavvio necessario</string>
 	<string name="email_title">Email del servizio post-vendita</string>
+	<string name="wifi_connect_success">Connessione riuscita:</string>
+	<string name="wifi_ssid_not_found">Impossibile connettersi a questa rete Wi-Fi, verifica che la rete esista</string>
 </resources>

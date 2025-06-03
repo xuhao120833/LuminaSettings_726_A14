@@ -320,6 +320,8 @@
     <string name="password_error4">Hasła się nie zgadzają, proszę wprowadzić ponownie</string>
     <string name="password_reboot_useful">Nowe hasło zostało ustawione, restart wymagany</string>
     <string name="email_title">E-mail obsługi posprzedażowej</string>
+    <string name="wifi_connect_success">Połączono pomyślnie:</string>
+    <string name="wifi_ssid_not_found">Nie można połączyć się z tą siecią Wi-Fi, sprawdź czy sieć istnieje</string>
 </resources>
 
 

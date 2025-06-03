@@ -320,4 +320,6 @@
     <string name="password_error4">De twee ingevoerde nieuwe wachtwoorden komen niet overeen. Probeer het opnieuw</string>
     <string name="password_reboot_useful">Nieuw wachtwoord ingesteld, herstart vereist</string>
     <string name="email_title">E-mail voor aftersales service</string>
+    <string name="wifi_connect_success">Verbonden:</string>
+    <string name="wifi_ssid_not_found">Kan geen verbinding maken met dit wifi-netwerk, controleer of het netwerk bestaat</string>
 </resources>

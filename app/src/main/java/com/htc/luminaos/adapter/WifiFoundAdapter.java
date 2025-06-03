@@ -327,8 +327,7 @@ public class WifiFoundAdapter extends RecyclerView.Adapter<WifiFoundAdapter.MyVi
 
             wifiConnectDialog.setConnectName(ssid);
 
-            wifiConnectDialog
-                    .setOnClickCallBack(new WifiConnectDialog.OnWifiConnectCallBack() {
+            wifiConnectDialog.setOnClickCallBack(new WifiConnectDialog.OnWifiConnectCallBack() {
 
                         @Override
                         public int onClick(String password) {

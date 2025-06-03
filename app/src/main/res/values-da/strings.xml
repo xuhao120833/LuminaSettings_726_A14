@@ -320,5 +320,7 @@
     <string name="password_error4">De to nye adgangskoder stemmer ikke overens. Prøv igen</string>
     <string name="password_reboot_useful">Ny adgangskode indstillet. Træder i kraft efter genstart</string>
     <string name="email_title">Eftersalgsservice e-mail</string>
+    <string name="wifi_connect_success">Forbundet:</string>
+    <string name="wifi_ssid_not_found">Kan ikke oprette forbindelse til Wi-Fi. Kontroller, om netværket findes.</string>
 </resources>
 

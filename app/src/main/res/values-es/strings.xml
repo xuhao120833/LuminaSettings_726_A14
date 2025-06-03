@@ -320,4 +320,6 @@
 	<string name="password_error4">Las dos contraseñas no coinciden, por favor intente de nuevo</string>
 	<string name="password_reboot_useful">Nueva contraseña establecida correctamente, se aplicará después del reinicio</string>
 	<string name="email_title">Correo electrónico de servicio posventa</string>
+	<string name="wifi_connect_success">Conexión exitosa:</string>
+	<string name="wifi_ssid_not_found">No se puede conectar a esta Wi-Fi, por favor verifica si la red existe</string>
 </resources>

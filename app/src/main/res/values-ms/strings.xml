@@ -320,4 +320,6 @@
     <string name="password_error4">Kedua-dua kata laluan baharu tidak sepadan, sila cuba semula</string>
     <string name="password_reboot_useful">Kata laluan baharu telah ditetapkan, mula semula untuk berkuat kuasa</string>
     <string name="email_title">E-mel perkhidmatan selepas jualan</string>
+    <string name="wifi_connect_success">Berjaya disambungkan:</string>
+    <string name="wifi_ssid_not_found">Tidak dapat menyambung ke Wi-Fi ini, sila pastikan rangkaian wujud.</string>
 </resources>
