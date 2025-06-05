@@ -777,37 +777,69 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
         } else updateZoom(max_value - l); //有摄像头
     }
 
-    public void changeform(int l, int t, int right, int bottom, String key) {
-        Log.d("changeform before ", KeystoneUtils_726.lt_X + "," + KeystoneUtils_726.lt_Y + "," + KeystoneUtils_726.lb_X  + "," + KeystoneUtils_726.lb_Y
-                + "," + KeystoneUtils_726.rt_X + "," + KeystoneUtils_726.rt_Y + "," + KeystoneUtils_726.rb_X + "," + KeystoneUtils_726.rb_Y);
-
-        KeystoneUtils_726.lt_X = Integer.parseInt(df.format(((100 - 100 * scale) * zoom_step_x + (100 - l) * step_x) * 1000 / KeystoneUtils_726.lcd_w));
-        KeystoneUtils_726.lt_Y = 1000 - Integer.parseInt(df.format((KeystoneUtils_726.lcd_h - (100 - t) * step_y) * 1000 / KeystoneUtils_726.lcd_h));
-
-        KeystoneUtils_726.lb_X = Integer.parseInt(df.format(((100 - 100 * scale) * zoom_step_x + (100 - l) * step_x) * 1000 / KeystoneUtils_726.lcd_w));
-        KeystoneUtils_726.lb_Y = Integer.parseInt(df.format(((100 - bottom) * step_y) * 1000 / KeystoneUtils_726.lcd_h));
-
-        KeystoneUtils_726.rt_X = 1000 - Integer.parseInt(df.format((KeystoneUtils_726.lcd_w * scale - (100 - right) * step_x) * 1000 / KeystoneUtils_726.lcd_w));
-        KeystoneUtils_726.rt_Y = 1000 - Integer.parseInt(df.format((KeystoneUtils_726.lcd_h - (100 - t) * step_y) * 1000 / KeystoneUtils_726.lcd_h));
-
-        KeystoneUtils_726.rb_X = 1000 - Integer.parseInt(df.format((KeystoneUtils_726.lcd_w * scale - (100 - right) * step_x) * 1000 / KeystoneUtils_726.lcd_w));
-        KeystoneUtils_726.rb_Y = Integer.parseInt(df.format(((100 - bottom) * step_y) * 1000 / KeystoneUtils_726.lcd_h));
-
-        Log.d("changeform after ", KeystoneUtils_726.lt_X + "," + KeystoneUtils_726.lt_Y + "," + KeystoneUtils_726.lb_X  + "," + KeystoneUtils_726.lb_Y
-                + "," + KeystoneUtils_726.rt_X + "," + KeystoneUtils_726.rt_Y + "," + KeystoneUtils_726.rb_X + "," + KeystoneUtils_726.rb_Y);
-
-//        if (getAuto()) {
-//            Log.d(TAG," UpdateKeystoneZOOM(false) ");
-//            KeystoneUtils_726.UpdateKeystoneZOOM(false);
-////            sendKeystoneBroadcast();
-//        } else {
-//            Log.d(TAG," UpdateKeystoneZOOM(true) ");
-//            KeystoneUtils_726.UpdateKeystoneZOOM(true);
+//    public void changeform(int l, int t, int right, int bottom, String key) {
+//        Log.d("changeform before ", KeystoneUtils_726.lt_X + "," + KeystoneUtils_726.lt_Y + "," + KeystoneUtils_726.lb_X  + "," + KeystoneUtils_726.lb_Y
+//                + "," + KeystoneUtils_726.rt_X + "," + KeystoneUtils_726.rt_Y + "," + KeystoneUtils_726.rb_X + "," + KeystoneUtils_726.rb_Y);
+//
+//        KeystoneUtils_726.lt_X = Integer.parseInt(df.format(((100 - 100 * scale) * zoom_step_x + (100 - l) * step_x) * 1000 / KeystoneUtils_726.lcd_w));
+//        KeystoneUtils_726.lt_Y = 1000 - Integer.parseInt(df.format((KeystoneUtils_726.lcd_h - (100 - t) * step_y) * 1000 / KeystoneUtils_726.lcd_h));
+//
+//        KeystoneUtils_726.lb_X = Integer.parseInt(df.format(((100 - 100 * scale) * zoom_step_x + (100 - l) * step_x) * 1000 / KeystoneUtils_726.lcd_w));
+//        KeystoneUtils_726.lb_Y = Integer.parseInt(df.format(((100 - bottom) * step_y) * 1000 / KeystoneUtils_726.lcd_h));
+//
+//        KeystoneUtils_726.rt_X = 1000 - Integer.parseInt(df.format((KeystoneUtils_726.lcd_w * scale - (100 - right) * step_x) * 1000 / KeystoneUtils_726.lcd_w));
+//        KeystoneUtils_726.rt_Y = 1000 - Integer.parseInt(df.format((KeystoneUtils_726.lcd_h - (100 - t) * step_y) * 1000 / KeystoneUtils_726.lcd_h));
+//
+//        KeystoneUtils_726.rb_X = 1000 - Integer.parseInt(df.format((KeystoneUtils_726.lcd_w * scale - (100 - right) * step_x) * 1000 / KeystoneUtils_726.lcd_w));
+//        KeystoneUtils_726.rb_Y = Integer.parseInt(df.format(((100 - bottom) * step_y) * 1000 / KeystoneUtils_726.lcd_h));
+//
+//        Log.d("changeform after ", KeystoneUtils_726.lt_X + "," + KeystoneUtils_726.lt_Y + "," + KeystoneUtils_726.lb_X  + "," + KeystoneUtils_726.lb_Y
+//                + "," + KeystoneUtils_726.rt_X + "," + KeystoneUtils_726.rt_Y + "," + KeystoneUtils_726.rb_X + "," + KeystoneUtils_726.rb_Y);
+//
+////        if (getAuto()) {
+////            Log.d(TAG," UpdateKeystoneZOOM(false) ");
+////            KeystoneUtils_726.UpdateKeystoneZOOM(false);
+//////            sendKeystoneBroadcast();
+////        } else {
+////            Log.d(TAG," UpdateKeystoneZOOM(true) ");
+////            KeystoneUtils_726.UpdateKeystoneZOOM(true);
+////        }
+//        KeystoneUtils_726.UpdateKeystoneZOOMNC();
+//        if(key.equals("ratio")) {
+//            sendKeystoneBroadcast(key);
 //        }
+//    }
+
+    public void changeform(int l, int t, int right, int bottom, String key) {
+        int temp_w = 1920;
+        int temp_h = 1080;
+        int offset_x = 0;
+        int offset_y = 0;
+
+        temp_h = KeystoneUtils_726.lcd_h ;
+        temp_w = (int)(temp_h * step_x)/step_y;
+
+        offset_x = ((KeystoneUtils_726.lcd_w - temp_w)+(step_x * All))/2;
+        offset_y = (step_y * All)/2;
+
+        Log.d("changeform before ", "offset_x=" + offset_x + "," + "offset_y=" + offset_y + "," + "temp_w="  + temp_w + "," + "temp_h=" + temp_h + "," + "step_x=" +step_x+","  + "step_y="+step_y+"," + "All="+All);
+
+        KeystoneUtils_726.lt_X = offset_x;
+        KeystoneUtils_726.lt_Y = offset_y;
+
+        KeystoneUtils_726.lb_X = offset_x;
+        KeystoneUtils_726.lb_Y = offset_y;
+
+        KeystoneUtils_726.rt_X = offset_x;
+        KeystoneUtils_726.rt_Y = offset_y;
+
+        KeystoneUtils_726.rb_X = offset_x;
+        KeystoneUtils_726.rb_Y = offset_y;
+
         KeystoneUtils_726.UpdateKeystoneZOOMNC();
-        if(key.equals("ratio")) {
-            sendKeystoneBroadcast(key);
-        }
+        // if(key.equals("ratio")) {
+        //     sendKeystoneBroadcast(key);
+        // }
     }
 
     public void updateZoom(int zoom) {//数字缩放有摄像头

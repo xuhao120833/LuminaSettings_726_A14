@@ -12,7 +12,6 @@ public class AddViewToScreen {
     private static String TAG = "AddViewToScreen";
 
     public void addView(View v, WindowManager.LayoutParams p) {
-        // 添加一个view之前先尝试删除这个view, 避免重复添加
         Log.d(TAG, "v.isAttachedToWindow() " + String.valueOf(v.isAttachedToWindow()));
         try {
             v.clearFocus();

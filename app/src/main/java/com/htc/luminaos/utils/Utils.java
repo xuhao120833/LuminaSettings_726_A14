@@ -27,7 +27,8 @@ public class Utils {
     //默认背景使用的ArrayList
     public static ArrayList<Object> drawables = new ArrayList<>();
     public static String support_image_path = "";
-
+    //判断display悬浮窗有没有添加到桌上
+    public static boolean attachedToWindow= false;
     public static final int REQUEST_CODE_PICK_IMAGE = 1;
 
     //一个全局的特定IP APP信息

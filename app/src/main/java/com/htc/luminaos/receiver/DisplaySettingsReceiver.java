@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.PixelFormat;
 import android.media.AudioManager;
 import android.os.Build;
+import android.os.SystemProperties;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -19,6 +20,7 @@ import com.htc.luminaos.R;
 import com.htc.luminaos.databinding.ActivityDisplaySettingsBinding;
 import com.htc.luminaos.utils.AddViewToScreen;
 import com.htc.luminaos.utils.ReflectUtil;
+import com.htc.luminaos.utils.Utils;
 import com.softwinner.PQControl;
 import com.softwinner.tv.AwTvDisplayManager;
 
@@ -81,16 +83,31 @@ public class DisplaySettingsReceiver extends BroadcastReceiver implements View.O
             try {
                 initData();
                 boolean show = intent.getBooleanExtra("show", false);
-                if (show && !displaySettingsBinding.getRoot().isAttachedToWindow()) {
+                //displaySettingsBinding.getRoot().isAttachedToWindow()会有极低的概率不生效
+//                if (show && !displaySettingsBinding.getRoot().isAttachedToWindow()) {
+//                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+//                    String currentTime = sdf.format(new Date());
+//                    Log.d(TAG, "mavts.addView " + currentTime);
+//                    mavts.addView(displaySettingsBinding.getRoot(), lp);
+//                } else if (!show && displaySettingsBinding.getRoot().isAttachedToWindow()) {
+//                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+//                    String currentTime = sdf.format(new Date());
+//                    Log.d(TAG, "mavts.clearView " + currentTime);
+//                    mavts.clearView(displaySettingsBinding.getRoot());
+//                }
+                boolean attachedToWindow = SystemProperties.getBoolean("display.attach",false);
+                if (show && !attachedToWindow) {
                     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
                     String currentTime = sdf.format(new Date());
                     Log.d(TAG, "mavts.addView " + currentTime);
                     mavts.addView(displaySettingsBinding.getRoot(), lp);
-                } else if (!show && displaySettingsBinding.getRoot().isAttachedToWindow()) {
+                    SystemProperties.set("display.attach", String.valueOf(true));
+                } else if (!show && attachedToWindow) {
                     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
                     String currentTime = sdf.format(new Date());
                     Log.d(TAG, "mavts.clearView " + currentTime);
                     mavts.clearView(displaySettingsBinding.getRoot());
+                    SystemProperties.set("display.attach", String.valueOf(false));
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -201,6 +218,7 @@ public class DisplaySettingsReceiver extends BroadcastReceiver implements View.O
     @Override
     public boolean onKey(View v, int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
+            SystemProperties.set("display.attach", String.valueOf(false));
             mavts.clearView(displaySettingsBinding.main);
             return true;
         }
