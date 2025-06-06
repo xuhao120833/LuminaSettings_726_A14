@@ -1,4 +1,5 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
+//构建脚本自身的依赖
 buildscript {
     repositories {
         maven { url 'https://maven.aliyun.com/repository/google' }
@@ -31,6 +32,7 @@ allprojects {
 //            options.compilerArgs.add('-Xbootclasspath/p:app/libs/classes.jar')
 //        }
 //    }
+
     gradle.projectsEvaluated {
         tasks.withType(JavaCompile).configureEach {
             // 将 classes.jar 添加到编译类路径的最前面

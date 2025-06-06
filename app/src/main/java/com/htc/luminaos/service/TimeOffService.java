@@ -1,6 +1,9 @@
 package com.htc.luminaos.service;
 
 import android.app.ActivityManager;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.app.Service;
 import android.content.ComponentName;
 import android.content.Context;
@@ -10,6 +13,8 @@ import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.IBinder;
 import android.util.Log;
+
+import androidx.core.app.NotificationCompat;
 
 import com.htc.luminaos.R;
 import com.htc.luminaos.utils.Contants;
@@ -46,6 +51,9 @@ public class TimeOffService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         initData(intent);
         Log.d(TAG, "onStartCommand()");
+
+        startForeground(1, createMinimalNotification());
+
         if(timer != null) {
             timer.cancel();
             timer = null;
@@ -58,7 +66,8 @@ public class TimeOffService extends Service {
         } else {
             stopSelf();
         }
-        return START_STICKY;//如果系统因为资源不足（如内存）杀死了该服务，之后资源允许时，系统会自动重启服务。
+//        return START_STICKY;//如果系统因为资源不足（如内存）杀死了该服务，之后资源允许时，系统会自动重启服务。
+        return START_REDELIVER_INTENT;//重启服务，并且使用原始intent中的数据
     }
 
     private void initData(Intent intent) {
@@ -173,4 +182,31 @@ public class TimeOffService extends Service {
         Log.d(TAG, "getTopActivity = " + cn.getClassName());
         return cn.getClassName();
     }
+
+    private Notification createMinimalNotification() {
+        String channelId = "timeoff_channel_id";
+        String channelName = "Time Off Service";
+
+        NotificationChannel channel = new NotificationChannel(
+                channelId,
+                channelName,
+                NotificationManager.IMPORTANCE_MIN // 尽可能低的优先级
+        );
+        channel.setSound(null, null); // 禁用声音
+        channel.enableLights(false);
+        channel.enableVibration(false);
+        NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        manager.createNotificationChannel(channel);
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, channelId)
+                .setSmallIcon(R.drawable.ic_launcher_foreground) // 必须设置
+                .setContentTitle("") // 标题空
+                .setContentText("")  // 内容空
+                .setPriority(NotificationCompat.PRIORITY_MIN)
+                .setOngoing(true) // 不能被滑掉
+                .setVisibility(NotificationCompat.VISIBILITY_SECRET); // 锁屏也不显示
+
+        return builder.build();
+    }
+
 }
