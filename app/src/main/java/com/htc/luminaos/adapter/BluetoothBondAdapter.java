@@ -140,13 +140,11 @@ public class BluetoothBondAdapter extends RecyclerView.Adapter<BluetoothBondAdap
                     break;
                 case 2:
                     myViewHolder.ble_status.setVisibility(View.VISIBLE);
-                    myViewHolder.ble_status.setText(mContext
-                            .getString(R.string.connecting));
+                    myViewHolder.ble_status.setText(mContext.getString(R.string.connecting));
                     break;
                 case 3:
                     myViewHolder.ble_status.setVisibility(View.VISIBLE);
-                    myViewHolder.ble_status.setText(mContext
-                            .getString(R.string.disconnecting));
+                    myViewHolder.ble_status.setText(mContext.getString(R.string.disconnecting));
                     break;
             }
         } else {

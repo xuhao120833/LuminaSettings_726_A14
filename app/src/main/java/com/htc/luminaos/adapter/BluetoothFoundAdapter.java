@@ -77,8 +77,7 @@ public class BluetoothFoundAdapter extends RecyclerView.Adapter<BluetoothFoundAd
                         myViewHolder.ble_type.setImageResource(R.drawable.bluetooth);
                         break;
                     case BluetoothClass.Device.PERIPHERAL_POINTING:
-                        myViewHolder.ble_type
-                                .setImageResource(R.drawable.bluetooth);
+                        myViewHolder.ble_type.setImageResource(R.drawable.bluetooth);
                         break;
                     default:
                         myViewHolder.ble_type.setImageResource(R.drawable.bluetooth);

@@ -189,6 +189,7 @@ public class BluetoothActivity extends BaseActivity implements BluetoothCallBcak
                                 view.clearFocus();
 
                             scanList.remove(device);
+                            foundAdapter.setCurrentPair(null);
                             foundAdapter.notifyDataSetChanged();
                         }
                         if (device.getBluetoothClass().getMajorDeviceClass() == BluetoothClass.Device.Major.AUDIO_VIDEO) {
