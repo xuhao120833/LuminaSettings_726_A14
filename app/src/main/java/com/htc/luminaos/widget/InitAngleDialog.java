@@ -88,6 +88,7 @@ public class InitAngleDialog extends BaseDialog implements View.OnClickListener 
         }
         KeystoneUtils_726.resetKeystone();
         KeystoneUtils_726.writeGlobalSettings(getContext(), KeystoneUtils_726.ZOOM_VALUE, 0);
+        KeystoneUtils_726.writeSystemProperties(KeystoneUtils_726.PROP_ZOOM_VALUE,0);
         projectActivity.All = 0;
         projectActivity.updateZoomView();
         SystemProperties.set("persist.sys.keystone_offset", "0");

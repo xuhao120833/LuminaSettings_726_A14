@@ -41,6 +41,7 @@ public class KeystoneUtils_726 {
 
     //数字缩放
     public static final String ZOOM_VALUE = "zoom_value";
+    public static final String PROP_ZOOM_VALUE = "persist.sys.zoom_value";
     //画面比例
     public static final String ZOOM_SCALE = "zoom_scale";
     public static final String PROP_ZOOM_SCALE = "persist.sys.zoom_scale";
@@ -298,7 +299,7 @@ public class KeystoneUtils_726 {
         writeParcelToFlinger(lt_X, lt_Y, rt_X, rt_Y, lb_X, lb_Y, rb_X, rb_Y);
     }
 
-    public static void UpdateKeystoneZOOMNC() { //无摄像头只设置属性
+    public static void UpdateKeystoneZOOMNC() {
         SystemProperties.set("persist.sys.zoom.value", lb_X + "," + lb_Y + "," + lt_X + "," + lt_Y + "," + rt_X + "," + rt_Y + "," + rb_X + "," + rb_Y);
         Log.d("UpdateKeystoneZOOMNC ", lb_X + "," + lb_Y + "," + lt_X + "," + lt_Y + "," + rt_X + "," + rt_Y + "," + rb_X + "," + rb_Y);
 
@@ -559,16 +560,25 @@ public class KeystoneUtils_726 {
     }
 
     public static void optKeystoneFun(int[] tpData) {
-        DecimalFormat df = new DecimalFormat("0");//格式化小数
-        lt_X = Integer.parseInt(df.format((tpData[0] * 1000) / lcd_w));
-        lt_Y = Integer.parseInt(df.format((tpData[1] * 1000) / lcd_h));
-        rt_X = Integer.parseInt(df.format((tpData[2] * 1000) / lcd_w));
-        rt_Y = Integer.parseInt(df.format((tpData[3] * 1000) / lcd_h));
-        lb_X = Integer.parseInt(df.format((tpData[4] * 1000) / lcd_w));
-        lb_Y = Integer.parseInt(df.format((tpData[5] * 1000) / lcd_h));
-        rb_X = Integer.parseInt(df.format((tpData[6] * 1000) / lcd_w));
-        rb_Y = Integer.parseInt(df.format((tpData[7] * 1000) / lcd_h));
-        UpdateKeystoneZOOM(true);
+        lt_X = tpData[0];
+        lt_Y = tpData[1];
+        rt_X = tpData[2];
+        rt_Y = tpData[3];
+        lb_X = tpData[4];
+        lb_Y = tpData[5];
+        rb_X = tpData[6];
+        rb_Y = tpData[7];
+        UpdateKeystoneZOOMNC();
+//        DecimalFormat df = new DecimalFormat("0");//格式化小数
+//        lt_X = Integer.parseInt(df.format((tpData[0] * 1000) / lcd_w));
+//        lt_Y = Integer.parseInt(df.format((tpData[1] * 1000) / lcd_h));
+//        rt_X = Integer.parseInt(df.format((tpData[2] * 1000) / lcd_w));
+//        rt_Y = Integer.parseInt(df.format((tpData[3] * 1000) / lcd_h));
+//        lb_X = Integer.parseInt(df.format((tpData[4] * 1000) / lcd_w));
+//        lb_Y = Integer.parseInt(df.format((tpData[5] * 1000) / lcd_h));
+//        rb_X = Integer.parseInt(df.format((tpData[6] * 1000) / lcd_w));
+//        rb_Y = Integer.parseInt(df.format((tpData[7] * 1000) / lcd_h));
+//        UpdateKeystoneZOOM(true);
     }
 
     public static void resetKeystone() {
