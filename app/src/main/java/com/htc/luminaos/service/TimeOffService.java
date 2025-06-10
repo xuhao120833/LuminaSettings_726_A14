@@ -42,17 +42,16 @@ public class TimeOffService extends Service {
 
     @Override
     public void onCreate() {
-        sharedPreferences = ShareUtil.getInstans(this);
-        Log.d(TAG, "onCreate()");
         super.onCreate();
+        Log.d(TAG, "onCreate()");
+        sharedPreferences = ShareUtil.getInstans(this);
+        startForeground(1, createMinimalNotification());
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         initData(intent);
         Log.d(TAG, "onStartCommand()");
-
-        startForeground(1, createMinimalNotification());
 
         if(timer != null) {
             timer.cancel();

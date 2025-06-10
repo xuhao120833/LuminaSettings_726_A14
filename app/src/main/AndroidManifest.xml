@@ -227,6 +227,10 @@
             android:name=".service.TimeOffService"
             android:enabled="true"
             android:exported="true" />
+        <service
+            android:name=".service.KeepAliveService"
+            android:enabled="true"
+            android:exported="true" />
     </application>
 
 </manifest>

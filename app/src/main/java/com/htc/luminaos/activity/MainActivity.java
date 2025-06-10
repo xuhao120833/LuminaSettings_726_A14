@@ -54,6 +54,7 @@ import com.htc.luminaos.receiver.InitAngleReceiver;
 import com.htc.luminaos.receiver.UnlockCallBack;
 import com.htc.luminaos.receiver.UnlockReceiver;
 import com.htc.luminaos.receiver.UsbDeviceCallBack;
+import com.htc.luminaos.service.KeepAliveService;
 import com.htc.luminaos.service.TimeOffService;
 import com.htc.luminaos.utils.BatteryCallBack;
 import com.htc.luminaos.utils.BlurImageView;
@@ -342,6 +343,8 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
             isEthernetConnect(getApplicationContext());
             StartupTimer.mark("onCreate完成");
             startRebootService();
+
+            startForegroundService(new Intent(this, KeepAliveService.class));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -381,7 +384,7 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
             ShareUtil.put(this,Contants.TimeOffTime,time_off_value[cur_time_off_index]);
             intent.putExtra(Contants.TimeOffStatus,true);
         }
-        startService(intent);
+        startForegroundService(intent);
     }
 
     private void chooseLayout() {

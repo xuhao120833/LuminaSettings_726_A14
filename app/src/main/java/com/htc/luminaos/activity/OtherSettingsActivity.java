@@ -215,7 +215,7 @@ public class OtherSettingsActivity extends BaseActivity implements View.OnKeyLis
             ShareUtil.put(this,Contants.TimeOffTime,time_off_value[index]);
             intent.putExtra(Contants.TimeOffStatus,true);
         }
-        startService(intent);
+        startForegroundService(intent);
     }
 
     @Override

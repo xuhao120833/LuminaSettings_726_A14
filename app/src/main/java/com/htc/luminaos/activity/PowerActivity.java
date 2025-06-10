@@ -152,7 +152,7 @@ public class PowerActivity extends AppCompatActivity implements View.OnClickList
             intent.putExtra(Contants.TimeOffStatus,true);
             intent.putExtra(Contants.TimeOffTime,time_off_value[index]);
         }
-        startService(intent);
+        startForegroundService(intent);
     }
 
     @Override
