@@ -493,10 +493,7 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
             zoom_scale++;
             if (zoom_scale > 2)
                 zoom_scale = 0;
-            if (!SystemProperties.get("persist.sys.camok", "0").equals("1") || SystemProperties.getBoolean("persist.sys.tpryauto", false))
-                set_screen_zoom(All, All, All, All, zoom_scale);
-            else
-                updateScaleZoom(zoom_scale);
+            set_screen_zoom(All, All, All, All, zoom_scale);
             Log.d(TAG, " writeSystemProperties KeystoneUtils_726.PROP_ZOOM_SCALE ");
             KeystoneUtils_726.writeSystemProperties(KeystoneUtils_726.PROP_ZOOM_SCALE, zoom_scale);
             updateSzoomTv();
@@ -504,10 +501,7 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
             zoom_scale--;
             if (zoom_scale < 0)
                 zoom_scale = 2;
-            if (!SystemProperties.get("persist.sys.camok", "0").equals("1") || SystemProperties.getBoolean("persist.sys.tpryauto", false))
-                set_screen_zoom(All, All, All, All, zoom_scale);
-            else
-                updateScaleZoom(zoom_scale);
+            set_screen_zoom(All, All, All, All, zoom_scale);
 //            KeystoneUtils_726.writeGlobalSettings(this, KeystoneUtils_726.ZOOM_SCALE, zoom_scale);
             KeystoneUtils_726.writeSystemProperties(KeystoneUtils_726.PROP_ZOOM_SCALE, zoom_scale);
             updateSzoomTv();
@@ -515,10 +509,7 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
             zoom_scale++;
             if (zoom_scale > 2)
                 zoom_scale = 0;
-            if (!SystemProperties.get("persist.sys.camok", "0").equals("1") || SystemProperties.getBoolean("persist.sys.tpryauto", false))
-                set_screen_zoom(All, All, All, All, zoom_scale);
-            else
-                updateScaleZoom(zoom_scale);
+            set_screen_zoom(All, All, All, All, zoom_scale);
 //            KeystoneUtils_726.writeGlobalSettings(this, KeystoneUtils_726.ZOOM_SCALE, zoom_scale);
             KeystoneUtils_726.writeSystemProperties(KeystoneUtils_726.PROP_ZOOM_SCALE, zoom_scale);
             updateSzoomTv();
@@ -587,10 +578,7 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
                 zoom_scale--;
                 if (zoom_scale < 0)
                     zoom_scale = 2;
-                if (!SystemProperties.get("persist.sys.camok", "0").equals("1") || SystemProperties.getBoolean("persist.sys.tpryauto", false))
-                    set_screen_zoom(All, All, All, All, zoom_scale);
-                else
-                    updateScaleZoom(zoom_scale);
+                set_screen_zoom(All, All, All, All, zoom_scale);
                 Log.d(TAG, " KEYCODE_DPAD_LEFT writeSystemProperties KeystoneUtils_726.PROP_ZOOM_SCALE ");
                 KeystoneUtils_726.writeSystemProperties(KeystoneUtils_726.PROP_ZOOM_SCALE, zoom_scale);
                 updateSzoomTv();
@@ -645,10 +633,7 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
                 zoom_scale++;
                 if (zoom_scale > 2)
                     zoom_scale = 0;
-                if (!SystemProperties.get("persist.sys.camok", "0").equals("1") || SystemProperties.getBoolean("persist.sys.tpryauto", false))
-                    set_screen_zoom(All, All, All, All, zoom_scale);
-                else
-                    updateScaleZoom(zoom_scale);
+                set_screen_zoom(All, All, All, All, zoom_scale);
                 Log.d(TAG, " KEYCODE_DPAD_RIGHT writeSystemProperties KeystoneUtils_726.PROP_ZOOM_SCALE ");
                 KeystoneUtils_726.writeSystemProperties(KeystoneUtils_726.PROP_ZOOM_SCALE, zoom_scale);
                 updateSzoomTv();
@@ -769,10 +754,16 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
         r = max_value - r;
         b = max_value - b;
 //        changeform(l, t, r, b);
+//
+//        if (!SystemProperties.get("persist.sys.camok", "0").equals("1") || getAuto()) { //无摄像头
+//            changeform(l, t, r, b, "zoom");
+//        } else updateZoom(max_value - l); //有摄像头
 
-        if (!SystemProperties.get("persist.sys.camok", "0").equals("1") || getAuto()) { //无摄像头
+        if ((SystemProperties.get("persist.sys.camok", "0").equals("1") && !SystemProperties.get("persist.sys.focusupdn", "0").equals("1"))) {
+            updateZoom(max_value - l); //摄像头+四角梯形校正
+        } else {
             changeform(l, t, r, b, "zoom");
-        } else updateZoom(max_value - l); //有摄像头
+        }
     }
 
 //    public void changeform(int l, int t, int right, int bottom, String key) {
@@ -835,9 +826,9 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
         KeystoneUtils_726.rb_Y = offset_y;
 
         KeystoneUtils_726.UpdateKeystoneZOOMNC();
-        if (key.equals("zoom")) {
-            sendKeystoneBroadcast(key);
-        }
+//        if (key.equals("zoom")) {
+        sendKeystoneBroadcast(key);
+//        }
     }
 
     public void updateZoom(int zoom) {//数字缩放有摄像头
@@ -1100,7 +1091,13 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
         t = 100 - t;
         r = 100 - r;
         b = 100 - b;
-        changeform(l, t, r, b, "ratio");
+
+        if((SystemProperties.get("persist.sys.camok", "0").equals("1") && !SystemProperties.get("persist.sys.focusupdn", "0").equals("1"))){
+            updateScaleZoom(zoom_scale);
+        }else{
+            changeform(l, t, r, b, "ratio");
+        }
+
         String modify_value = "overscan " + df.format((double) l * scale) + "," + t + "," + df.format((double) r * scale) + "," + b;
         SystemProperties.set("persist.vendor.overscan.main", modify_value);
     }
