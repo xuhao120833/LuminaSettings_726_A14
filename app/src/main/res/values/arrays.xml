@@ -139,8 +139,8 @@
 
     <string-array name="picture_mode_weimi_choices_no_custom">
         <item>@string/device_mode0</item>
-        <item>@string/picture_1</item>
         <item>@string/picture_2</item>
+        <item>@string/picture_1</item>
     </string-array>
 
     <string-array name="soundMode_name">

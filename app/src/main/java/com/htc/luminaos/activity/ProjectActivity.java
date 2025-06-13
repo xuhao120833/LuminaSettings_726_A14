@@ -41,6 +41,7 @@ import com.htc.luminaos.utils.ToastUtil;
 import com.htc.luminaos.utils.scUtils;
 import com.htc.luminaos.widget.InitAngleDialog;
 import com.htc.luminaos.widget.TimezoneDialog;
+import com.softwinner.PQControl;
 import com.softwinner.tv.AwTvDisplayManager;
 import com.softwinner.tv.AwTvSystemManager;
 import com.softwinner.tv.common.AwTvDisplayTypes;
@@ -97,6 +98,13 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
     public int[] rb_xy = new int[2];
 
     String[] screen_zoom;
+    private int mColorTemp = 0;
+    private String[] colorTemp_name;
+    private PQControl pqControl;
+    AwTvDisplayManager awTvDisplayManager;
+    private int mR = 50;
+    private int mG = 50;
+    private int mB = 50;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -129,10 +137,13 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
     }
 
     private void initView() {
-        projectBinding.rlDisplaySettings.setOnClickListener(this);
-        projectBinding.rlDisplaySettings.setOnHoverListener(this);
+//        projectBinding.rlDisplaySettings.setOnClickListener(this);
+//        projectBinding.rlDisplaySettings.setOnHoverListener(this);
         projectBinding.rlColorMode.setOnClickListener(this);
         projectBinding.rlColorMode.setOnHoverListener(this);
+        projectBinding.rlColorTemp.setOnClickListener(this);
+        projectBinding.rlColorTemp.setOnHoverListener(this);
+        projectBinding.rlColorTemp.setOnKeyListener(this);
         projectBinding.rlAudioMode.setOnClickListener(this);
         projectBinding.rlAudioMode.setOnHoverListener(this);
         projectBinding.rlProjectMode.setOnClickListener(this);
@@ -213,8 +224,9 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
         projectBinding.screenZoomLeft.setOnClickListener(this);
         projectBinding.screenZoomRight.setOnClickListener(this);
 
-        projectBinding.rlDisplaySettings.setVisibility(MyApplication.config.displaySetting ? View.VISIBLE : View.GONE);
+//        projectBinding.rlDisplaySettings.setVisibility(MyApplication.config.displaySetting ? View.VISIBLE : View.GONE);
         projectBinding.rlColorMode.setVisibility(MyApplication.config.brightAndColor ? View.VISIBLE : View.GONE);
+        projectBinding.rlColorTemp.setVisibility(MyApplication.config.displayColorTemp ? View.VISIBLE : View.GONE);
         projectBinding.rlAudioMode.setVisibility(MyApplication.config.AudioMode ? View.VISIBLE : View.GONE);
         projectBinding.rlProjectMode.setVisibility(MyApplication.config.projectMode ? View.VISIBLE : View.GONE);
         projectBinding.rlDeviceMode2.setVisibility(MyApplication.config.deviceMode ? View.VISIBLE : View.GONE);
@@ -325,6 +337,13 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
 
         //16:9 16:10 4:3 画面缩放
 //        updateSzoomTv();
+
+        //色温相关
+        awTvDisplayManager = AwTvDisplayManager.getInstance();
+        pqControl = new PQControl();
+        colorTemp_name = getResources().getStringArray(R.array.picture_mode_weimi_choices_no_custom);
+        mColorTemp = pqControl.getColorTemperature();
+        projectBinding.colorTempTv.setText(colorTemp_name[mColorTemp]);
     }
 
     private void updateSzoomTv() {
@@ -399,7 +418,14 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
         if (id == R.id.rl_color_mode) {
             startNewActivity(PictureModeActivity.class);
 //            startNewActivity(DisplaySettingsActivity.class);
-        } else if (id == R.id.rl_audio_mode) {
+        } else if (id == R.id.rl_color_temp) {
+            if (mColorTemp==2){
+                mColorTemp = 0;
+            }else {
+                mColorTemp +=1;
+            }
+            updateColorTemp(mColorTemp);
+        }else if (id == R.id.rl_audio_mode) {
             startNewActivity(AudioModeActivity.class);
         } else if (id == R.id.rl_power_mode) {
             old_project_mode = cur_project_mode;
@@ -560,6 +586,14 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
                 updateProjectMode();
 //                    break;
                 return true;
+            } else if (id == R.id.rl_color_temp) {
+                if (mColorTemp == 0) {
+                    mColorTemp = colorTemp_name.length - 1;
+                } else {
+                    mColorTemp -= 1;
+                }
+                updateColorTemp(mColorTemp);
+                return true;
             } else if (id == R.id.rl_digital_zoom) {
                 if (event.getAction() != KeyEvent.ACTION_DOWN)
                     return false;
@@ -614,6 +648,14 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
 
                 updateProjectMode();
 //                    break;
+                return true;
+            } else if (id == R.id.rl_color_temp) {
+                if (mColorTemp == colorTemp_name.length - 1) {
+                    mColorTemp = 0;
+                } else {
+                    mColorTemp += 1;
+                }
+                updateColorTemp(mColorTemp);
                 return true;
             } else if (id == R.id.rl_digital_zoom) {
                 if (event.getAction() != KeyEvent.ACTION_DOWN)
@@ -1140,4 +1182,19 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
             KeystoneUtils_726.optKeystoneFun(tpData);
         }
     }
+
+    private void updateColorTemp(int colorTemp) {
+        //pqControl.setColorTemperature(colorTemp);
+        pqControl.factorySetColorTemperature(0xFF, "0xFF", colorTemp);
+        projectBinding.colorTempTv.setText(colorTemp_name[colorTemp]);
+        int[] mRGBInfo = pqControl.factoryGetWBInfo(mColorTemp);
+        mR = mRGBInfo[PQControl.GAIN_R];
+        mG = mRGBInfo[PQControl.GAIN_G];
+        mB = mRGBInfo[PQControl.GAIN_B];
+//        updateR(false);
+//        updateG(false);
+//        updateB(false);
+    }
+
+
 }

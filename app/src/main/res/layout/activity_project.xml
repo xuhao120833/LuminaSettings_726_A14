@@ -101,10 +101,63 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/rl_color_temp"
+                android:layout_width="@dimen/x_1080"
+                android:layout_height="@dimen/y_80"
+                android:layout_below="@id/rl_color_mode"
+                android:layout_marginStart="@dimen/x_100"
+                android:layout_marginBottom="@dimen/y_19"
+                style="@style/focusStyle"
+                android:background="@drawable/main_settings_bg">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/x_50"
+                    android:duplicateParentState="true"
+                    android:text="@string/color_temp"
+                    android:textColor="@color/tv_color"
+                    android:textSize="@dimen/x_27" />
+
+                <View
+                    android:layout_width="@dimen/x_53"
+                    android:layout_height="@dimen/y_53"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/x_50"
+                    android:background="@drawable/arrow_right_bg"
+                    android:duplicateParentState="true" />
+
+                <View
+                    android:layout_width="@dimen/x_53"
+                    android:layout_height="@dimen/y_53"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/x_468"
+                    android:background="@drawable/arrow_left_bg"
+                    android:duplicateParentState="true" />
+
+                <TextView
+                    android:id="@+id/color_temp_tv"
+                    android:layout_width="@dimen/x_368"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/x_103"
+                    android:duplicateParentState="true"
+                    android:gravity="center"
+                    android:text="@string/picture_mode_standard_name"
+                    android:textColor="@color/tv_color"
+                    android:textSize="@dimen/x_23" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
                 android:layout_width="@dimen/x_1080"
                 android:layout_height="@dimen/y_80"
                 android:id="@+id/rl_audio_mode"
-                android:layout_below="@id/rl_color_mode"
+                android:layout_below="@id/rl_color_temp"
                 android:layout_marginStart="@dimen/x_100"
                 android:layout_marginBottom="@dimen/y_19"
                 android:background="@drawable/main_settings_bg"

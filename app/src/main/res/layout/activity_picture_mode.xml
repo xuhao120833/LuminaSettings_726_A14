@@ -80,7 +80,8 @@
         android:layout_below="@id/rl_picture_mode"
         android:layout_marginStart="@dimen/x_100"
         android:layout_marginTop="@dimen/y_19"
-        style="@style/unfocusStyle"
+        style="@style/focusStyle"
+        android:visibility="gone"
         android:background="@drawable/main_settings_bg">
 
         <TextView

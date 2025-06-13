@@ -71,7 +71,7 @@ public class PictureModeActivity extends BaseActivity implements View.OnKeyListe
         }
         awTvDisplayManager = AwTvDisplayManager.getInstance();
         pqControl = new PQControl();
-        //        colorTemp_name = getResources().getStringArray(R.array.colorTemp_name);
+        colorTemp_name = getResources().getStringArray(R.array.picture_mode_weimi_choices_no_custom);
         //        soundMode_name = getResources().getStringArray(R.array.soundMode_name);
         //        tvAudioControl = new TvAudioControl(getApplicationContext());
     }
@@ -119,7 +119,7 @@ public class PictureModeActivity extends BaseActivity implements View.OnKeyListe
         activityPictureModeBinding.rlSharpness.setOnHoverListener(this);
 
         activityPictureModeBinding.rlPictureMode.setVisibility(MyApplication.config.displayPictureMode ? View.VISIBLE : View.GONE);
-        activityPictureModeBinding.rlColorTemp.setVisibility(MyApplication.config.displayColorTemp ? View.VISIBLE : View.GONE);
+//        activityPictureModeBinding.rlColorTemp.setVisibility(MyApplication.config.displayColorTemp ? View.VISIBLE : View.GONE);
         activityPictureModeBinding.rlBrightness.setVisibility(MyApplication.config.brightnessPQ ? View.VISIBLE : View.GONE);
         activityPictureModeBinding.rlContrast.setVisibility(MyApplication.config.contrast ? View.VISIBLE : View.GONE);
         activityPictureModeBinding.rlHue.setVisibility(MyApplication.config.hue ? View.VISIBLE : View.GONE);
@@ -147,8 +147,8 @@ public class PictureModeActivity extends BaseActivity implements View.OnKeyListe
         mCurHue = pqControl.getBasicControl(PQControl.PQ_BASIC_HUE);
         mSharpness = pqControl.getBasicControl(PQControl.PQ_BASIC_SHARPNESS);
 
-//        mColorTemp = pqControl.getColorTemperature();
-//        activityPictureModeBinding.colorTempTv.setText(colorTemp_name[mColorTemp]);
+        mColorTemp = pqControl.getColorTemperature();
+        activityPictureModeBinding.colorTempTv.setText(colorTemp_name[mColorTemp]);
         int[] mRGBInfo = pqControl.factoryGetWBInfo(mColorTemp);
         mR = mRGBInfo[PQControl.GAIN_R];
         mG = mRGBInfo[PQControl.GAIN_G];
@@ -180,7 +180,14 @@ public class PictureModeActivity extends BaseActivity implements View.OnKeyListe
             pqControl.setPictureMode(picture_mode_values[curPosition]);
             updatePictureMode();
             activityPictureModeBinding.pictureModeTv.setText(picture_mode_choices[curPosition]);
-        } else if (id == R.id.rl_brightness) {
+        } else if (id == R.id.rl_color_temp) {
+            if (mColorTemp==2){
+                mColorTemp = 0;
+            }else {
+                mColorTemp +=1;
+            }
+            updateColorTemp(mColorTemp);
+        }else if (id == R.id.rl_brightness) {
             if (brightness_system == 100)
                 return;
 
