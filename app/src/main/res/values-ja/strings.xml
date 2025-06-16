@@ -322,4 +322,5 @@
     <string name="email_title">アフターサービス用メール</string>
     <string name="wifi_connect_success">接続成功：</string>
     <string name="wifi_ssid_not_found">このWi-Fiに接続できません。ネットワークが存在するか確認してください。</string>
+    <string name="accessibility_title">アクセシビリティ機能</string>
 </resources>

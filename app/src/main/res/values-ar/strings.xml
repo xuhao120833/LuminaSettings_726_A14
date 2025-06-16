@@ -322,6 +322,7 @@
     <string name="email_title">البريد الإلكتروني لخدمة ما بعد البيع</string>
     <string name="wifi_connect_success">تم الاتصال بنجاح:</string>
     <string name="wifi_ssid_not_found">تعذر الاتصال بشبكة Wi-Fi، يرجى التأكد من وجود الشبكة</string>
+    <string name="accessibility_title">إمكانية الوصول</string>
 </resources>
 
 

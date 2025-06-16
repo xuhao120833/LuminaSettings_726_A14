@@ -52,7 +52,7 @@ public class OtherSettingsActivity extends BaseActivity implements View.OnKeyLis
         initData();
     }
 
-    private void initView(){
+    private void initView() {
         otherSettingsBinding.rlButtonSound.setOnClickListener(this);
         otherSettingsBinding.buttonSoundSwitch.setOnClickListener(this);
 //        otherSettingsBinding.rlAudioMode.setOnClickListener(this);
@@ -64,15 +64,16 @@ public class OtherSettingsActivity extends BaseActivity implements View.OnKeyLis
         otherSettingsBinding.rlPowerMode.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if(hasFocus){
+                if (hasFocus) {
                     otherSettingsBinding.powerModeTv.setSelected(true);
-                }else {
+                } else {
                     otherSettingsBinding.powerModeTv.setSelected(false);
                 }
             }
         });
         otherSettingsBinding.rlSetPassword.setOnClickListener(this);
         otherSettingsBinding.rlAccount.setOnClickListener(this);
+        otherSettingsBinding.rlAccessibility.setOnClickListener(this);
         otherSettingsBinding.rlDeveloper.setOnClickListener(this);
 
         otherSettingsBinding.rlButtonSound.setOnHoverListener(this);
@@ -85,6 +86,7 @@ public class OtherSettingsActivity extends BaseActivity implements View.OnKeyLis
         otherSettingsBinding.rlPowerMode.setOnHoverListener(this);
         otherSettingsBinding.rlSetPassword.setOnHoverListener(this);
         otherSettingsBinding.rlAccount.setOnHoverListener(this);
+        otherSettingsBinding.rlAccessibility.setOnHoverListener(this);
         otherSettingsBinding.rlDeveloper.setOnHoverListener(this);
 
         otherSettingsBinding.rlScreenSaver.setOnKeyListener(this);
@@ -96,13 +98,14 @@ public class OtherSettingsActivity extends BaseActivity implements View.OnKeyLis
 //        otherSettingsBinding.rlBootInput.requestFocusFromTouch();
 
 //        otherSettingsBinding.rlAudioMode.setVisibility(MyApplication.config.AudioMode?View.VISIBLE:View.GONE);
-        otherSettingsBinding.rlPowerMode.setVisibility(MyApplication.config.powerMode?View.VISIBLE:View.GONE);
-        otherSettingsBinding.rlAccount.setVisibility(MyApplication.config.account?View.VISIBLE:View.GONE);
-        otherSettingsBinding.rlBootInput.setVisibility(MyApplication.config.bootSource?View.VISIBLE:View.GONE);
-        otherSettingsBinding.rlSetPassword.setVisibility(MyApplication.config.set_password?View.VISIBLE:View.GONE);
-        otherSettingsBinding.rlScreenSaver.setVisibility(MyApplication.config.screenSaver?View.VISIBLE:View.GONE);
+        otherSettingsBinding.rlPowerMode.setVisibility(MyApplication.config.powerMode ? View.VISIBLE : View.GONE);
+        otherSettingsBinding.rlAccount.setVisibility(MyApplication.config.account ? View.VISIBLE : View.GONE);
+        otherSettingsBinding.rlBootInput.setVisibility(MyApplication.config.bootSource ? View.VISIBLE : View.GONE);
+        otherSettingsBinding.rlSetPassword.setVisibility(MyApplication.config.set_password ? View.VISIBLE : View.GONE);
+        otherSettingsBinding.rlScreenSaver.setVisibility(MyApplication.config.screenSaver ? View.VISIBLE : View.GONE);
+        otherSettingsBinding.rlAccessibility.setVisibility(MyApplication.config.accessibility ? View.VISIBLE : View.GONE);
 
-        if ((boolean)ShareUtil.get(this,Contants.KEY_DEVELOPER_MODE,false)){
+        if ((boolean) ShareUtil.get(this, Contants.KEY_DEVELOPER_MODE, false)) {
             otherSettingsBinding.rlDeveloper.setVisibility(View.VISIBLE);
         }
 
@@ -122,18 +125,18 @@ public class OtherSettingsActivity extends BaseActivity implements View.OnKeyLis
         }
     }
 
-    private void initData(){
+    private void initData() {
         otherSettingsBinding.buttonSoundSwitch.setChecked(getButtonSound());
 
-        screen_saver_title =  getResources().getStringArray(R.array.screen_saver_title);
+        screen_saver_title = getResources().getStringArray(R.array.screen_saver_title);
         screen_saver_value = getResources().getIntArray(R.array.screen_saver_value);
         cur_screen_saver_index = getCurScreenSaverIndex();
         otherSettingsBinding.screenSaverTv.setText(screen_saver_title[cur_screen_saver_index]);
 
-        time_off_title =  getResources().getStringArray(R.array.time_off_title);
+        time_off_title = getResources().getStringArray(R.array.time_off_title);
         time_off_value = getResources().getIntArray(R.array.time_off_value);
-        cur_time_off_index =(int) ShareUtil.get(this, Contants.TimeOffIndex,0);
-        Log.d(TAG," initData cur_time_off_index "+cur_time_off_index);
+        cur_time_off_index = (int) ShareUtil.get(this, Contants.TimeOffIndex, 0);
+        Log.d(TAG, " initData cur_time_off_index " + cur_time_off_index);
         otherSettingsBinding.timerOffTv.setText(time_off_title[cur_time_off_index]);
         /*if ((boolean) ShareUtil.get(this, Contants.TimeOffStatus,false)){
             int  timeOffTime =(int) ShareUtil.get(this, Contants.TimeOffTime,0);
@@ -143,10 +146,10 @@ public class OtherSettingsActivity extends BaseActivity implements View.OnKeyLis
         }*/
         mAwTvSystemManager = AwTvSystemManager.getInstance(this);
         powerModes = getResources().getStringArray(R.array.power_mode_name);
-        curPowerMode = mAwTvSystemManager.getPowerOnMode()== AwTvSystemTypes.EnumPowerMode.E_AW_POWER_MODE_DIRECT?1:0;
+        curPowerMode = mAwTvSystemManager.getPowerOnMode() == AwTvSystemTypes.EnumPowerMode.E_AW_POWER_MODE_DIRECT ? 1 : 0;
         otherSettingsBinding.powerModeTv.setText(powerModes[curPowerMode]);
 
-        if (Utils.sourceList!= null && Utils.sourceList.length > 0 && !Utils.sourceList[0].isEmpty()) { //兼容多信源的情况
+        if (Utils.sourceList != null && Utils.sourceList.length > 0 && !Utils.sourceList[0].isEmpty()) { //兼容多信源的情况
             boot_source_name = new String[Utils.sourceListTitle.length + 1];
             boot_source_name[0] = getResources().getString(R.string.boot_source_1);
             System.arraycopy(Utils.sourceListTitle, 0, boot_source_name, 1, Utils.sourceListTitle.length);
@@ -161,7 +164,7 @@ public class OtherSettingsActivity extends BaseActivity implements View.OnKeyLis
             boot_source_value = getResources().getStringArray(R.array.boot_source_value);
         }
         String source_value = get_power_signal();
-        for (int i=0;i<boot_source_value.length;i++){
+        for (int i = 0; i < boot_source_value.length; i++) {
             if (source_value.equals(boot_source_value[i])) {
                 boot_source_index = i;
                 break;
@@ -170,50 +173,50 @@ public class OtherSettingsActivity extends BaseActivity implements View.OnKeyLis
         otherSettingsBinding.bootInputTv.setText(boot_source_name[boot_source_index]);
     }
 
-    private String get_power_signal(){
+    private String get_power_signal() {
 
-        return SystemProperties.get("persist.sys.default_source","LOCAL");
+        return SystemProperties.get("persist.sys.default_source", "LOCAL");
     }
 
     //获取设备默认使用的HDMI接口，如果没设置就是HDMI1，设置了就是HDMI2
-    private String get_hdmisource(){
+    private String get_hdmisource() {
 
-        return SystemProperties.get("persist.sys.hdmisource","HDMI1");
+        return SystemProperties.get("persist.sys.hdmisource", "HDMI1");
     }
 
-    private void set_power_signal(String source){
-        SystemProperties.set("persist.sys.default_source",source);
+    private void set_power_signal(String source) {
+        SystemProperties.set("persist.sys.default_source", source);
     }
 
-    private int getCurScreenSaverIndex(){
-        int screen_off_timeout = Settings.System.getInt(getContentResolver(),Settings.System.SCREEN_OFF_TIMEOUT,300000);
-        Log.d(TAG,"getCurScreenSaverIndex screen_off_timeout "+screen_off_timeout);
-        for (int i=0;i<screen_saver_value.length;i++){
-            if (screen_off_timeout==screen_saver_value[i])
+    private int getCurScreenSaverIndex() {
+        int screen_off_timeout = Settings.System.getInt(getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, 300000);
+        Log.d(TAG, "getCurScreenSaverIndex screen_off_timeout " + screen_off_timeout);
+        for (int i = 0; i < screen_saver_value.length; i++) {
+            if (screen_off_timeout == screen_saver_value[i])
                 return i;
         }
         return 0;
     }
 
-    private void updateScreenSaver(int index){
-        Log.d(TAG,"updateScreenSaver screen_saver_value[index] "+screen_saver_value[index]);
-        Settings.System.putInt(getContentResolver(),Settings.System.SCREEN_OFF_TIMEOUT,screen_saver_value[index]);
+    private void updateScreenSaver(int index) {
+        Log.d(TAG, "updateScreenSaver screen_saver_value[index] " + screen_saver_value[index]);
+        Settings.System.putInt(getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, screen_saver_value[index]);
         otherSettingsBinding.screenSaverTv.setText(screen_saver_title[index]);
     }
 
-    private void setTimeOff(int index){
-        Log.d(TAG," 定时关机时间为 "+time_off_title.length+" "+index);
+    private void setTimeOff(int index) {
+        Log.d(TAG, " 定时关机时间为 " + time_off_title.length + " " + index);
         otherSettingsBinding.timerOffTv.setText(time_off_title[index]);
-        ShareUtil.put(this,Contants.TimeOffIndex,index);
+        ShareUtil.put(this, Contants.TimeOffIndex, index);
         Intent intent = new Intent(this, TimeOffService.class);
-        if (index==0){
-            ShareUtil.put(this,Contants.TimeOffStatus,false);
-            ShareUtil.put(this,Contants.TimeOffTime,time_off_value[index]);
-            intent.putExtra(Contants.TimeOffStatus,false);
-        }else {
-            ShareUtil.put(this,Contants.TimeOffStatus,true);
-            ShareUtil.put(this,Contants.TimeOffTime,time_off_value[index]);
-            intent.putExtra(Contants.TimeOffStatus,true);
+        if (index == 0) {
+            ShareUtil.put(this, Contants.TimeOffStatus, false);
+            ShareUtil.put(this, Contants.TimeOffTime, time_off_value[index]);
+            intent.putExtra(Contants.TimeOffStatus, false);
+        } else {
+            ShareUtil.put(this, Contants.TimeOffStatus, true);
+            ShareUtil.put(this, Contants.TimeOffTime, time_off_value[index]);
+            intent.putExtra(Contants.TimeOffStatus, true);
         }
         startForegroundService(intent);
     }
@@ -257,43 +260,47 @@ public class OtherSettingsActivity extends BaseActivity implements View.OnKeyLis
 //            mAwTvSystemManager.setPowerOnMode(curPowerMode == 1 ?
 //                    AwTvSystemTypes.EnumPowerMode.E_AW_POWER_MODE_DIRECT : AwTvSystemTypes.EnumPowerMode.E_AW_POWER_MODE_STANDBY);
             mAwTvSystemManager.setPowerOnMode(curPowerMode == 1 ?
-                    AwTvSystemTypes.EnumPowerMode.valueOf(1): AwTvSystemTypes.EnumPowerMode.valueOf(0));
+                    AwTvSystemTypes.EnumPowerMode.valueOf(1) : AwTvSystemTypes.EnumPowerMode.valueOf(0));
         } else if (id == R.id.rl_account) {
             Log.d(TAG, "打开Google账号切换界面");
 //            Intent intent = new Intent(Settings.ACTION_SYNC_SETTINGS);
 //            intent.putExtra(Settings.EXTRA_ACCOUNT_TYPES, new String[]{"com.google"});
 //            startActivity(intent);
             startNewActivity(AccountActivity.class);
+        } else if (id == R.id.rl_accessibility) {
+            Intent intent = new Intent("android.settings.ACCESSIBILITY_SETTINGS");
+            intent.addCategory(Intent.CATEGORY_DEFAULT);
+            startActivity(intent);
         } else if (id == R.id.rl_developer) {
             startNewActivity(DeveloperModeActivity.class);
-        } else if(id == R.id.rl_set_password) {
+        } else if (id == R.id.rl_set_password) {
             SetPasswordDialog passwordDialog = new SetPasswordDialog(this);
             passwordDialog.show();
         }
     }
 
-   private boolean getButtonSound(){
+    private boolean getButtonSound() {
         return Settings.System.getInt(getContentResolver(),
-                Settings.System.SOUND_EFFECTS_ENABLED, 0)==1;
-   }
+                Settings.System.SOUND_EFFECTS_ENABLED, 0) == 1;
+    }
 
-    private void setButtonSound(boolean ret){
-        Settings.System.putInt(getContentResolver(),Settings.System.SOUND_EFFECTS_ENABLED,ret?1:0);
+    private void setButtonSound(boolean ret) {
+        Settings.System.putInt(getContentResolver(), Settings.System.SOUND_EFFECTS_ENABLED, ret ? 1 : 0);
     }
 
     @Override
     public boolean onKey(View v, int keyCode, KeyEvent event) {
 
-        if ((event.getKeyCode()==KeyEvent.KEYCODE_DPAD_LEFT ||event.getKeyCode()==KeyEvent.KEYCODE_DPAD_RIGHT)
-                && (System.currentTimeMillis()-cur_time<150)){
+        if ((event.getKeyCode() == KeyEvent.KEYCODE_DPAD_LEFT || event.getKeyCode() == KeyEvent.KEYCODE_DPAD_RIGHT)
+                && (System.currentTimeMillis() - cur_time < 150)) {
             return true;
         }
 
-        if ((event.getAction() == KeyEvent.ACTION_UP) && (keyCode == KeyEvent.KEYCODE_DPAD_LEFT || keyCode == KeyEvent.KEYCODE_DPAD_RIGHT )) {
+        if ((event.getAction() == KeyEvent.ACTION_UP) && (keyCode == KeyEvent.KEYCODE_DPAD_LEFT || keyCode == KeyEvent.KEYCODE_DPAD_RIGHT)) {
             return true;
         }
 
-        if (keyCode==KeyEvent.KEYCODE_DPAD_LEFT && event.getAction() ==KeyEvent.ACTION_DOWN){
+        if (keyCode == KeyEvent.KEYCODE_DPAD_LEFT && event.getAction() == KeyEvent.ACTION_DOWN) {
             int id = v.getId();
             if (id == R.id.rl_screen_saver) {
                 if (cur_screen_saver_index == 0)
@@ -329,7 +336,7 @@ public class OtherSettingsActivity extends BaseActivity implements View.OnKeyLis
                         AwTvSystemTypes.EnumPowerMode.E_AW_POWER_MODE_DIRECT : AwTvSystemTypes.EnumPowerMode.E_AW_POWER_MODE_STANDBY);
                 return true;
             }
-        }else if (keyCode==KeyEvent.KEYCODE_DPAD_RIGHT && event.getAction() ==KeyEvent.ACTION_DOWN){
+        } else if (keyCode == KeyEvent.KEYCODE_DPAD_RIGHT && event.getAction() == KeyEvent.ACTION_DOWN) {
             int id = v.getId();
             if (id == R.id.rl_screen_saver) {
                 if (cur_screen_saver_index == screen_saver_title.length - 1)

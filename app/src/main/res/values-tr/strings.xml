@@ -322,5 +322,6 @@
     <string name="email_title">Satış sonrası hizmet e-postası</string>
     <string name="wifi_connect_success">Bağlantı başarılı:</string>
     <string name="wifi_ssid_not_found">Bu Wi-Fi ağına bağlanılamıyor, lütfen ağın mevcut olduğunu doğrulayın</string>
+    <string name="accessibility_title">Erişilebilirlik Özellikleri</string>
 </resources>
 

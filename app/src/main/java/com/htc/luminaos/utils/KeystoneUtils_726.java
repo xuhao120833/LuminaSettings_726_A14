@@ -568,7 +568,10 @@ public class KeystoneUtils_726 {
         lb_Y = tpData[5];
         rb_X = tpData[6];
         rb_Y = tpData[7];
-        UpdateKeystoneZOOMNC();
+        SystemProperties.set("persist.sys.zoom.value", lb_X + "," + lb_Y + "," + lt_X + "," + lt_Y + "," + rt_X + "," + rt_Y + "," + rb_X + "," + rb_Y);
+        Log.d("UpdateKeystoneZOOMNC ", lb_X + "," + lb_Y + "," + lt_X + "," + lt_Y + "," + rt_X + "," + rt_Y + "," + rb_X + "," + rb_Y);
+        writeParcelToFlinger(lt_X, lt_Y, rt_X, rt_Y, lb_X, lb_Y, rb_X, rb_Y);
+
 //        DecimalFormat df = new DecimalFormat("0");//格式化小数
 //        lt_X = Integer.parseInt(df.format((tpData[0] * 1000) / lcd_w));
 //        lt_Y = Integer.parseInt(df.format((tpData[1] * 1000) / lcd_h));

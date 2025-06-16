@@ -485,6 +485,37 @@
                 android:layout_width="@dimen/x_1080"
                 android:layout_height="@dimen/y_80"
                 android:layout_below="@id/rl_account"
+                android:id="@+id/rl_accessibility"
+                android:layout_marginStart="@dimen/x_100"
+                android:layout_marginTop="@dimen/y_19"
+                android:background="@drawable/main_settings_bg"
+                style="@style/focusStyle"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/x_50"
+                    android:layout_centerVertical="true"
+                    android:textColor="@color/tv_color"
+                    android:textSize="@dimen/x_27"
+                    android:text="@string/accessibility_title"
+                    android:duplicateParentState="true"
+                    />
+                <View
+                    android:layout_width="@dimen/x_53"
+                    android:layout_height="@dimen/y_53"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="@dimen/x_50"
+                    android:background="@drawable/arrow_right_bg"
+                    android:duplicateParentState="true"
+                    />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="@dimen/x_1080"
+                android:layout_height="@dimen/y_80"
+                android:layout_below="@id/rl_accessibility"
                 android:id="@+id/rl_developer"
                 android:layout_marginStart="@dimen/x_100"
                 android:layout_marginTop="@dimen/y_19"

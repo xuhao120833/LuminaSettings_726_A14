@@ -322,6 +322,7 @@
     <string name="email_title">Ügyfélszolgálati e-mail</string>
     <string name="wifi_connect_success">Csatlakozás sikeres:</string>
     <string name="wifi_ssid_not_found">Nem lehet csatlakozni ehhez a Wi-Fi hálózathoz, kérjük, ellenőrizze, hogy a hálózat létezik-e</string>
+    <string name="accessibility_title">Kisegítő lehetőségek</string>
 </resources>
 
 

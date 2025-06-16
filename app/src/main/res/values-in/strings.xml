@@ -322,4 +322,5 @@
     <string name="email_title">Email layanan purna jual</string>
     <string name="wifi_connect_success">Berhasil terhubung:</string>
     <string name="wifi_ssid_not_found">Tidak dapat terhubung ke Wi-Fi ini, harap periksa apakah jaringan tersedia</string>
+    <string name="accessibility_title">Fungsi Aksesibilitas</string>
 </resources>

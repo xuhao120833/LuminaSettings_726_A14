@@ -322,4 +322,5 @@
     <string name="email_title">E-mail voor aftersales service</string>
     <string name="wifi_connect_success">Verbonden:</string>
     <string name="wifi_ssid_not_found">Kan geen verbinding maken met dit wifi-netwerk, controleer of het netwerk bestaat</string>
+    <string name="accessibility_title">Toegankelijkheidsfuncties</string>
 </resources>

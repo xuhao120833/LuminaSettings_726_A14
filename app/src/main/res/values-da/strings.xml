@@ -322,5 +322,6 @@
     <string name="email_title">Eftersalgsservice e-mail</string>
     <string name="wifi_connect_success">Forbundet:</string>
     <string name="wifi_ssid_not_found">Kan ikke oprette forbindelse til Wi-Fi. Kontroller, om netværket findes.</string>
+    <string name="accessibility_title">Tilgængelighedsfunktioner</string>
 </resources>
 

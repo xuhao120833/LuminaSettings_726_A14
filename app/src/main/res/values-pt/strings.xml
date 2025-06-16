@@ -322,6 +322,7 @@
     <string name="email_title">Email de serviço pós-venda</string>
     <string name="wifi_connect_success">Conexão bem-sucedida:</string>
     <string name="wifi_ssid_not_found">Não foi possível conectar a este Wi-Fi, por favor verifique se a rede existe</string>
+    <string name="accessibility_title">Acessibilidade</string>
 </resources>
 
 

@@ -322,4 +322,5 @@
     <string name="email_title">Netfang fyrir þjónustu eftir sölu</string>
     <string name="wifi_connect_success">Tenging tókst:</string>
     <string name="wifi_ssid_not_found">Ekki er hægt að tengjast þessu Wi-Fi, vinsamlegast athugaðu hvort netið sé til.</string>
+    <string name="accessibility_title">Aðgengi</string>
 </resources>

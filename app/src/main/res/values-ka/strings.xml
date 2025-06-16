@@ -322,4 +322,5 @@
     <string name="email_title">გარემომცველი მომსახურების ელფოსტა</string>
     <string name="wifi_connect_success">დაკავშირება წარმატებით შესრულდა:</string>
     <string name="wifi_ssid_not_found">ვერ მოხერხდა კავშირი ამ Wi-Fi-სთან, გთხოვთ დაადასტუროთ ქსელის არსებობა</string>
+    <string name="accessibility_title">შესაძლებლობის ფუნქცია</string>
 </resources>
