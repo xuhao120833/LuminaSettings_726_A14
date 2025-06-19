@@ -1,6 +1,7 @@
 package com.htc.luminaos.adapter;
 
 import android.content.Context;
+import android.content.IntentFilter;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -11,7 +12,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.android.internal.app.LocalePicker;
 import com.htc.luminaos.R;
+import com.htc.luminaos.activity.MainActivity;
 import com.htc.luminaos.entry.Language;
+import com.htc.luminaos.receiver.DisplaySettingsReceiver;
 import com.htc.luminaos.utils.ScrollUtils;
 import com.htc.luminaos.utils.Utils;
 

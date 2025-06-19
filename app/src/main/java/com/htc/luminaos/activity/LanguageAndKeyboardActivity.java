@@ -199,7 +199,7 @@ public class LanguageAndKeyboardActivity extends BaseActivity {
                 preprocess[finalSize++] = new Language(toTitleCase(l.getDisplayLanguage(l)), l);
             } else {
                 if (preprocess[finalSize - 1].getLocale().getLanguage().equals(language)
-                        && (language.equals("zh") || language.equals("en"))) {  //只有中文、英文区分具体的国家
+                        && (language.equals("zh") || language.equals("en"))) {  //只有中文、英文区分具体的国家码
                     Log.d(TAG, " 语言列表 language " + language + " s " + s + " l.getDisplayLanguage(l)" + l.getDisplayLanguage(l));
                     preprocess[finalSize - 1].setLabel(toTitleCase(getDisplayName(preprocess[finalSize - 1].getLocale())));
                     preprocess[finalSize++] = new Language(toTitleCase(getDisplayName(l)), l);

@@ -202,7 +202,7 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
     //电池
     private BatteryReceiver batteryReceiver = null;
     //Display Settings 悬浮窗
-    private DisplaySettingsReceiver displaySettingsReceiver = null;
+    public static DisplaySettingsReceiver displaySettingsReceiver = null;
     private InitAngleReceiver initAngleReceiver = null;
     private UnlockReceiver unlockReceiver = null;
 
@@ -755,10 +755,13 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
         handler.sendEmptyMessage(204);
 
         //Display Settings悬浮窗
-        displaySettingsReceiver = new DisplaySettingsReceiver(getApplicationContext());
-        IntentFilter displayFilter = new IntentFilter();
-        displayFilter.addAction(DisplaySettingsReceiver.DisplayAction);
-        registerReceiver(displaySettingsReceiver, displayFilter);
+        if(displaySettingsReceiver == null) {
+            Log.d(TAG, "registerReceiver displaySettingsReceiver");
+            displaySettingsReceiver = new DisplaySettingsReceiver(getApplicationContext());
+            IntentFilter displayFilter = new IntentFilter();
+            displayFilter.addAction(DisplaySettingsReceiver.DisplayAction);
+            getApplicationContext().registerReceiver(displaySettingsReceiver, displayFilter);
+        }
 
         //初始角度矫正
         initAngleReceiver = new InitAngleReceiver(getApplicationContext());
@@ -1484,7 +1487,8 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
         unregisterReceiver(usbDeviceReceiver);
         unregisterReceiver(appReceiver);
         unregisterReceiver(batteryReceiver);
-        unregisterReceiver(displaySettingsReceiver);
+        getApplicationContext().unregisterReceiver(displaySettingsReceiver);
+        displaySettingsReceiver = null;
         unregisterReceiver(initAngleReceiver);
 //        unregisterReceiver(unlockReceiver);
         super.onDestroy();

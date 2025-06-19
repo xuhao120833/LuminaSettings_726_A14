@@ -72,7 +72,7 @@ public class Config {
     //屏幕保护
     public boolean screenSaver = true;
     //无障碍服务
-    public boolean accessibility = true;
+    public boolean accessibility = false;
 
     public  String sourceList ="HDMI1";
     public  String sourceListTitle ="HDMI";

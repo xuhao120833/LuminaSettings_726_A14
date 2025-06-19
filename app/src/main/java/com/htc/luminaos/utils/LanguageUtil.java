@@ -14,6 +14,10 @@ public class LanguageUtil {
         // 获取当前系统的国家/地区代码
         String country = locale.getCountry();
 
-        return language + "-" + country;  // 返回语言和国家代码的组合
+        if(language.equals("zh") || language.equals("en")) {  //只有中文、英文区分国家码
+            return language + "-" + country;  // 返回语言和国家代码的组合
+        } else {
+            return language + "-";  // 返回语言码
+        }
     }
 }

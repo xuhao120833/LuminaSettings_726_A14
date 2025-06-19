@@ -1,10 +1,13 @@
 package com.htc.luminaos.activity;
 
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +20,7 @@ import com.htc.luminaos.databinding.ActivityMainSettingBinding;
 import com.htc.luminaos.databinding.ActivitySettingsCustomBinding;
 import com.htc.luminaos.databinding.MainSettingsCustomBinding;
 import com.htc.luminaos.databinding.SettingsCustomBinding;
+import com.htc.luminaos.receiver.DisplaySettingsReceiver;
 
 public class MainSettingActivity extends BaseActivity {
 
@@ -26,6 +30,7 @@ public class MainSettingActivity extends BaseActivity {
     SettingsCustomBinding settingsCustomBinding;
 
     MainSettingsCustomBinding mainSettingsCustomBinding;
+    private static String TAG = "MainSettingActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +47,7 @@ public class MainSettingActivity extends BaseActivity {
         initView();
         initData();
 
+        handleDisplayBroadcast();
         //原生逻辑
 //        mainSettingBinding = ActivityMainSettingBinding.inflate(LayoutInflater.from(this));
 //        setContentView(mainSettingBinding.getRoot());
@@ -324,6 +330,18 @@ public class MainSettingActivity extends BaseActivity {
         intent_hdmi.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         intent_hdmi.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent_hdmi);
+    }
+
+    private void handleDisplayBroadcast() {
+        Log.d(TAG," handleDisplayBroadcast ");
+        Context applicationContext = getApplicationContext();
+
+        applicationContext.unregisterReceiver(MainActivity.displaySettingsReceiver);
+        MainActivity.displaySettingsReceiver = null;
+        MainActivity.displaySettingsReceiver = new DisplaySettingsReceiver(applicationContext);
+        IntentFilter displayFilter = new IntentFilter();
+        displayFilter.addAction(DisplaySettingsReceiver.DisplayAction);
+        applicationContext.registerReceiver(MainActivity.displaySettingsReceiver, displayFilter);
     }
 
 }
