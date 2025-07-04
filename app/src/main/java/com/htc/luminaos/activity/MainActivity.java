@@ -205,13 +205,9 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
     public static DisplaySettingsReceiver displaySettingsReceiver = null;
     private InitAngleReceiver initAngleReceiver = null;
     private UnlockReceiver unlockReceiver = null;
-
     private static String TAG = "MainActivity";
-
     private String appName = "";
-
     private boolean requestFlag = false;
-
     private final int DATA_ERROR = 102;
     private final int DATA_FINISH = 103;
 
@@ -466,6 +462,7 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
         customBinding.rlBluetooth.setOnClickListener(this);
         customBinding.rlBluetooth.setOnHoverListener(this);
         customBinding.rlBluetooth.setOnFocusChangeListener(this);
+        customBinding.rlBluetooth.setVisibility(MyApplication.config.bluetooth ? View.VISIBLE : View.GONE);
         //清除缓存
         customBinding.rlClearMemory.setOnClickListener(this);
         customBinding.rlClearMemory.setOnHoverListener(this);
@@ -496,7 +493,7 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
         customBinding.rlSupport.setOnClickListener(this);
         customBinding.rlSupport.setOnHoverListener(this);
         customBinding.rlSupport.setOnFocusChangeListener(this);
-        customBinding.rlSupport.setVisibility((MyApplication.config.support && !Utils.support_image_path.isEmpty()) ? View.VISIBLE : View.INVISIBLE);
+        customBinding.rlSupport.setVisibility((MyApplication.config.support && !Utils.support_image_path.isEmpty()) ? View.VISIBLE : View.GONE);
         //电池状态
         initBattery();
         //U盘插入
