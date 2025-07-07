@@ -240,6 +240,7 @@
     <string name="device_mode0">Staðlað ham</string>
     <string name="device_mode1">Orkusparnaðarham</string>
     <string name="device_mode2">Háupplausnarham</string>
+    <string name="device_mode3">Lágvaða stilling</string>
     <string name="new_version">Ný útgáfa</string>
     <string name="update_content">Uppfærsluefni</string>
     <string name="best_version">Nýjasta útgáfan nú þegar uppsett</string>

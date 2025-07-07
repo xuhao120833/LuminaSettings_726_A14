@@ -240,6 +240,7 @@
     <string name="device_mode0">מצב סטנדרטי</string>
     <string name="device_mode1">מצב חסכוני</string>
     <string name="device_mode2">מצב בהיר</string>
+    <string name="device_mode3">מצב רעש נמוך</string>
     <string name="new_version">גרסה חדשה</string>
     <string name="update_content">תוכן עדכון</string>
     <string name="best_version">הגרסה העדכנית ביותר כבר מותקנת</string>

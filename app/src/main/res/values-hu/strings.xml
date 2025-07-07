@@ -240,6 +240,7 @@
     <string name="device_mode0">Standard mód</string>
     <string name="device_mode1">Energiatakarékos mód</string>
     <string name="device_mode2">Nagy fényerejű mód</string>
+    <string name="device_mode3" translatable="true">Alacsony zajszintű mód</string>
     <string name="new_version">Új verzió</string>
     <string name="update_content">Frissítési tartalom</string>
     <string name="best_version">Már a legújabb verzió van telepítve</string>

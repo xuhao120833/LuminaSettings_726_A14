@@ -240,6 +240,7 @@
     <string name="device_mode0">Modo padrão</string>
     <string name="device_mode1">Modo econômico</string>
     <string name="device_mode2">Modo de alta luminosidade</string>
+    <string name="device_mode3">Modo de baixo ruído</string>
     <string name="new_version">Nova versão</string>
     <string name="update_content">Conteúdo da atualização</string>
     <string name="best_version">Versão mais recente já instalada</string>

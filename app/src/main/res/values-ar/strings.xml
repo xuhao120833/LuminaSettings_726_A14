@@ -240,6 +240,7 @@
     <string name="device_mode0">الوضع القياسي</string>
     <string name="device_mode1">وضع توفير الطاقة</string>
     <string name="device_mode2">وضع السطوع العالي</string>
+    <string name="device_mode3" translatable="true">وضع الضوضاء المنخفضة</string>
     <string name="new_version">الإصدار الجديد</string>
     <string name="update_content">محتوى التحديث</string>
     <string name="best_version">الإصدار الأحدث متوفر بالفعل</string>

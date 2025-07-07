@@ -240,6 +240,7 @@
 	<string name="device_mode0">Modo estándar</string>
 	<string name="device_mode1">Modo de ahorro de energía</string>
 	<string name="device_mode2">Modo de alto brillo</string>
+	<string name="device_mode3" translatable="true">Modo de bajo ruido</string>
 	<string name="new_version">Nueva versión</string>
 	<string name="update_content">Contenido de actualización</string>
 	<string name="best_version">Ya tienes la última versión</string>

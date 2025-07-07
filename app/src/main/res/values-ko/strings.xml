@@ -240,6 +240,7 @@
     <string name="device_mode0">표준 모드</string>
     <string name="device_mode1">절전 모드</string>
     <string name="device_mode2">고밝기 모드</string>
+    <string name="device_mode3">저소음 모드</string>
     <string name="new_version">새 버전</string>
     <string name="update_content">업데이트 내용</string>
     <string name="best_version">최신 버전입니다</string>

@@ -240,6 +240,7 @@
 	<string name="device_mode0">Modalità standard</string>
 	<string name="device_mode1">Modalità risparmio energetico</string>
 	<string name="device_mode2">Modalità alta luminosità</string>
+	<string name="device_mode3">Modalità a bassa rumorosità</string>
 	<string name="new_version">Nuova versione</string>
 	<string name="update_content">Contenuto aggiornamento</string>
 	<string name="best_version">Versione più recente già</string>

@@ -105,6 +105,7 @@ public class Config {
 
     //设备模式
     public boolean deviceMode = true;
+    public boolean low_noise_mode = false;
 
     //设备型号
     public boolean deviceModel = true;

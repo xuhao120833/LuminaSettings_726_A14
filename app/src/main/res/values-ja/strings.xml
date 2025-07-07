@@ -240,6 +240,7 @@
     <string name="device_mode0">標準モード</string>
     <string name="device_mode1">省エネルギーモード</string>
     <string name="device_mode2">高輝度モード</string>
+    <string name="device_mode3">低ノイズモード</string>
     <string name="new_version">新しいバージョン</string>
     <string name="update_content">更新内容</string>
     <string name="best_version">最新バージョンです</string>

@@ -240,6 +240,7 @@
     <string name="device_mode0">Mod standard</string>
     <string name="device_mode1">Mod economisire energie</string>
     <string name="device_mode2">Mod luminozitate ridicată</string>
+    <string name="device_mode3">Mod zgomot redus</string>
     <string name="new_version">Versiune nouă</string>
     <string name="update_content">Conținut actualizare</string>
     <string name="best_version">Cea mai recentă versiune deja instalată</string>

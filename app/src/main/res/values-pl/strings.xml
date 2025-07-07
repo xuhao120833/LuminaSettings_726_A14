@@ -240,6 +240,7 @@
     <string name="device_mode0">Tryb standardowy</string>
     <string name="device_mode1">Tryb oszczędzania energii</string>
     <string name="device_mode2">Tryb wysokiej jasności</string>
+    <string name="device_mode3">Tryb niskiego szumu</string>
     <string name="new_version">Nowa wersja</string>
     <string name="update_content">Zawartość aktualizacji</string>
     <string name="best_version">Już najnowsza wersja</string>

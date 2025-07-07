@@ -240,6 +240,7 @@
     <string name="device_mode0">Chế độ chuẩn</string>
     <string name="device_mode1">Chế độ tiết kiệm năng lượng</string>
     <string name="device_mode2">Chế độ sáng cao</string>
+    <string name="device_mode3">Chế độ tiếng ồn thấp</string>
     <string name="new_version">Phiên bản mới</string>
     <string name="update_content">Nội dung cập nhật</string>
     <string name="best_version">Phiên bản mới nhất</string>

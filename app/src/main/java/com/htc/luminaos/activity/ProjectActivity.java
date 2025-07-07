@@ -105,6 +105,7 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
     private int mR = 50;
     private int mG = 50;
     private int mB = 50;
+    private int maxMode = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -158,6 +159,8 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
         projectBinding.rlDeviceMode2.setOnKeyListener(this);
         projectBinding.rlDeviceMode2.setOnClickListener(this);
         projectBinding.rlDeviceMode2.setOnHoverListener(this);
+        if(MyApplication.config.low_noise_mode)
+            maxMode = 1;
         updateText(ReflectUtil.invokeGet_brightness_level()); //初始化设备模式的Text显示
         projectBinding.rlDigitalZoom.setOnKeyListener(this);
         projectBinding.rlDigitalZoom.setOnHoverListener(this);
@@ -507,7 +510,7 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
         } else if (id == R.id.rl_device_mode2) {
             Log.d(TAG, "onClick向右切换设备模式");
             cur_device_Mode++;
-            if (cur_device_Mode > 2) {
+            if (cur_device_Mode > maxMode) {
                 cur_device_Mode = 0;
             }
             updateText(cur_device_Mode);
@@ -641,7 +644,7 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
                 Log.d(TAG, "向左切换设备模式");
                 cur_device_Mode--;
                 if (cur_device_Mode < 0) {
-                    cur_device_Mode = 2;
+                    cur_device_Mode = maxMode;
                 }
                 updateText(cur_device_Mode);
                 ReflectUtil.invokeSet_brightness_level(cur_device_Mode);
@@ -703,7 +706,7 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
                     return false;
                 Log.d(TAG, "向右切换设备模式");
                 cur_device_Mode++;
-                if (cur_device_Mode > 2) {
+                if (cur_device_Mode > maxMode) {
                     cur_device_Mode = 0;
                 }
                 updateText(cur_device_Mode);
@@ -722,7 +725,11 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
                 projectBinding.deviceModeTv.setText(getString(R.string.device_mode0));
                 break;
             case 1:
-                projectBinding.deviceModeTv.setText(getString(R.string.device_mode1));
+                if(MyApplication.config.low_noise_mode) {
+                    projectBinding.deviceModeTv.setText(getString(R.string.device_mode3));
+                } else {
+                    projectBinding.deviceModeTv.setText(getString(R.string.device_mode1));
+                }
                 break;
             case 2:
                 projectBinding.deviceModeTv.setText(getString(R.string.device_mode2));

@@ -240,6 +240,7 @@
     <string name="device_mode0">Standardmode</string>
     <string name="device_mode1">Energibesparende mode</string>
     <string name="device_mode2">Høj lysstyrke mode</string>
+    <string name="device_mode3" translatable="true">Lav støjtilstand</string>
     <string name="new_version">Ny version</string>
     <string name="update_content">Opdateringsindhold</string>
     <string name="best_version">Nyeste version allerede</string>

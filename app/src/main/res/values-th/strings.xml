@@ -240,6 +240,7 @@
     <string name="device_mode0">โหมดมาตรฐาน</string>
     <string name="device_mode1">โหมดประหยัดพลังงาน</string>
     <string name="device_mode2">โหมดความสว่างสูง</string>
+    <string name="device_mode3">โหมดเสียงรบกวนต่ำ</string>
     <string name="new_version">เวอร์ชันใหม่</string>
     <string name="update_content">เนื้อหาอัปเดต</string>
     <string name="best_version">เวอร์ชันล่าสุดแล้ว</string>

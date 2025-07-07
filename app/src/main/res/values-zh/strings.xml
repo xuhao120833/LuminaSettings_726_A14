@@ -240,6 +240,7 @@
 	<string name="device_mode0">标准模式</string>
 	<string name="device_mode1">节能模式</string>
 	<string name="device_mode2">高亮模式</string>
+	<string name="device_mode3">低噪声模式</string>
 	<string name="new_version">New Version</string>
 	<string name="update_content">Update Content</string>
 	<string name="best_version">Latest version already</string>

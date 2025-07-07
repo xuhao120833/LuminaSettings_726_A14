@@ -240,6 +240,7 @@
     <string name="device_mode0">Standardmodus</string>
     <string name="device_mode1">Energiesparmodus</string>
     <string name="device_mode2">Heller Modus</string>
+	<string name="device_mode3" translatable="true">Modus mit geringer Geräuschentwicklung</string>
     <string name="new_version">Neue Version</string>
     <string name="update_content">Aktualisierungsinhalt</string>
     <string name="best_version">Neueste Version bereits installiert</string>

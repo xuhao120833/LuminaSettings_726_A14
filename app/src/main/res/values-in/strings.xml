@@ -240,6 +240,7 @@
     <string name="device_mode0">Mode standar</string>
     <string name="device_mode1">Mode hemat energi</string>
     <string name="device_mode2">Mode terang tinggi</string>
+    <string name="device_mode3" translatable="true">Mode rendah kebisingan</string>
     <string name="new_version">Versi Baru</string>
     <string name="update_content">Konten Pembaruan</string>
     <string name="best_version">Sudah versi terbaru</string>

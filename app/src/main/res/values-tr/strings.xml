@@ -240,6 +240,7 @@
     <string name="device_mode0">Standart Mod</string>
     <string name="device_mode1">Enerji Tasarrufu Modu</string>
     <string name="device_mode2">Aşırı Aydınlatma Modu</string>
+    <string name="device_mode3">Düşük gürültü modu</string>
     <string name="new_version">Yeni Sürüm</string>
     <string name="update_content">Güncelleme İçeriği</string>
     <string name="best_version">Zaten en son sürüm</string>

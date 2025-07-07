@@ -240,6 +240,7 @@
     <string name="device_mode0">Стандартний режим</string>
     <string name="device_mode1">Економний режим</string>
     <string name="device_mode2">Яскравий режим</string>
+    <string name="device_mode3">Режим низького шуму</string>
     <string name="new_version">Нова версія</string>
     <string name="update_content">Вміст оновлення</string>
     <string name="best_version">Остання версія вже встановлена</string>

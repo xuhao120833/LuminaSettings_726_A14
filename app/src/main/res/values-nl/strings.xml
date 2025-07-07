@@ -240,6 +240,7 @@
     <string name="device_mode0">Standaardmodus</string>
     <string name="device_mode1">Energiebesparende modus</string>
     <string name="device_mode2">Heldere modus</string>
+    <string name="device_mode3">Laagruismodus</string>
     <string name="new_version">Nieuwe versie</string>
     <string name="update_content">Update-inhoud</string>
     <string name="best_version">Nieuwste versie al geïnstalleerd</string>

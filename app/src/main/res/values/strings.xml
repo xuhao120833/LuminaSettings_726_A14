@@ -240,6 +240,7 @@
     <string name="device_mode0">Standard Mode</string>
     <string name="device_mode1">Energy Saving Mode</string>
     <string name="device_mode2">High Brightness Mode</string>
+    <string name="device_mode3">Low-Noise Mode</string>
     <string name="new_version">New Version</string>
     <string name="update_content">Update Content</string>
     <string name="best_version">Latest version already</string>
