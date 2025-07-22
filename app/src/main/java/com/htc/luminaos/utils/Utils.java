@@ -44,6 +44,7 @@ public class Utils {
             R.drawable.background10,
             R.drawable.background11,
             R.drawable.background12,
+            R.drawable.background0,
             R.drawable.background13,
     };
 

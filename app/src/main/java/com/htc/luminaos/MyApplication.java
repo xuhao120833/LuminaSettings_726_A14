@@ -208,6 +208,7 @@ public class MyApplication extends Application {
             Utils.drawables.add(R.drawable.background10);
             Utils.drawables.add(R.drawable.background11);
             Utils.drawables.add(R.drawable.background12);
+            Utils.drawables.add(R.drawable.background0);
             Utils.drawables.add(R.drawable.background13);
             copyMyWallpaper();
             Utils.drawables.add(getResources().getDrawable(R.drawable.wallpaper_add));

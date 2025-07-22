@@ -1206,8 +1206,8 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
     }
 
     private void updateColorTemp(int colorTemp) {
-        //pqControl.setColorTemperature(colorTemp);
-        pqControl.factorySetColorTemperature(0xFF, "0xFF", colorTemp);
+        pqControl.setColorTemperature(colorTemp);
+//        pqControl.factorySetColorTemperature(0xFF, "0xFF", colorTemp);
         projectBinding.colorTempTv.setText(colorTemp_name[colorTemp]);
         int[] mRGBInfo = pqControl.factoryGetWBInfo(mColorTemp);
         mR = mRGBInfo[PQControl.GAIN_R];
