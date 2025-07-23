@@ -9,6 +9,7 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.media.AudioManagerEx;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -21,6 +22,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.CompoundButton;
 import android.widget.Toast;
 
 import com.htc.luminaos.MyApplication;
@@ -106,6 +108,7 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
     private int mG = 50;
     private int mB = 50;
     private int maxMode = 2;
+    AudioManagerEx audioManagerEx;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -177,6 +180,15 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
         projectBinding.rlManualKeystone.setOnHoverListener(this);
         projectBinding.rlResetKeystone.setOnClickListener(this);
         projectBinding.rlResetKeystone.setOnHoverListener(this);
+        projectBinding.rlArcSwitch.setOnClickListener(this);
+        projectBinding.rlArcSwitch.setOnHoverListener(this);
+        projectBinding.arcSwitch.setOnClickListener(this);
+        projectBinding.arcSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                updateAudioDevice(isChecked?"AUDIO_ARC":"AUDIO_SPEAKER");
+            }
+        });
 
         projectBinding.rlAutoFocus.setOnClickListener(this);
         projectBinding.rlAutoFocus.setOnHoverListener(this);
@@ -236,6 +248,7 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
         projectBinding.rlDigitalZoom.setVisibility(MyApplication.config.wholeZoom ? View.VISIBLE : View.GONE);
         projectBinding.rlScreenZoom.setVisibility(MyApplication.config.screenZoom ? View.VISIBLE : View.GONE);
         projectBinding.rlAutoKeystone.setVisibility(MyApplication.config.autoKeystone ? View.VISIBLE : View.GONE);
+        projectBinding.rlArcSwitch.setVisibility(MyApplication.config.arcSwitch?View.VISIBLE:View.GONE);
         if ((boolean)ShareUtil.get(this,Contants.KEY_DEVELOPER_MODE,false) || MyApplication.config.initAngleCorrect){
             projectBinding.rlInitAngle.setVisibility(View.VISIBLE);
         } else {
@@ -362,6 +375,11 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
         colorTemp_name = getResources().getStringArray(R.array.picture_mode_weimi_choices_no_custom);
         mColorTemp = pqControl.getColorTemperature();
         projectBinding.colorTempTv.setText(colorTemp_name[mColorTemp]);
+
+        audioManagerEx = new AudioManagerEx(this);
+        ArrayList<String> audioDevices = audioManagerEx.getAudioDeviceActive(AudioManagerEx.AUDIO_OUTPUT_ACTIVE);
+        if (audioDevices!=null && audioDevices.size()>0)
+            projectBinding.arcSwitch.setChecked(audioDevices.get(0).equals("AUDIO_ARC"));
     }
 
     private void updateSzoomTv() {
@@ -557,6 +575,8 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
 //            KeystoneUtils_726.writeGlobalSettings(this, KeystoneUtils_726.ZOOM_SCALE, zoom_scale);
             KeystoneUtils_726.writeSystemProperties(KeystoneUtils_726.PROP_ZOOM_SCALE, zoom_scale);
             updateSzoomTv();
+        } else if (id == R.id.arc_switch || id == R.id.rl_arc_switch) {
+            projectBinding.arcSwitch.setChecked(!projectBinding.arcSwitch.isChecked());
         }
     }
 
@@ -739,7 +759,7 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
     }
 
     private void updateProjectMode() {
-//        tvDisplayManager.factorySetPanelValue(AwTvDisplayTypes.EnumPanelConfigType.E_AW_PANEL_CONFIG_MIRROR, cur_project_mode);
+        tvDisplayManager.factorySetPanelValue(AwTvDisplayTypes.EnumPanelConfigType.E_AW_PANEL_CONFIG_MIRROR, cur_project_mode);
         projectBinding.projectModeTv.setText(project_name.get(cur_project_mode));
 //        SystemProperties.set("persist.sys.panelvalue", String.valueOf(cur_project_mode));
 //        if (getAuto())
@@ -747,10 +767,10 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
         SystemProperties.set("persist.sys.panelvalue", String.valueOf(cur_project_mode));
 //        if (SystemProperties.get("persist.sys.camok", "0").equals("1")
 //                && SystemProperties.get("persist.sys.focusupdn", "0").equals("0"))
-        KeystoneUtils_726.setKeystoneNormalXY(old_project_mode, cur_project_mode);
+ //       KeystoneUtils_726.setKeystoneNormalXY(old_project_mode, cur_project_mode);
         if (SystemProperties.getBoolean("persist.sys.tpryauto", false))
             sendProjectBroadCast();
-        tvDisplayManager.factorySetPanelValue(AwTvDisplayTypes.EnumPanelConfigType.E_AW_PANEL_CONFIG_MIRROR, cur_project_mode);
+        //tvDisplayManager.factorySetPanelValue(AwTvDisplayTypes.EnumPanelConfigType.E_AW_PANEL_CONFIG_MIRROR, cur_project_mode);
 
 //        new Handler(Looper.getMainLooper()).postDelayed(() -> {
 //            Log.d(TAG," 延时5s执行tvDisplayManager.factorySetPanelValue");
@@ -1218,5 +1238,10 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
 //        updateB(false);
     }
 
+    private void updateAudioDevice(String value){
+        ArrayList<String> channels = new ArrayList<>();
+        channels.add(value);
+        audioManagerEx.setAudioDeviceActive(channels, AudioManagerEx.AUDIO_OUTPUT_ACTIVE);
+    }
 
 }

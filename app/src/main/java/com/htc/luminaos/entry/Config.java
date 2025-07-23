@@ -83,6 +83,8 @@ public class Config {
     //自动梯形矫正
     public boolean autoKeystone = true;
 
+    public boolean arcSwitch = false;
+
     //初始角度矫正
     public boolean initAngleCorrect = true;
 
