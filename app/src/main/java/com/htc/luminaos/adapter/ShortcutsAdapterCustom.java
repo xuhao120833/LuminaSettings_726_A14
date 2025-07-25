@@ -1,5 +1,6 @@
 package com.htc.luminaos.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -51,6 +52,7 @@ public class ShortcutsAdapterCustom extends RecyclerView.Adapter<ShortcutsAdapte
     android.os.Handler handler = new Handler();
 
     public ShortcutsAdapterCustom(Context mContext, ArrayList<ShortInfoBean> short_list) {
+        Log.d(TAG," 创建ShortcutsAdapterCustom ");
         this.mContext = mContext;
         this.short_list = short_list;
     }
@@ -63,12 +65,17 @@ public class ShortcutsAdapterCustom extends RecyclerView.Adapter<ShortcutsAdapte
         return itemCallBack;
     }
 
+    public void setShort_list(ArrayList<ShortInfoBean> short_list) {
+        this.short_list = short_list;
+        notifyDataSetChanged();
+    }
+
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
 
         MyViewHolder myViewHolder = new MyViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.shortcuts_item_custom, null));
-
+        myViewHolder.setIsRecyclable(false);
         return myViewHolder;
     }
 
