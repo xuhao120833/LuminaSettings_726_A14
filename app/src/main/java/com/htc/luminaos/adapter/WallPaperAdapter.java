@@ -171,6 +171,7 @@ public class WallPaperAdapter extends RecyclerView.Adapter<WallPaperAdapter.MyVi
         int position = holder.getAdapterPosition();
         Log.d(TAG, " onViewAttachedToWindow " + position);
         if (position < drawables.size() - 1) {
+            holder.icon_card.setCardBackgroundColor(Color.parseColor("#00000000"));
             Log.d(TAG, " 添加View i " + position);
             loadAndSetBackground(position, holder);
         } else {
