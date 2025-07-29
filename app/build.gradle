@@ -2,7 +2,6 @@ apply plugin: 'com.android.application'
 
 ext.build_number = "debug";
 
-def buildVersion = "zz"
 
 android {
     namespace 'com.htc.luminaos'
@@ -89,7 +88,7 @@ android {
 }
 
 static def getVersionNames() {
-    return "1.0.25"
+    return "1.0.27"
 }
 
 static def releaseTime() {
@@ -101,10 +100,7 @@ static def releaseCode() {
 
 dependencies {
     implementation 'com.android.support:appcompat-v7:28.0.0'
-    if(buildVersion == "zz")
-        implementation files('libs/softwinner_726_0718.jar')
-    else if(buildVersion == "zy")
-        implementation files('libs/softwinner_726_a14_zy.jar')
+    implementation files('libs/softwinner_726.jar')
     implementation 'com.google.android.material:material:1.3.0'
     compileOnly files('libs/classes_726_a14.jar')
     implementation 'androidx.appcompat:appcompat:1.3.1'
@@ -112,7 +108,7 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
-    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    implementation 'androidx.recyclerview:recyclerview:1.3.0'
     implementation 'com.squareup.okhttp3:okhttp:5.0.0-alpha.12'
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     implementation files('libs/Baidu_Mtj_android_4.0.10.9.jar')

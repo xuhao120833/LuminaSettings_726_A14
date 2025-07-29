@@ -376,10 +376,10 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
         mColorTemp = pqControl.getColorTemperature();
         projectBinding.colorTempTv.setText(colorTemp_name[mColorTemp]);
 
-        audioManagerEx = new AudioManagerEx(this);
-        ArrayList<String> audioDevices = audioManagerEx.getAudioDeviceActive(AudioManagerEx.AUDIO_OUTPUT_ACTIVE);
-        if (audioDevices!=null && audioDevices.size()>0)
-            projectBinding.arcSwitch.setChecked(audioDevices.get(0).equals("AUDIO_ARC"));
+//        audioManagerEx = new AudioManagerEx(this);
+//        ArrayList<String> audioDevices = audioManagerEx.getAudioDeviceActive(AudioManagerEx.AUDIO_OUTPUT_ACTIVE);
+//        if (audioDevices!=null && audioDevices.size()>0)
+//            projectBinding.arcSwitch.setChecked(audioDevices.get(0).equals("AUDIO_ARC"));
     }
 
     private void updateSzoomTv() {

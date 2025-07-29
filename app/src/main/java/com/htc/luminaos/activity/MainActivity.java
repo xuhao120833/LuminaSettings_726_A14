@@ -62,6 +62,7 @@ import com.htc.luminaos.utils.FileUtils;
 
 import android.os.Environment;
 import android.os.Handler;
+import android.os.HandlerThread;
 import android.os.Message;
 import android.os.SystemProperties;
 import android.os.storage.StorageManager;
@@ -230,27 +231,46 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
     private WifiHotUtil wifiHotUtil = null;
 
     private ShortcutsAdapterCustom shortcutsAdapterCustom = null;
+    private boolean dataOK = false;
+
+    Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+            //读取首页的配置文件，优先读取网络服务器配置，其次读本地配置。只读取一次，清除应用缓存可触发再次读取。
+            if (!dataOK) {
+                initDataApp();
+                short_list = loadHomeAppData();
+                Log.d(TAG, " initDataCustom快捷图标 short_list " + short_list.size());
+                Log.d(TAG, " initDataCustom handler" + handler);
+                handler.sendEmptyMessage(204);
+                initReceiver();
+                dataOK = true;
+            }
+
+            handler.postDelayed(this, 200);
+        }
+    };
 
     Handler handler = new Handler(new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
             switch (msg.what) {
-                case 202:
-                    ShortcutsAdapter shortcutsAdapter = new ShortcutsAdapter(MainActivity.this, short_list);
-                    shortcutsAdapter.setItemCallBack(itemCallBack);
-                    mainBinding.shortcutsRv.setAdapter(shortcutsAdapter);
-                    break;
+//                case 202:
+//                    ShortcutsAdapter shortcutsAdapter = new ShortcutsAdapter(MainActivity.this, short_list);
+//                    shortcutsAdapter.setItemCallBack(itemCallBack);
+//                    mainBinding.shortcutsRv.setAdapter(shortcutsAdapter);
+//                    break;
                 case 204:
-                    Log.d(TAG," handler 204");
-                    shortcutsAdapterCustom = new ShortcutsAdapterCustom(MainActivity.this, short_list);
-                    shortcutsAdapterCustom.setItemCallBack(itemCallBackCustom);
-                    customBinding.shortcutsRv.setAdapter(shortcutsAdapterCustom);
-                    break;
-                case 205:
-                    Log.d(TAG," handler 205");
-                    if(shortcutsAdapterCustom != null) {
+                    Log.d(TAG, " handler 204");
+                    if (shortcutsAdapterCustom != null) {
                         shortcutsAdapterCustom.setShort_list(short_list);
+                    } else {
+                        shortcutsAdapterCustom = new ShortcutsAdapterCustom(MainActivity.this, short_list);
+                        shortcutsAdapterCustom.setItemCallBack(itemCallBackCustom);
+
+                        customBinding.shortcutsRv.setAdapter(shortcutsAdapterCustom);
                     }
+                    handler.removeCallbacks(runnable);
                     break;
                 case DATA_ERROR:
                     requestFlag = false;
@@ -292,7 +312,7 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
                 } else {
                     Log.d(TAG, " 收到refreshApps的广播，且没有/system/others.config");
                     short_list = loadHomeAppData();
-                    handler.sendEmptyMessage(205);
+                    handler.sendEmptyMessage(204);
                 }
             }
         }
@@ -309,7 +329,7 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
             JSONObject obj = new JSONObject(result);
             readSpecialApps(obj, residentList);
             short_list = loadHomeAppData();
-            handler.sendEmptyMessage(205);
+            handler.sendEmptyMessage(204);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -365,7 +385,8 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
             if ((boolean) ShareUtil.get(this, Contants.MODIFY, false)) {
                 short_list = loadHomeAppData();
 //            handler.sendEmptyMessage(202);
-                handler.sendEmptyMessage(205);
+                Log.d(TAG, " onResume handler" + handler);
+                handler.sendEmptyMessage(204);
                 ShareUtil.put(this, Contants.MODIFY, false);
             }
             Log.d(TAG, " onResume快捷图标 short_list " + short_list.size());
@@ -380,14 +401,14 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
         int[] time_off_value = getResources().getIntArray(R.array.time_off_value);
         int cur_time_off_index = (int) ShareUtil.get(this, Contants.TimeOffIndex, 0);
         Intent intent = new Intent(this, TimeOffService.class);
-        if (cur_time_off_index==0){
-            ShareUtil.put(this,Contants.TimeOffStatus,false);
-            ShareUtil.put(this,Contants.TimeOffTime,time_off_value[cur_time_off_index]);
-            intent.putExtra(Contants.TimeOffStatus,false);
-        }else {
-            ShareUtil.put(this,Contants.TimeOffStatus,true);
-            ShareUtil.put(this,Contants.TimeOffTime,time_off_value[cur_time_off_index]);
-            intent.putExtra(Contants.TimeOffStatus,true);
+        if (cur_time_off_index == 0) {
+            ShareUtil.put(this, Contants.TimeOffStatus, false);
+            ShareUtil.put(this, Contants.TimeOffTime, time_off_value[cur_time_off_index]);
+            intent.putExtra(Contants.TimeOffStatus, false);
+        } else {
+            ShareUtil.put(this, Contants.TimeOffStatus, true);
+            ShareUtil.put(this, Contants.TimeOffTime, time_off_value[cur_time_off_index]);
+            intent.putExtra(Contants.TimeOffStatus, true);
         }
         startForegroundService(intent);
     }
@@ -676,18 +697,9 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
     }
 
     private void initDataCustom() {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                //读取首页的配置文件，优先读取网络服务器配置，其次读本地配置。只读取一次，清除应用缓存可触发再次读取。
-                initDataApp();
-                short_list = loadHomeAppData();
-                Log.d(TAG, " initDataCustom快捷图标 short_list " + short_list.size());
-                handler.sendEmptyMessage(204);
-                initReceiver();
-            }
-        }).start();
+        handler.post(runnable);
     }
+
 
     private void initReceiver() {
         IntentFilter networkFilter = new IntentFilter(
@@ -761,7 +773,7 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
 //        handler.sendEmptyMessage(204);
 
         //Display Settings悬浮窗
-        if(displaySettingsReceiver == null) {
+        if (displaySettingsReceiver == null) {
             Log.d(TAG, "registerReceiver displaySettingsReceiver");
             displaySettingsReceiver = new DisplaySettingsReceiver(getApplicationContext());
             IntentFilter displayFilter = new IntentFilter();
@@ -891,9 +903,9 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
         String appname = null;
         String action = null;
         int id = v.getId();
-        if(id == R.id.rl_support) {
+        if (id == R.id.rl_support) {
             showSupportDialog();
-        }else if (id == R.id.rl_clear_memory) {
+        } else if (id == R.id.rl_clear_memory) {
             goAction("com.htc.clearmemory/com.htc.clearmemory.MainActivity");
         } else if (id == R.id.rl_wallpapers) {
             startNewActivity(WallPaperActivity.class);
@@ -1073,8 +1085,8 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
         SharedPreferences.Editor editor = sharedPreferences.edit();
         int code = sharedPreferences.getInt("code", 0);
         Log.d(TAG, " initDataApp读code值 " + code);
-        int reload = SystemProperties.getInt("persist.htc.reload",0);
-        if(reload == 1) {
+        int reload = SystemProperties.getInt("persist.htc.reload", 0);
+        if (reload == 1) {
             DBUtils.getInstance(this).deleteTable();
         }
         if (code == 0 || reload == 1) {  //保证配置文件只在最初读一次
@@ -1782,7 +1794,7 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
             public void run() {
                 // 设置首页的配置图标
                 try {
-                    if(drawable != null) {
+                    if (drawable != null) {
                         view.setImageDrawable(drawable);
                     } else {
                         view.setImageResource(defaultId);
@@ -2445,7 +2457,7 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
                 }
 
                 // 如果当前语言没找到，尝试找英文
-                Log.d(TAG,"loadSupport Utils.support_image_path "+Utils.support_image_path);
+                Log.d(TAG, "loadSupport Utils.support_image_path " + Utils.support_image_path);
                 if (Utils.support_image_path.isEmpty()) {
                     for (File file : files) {
                         if (file.isFile() && file.getName().contains("_en")) {
@@ -2473,7 +2485,7 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
     }
 
     private void showSupportDialog() {
-        Dialog dialog = new Dialog(this,R.style.DialogTheme);
+        Dialog dialog = new Dialog(this, R.style.DialogTheme);
         DialogSupportBinding supportBinding = DialogSupportBinding.inflate(LayoutInflater.from(this));
         dialog.setContentView(supportBinding.getRoot());
         File file = new File(Utils.support_image_path);
@@ -2515,6 +2527,6 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
     @Override
     public void unLock() {
         short_list = loadHomeAppData();
-        handler.sendEmptyMessage(205);
+        handler.sendEmptyMessage(204);
     }
 }
