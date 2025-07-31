@@ -1474,8 +1474,7 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
     }
 
     private void updateBle() {
-        boolean isConnected = BluetoothUtils.getInstance(this)
-                .isBluetoothConnected();
+        boolean isConnected = BluetoothUtils.getInstance(this).isBluetoothConnected();
         if (isConnected) {
 //            mainBinding.homeBluetooth.setBackgroundResource(R.drawable.bluetooth_con);
             customBinding.homeBluetooth.setImageResource(R.drawable.bt_custom_green);
@@ -1491,7 +1490,6 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
 //                TimeUtils
 //                        .getCurrentTime(this);
 //        mainBinding.timeTv.setText(builder);
-
         customBinding.timeTv.setText(TimeUtils.getCurrentTime(this));
     }
 

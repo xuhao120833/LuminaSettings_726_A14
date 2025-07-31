@@ -767,7 +767,7 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
         SystemProperties.set("persist.sys.panelvalue", String.valueOf(cur_project_mode));
 //        if (SystemProperties.get("persist.sys.camok", "0").equals("1")
 //                && SystemProperties.get("persist.sys.focusupdn", "0").equals("0"))
- //       KeystoneUtils_726.setKeystoneNormalXY(old_project_mode, cur_project_mode);
+        KeystoneUtils_726.setKeystoneNormalXY(old_project_mode, cur_project_mode);
         if (SystemProperties.getBoolean("persist.sys.tpryauto", false))
             sendProjectBroadCast();
         //tvDisplayManager.factorySetPanelValue(AwTvDisplayTypes.EnumPanelConfigType.E_AW_PANEL_CONFIG_MIRROR, cur_project_mode);
