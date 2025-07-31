@@ -44,51 +44,64 @@ public class BluetoothUtils {
 	 * 
 	 * @return
 	 */
-	public List<BluetoothDevice> getCurrentConnectDevice() {
+//	public List<BluetoothDevice> getCurrentConnectDevice() {
+//		if (mBluetoothAdapter != null && mBluetoothAdapter.isEnabled()) {
+//			Class<BluetoothAdapter> bluetoothAdapterClass = BluetoothAdapter.class;
+//			try {// 得到蓝牙状态的方法
+//				Method method = bluetoothAdapterClass.getDeclaredMethod(
+//						"getConnectionState", (Class[]) null);
+//				// 打开权限
+//				method.setAccessible(true);
+//				int state = (Integer) method.invoke(mBluetoothAdapter, (Object[]) null);
+//				if (state == BluetoothAdapter.STATE_CONNECTED) {
+//					List<BluetoothDevice> deviceconnectList = new ArrayList<BluetoothDevice>();
+//					Set<BluetoothDevice> devices = mBluetoothAdapter.getBondedDevices();
+//					for (BluetoothDevice device : devices) {
+//						Method isConnectedMethod = BluetoothDevice.class.getDeclaredMethod("isConnected",
+//										(Class[]) null);
+//						method.setAccessible(true);
+//						boolean isConnected = (Boolean) isConnectedMethod
+//								.invoke(device, (Object[]) null);
+//						if (isConnected) {
+//							// L.i("Connected : " + device.getAddress());
+//							deviceconnectList.add(device);
+//						}
+//					}
+//					return deviceconnectList;
+//				}
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//				return null;
+//			}
+//		}
+//		return null;
+//	}
 
-		if (mBluetoothAdapter != null && mBluetoothAdapter.isEnabled()) {
-
-			Class<BluetoothAdapter> bluetoothAdapterClass = BluetoothAdapter.class;
-			try {// 得到蓝牙状态的方法
-				Method method = bluetoothAdapterClass.getDeclaredMethod(
-						"getConnectionState", (Class[]) null);
-				// 打开权限
-				method.setAccessible(true);
-				int state = (Integer) method.invoke(mBluetoothAdapter,
-						(Object[]) null);
-				if (state == BluetoothAdapter.STATE_CONNECTED) {
-
-					List<BluetoothDevice> deviceconnectList = new ArrayList<BluetoothDevice>();
-
-					Set<BluetoothDevice> devices = mBluetoothAdapter
-							.getBondedDevices();
-
-					for (BluetoothDevice device : devices) {
-
-						Method isConnectedMethod = BluetoothDevice.class
-								.getDeclaredMethod("isConnected",
-										(Class[]) null);
-						method.setAccessible(true);
-						boolean isConnected = (Boolean) isConnectedMethod
-								.invoke(device, (Object[]) null);
-						if (isConnected) {
-
-							// L.i("Connected : " + device.getAddress());
-
-							deviceconnectList.add(device);
-						}
+	private List<BluetoothDevice> getCurrentConnectDevice() {
+		Class<BluetoothAdapter> bluetoothAdapterClass = BluetoothAdapter.class;// 得到BluetoothAdapter的Class对象
+		try {// 得到蓝牙状态的方法
+            /*Method method = bluetoothAdapterClass.getDeclaredMethod(
+                    "getConnectionState", (Class[]) null);
+            // 打开权限
+            method.setAccessible(true);
+            int state = (Integer) method.invoke(bluetoothAdapter,
+                    (Object[]) null);*/
+			List<BluetoothDevice> deviceconnectList = new ArrayList<BluetoothDevice>();
+			Set<BluetoothDevice> devices = mBluetoothAdapter.getBondedDevices();
+			for (BluetoothDevice device : devices) {
+				Method isConnectedMethod = BluetoothDevice.class.getDeclaredMethod("isConnected", (Class[]) null);
+				boolean isConnected = (Boolean) isConnectedMethod.invoke(device, (Object[]) null);
+				if (isConnected) {
+					if (device != null) {
+						deviceconnectList.add(device);
 					}
-
-					return deviceconnectList;
 				}
-
-			} catch (Exception e) {
-				e.printStackTrace();
-				return null;
 			}
+			return deviceconnectList;
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		return null;
-
 	}
 	
 	public boolean isBluetoothConnected() {
