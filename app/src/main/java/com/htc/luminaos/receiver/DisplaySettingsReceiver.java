@@ -20,7 +20,6 @@ import com.htc.luminaos.R;
 import com.htc.luminaos.databinding.ActivityDisplaySettingsBinding;
 import com.htc.luminaos.utils.AddViewToScreen;
 import com.htc.luminaos.utils.ReflectUtil;
-import com.htc.luminaos.utils.Utils;
 import com.softwinner.PQControl;
 import com.softwinner.tv.AwTvDisplayManager;
 
@@ -72,7 +71,8 @@ public class DisplaySettingsReceiver extends BroadcastReceiver implements View.O
         pqControl = new PQControl();
     }
 
-    DisplaySettingsReceiver() {
+    public DisplaySettingsReceiver() {
+        // 必须存在这个无参构造函数
     }
 
     @Override
