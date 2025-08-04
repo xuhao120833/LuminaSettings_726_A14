@@ -74,7 +74,8 @@
     <string name="update_firmware">Lokale update</string>
     <string name="all_apps">Alle apps</string>
     <string name="app_manager_settings">Applicatie-instellingen</string>
-    <string name="bluetooth">Bluetooth-instellingen</string>
+    <string name="bluetooth_settings">Bluetooth-instellingen</string>
+    <string name="bluetooth">Bluetooth</string>
     <string name="bluetooth_switch">Bluetooth-schakelaar</string>
     <string name="search_bluetooth">Zoek naar Bluetooth-apparaten</string>
     <string name="paired_devices">Gekoppelde apparaten</string>
@@ -86,6 +87,7 @@
     <string name="timezone">Tijdzone</string>
     <string name="time_format">Gebruik 24-uursindeling</string>
     <string name="language_keyboard">Taal en toetsenbord</string>
+    <string name="language_keyboard2">Taal en toetsenbord</string>
     <string name="language_setting">Taalinstellingen</string>
     <string name="inputmethod">Invoermethode</string>
     <string name="inputmethod_setting">Instellingen invoermethode</string>
@@ -99,11 +101,13 @@
     <string name="apps">Mijn apps</string>
     <string name="google">Google Play Store</string>
     <string name="settings">Instellingen</string>
-    <string name="project_setting">Projectie-instellingen</string>
+    <string name="projection_settings">Projectie-instellingen</string>
+    <string name="projection">Projectie-instellingen</string>
     <string name="wireless_network">Draadloos netwerk</string>
     <string name="apps_manager">App-instellingen</string>
     <string name="date_time">Datum en tijd</string>
     <string name="other_settings">Andere instellingen</string>
+    <string name="others">Andere instellingen</string>
     <string name="system_info">Systeeminformatie</string>
     <string name="boot_input">Externe invoer bij opstarten</string>
     <string name="boot_apps">Apps starten bij opstarten</string>
@@ -224,7 +228,8 @@
     <string name="picture_mode_custom_name">Aangepast</string>
     <string name="Eshare">Scherm delen</string>
     <string name="Filemanager">Bestandsbeheer</string>
-    <string name="network_setting">Netwerkinstellingen</string>
+    <string name="network_settings">Netwerkinstellingen</string>
+    <string name="network">Netwerk</string>
     <string name="choose_ap">Kies AP-frequentie</string>
     <string name="network_disconnect_tip">Verbind met het netwerk en probeer opnieuw!</string>
     <string name="data_err">Gegevensfout opgetreden!</string>

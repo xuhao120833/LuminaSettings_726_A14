@@ -162,8 +162,8 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
         projectBinding.rlDeviceMode2.setOnKeyListener(this);
         projectBinding.rlDeviceMode2.setOnClickListener(this);
         projectBinding.rlDeviceMode2.setOnHoverListener(this);
-        if(MyApplication.config.low_noise_mode)
-            maxMode = 1;
+//        if(MyApplication.config.low_noise_mode)
+//            maxMode = 1;
         updateText(ReflectUtil.invokeGet_brightness_level()); //初始化设备模式的Text显示
         projectBinding.rlDigitalZoom.setOnKeyListener(this);
         projectBinding.rlDigitalZoom.setOnHoverListener(this);
@@ -183,12 +183,12 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
         projectBinding.rlArcSwitch.setOnClickListener(this);
         projectBinding.rlArcSwitch.setOnHoverListener(this);
         projectBinding.arcSwitch.setOnClickListener(this);
-        projectBinding.arcSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                updateAudioDevice(isChecked?"AUDIO_ARC":"AUDIO_SPEAKER");
-            }
-        });
+//        projectBinding.arcSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//                updateAudioDevice(isChecked?"AUDIO_ARC":"AUDIO_SPEAKER");
+//            }
+//        });
 
         projectBinding.rlAutoFocus.setOnClickListener(this);
         projectBinding.rlAutoFocus.setOnHoverListener(this);
@@ -376,10 +376,10 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
         mColorTemp = pqControl.getColorTemperature();
         projectBinding.colorTempTv.setText(colorTemp_name[mColorTemp]);
 
-//        audioManagerEx = new AudioManagerEx(this);
-//        ArrayList<String> audioDevices = audioManagerEx.getAudioDeviceActive(AudioManagerEx.AUDIO_OUTPUT_ACTIVE);
-//        if (audioDevices!=null && audioDevices.size()>0)
-//            projectBinding.arcSwitch.setChecked(audioDevices.get(0).equals("AUDIO_ARC"));
+        audioManagerEx = new AudioManagerEx(this);
+        ArrayList<String> audioDevices = audioManagerEx.getAudioDeviceActive(AudioManagerEx.AUDIO_OUTPUT_ACTIVE);
+        if (audioDevices!=null && audioDevices.size()>0)
+            projectBinding.arcSwitch.setChecked(audioDevices.get(0).equals("AUDIO_ARC"));
     }
 
     private void updateSzoomTv() {
@@ -576,7 +576,9 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
             KeystoneUtils_726.writeSystemProperties(KeystoneUtils_726.PROP_ZOOM_SCALE, zoom_scale);
             updateSzoomTv();
         } else if (id == R.id.arc_switch || id == R.id.rl_arc_switch) {
-            projectBinding.arcSwitch.setChecked(!projectBinding.arcSwitch.isChecked());
+            boolean isChecked = projectBinding.arcSwitch.isChecked();
+            projectBinding.arcSwitch.setChecked(!isChecked);
+            updateAudioDevice(!isChecked?"AUDIO_ARC":"AUDIO_SPEAKER");
         }
     }
 

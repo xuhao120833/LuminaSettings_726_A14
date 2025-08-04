@@ -74,7 +74,8 @@
 	<string name="update_firmware">Místní aktualizace</string>
 	<string name="all_apps">Všechny aplikace</string>
 	<string name="app_manager_settings">Nastavení aplikací</string>
-	<string name="bluetooth">Nastavení Bluetooth</string>
+	<string name="bluetooth_settings">Nastavení Bluetooth</string>
+	<string name="bluetooth">Bluetooth</string>
 	<string name="bluetooth_switch">Přepínač Bluetooth</string>
 	<string name="search_bluetooth">Vyhledat Bluetooth zařízení</string>
 	<string name="paired_devices">Spárovaná zařízení</string>
@@ -86,6 +87,7 @@
 	<string name="timezone">Časové pásmo</string>
 	<string name="time_format">Použít 24hodinový formát</string>
 	<string name="language_keyboard">Jazyk a klávesnice</string>
+	<string name="language_keyboard2">Jazyk a klávesnice</string>
 	<string name="language_setting">Nastavení jazyka</string>
 	<string name="inputmethod">Vstupní metoda</string>
 	<string name="inputmethod_setting">Nastavení vstupní metody</string>
@@ -99,11 +101,13 @@
 	<string name="apps">Moje aplikace</string>
 	<string name="google">Obchod s aplikacemi</string>
 	<string name="settings">Nastavení</string>
-	<string name="project_setting">Nastavení projekce</string>
+	<string name="projection_settings">Nastavení projekce</string>
+	<string name="projection">Nastavení projekce</string>
 	<string name="wireless_network">Bezdrátová síť</string>
 	<string name="apps_manager">Správa aplikací</string>
 	<string name="date_time">Datum a čas</string>
 	<string name="other_settings">Další nastavení</string>
+	<string name="others">Další nastavení</string>
 	<string name="system_info">Informace o systému</string>
 	<string name="boot_input">Vstup při spuštění</string>
 	<string name="boot_apps">Aplikace při spuštění</string>
@@ -224,7 +228,8 @@
 	<string name="picture_mode_custom_name">Vlastní</string>
 	<string name="Eshare">Zrcadlení</string>
 	<string name="Filemanager">Správce souborů</string>
-	<string name="network_setting">Nastavení sítě</string>
+	<string name="network_settings">Nastavení sítě</string>
+	<string name="network">Síť</string>
 	<string name="choose_ap">Vybrat pásmo AP</string>
 	<string name="network_disconnect_tip">Připojte se k síti a zkuste to znovu!</string>
 	<string name="data_err">Chyba při načítání dat!</string>

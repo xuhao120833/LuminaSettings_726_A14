@@ -74,7 +74,8 @@
     <string name="update_firmware">עדכון תוכנה מקומית</string>
     <string name="all_apps">כל האפליקציות</string>
     <string name="app_manager_settings">הגדרות אפליקציות</string>
-    <string name="bluetooth">הגדרות Bluetooth</string>
+    <string name="bluetooth_settings">הגדרות Bluetooth</string>
+    <string name="bluetooth">Bluetooth</string>
     <string name="bluetooth_switch">הפעל Bluetooth</string>
     <string name="search_bluetooth">חפש מכשירי Bluetooth</string>
     <string name="paired_devices">מכשירים מצומדים</string>
@@ -86,6 +87,7 @@
     <string name="timezone">אזור זמן</string>
     <string name="time_format">השתמש בפורמט 24 שעות</string>
     <string name="language_keyboard">שפה ומקלדת</string>
+    <string name="language_keyboard2">שפה ומקלדת</string>
     <string name="language_setting">הגדרות שפה</string>
     <string name="inputmethod">שיטת קלט</string>
     <string name="inputmethod_setting">הגדרות שיטת קלט</string>
@@ -99,11 +101,13 @@
     <string name="apps">האפליקציות שלי</string>
     <string name="google">חנות האפליקציות</string>
     <string name="settings">הגדרות</string>
-    <string name="project_setting">הגדרות הקרנה</string>
+    <string name="projection_settings">הגדרות הקרנה</string>
+    <string name="projection">הגדרות הקרנה</string>
     <string name="wireless_network">רשת אלחוטית</string>
     <string name="apps_manager">הגדרות אפליקציות</string>
     <string name="date_time">תאריך ושעה</string>
     <string name="other_settings">הגדרות נוספות</string>
+    <string name="others">הגדרות נוספות</string>
     <string name="system_info">מידע על המערכת</string>
     <string name="boot_input">קלט חיצוני בהפעלה</string>
     <string name="boot_apps">אפליקציות בהפעלה</string>
@@ -224,7 +228,8 @@
     <string name="picture_mode_custom_name">מותאם אישית</string>
     <string name="Eshare">שיתוף מסך</string>
     <string name="Filemanager">מנהל קבצים</string>
-    <string name="network_setting">הגדרות רשת</string>
+    <string name="network_settings">הגדרות רשת</string>
+    <string name="network">רשת</string>
     <string name="choose_ap">בחר תדירות AP</string>
     <string name="network_disconnect_tip">אנא התחבר לרשת ואז נסה שוב!</string>
     <string name="data_err">שגיאה בקבלת נתונים!</string>

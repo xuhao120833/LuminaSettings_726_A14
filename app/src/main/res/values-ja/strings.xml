@@ -74,7 +74,8 @@
     <string name="update_firmware">ローカルアップグレード</string>
     <string name="all_apps">すべてのアプリ</string>
     <string name="app_manager_settings">アプリ設定</string>
-    <string name="bluetooth">Bluetooth設定</string>
+    <string name="bluetooth_settings">Bluetooth設定</string>
+    <string name="bluetooth">Bluetooth</string>
     <string name="bluetooth_switch">Bluetoothスイッチ</string>
     <string name="search_bluetooth">Bluetoothデバイスを検索</string>
     <string name="paired_devices">ペアリング済みデバイス</string>
@@ -86,6 +87,7 @@
     <string name="timezone">タイムゾーン</string>
     <string name="time_format">24時間形式を使用</string>
     <string name="language_keyboard">言語とキーボード</string>
+    <string name="language_keyboard2">言語とキーボード</string>
     <string name="language_setting">言語設定</string>
     <string name="inputmethod">入力メソッド</string>
     <string name="inputmethod_setting">入力メソッド設定</string>
@@ -99,11 +101,13 @@
     <string name="apps">マイアプリ</string>
     <string name="google">アプリストア</string>
     <string name="settings">設定</string>
-    <string name="project_setting">投影設定</string>
+    <string name="projection_settings">投影設定</string>
+    <string name="projection">投影設定</string>
     <string name="wireless_network">ワイヤレスネットワーク</string>
     <string name="apps_manager">アプリ設定</string>
     <string name="date_time">日付と時刻</string>
     <string name="other_settings">その他の設定</string>
+    <string name="others">その他の設定</string>
     <string name="system_info">システム情報</string>
     <string name="boot_input">起動時外部入力</string>
     <string name="boot_apps">起動時アプリ</string>
@@ -224,7 +228,8 @@
     <string name="picture_mode_custom_name">カスタム</string>
     <string name="Eshare">画面共有</string>
     <string name="Filemanager">ファイルマネージャー</string>
-    <string name="network_setting">ネットワーク設定</string>
+    <string name="network_settings">ネットワーク設定</string>
+    <string name="network">ネットワーク</string>
     <string name="choose_ap">AP周波数を選択</string>
     <string name="network_disconnect_tip">ネットワークに接続してから再試行してください！</string>
     <string name="data_err">データ取得異常！</string>

@@ -74,7 +74,8 @@
     <string name="update_firmware">อัปเดตในท้องถิ่น</string>
     <string name="all_apps">แอปทั้งหมด</string>
     <string name="app_manager_settings">การตั้งค่าแอปพลิเคชัน</string>
-    <string name="bluetooth">การตั้งค่า Bluetooth</string>
+    <string name="bluetooth_settings">การตั้งค่า Bluetooth</string>
+    <string name="bluetooth">Bluetooth</string>
     <string name="bluetooth_switch">สวิตช์ Bluetooth</string>
     <string name="search_bluetooth">ค้นหาอุปกรณ์ Bluetooth</string>
     <string name="paired_devices">อุปกรณ์ที่จับคู่</string>
@@ -86,6 +87,7 @@
     <string name="timezone">เขตเวลา</string>
     <string name="time_format">ใช้รูปแบบเวลา 24 ชั่วโมง</string>
     <string name="language_keyboard">ภาษาและคีย์บอร์ด</string>
+    <string name="language_keyboard2">ภาษาและคีย์บอร์ด</string>
     <string name="language_setting">การตั้งค่าภาษา</string>
     <string name="inputmethod">วิธีการป้อนข้อมูล</string>
     <string name="inputmethod_setting">การตั้งค่าวิธีการป้อนข้อมูล</string>
@@ -99,11 +101,13 @@
     <string name="apps">แอปของฉัน</string>
     <string name="google">Google Play Store</string>
     <string name="settings">การตั้งค่า</string>
-    <string name="project_setting">การตั้งค่าการฉายภาพ</string>
+    <string name="projection_settings">การตั้งค่าการฉายภาพ</string>
+    <string name="projection">การตั้งค่าการฉายภาพ</string>
     <string name="wireless_network">เครือข่ายไร้สาย</string>
     <string name="apps_manager">การตั้งค่าแอป</string>
     <string name="date_time">วันที่และเวลา</string>
     <string name="other_settings">การตั้งค่าอื่น ๆ</string>
+    <string name="others">การตั้งค่าอื่น ๆ</string>
     <string name="system_info">ข้อมูลระบบ</string>
     <string name="boot_input">การป้อนข้อมูลภายนอกเมื่อบูต</string>
     <string name="boot_apps">แอปที่เริ่มบูต</string>
@@ -224,7 +228,8 @@
     <string name="picture_mode_custom_name">กำหนดเอง</string>
     <string name="Eshare">แชร์หน้าจอ</string>
     <string name="Filemanager">จัดการไฟล์</string>
-    <string name="network_setting">การตั้งค่าเครือข่าย</string>
+    <string name="network_settings">การตั้งค่าเครือข่าย</string>
+    <string name="network">Nätverk</string>
     <string name="choose_ap">เลือกย่าน AP</string>
     <string name="network_disconnect_tip">กรุณาเชื่อมต่อเครือข่ายแล้วลองใหม่!</string>
     <string name="data_err">เกิดข้อผิดพลาดในการรับข้อมูล!</string>

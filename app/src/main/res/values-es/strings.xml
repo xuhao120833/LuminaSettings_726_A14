@@ -74,7 +74,8 @@
 	<string name="update_firmware">Actualización local</string>
 	<string name="all_apps">Todas las aplicaciones</string>
 	<string name="app_manager_settings">Configuraciones de aplicaciones</string>
-	<string name="bluetooth">Configuraciones de Bluetooth</string>
+	<string name="bluetooth_settings">Configuraciones de Bluetooth</string>
+	<string name="bluetooth">Bluetooth</string>
 	<string name="bluetooth_switch">Interruptor de Bluetooth</string>
 	<string name="search_bluetooth">Buscar dispositivos Bluetooth</string>
 	<string name="paired_devices">Dispositivos emparejados</string>
@@ -86,6 +87,7 @@
 	<string name="timezone">Zona horaria</string>
 	<string name="time_format">Usar formato de 24 horas</string>
 	<string name="language_keyboard">Idioma y teclado</string>
+	<string name="language_keyboard2">Idioma y teclado</string>
 	<string name="language_setting">Configuración de idioma</string>
 	<string name="inputmethod">Método de entrada</string>
 	<string name="inputmethod_setting">Configuración del método de entrada</string>
@@ -99,11 +101,13 @@
 	<string name="apps">Mis aplicaciones</string>
 	<string name="google">Tienda de aplicaciones</string>
 	<string name="settings">Configuraciones</string>
-	<string name="project_setting">Configuración de proyección</string>
+	<string name="projection_settings">Configuración de proyección</string>
+	<string name="projection">Configuración de proyección</string>
 	<string name="wireless_network">Red inalámbrica</string>
 	<string name="apps_manager">Configuraciones de aplicaciones</string>
 	<string name="date_time">Fecha y hora</string>
 	<string name="other_settings">Otras configuraciones</string>
+	<string name="others">Otras configuraciones</string>
 	<string name="system_info">Información del sistema</string>
 	<string name="boot_input">Entrada externa al iniciar</string>
 	<string name="boot_apps">Aplicaciones de inicio</string>
@@ -224,7 +228,8 @@
 	<string name="picture_mode_custom_name">Personalizado</string>
 	<string name="Eshare">Proyección</string>
 	<string name="Filemanager">Administrador de archivos</string>
-	<string name="network_setting">Configuraciones de red</string>
+	<string name="network_settings">Configuraciones de red</string>
+	<string name="network">Red</string>
 	<string name="choose_ap">Seleccionar banda AP</string>
 	<string name="network_disconnect_tip">¡Por favor, conéctese a la red y vuelva a intentarlo!</string>
 	<string name="data_err">¡Error al obtener datos!</string>

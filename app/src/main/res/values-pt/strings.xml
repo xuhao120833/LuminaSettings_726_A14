@@ -74,7 +74,8 @@
     <string name="update_firmware">Atualização local</string>
     <string name="all_apps">Todos os aplicativos</string>
     <string name="app_manager_settings">Configurações de aplicativos</string>
-    <string name="bluetooth">Configurações de Bluetooth</string>
+    <string name="bluetooth_settings">Configurações de Bluetooth</string>
+    <string name="bluetooth">Bluetooth</string>
     <string name="bluetooth_switch">Interruptor de Bluetooth</string>
     <string name="search_bluetooth">Buscar dispositivos Bluetooth</string>
     <string name="paired_devices">Dispositivos emparelhados</string>
@@ -86,6 +87,7 @@
     <string name="timezone">Fuso horário</string>
     <string name="time_format">Usar formato de 24 horas</string>
     <string name="language_keyboard">Idioma e teclado</string>
+    <string name="language_keyboard2">Idioma e teclado</string>
     <string name="language_setting">Configurações de idioma</string>
     <string name="inputmethod">Método de entrada</string>
     <string name="inputmethod_setting">Configurações de método de entrada</string>
@@ -99,11 +101,13 @@
     <string name="apps">Meus aplicativos</string>
     <string name="google">Loja de aplicativos</string>
     <string name="settings">Configurações</string>
-    <string name="project_setting">Configurações de projeção</string>
+    <string name="projection_settings">Configurações de projeção</string>
+    <string name="projection">Configurações de projeção</string>
     <string name="wireless_network">Rede sem fio</string>
     <string name="apps_manager">Configurações de aplicativos</string>
     <string name="date_time">Data e hora</string>
     <string name="other_settings">Outras configurações</string>
+    <string name="others">Outras configurações</string>
     <string name="system_info">Informações do sistema</string>
     <string name="boot_input">Entrada externa na inicialização</string>
     <string name="boot_apps">Aplicativos de inicialização</string>
@@ -224,7 +228,8 @@
     <string name="picture_mode_custom_name">Personalizado</string>
     <string name="Eshare">Espelhamento</string>
     <string name="Filemanager">Gerenciador de arquivos</string>
-    <string name="network_setting">Configurações de rede</string>
+    <string name="network_settings">Configurações de rede</string>
+    <string name="network">Rede</string>
     <string name="choose_ap">Escolher banda AP</string>
     <string name="network_disconnect_tip">Por favor, conecte-se à rede antes de tentar novamente!</string>
     <string name="data_err">Erro ao obter dados!</string>

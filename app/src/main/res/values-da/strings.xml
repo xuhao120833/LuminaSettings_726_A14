@@ -74,7 +74,8 @@
     <string name="update_firmware">Lokal opdatering</string>
     <string name="all_apps">Alle applikationer</string>
     <string name="app_manager_settings">Applikationsindstillinger</string>
-    <string name="bluetooth">Bluetooth-indstillinger</string>
+    <string name="bluetooth_settings">Bluetooth-indstillinger</string>
+    <string name="bluetooth">Bluetooth</string>
     <string name="bluetooth_switch">Bluetooth-kontakt</string>
     <string name="search_bluetooth">Søg efter Bluetooth-enheder</string>
     <string name="paired_devices">Parrede enheder</string>
@@ -86,6 +87,7 @@
     <string name="timezone">Tidszone</string>
     <string name="time_format">Brug 24-timers format</string>
     <string name="language_keyboard">Sprog og tastatur</string>
+    <string name="language_keyboard2">Sprog og tastatur</string>
     <string name="language_setting">Sprogindstillinger</string>
     <string name="inputmethod">Indtastningsmetode</string>
     <string name="inputmethod_setting">Indstillinger for indtastningsmetode</string>
@@ -99,11 +101,13 @@
     <string name="apps">Mine applikationer</string>
     <string name="google">App Store</string>
     <string name="settings">Indstillinger</string>
-    <string name="project_setting">Projektindstillinger</string>
+    <string name="projection_settings">Projektindstillinger</string>
+    <string name="projection">Projektindstillinger</string>
     <string name="wireless_network">Trådløst netværk</string>
     <string name="apps_manager">Applikationsindstillinger</string>
     <string name="date_time">Dato og tid</string>
     <string name="other_settings">Andre indstillinger</string>
+    <string name="others">Andre indstillinger</string>
     <string name="system_info">Systemoplysninger</string>
     <string name="boot_input">Ekstern indgang ved opstart</string>
     <string name="boot_apps">Programmer, der starter op</string>
@@ -224,7 +228,8 @@
     <string name="picture_mode_custom_name">Brugerdefineret</string>
     <string name="Eshare">Spejl</string>
     <string name="Filemanager">Filhåndtering</string>
-    <string name="network_setting">Netværksindstillinger</string>
+    <string name="network_settings">Netværksindstillinger</string>
+    <string name="network">Netværk</string>
     <string name="choose_ap">Vælg AP-bånd</string>
     <string name="network_disconnect_tip">Forbind venligst til netværket og prøv igen!</string>
     <string name="data_err">Datafejl!</string>

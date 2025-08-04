@@ -74,7 +74,8 @@
 	<string name="update_firmware">本地升級</string>
 	<string name="all_apps">所有應用</string>
 	<string name="app_manager_settings">應用程序設置</string>
-	<string name="bluetooth">藍牙設置</string>
+	<string name="bluetooth_settings">藍牙設置</string>
+	<string name="bluetooth">藍牙</string>
 	<string name="bluetooth_switch">藍牙開關</string>
 	<string name="search_bluetooth">搜索藍牙設備</string>
 	<string name="paired_devices">配對設備</string>
@@ -86,6 +87,7 @@
 	<string name="timezone">時區</string>
 	<string name="time_format">使用24小時格式</string>
 	<string name="language_keyboard">語言和鍵盤</string>
+	<string name="language_keyboard2">語言和鍵盤</string>
 	<string name="language_setting">語言設置</string>
 	<string name="inputmethod">輸入法</string>
 	<string name="inputmethod_setting">輸入法設置</string>
@@ -99,11 +101,13 @@
 	<string name="apps">我的應用</string>
 	<string name="google">應用商店</string>
 	<string name="settings">設定</string>
-	<string name="project_setting">投影設定</string>
+	<string name="projection_settings">投影設定</string>
+	<string name="projection">投影設定</string>
 	<string name="wireless_network">無線網絡</string>
 	<string name="apps_manager">應用設定</string>
 	<string name="date_time">日期和時間</string>
 	<string name="other_settings">其他設定</string>
+	<string name="others">其他設定</string>
 	<string name="system_info">系統信息</string>
 	<string name="boot_input">啟動時外部輸入</string>
 	<string name="boot_apps">開機啟動應用</string>
@@ -224,7 +228,8 @@
 	<string name="picture_mode_custom_name">自定義</string>
 	<string name="Eshare">投屏</string>
 	<string name="Filemanager">文件管理</string>
-	<string name="network_setting">網絡設定</string>
+	<string name="network_settings">網絡設定</string>
+	<string name="network">網絡</string>
 	<string name="choose_ap">選擇AP頻段</string>
 	<string name="network_disconnect_tip">請鏈接網絡後重試！</string>
 	<string name="data_err">獲取數據異常！</string>

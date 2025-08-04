@@ -74,7 +74,8 @@
     <string name="update_firmware">Локальне оновлення</string>
     <string name="all_apps">Всі додатки</string>
     <string name="app_manager_settings">Налаштування додатків</string>
-    <string name="bluetooth">Налаштування Bluetooth</string>
+    <string name="bluetooth_settings">Налаштування Bluetooth</string>
+    <string name="bluetooth">Bluetooth</string>
     <string name="bluetooth_switch">Вимикач Bluetooth</string>
     <string name="search_bluetooth">Пошук Bluetooth пристроїв</string>
     <string name="paired_devices">Спарені пристрої</string>
@@ -86,6 +87,7 @@
     <string name="timezone">Часовий пояс</string>
     <string name="time_format">Використовувати 24-годинний формат</string>
     <string name="language_keyboard">Мова та клавіатура</string>
+    <string name="language_keyboard2">Мова та клавіатура</string>
     <string name="language_setting">Налаштування мови</string>
     <string name="inputmethod">Метод введення</string>
     <string name="inputmethod_setting">Налаштування методу введення</string>
@@ -99,11 +101,13 @@
     <string name="apps">Мої додатки</string>
     <string name="google">Магазин додатків</string>
     <string name="settings">Налаштування</string>
-    <string name="project_setting">Налаштування проєктора</string>
+    <string name="projection_settings">Налаштування проєктора</string>
+    <string name="projection">Налаштування проєктора</string>
     <string name="wireless_network">Бездротова мережа</string>
     <string name="apps_manager">Налаштування додатків</string>
     <string name="date_time">Дата та час</string>
     <string name="other_settings">Інші налаштування</string>
+    <string name="others">Інші налаштування</string>
     <string name="system_info">Інформація про систему</string>
     <string name="boot_input">Зовнішнє введення при завантаженні</string>
     <string name="boot_apps">Додатки при завантаженні</string>
@@ -224,7 +228,8 @@
     <string name="picture_mode_custom_name">Користувацький</string>
     <string name="Eshare">Кастинг</string>
     <string name="Filemanager">Менеджер файлів</string>
-    <string name="network_setting">Налаштування мережі</string>
+    <string name="network_settings">Налаштування мережі</string>
+    <string name="network">Мережа</string>
     <string name="choose_ap">Виберіть діапазон AP</string>
     <string name="network_disconnect_tip">Будь ласка, підключіться до мережі та спробуйте ще раз!</string>
     <string name="data_err">Помилка отримання даних!</string>

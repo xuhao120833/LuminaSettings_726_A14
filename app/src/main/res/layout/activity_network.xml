@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/x_100"
         android:layout_marginTop="@dimen/y_40"
-        android:text="@string/network_setting"
+        android:text="@string/network_settings"
         android:textColor="@color/white"
         android:textSize="@dimen/x_40" />
 

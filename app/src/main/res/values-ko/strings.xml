@@ -74,7 +74,8 @@
     <string name="update_firmware">로컬 업그레이드</string>
     <string name="all_apps">모든 앱</string>
     <string name="app_manager_settings">응용 프로그램 설정</string>
-    <string name="bluetooth">블루투스 설정</string>
+    <string name="bluetooth_settings">블루투스 설정</string>
+    <string name="bluetooth">블루투스</string>
     <string name="bluetooth_switch">블루투스 스위치</string>
     <string name="search_bluetooth">블루투스 장치 검색</string>
     <string name="paired_devices">페어링된 장치</string>
@@ -86,6 +87,7 @@
     <string name="timezone">시간대</string>
     <string name="time_format">24시간 형식 사용</string>
     <string name="language_keyboard">언어 및 키보드</string>
+    <string name="language_keyboard2">언어 및 키보드</string>
     <string name="language_setting">언어 설정</string>
     <string name="inputmethod">입력법</string>
     <string name="inputmethod_setting">입력법 설정</string>
@@ -99,11 +101,13 @@
     <string name="apps">내 앱</string>
     <string name="google">앱 스토어</string>
     <string name="settings">설정</string>
-    <string name="project_setting">투영 설정</string>
+    <string name="projection_settings">투영 설정</string>
+    <string name="projection">투영 설정</string>
     <string name="wireless_network">무선 네트워크</string>
     <string name="apps_manager">앱 설정</string>
     <string name="date_time">날짜 및 시간</string>
     <string name="other_settings">기타 설정</string>
+    <string name="others">기타 설정</string>
     <string name="system_info">시스템 정보</string>
     <string name="boot_input">부팅 시 외부 입력</string>
     <string name="boot_apps">부팅 시 시작할 앱</string>
@@ -224,7 +228,8 @@
     <string name="picture_mode_custom_name">사용자 정의</string>
     <string name="Eshare">투사</string>
     <string name="Filemanager">파일 관리자</string>
-    <string name="network_setting">네트워크 설정</string>
+    <string name="network_settings">네트워크 설정</string>
+    <string name="network">네트워크</string>
     <string name="choose_ap">AP 주파수 대역 선택</string>
     <string name="network_disconnect_tip">네트워크에 연결한 후 다시 시도하십시오!</string>
     <string name="data_err">데이터를 가져오는 데 예외가 발생했습니다!</string>

@@ -74,7 +74,8 @@
     <string name="update_firmware">Actualizare locală</string>
     <string name="all_apps">Toate aplicațiile</string>
     <string name="app_manager_settings">Setări aplicații</string>
-    <string name="bluetooth">Setări Bluetooth</string>
+    <string name="bluetooth_settings">Setări Bluetooth</string>
+    <string name="bluetooth">Bluetooth</string>
     <string name="bluetooth_switch">Comutator Bluetooth</string>
     <string name="search_bluetooth">Caută dispozitive Bluetooth</string>
     <string name="paired_devices">Dispozitive împerecheate</string>
@@ -86,6 +87,7 @@
     <string name="timezone">Fus orar</string>
     <string name="time_format">Utilizează formatul de 24 de ore</string>
     <string name="language_keyboard">Limbă și tastatură</string>
+    <string name="language_keyboard2">Limbă și tastatură</string>
     <string name="language_setting">Setări limbă</string>
     <string name="inputmethod">Metodă de introducere</string>
     <string name="inputmethod_setting">Setări metodă de introducere</string>
@@ -99,11 +101,13 @@
     <string name="apps">Aplicațiile mele</string>
     <string name="google">Magazin de aplicații</string>
     <string name="settings">Setări</string>
-    <string name="project_setting">Setări proiecție</string>
+    <string name="projection_settings">Setări proiecție</string>
+    <string name="projection">Setări proiecție</string>
     <string name="wireless_network">Rețea wireless</string>
     <string name="apps_manager">Setări aplicații</string>
     <string name="date_time">Dată și oră</string>
     <string name="other_settings">Alte setări</string>
+    <string name="others">Alte setări</string>
     <string name="system_info">Informații sistem</string>
     <string name="boot_input">Intrare externă la pornire</string>
     <string name="boot_apps">Aplicații la pornire</string>
@@ -224,7 +228,8 @@
     <string name="picture_mode_custom_name">Personalizat</string>
     <string name="Eshare">Proiecție ecran</string>
     <string name="Filemanager">Manager fișiere</string>
-    <string name="network_setting">Setări rețea</string>
+    <string name="network_settings">Setări rețea</string>
+    <string name="network">Rețea</string>
     <string name="choose_ap">Alege banda AP</string>
     <string name="network_disconnect_tip">Vă rugăm să vă conectați la rețea și să încercați din nou!</string>
     <string name="data_err">Eroare la obținerea datelor!</string>

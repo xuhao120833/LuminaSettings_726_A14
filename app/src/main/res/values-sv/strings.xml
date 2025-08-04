@@ -74,7 +74,8 @@
 	<string name="update_firmware">Lokal uppdatering</string>
 	<string name="all_apps">Alla appar</string>
 	<string name="app_manager_settings">Appinställningar</string>
-	<string name="bluetooth">Bluetooth-inställningar</string>
+	<string name="bluetooth_settings">Bluetooth-inställningar</string>
+	<string name="bluetooth">Bluetooth</string>
 	<string name="bluetooth_switch">Bluetooth-strömbrytare</string>
 	<string name="search_bluetooth">Sök efter Bluetooth-enheter</string>
 	<string name="paired_devices">Matchade enheter</string>
@@ -86,6 +87,7 @@
 	<string name="timezone">Tidszon</string>
 	<string name="time_format">Använd 24-timmarsformat</string>
 	<string name="language_keyboard">Språk och tangentbord</string>
+	<string name="language_keyboard2">Språk och tangentbord</string>
 	<string name="language_setting">Språkinställningar</string>
 	<string name="inputmethod">Indatametod</string>
 	<string name="inputmethod_setting">Inställningar för inmatningsmetod</string>
@@ -99,11 +101,13 @@
 	<string name="apps">Mina appar</string>
 	<string name="google">Appbutik</string>
 	<string name="settings">Inställningar</string>
-	<string name="project_setting">Projektorinställningar</string>
+	<string name="projection_settings">Projektorinställningar</string>
+	<string name="projection">Projektorinställningar</string>
 	<string name="wireless_network">Trådlöst nätverk</string>
 	<string name="apps_manager">Appinställningar</string>
 	<string name="date_time">Datum och tid</string>
 	<string name="other_settings">Övriga inställningar</string>
+	<string name="others">Övriga inställningar</string>
 	<string name="system_info">Systeminformation</string>
 	<string name="boot_input">Extern inmatning vid uppstart</string>
 	<string name="boot_apps">Starta appar vid uppstart</string>
@@ -224,7 +228,8 @@
 	<string name="picture_mode_custom_name">Anpassad</string>
 	<string name="Eshare">Skärmdelning</string>
 	<string name="Filemanager">Filhanterare</string>
-	<string name="network_setting">Nätverksinställningar</string>
+	<string name="network_settings">Nätverksinställningar</string>
+	<string name="network">Nätverk</string>
 	<string name="choose_ap">Välj AP-band</string>
 	<string name="network_disconnect_tip">Anslut till nätverk och försök igen!</string>
 	<string name="data_err">Fel vid hämtning av data!</string>

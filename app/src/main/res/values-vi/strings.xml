@@ -74,7 +74,8 @@
     <string name="update_firmware">Cập nhật phần mềm</string>
     <string name="all_apps">Tất cả ứng dụng</string>
     <string name="app_manager_settings">Cài đặt ứng dụng</string>
-    <string name="bluetooth">Cài đặt Bluetooth</string>
+    <string name="bluetooth_settings">Cài đặt Bluetooth</string>
+    <string name="bluetooth">Bluetooth</string>
     <string name="bluetooth_switch">Chuyển đổi Bluetooth</string>
     <string name="search_bluetooth">Tìm kiếm thiết bị Bluetooth</string>
     <string name="paired_devices">Thiết bị đã ghép nối</string>
@@ -86,6 +87,7 @@
     <string name="timezone">Múi giờ</string>
     <string name="time_format">Sử dụng định dạng 24 giờ</string>
     <string name="language_keyboard">Ngôn ngữ và bàn phím</string>
+    <string name="language_keyboard2">Ngôn ngữ và bàn phím</string>
     <string name="language_setting">Cài đặt ngôn ngữ</string>
     <string name="inputmethod">Phương thức nhập</string>
     <string name="inputmethod_setting">Cài đặt phương thức nhập</string>
@@ -99,11 +101,13 @@
     <string name="apps">Ứng dụng của tôi</string>
     <string name="google">Cửa hàng ứng dụng</string>
     <string name="settings">Cài đặt</string>
-    <string name="project_setting">Cài đặt chiếu</string>
+    <string name="projection_settings">Cài đặt chiếu</string>
+    <string name="projection">Cài đặt chiếu</string>
     <string name="wireless_network">Mạng không dây</string>
     <string name="apps_manager">Cài đặt ứng dụng</string>
     <string name="date_time">Ngày và giờ</string>
     <string name="other_settings">Cài đặt khác</string>
+    <string name="others">Cài đặt khác</string>
     <string name="system_info">Thông tin hệ thống</string>
     <string name="boot_input">Đầu vào khi khởi động</string>
     <string name="boot_apps">Ứng dụng khởi động khi bật máy</string>
@@ -224,7 +228,8 @@
     <string name="picture_mode_custom_name">Tùy chỉnh</string>
     <string name="Eshare">Chiếu màn hình</string>
     <string name="Filemanager">Quản lý tệp</string>
-    <string name="network_setting">Cài đặt mạng</string>
+    <string name="network_settings">Cài đặt mạng</string>
+    <string name="network">Mạng</string>
     <string name="choose_ap">Chọn băng tần AP</string>
     <string name="network_disconnect_tip">Vui lòng kết nối mạng và thử lại!</string>
     <string name="data_err">Lỗi khi lấy dữ liệu!</string>

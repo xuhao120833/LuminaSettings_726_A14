@@ -74,7 +74,8 @@
     <string name="update_firmware">Helyi frissítés</string>
     <string name="all_apps">Minden alkalmazás</string>
     <string name="app_manager_settings">Alkalmazásbeállítások</string>
-    <string name="bluetooth">Bluetooth beállítások</string>
+    <string name="bluetooth_settings">Bluetooth beállítások</string>
+    <string name="bluetooth">Bluetooth</string>
     <string name="bluetooth_switch">Bluetooth kapcsoló</string>
     <string name="search_bluetooth">Bluetooth eszközök keresése</string>
     <string name="paired_devices">Párosított eszközök</string>
@@ -86,6 +87,7 @@
     <string name="timezone">Időzóna</string>
     <string name="time_format">24 órás formátum használata</string>
     <string name="language_keyboard">Nyelv és billentyűzet</string>
+    <string name="language_keyboard2">Nyelv és billentyűzet</string>
     <string name="language_setting">Nyelvi beállítások</string>
     <string name="inputmethod">Beviteli mód</string>
     <string name="inputmethod_setting">Beviteli mód beállításai</string>
@@ -99,11 +101,13 @@
     <string name="apps">Saját alkalmazások</string>
     <string name="google">Alkalmazásbolt</string>
     <string name="settings">Beállítások</string>
-    <string name="project_setting">Vetítési beállítások</string>
+    <string name="projection_settings">Vetítési beállítások</string>
+    <string name="projection">Vetítési beállítások</string>
     <string name="wireless_network">Vezeték nélküli hálózat</string>
     <string name="apps_manager">Alkalmazásbeállítások</string>
     <string name="date_time">Dátum és idő</string>
     <string name="other_settings">Egyéb beállítások</string>
+    <string name="others">Egyéb beállítások</string>
     <string name="system_info">Rendszerinformáció</string>
     <string name="boot_input">Indításkor külső bemenet</string>
     <string name="boot_apps">Indításkor futtatandó alkalmazások</string>
@@ -224,7 +228,8 @@
     <string name="picture_mode_custom_name">Egyéni</string>
     <string name="Eshare">Képernyőtükrözés</string>
     <string name="Filemanager">Fájlkezelő</string>
-    <string name="network_setting">Hálózati beállítások</string>
+    <string name="network_settings">Hálózati beállítások</string>
+    <string name="network">Hálózat</string>
     <string name="choose_ap">Válasszon AP-sávot</string>
     <string name="network_disconnect_tip">Csatlakoztassa a hálózatot, majd próbálja újra!</string>
     <string name="data_err">Adatlekérési hiba!</string>

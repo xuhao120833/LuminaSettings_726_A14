@@ -74,7 +74,8 @@
     <string name="update_firmware">Aktualizacja lokalna</string>
     <string name="all_apps">Wszystkie aplikacje</string>
     <string name="app_manager_settings">Ustawienia aplikacji</string>
-    <string name="bluetooth">Ustawienia Bluetooth</string>
+    <string name="bluetooth_settings">Ustawienia Bluetooth</string>
+    <string name="bluetooth">Bluetooth</string>
     <string name="bluetooth_switch">Bluetooth</string>
     <string name="search_bluetooth">Wyszukaj urządzenia Bluetooth</string>
     <string name="paired_devices">Sparowane urządzenia</string>
@@ -86,6 +87,7 @@
     <string name="timezone">Strefa czasowa</string>
     <string name="time_format">Użyj formatu 24-godzinnego</string>
     <string name="language_keyboard">Język i klawiatura</string>
+    <string name="language_keyboard2">Język i klawiatura</string>
     <string name="language_setting">Ustawienia językowe</string>
     <string name="inputmethod">Metoda wprowadzania</string>
     <string name="inputmethod_setting">Ustawienia metody wprowadzania</string>
@@ -99,11 +101,13 @@
     <string name="apps">Moje aplikacje</string>
     <string name="google">Sklep z aplikacjami</string>
     <string name="settings">Ustawienia</string>
-    <string name="project_setting">Ustawienia projekcji</string>
+    <string name="projection_settings">Ustawienia projekcji</string>
+    <string name="projection">Ustawienia projekcji</string>
     <string name="wireless_network">Sieć bezprzewodowa</string>
     <string name="apps_manager">Ustawienia aplikacji</string>
     <string name="date_time">Data i czas</string>
     <string name="other_settings">Inne ustawienia</string>
+    <string name="others">Inne ustawienia</string>
     <string name="system_info">Informacje o systemie</string>
     <string name="boot_input">Auto. włączenie wejścia</string>
     <string name="boot_apps">Aplikacje uruchamiane przy starcie</string>
@@ -224,7 +228,8 @@
     <string name="picture_mode_custom_name">Własny</string>
     <string name="Eshare">Udostępnianie ekranu</string>
     <string name="Filemanager">Zarządzanie plikami</string>
-    <string name="network_setting">Ustawienia sieci</string>
+    <string name="network_settings">Ustawienia sieci</string>
+    <string name="network">Sieć</string>
     <string name="choose_ap">Pasmo AP</string>
     <string name="network_disconnect_tip">Proszę połączyć się z siecią i spróbować ponownie!</string>
     <string name="data_err">Wystąpił błąd podczas pobierania danych!</string>

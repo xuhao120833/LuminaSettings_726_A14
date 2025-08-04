@@ -74,7 +74,8 @@
     <string name="update_firmware">Yerel Güncelleme</string>
     <string name="all_apps">Tüm Uygulamalar</string>
     <string name="app_manager_settings">Uygulama Ayarları</string>
-    <string name="bluetooth">Bluetooth Ayarları</string>
+    <string name="bluetooth_settings">Bluetooth Ayarları</string>
+    <string name="bluetooth">Bluetooth</string>
     <string name="bluetooth_switch">Bluetooth Anahtarı</string>
     <string name="search_bluetooth">Bluetooth Cihazlarını Ara</string>
     <string name="paired_devices">Eşleştirilmiş Cihazlar</string>
@@ -86,6 +87,7 @@
     <string name="timezone">Zaman Dilimi</string>
     <string name="time_format">24 Saat Formatını Kullan</string>
     <string name="language_keyboard">Dil ve Klavye</string>
+    <string name="language_keyboard2">Dil ve Klavye</string>
     <string name="language_setting">Dil Ayarları</string>
     <string name="inputmethod">Giriş Yöntemi</string>
     <string name="inputmethod_setting">Giriş Yöntemi Ayarları</string>
@@ -99,11 +101,13 @@
     <string name="apps">Uygulamalarım</string>
     <string name="google">Uygulama Mağazası</string>
     <string name="settings">Ayarlar</string>
-    <string name="project_setting">Projeksiyon Ayarları</string>
+    <string name="projection_settings">Projeksiyon Ayarları</string>
+    <string name="projection">Projeksiyon Ayarları</string>
     <string name="wireless_network">Kablosuz Ağ</string>
     <string name="apps_manager">Uygulama Ayarları</string>
     <string name="date_time">Tarih ve Saat</string>
     <string name="other_settings">Diğer Ayarlar</string>
+    <string name="others">Diğer Ayarlar</string>
     <string name="system_info">Sistem Bilgisi</string>
     <string name="boot_input">Başlangıçta Dış Giriş</string>
     <string name="boot_apps">Açılışta Başlatılan Uygulamalar</string>
@@ -224,7 +228,8 @@
     <string name="picture_mode_custom_name">Özel</string>
     <string name="Eshare">Ekran Yansıtma</string>
     <string name="Filemanager">Dosya Yöneticisi</string>
-    <string name="network_setting">Ağ Ayarları</string>
+    <string name="network_settings">Ağ Ayarları</string>
+    <string name="network">Ağ</string>
     <string name="choose_ap">AP Bantını Seç</string>
     <string name="network_disconnect_tip">Lütfen ağı bağlayın ve tekrar deneyin!</string>
     <string name="data_err">Veri alma hatası!</string>

@@ -74,7 +74,8 @@
     <string name="update_firmware">ადგილობრივი განახლება</string>
     <string name="all_apps">ყველა აპლიკაცია</string>
     <string name="app_manager_settings">აპლიკაციების პარამეტრები</string>
-    <string name="bluetooth">Bluetooth პარამეტრები</string>
+    <string name="bluetooth_settings">Bluetooth პარამეტრები</string>
+    <string name="bluetooth">Bluetooth</string>
     <string name="bluetooth_switch">Bluetooth ჩართვა/გამორთვა</string>
     <string name="search_bluetooth">Bluetooth მოწყობილობების ძიება</string>
     <string name="paired_devices">შეკავშირებული მოწყობილობები</string>
@@ -86,6 +87,7 @@
     <string name="timezone">დროის ზონა</string>
     <string name="time_format">24 საათიანი ფორმატი</string>
     <string name="language_keyboard">ენა და კლავიატურა</string>
+    <string name="language_keyboard2">ენა და კლავიატურა</string>
     <string name="language_setting">ენის პარამეტრები</string>
     <string name="inputmethod">შეყვანის მეთოდი</string>
     <string name="inputmethod_setting">შეყვანის პარამეტრები</string>
@@ -99,11 +101,13 @@
     <string name="apps">ჩემი აპლიკაციები</string>
     <string name="google">აპლიკაციების მაღაზია</string>
     <string name="settings">პარამეტრები</string>
-    <string name="project_setting">პროექციის პარამეტრები</string>
+    <string name="projection_settings">პროექციის პარამეტრები</string>
+    <string name="projection">პროექციის პარამეტრები</string>
     <string name="wireless_network">უსადენო ქსელი</string>
     <string name="apps_manager">აპლიკაციის პარამეტრები</string>
     <string name="date_time">თარიღი და დრო</string>
     <string name="other_settings">სხვა პარამეტრები</string>
+    <string name="others">სხვა პარამეტრები</string>
     <string name="system_info">სისტემის ინფორმაცია</string>
     <string name="boot_input">ჩართვისას გარე შეყვანა</string>
     <string name="boot_apps">ჩართვის აპლიკაცია</string>
@@ -224,7 +228,8 @@
     <string name="picture_mode_custom_name">მორგებული</string>
     <string name="Eshare">ეკრანის გაზიარება</string>
     <string name="Filemanager">ფაილების მენეჯერი</string>
-    <string name="network_setting">ქსელის პარამეტრები</string>
+    <string name="network_settings">ქსელის პარამეტრები</string>
+    <string name="network">ქსელი</string>
     <string name="choose_ap">AP სიხშირის არჩევა</string>
     <string name="network_disconnect_tip">გთხოვთ, ქსელში ჩაერთეთ და სცადეთ თავიდან!</string>
     <string name="data_err">მონაცემების შეცდომა!</string>

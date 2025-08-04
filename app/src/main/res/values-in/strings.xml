@@ -74,7 +74,8 @@
     <string name="update_firmware">Perbarui lokal</string>
     <string name="all_apps">Semua aplikasi</string>
     <string name="app_manager_settings">Pengaturan aplikasi</string>
-    <string name="bluetooth">Pengaturan Bluetooth</string>
+    <string name="bluetooth_settings">Pengaturan Bluetooth</string>
+    <string name="bluetooth">Bluetooth</string>
     <string name="bluetooth_switch">Sakelar Bluetooth</string>
     <string name="search_bluetooth">Cari perangkat Bluetooth</string>
     <string name="paired_devices">Perangkat yang terpasang</string>
@@ -86,6 +87,7 @@
     <string name="timezone">Zona waktu</string>
     <string name="time_format">Gunakan format 24 jam</string>
     <string name="language_keyboard">Bahasa dan papan ketik</string>
+    <string name="language_keyboard2">Bahasa dan papan ketik</string>
     <string name="language_setting">Pengaturan bahasa</string>
     <string name="inputmethod">Metode input</string>
     <string name="inputmethod_setting">Pengaturan metode input</string>
@@ -99,11 +101,13 @@
     <string name="apps">Aplikasi saya</string>
     <string name="google">Toko aplikasi</string>
     <string name="settings">Pengaturan</string>
-    <string name="project_setting">Pengaturan proyeksi</string>
+    <string name="projection_settings">Pengaturan proyeksi</string>
+    <string name="projection">Pengaturan proyeksi</string>
     <string name="wireless_network">Jaringan nirkabel</string>
     <string name="apps_manager">Pengaturan aplikasi</string>
     <string name="date_time">Tanggal dan waktu</string>
     <string name="other_settings">Pengaturan lainnya</string>
+    <string name="others">Pengaturan lainnya</string>
     <string name="system_info">Informasi sistem</string>
     <string name="boot_input">Input eksternal saat boot</string>
     <string name="boot_apps">Aplikasi startup</string>
@@ -224,7 +228,8 @@
     <string name="picture_mode_custom_name">Kustom</string>
     <string name="Eshare">Proyeksi Layar</string>
     <string name="Filemanager">Manajer File</string>
-    <string name="network_setting">Pengaturan jaringan</string>
+    <string name="network_settings">Pengaturan jaringan</string>
+    <string name="network">Jaringan</string>
     <string name="choose_ap">Pilih pita AP</string>
     <string name="network_disconnect_tip">Harap sambungkan ke jaringan dan coba lagi!</string>
     <string name="data_err">Kesalahan dalam mengambil data!</string>

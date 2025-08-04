@@ -74,7 +74,8 @@
 	<string name="update_firmware">Aggiornamento locale</string>
 	<string name="all_apps">Tutte le app</string>
 	<string name="app_manager_settings">Impostazioni dell\'app</string>
-	<string name="bluetooth">Impostazioni Bluetooth</string>
+	<string name="bluetooth_settings">Impostazioni Bluetooth</string>
+	<string name="bluetooth">Bluetooth</string>
 	<string name="bluetooth_switch">Interruttore Bluetooth</string>
 	<string name="search_bluetooth">Cerca dispositivi Bluetooth</string>
 	<string name="paired_devices">Dispositivi accoppiati</string>
@@ -86,6 +87,7 @@
 	<string name="timezone">Fuso orario</string>
 	<string name="time_format">Utilizza il formato 24 ore</string>
 	<string name="language_keyboard">Lingua e tastiera</string>
+	<string name="language_keyboard2">Lingua e tastiera</string>
 	<string name="language_setting">Impostazioni lingua</string>
 	<string name="inputmethod">Metodo di input</string>
 	<string name="inputmethod_setting">Impostazioni metodo di input</string>
@@ -99,11 +101,13 @@
 	<string name="apps">Le mie app</string>
 	<string name="google">Negozio delle app</string>
 	<string name="settings">Impostazioni</string>
-	<string name="project_setting">Impostazioni di proiezione</string>
+	<string name="projection_settings">Impostazioni di proiezione</string>
+	<string name="projection">Impostazioni di proiezione</string>
 	<string name="wireless_network">Rete wireless</string>
 	<string name="apps_manager">Impostazioni delle app</string>
 	<string name="date_time">Data e ora</string>
 	<string name="other_settings">Altre impostazioni</string>
+	<string name="others">Altre impostazioni</string>
 	<string name="system_info">Informazioni di sistema</string>
 	<string name="boot_input">Input esterno all\'avvio</string>
 	<string name="boot_apps">App avviate all\'accensione</string>
@@ -224,7 +228,8 @@
 	<string name="picture_mode_custom_name">Personalizzato</string>
 	<string name="Eshare">Condivisione schermo</string>
 	<string name="Filemanager">Gestore file</string>
-	<string name="network_setting">Impostazioni di rete</string>
+	<string name="network_settings">Impostazioni di rete</string>
+	<string name="network">Rete</string>
 	<string name="choose_ap">Scegliere banda AP</string>
 	<string name="network_disconnect_tip">Si prega di collegare la rete e riprovare!</string>
 	<string name="data_err">Errore durante l\'ottenimento dei dati!</string>

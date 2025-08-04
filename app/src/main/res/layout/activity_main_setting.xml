@@ -45,7 +45,7 @@
             android:layout_centerHorizontal="true"
             android:duplicateParentState="true"
             android:gravity="center"
-            android:text="@string/project_setting"
+            android:text="@string/projection_settings"
             android:textColor="@color/tv_color"
             android:textSize="@dimen/x_28" />
     </RelativeLayout>
@@ -76,7 +76,7 @@
             android:layout_below="@id/wifi_icon"
             android:textSize="@dimen/x_28"
             android:textColor="@color/tv_color"
-            android:text="@string/network_setting"
+            android:text="@string/network_settings"
             android:duplicateParentState="true"
             android:gravity="center"
             android:layout_centerHorizontal="true"
@@ -109,7 +109,7 @@
             android:layout_below="@id/bluetooth_icon"
             android:textSize="@dimen/x_28"
             android:textColor="@color/tv_color"
-            android:text="@string/bluetooth"
+            android:text="@string/bluetooth_settings"
             android:duplicateParentState="true"
             android:gravity="center"
             android:layout_centerHorizontal="true"

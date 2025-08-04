@@ -74,7 +74,8 @@
     <string name="update_firmware">Kemas kini tempatan</string>
     <string name="all_apps">Semua aplikasi</string>
     <string name="app_manager_settings">Tetapan aplikasi</string>
-    <string name="bluetooth">Tetapan Bluetooth</string>
+    <string name="bluetooth_settings">Tetapan Bluetooth</string>
+    <string name="bluetooth">Bluetooth</string>
     <string name="bluetooth_switch">Suis Bluetooth</string>
     <string name="search_bluetooth">Cari peranti Bluetooth</string>
     <string name="paired_devices">Peranti yang dipadankan</string>
@@ -86,6 +87,7 @@
     <string name="timezone">Zon waktu</string>
     <string name="time_format">Menggunakan format 24 jam</string>
     <string name="language_keyboard">Bahasa dan papan kekunci</string>
+    <string name="language_keyboard2">Bahasa dan papan kekunci</string>
     <string name="language_setting">Tetapan bahasa</string>
     <string name="inputmethod">Kaedah input</string>
     <string name="inputmethod_setting">Tetapan kaedah input</string>
@@ -99,11 +101,13 @@
     <string name="apps">Aplikasi saya</string>
     <string name="google">Kedai aplikasi</string>
     <string name="settings">Tetapan</string>
-    <string name="project_setting">Tetapan Projek</string>
+    <string name="projection_settings">Tetapan Projek</string>
+    <string name="projection">Tetapan Projek</string>
     <string name="wireless_network">Rangkaian Tanpa Wayar</string>
     <string name="apps_manager">Tetapan Aplikasi</string>
     <string name="date_time">Tarikh dan Masa</string>
     <string name="other_settings">Tetapan Lain</string>
+    <string name="others">Tetapan Lain</string>
     <string name="system_info">Maklumat Sistem</string>
     <string name="boot_input">Input Luaran Semasa Permulaan</string>
     <string name="boot_apps">Aplikasi Mula Semasa Permulaan</string>
@@ -224,7 +228,8 @@
     <string name="picture_mode_custom_name">Kustom</string>
     <string name="Eshare">Tayangan</string>
     <string name="Filemanager">Pengurus Fail</string>
-    <string name="network_setting">Tetapan Rangkaian</string>
+    <string name="network_settings">Tetapan Rangkaian</string>
+    <string name="network">jaringan</string>
     <string name="choose_ap">Pilih Jalur AP</string>
     <string name="network_disconnect_tip">Sila sambungkan rangkaian sebelum mencuba lagi!</string>
     <string name="data_err">Ralat semasa mendapatkan data!</string>

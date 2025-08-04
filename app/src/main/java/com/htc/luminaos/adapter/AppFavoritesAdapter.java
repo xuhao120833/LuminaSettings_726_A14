@@ -2,6 +2,7 @@ package com.htc.luminaos.adapter;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -88,6 +89,7 @@ public class AppFavoritesAdapter extends BaseAdapter {
 
     private void setLayout(TextView name) {
         if (MyApplication.config.layout_select == 2 || MyApplication.config.layout_select == 3) {
+            name.setTextSize(TypedValue.COMPLEX_UNIT_PX,mContext.getResources().getDimensionPixelSize(R.dimen.y_28));
             name.setTextColor(Color.BLACK);
         }
     }

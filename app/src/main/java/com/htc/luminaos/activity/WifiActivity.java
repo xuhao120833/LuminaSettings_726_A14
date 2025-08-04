@@ -169,6 +169,7 @@ public class WifiActivity extends BaseActivity implements WifiEnabledReceiver.Wi
             if (!check) {
                 startanim(true);
             } else {
+                wifiBinding.wifiRv.setVisibility(View.GONE);
                 startanim(false);
                 action = "";
             }

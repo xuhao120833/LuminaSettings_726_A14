@@ -74,7 +74,8 @@
     <string name="update_firmware">Τοπική αναβάθμιση</string>
     <string name="all_apps">Όλες οι εφαρμογές</string>
     <string name="app_manager_settings">Ρυθμίσεις εφαρμογών</string>
-    <string name="bluetooth">Ρυθμίσεις Bluetooth</string>
+    <string name="bluetooth_settings">Ρυθμίσεις Bluetooth</string>
+    <string name="bluetooth">Bluetooth</string>
     <string name="bluetooth_switch">Διακόπτης Bluetooth</string>
     <string name="search_bluetooth">Αναζήτηση συσκευών Bluetooth</string>
     <string name="paired_devices">Συσκευές σε ζεύξη</string>
@@ -86,6 +87,7 @@
     <string name="timezone">Ζώνη ώρας</string>
     <string name="time_format">Χρήση μορφής 24 ωρών</string>
     <string name="language_keyboard">Γλώσσα και πληκτρολόγιο</string>
+    <string name="language_keyboard2">Γλώσσα και πληκτρολόγιο</string>
     <string name="language_setting">Ρυθμίσεις γλώσσας</string>
     <string name="inputmethod">Μέθοδος εισαγωγής</string>
     <string name="inputmethod_setting">Ρυθμίσεις μεθόδου εισαγωγής</string>
@@ -99,11 +101,13 @@
     <string name="apps">Οι εφαρμογές μου</string>
     <string name="google">Κατάστημα εφαρμογών</string>
     <string name="settings">Ρυθμίσεις</string>
-    <string name="project_setting">Ρυθμίσεις προβολής</string>
+    <string name="projection_settings">Ρυθμίσεις προβολής</string>
+    <string name="projection">Ρυθμίσεις προβολής</string>
     <string name="wireless_network">Ασύρματο δίκτυο</string>
     <string name="apps_manager">Ρυθμίσεις εφαρμογών</string>
     <string name="date_time">Ημερομηνία και ώρα</string>
     <string name="other_settings">Άλλες ρυθμίσεις</string>
+    <string name="others">Άλλες ρυθμίσεις</string>
     <string name="system_info">Πληροφορίες συστήματος</string>
     <string name="boot_input">Εξωτερική είσοδος κατά την εκκίνηση</string>
     <string name="boot_apps">Εκκίνηση εφαρμογών κατά την εκκίνηση</string>
@@ -224,7 +228,8 @@
     <string name="picture_mode_custom_name">Προσαρμοσμένο</string>
     <string name="Eshare">Κοινή χρήση οθόνης</string>
     <string name="Filemanager">Διαχείριση αρχείων</string>
-    <string name="network_setting">Ρυθμίσεις δικτύου</string>
+    <string name="network_settings">Ρυθμίσεις δικτύου</string>
+    <string name="network">Δίκτυο</string>
     <string name="choose_ap">Επιλογή μπάντας AP</string>
     <string name="network_disconnect_tip">Συνδεθείτε στο δίκτυο και δοκιμάστε ξανά!</string>
     <string name="data_err">Σφάλμα ανάκτησης δεδομένων!</string>

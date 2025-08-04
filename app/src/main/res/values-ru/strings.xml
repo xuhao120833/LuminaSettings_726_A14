@@ -74,7 +74,8 @@
     <string name="update_firmware">Обновление локально</string>
     <string name="all_apps">Все приложения</string>
     <string name="app_manager_settings">Настройки приложений</string>
-    <string name="bluetooth">Настройки Bluetooth</string>
+    <string name="bluetooth_settings">Настройки Bluetooth</string>
+    <string name="bluetooth">Bluetooth</string>
     <string name="bluetooth_switch">Выключатель Bluetooth</string>
     <string name="search_bluetooth">Поиск Bluetooth-устройств</string>
     <string name="paired_devices">Сопряженные устройства</string>
@@ -86,6 +87,7 @@
     <string name="timezone">Часовой пояс</string>
     <string name="time_format">Использовать 24-часовой формат</string>
     <string name="language_keyboard">Язык и клавиатура</string>
+    <string name="language_keyboard2">Язык и клавиатура</string>
     <string name="language_setting">Настройки языка</string>
     <string name="inputmethod">Метод ввода</string>
     <string name="inputmethod_setting">Настройки метода ввода</string>
@@ -99,11 +101,13 @@
     <string name="apps">Мои приложения</string>
     <string name="google">Магазин приложений</string>
     <string name="settings">Настройки</string>
-    <string name="project_setting">Настройки проекции</string>
+    <string name="projection_settings">Настройки проекции</string>
+    <string name="projection">Настройки проекции</string>
     <string name="wireless_network">Беспроводная сеть</string>
     <string name="apps_manager">Настройки приложений</string>
     <string name="date_time">Дата и время</string>
     <string name="other_settings">Другие настройки</string>
+    <string name="others">Другие настройки</string>
     <string name="system_info">Информация о системе</string>
     <string name="boot_input">Внешний ввод при запуске</string>
     <string name="boot_apps">Приложения, запускаемые при включении</string>
@@ -224,7 +228,8 @@
     <string name="picture_mode_custom_name">Пользовательский</string>
     <string name="Eshare">Экранное дублирование</string>
     <string name="Filemanager">Файловый менеджер</string>
-    <string name="network_setting">Настройки сети</string>
+    <string name="network_settings">Настройки сети</string>
+    <string name="network">Сеть</string>
     <string name="choose_ap">Выберите диапазон AP</string>
     <string name="network_disconnect_tip">Подключитесь к сети и попробуйте снова!</string>
     <string name="data_err">Ошибка получения данных!</string>

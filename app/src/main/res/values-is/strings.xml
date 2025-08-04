@@ -74,7 +74,8 @@
     <string name="update_firmware">Staðbundin uppfærsla</string>
     <string name="all_apps">Öll forrit</string>
     <string name="app_manager_settings">Forritsstillingar</string>
-    <string name="bluetooth">Bluetooth stillingar</string>
+    <string name="bluetooth_settings">Bluetooth stillingar</string>
+    <string name="bluetooth">Bluetooth</string>
     <string name="bluetooth_switch">Bluetooth kveikja/slökkva</string>
     <string name="search_bluetooth">Leita að Bluetooth tækjum</string>
     <string name="paired_devices">Pöruð tæki</string>
@@ -86,6 +87,7 @@
     <string name="timezone">Tímabelti</string>
     <string name="time_format">Nota 24 tíma snið</string>
     <string name="language_keyboard">Tungumál og lyklaborð</string>
+    <string name="language_keyboard2">Tungumál og lyklaborð</string>
     <string name="language_setting">Tungumálastilling</string>
     <string name="inputmethod">Innsláttaraðferð</string>
     <string name="inputmethod_setting">Innsláttastillingar</string>
@@ -99,11 +101,13 @@
     <string name="apps">Forrit mín</string>
     <string name="google">Forritabúð</string>
     <string name="settings">Stillingar</string>
-    <string name="project_setting">Varpastillingar</string>
+    <string name="projection_settings">Varpastillingar</string>
+    <string name="projection">Varpastillingar</string>
     <string name="wireless_network">Þráðlaust net</string>
     <string name="apps_manager">Forritastillingar</string>
     <string name="date_time">Dagsetning og tími</string>
     <string name="other_settings">Aðrar stillingar</string>
+    <string name="others">Aðrar stillingar</string>
     <string name="system_info">Kerfisupplýsingar</string>
     <string name="boot_input">Innsláttur við ræsingu</string>
     <string name="boot_apps">Forrit ræst við ræsingu</string>
@@ -224,7 +228,8 @@
     <string name="picture_mode_custom_name">Sérsniðið</string>
     <string name="Eshare">Skjádeiling</string>
     <string name="Filemanager">Skráastjóri</string>
-    <string name="network_setting">Netstillingar</string>
+    <string name="network_settings">Netstillingar</string>
+    <string name="network">Net</string>
     <string name="choose_ap">Veldu AP tíðni</string>
     <string name="network_disconnect_tip">Vinsamlegast tengstu neti og reyndu aftur!</string>
     <string name="data_err">Villa við að sækja gögn!</string>

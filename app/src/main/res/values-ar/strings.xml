@@ -74,7 +74,8 @@
     <string name="update_firmware">ترقية محلية</string>
     <string name="all_apps">جميع التطبيقات</string>
     <string name="app_manager_settings">إعدادات التطبيقات</string>
-    <string name="bluetooth">إعدادات Bluetooth</string>
+    <string name="bluetooth_settings">إعدادات Bluetooth</string>
+    <string name="bluetooth">بلوتوث</string>
     <string name="bluetooth_switch">مفتاح Bluetooth</string>
     <string name="search_bluetooth">البحث عن أجهزة Bluetooth</string>
     <string name="paired_devices">الأجهزة المقترنة</string>
@@ -86,6 +87,7 @@
     <string name="timezone">المنطقة الزمنية</string>
     <string name="time_format">استخدام تنسيق 24 ساعة</string>
     <string name="language_keyboard">اللغة ولوحة المفاتيح</string>
+    <string name="language_keyboard2">اللغة ولوحة المفاتيح</string>
     <string name="language_setting">إعدادات اللغة</string>
     <string name="inputmethod">طريقة الإدخال</string>
     <string name="inputmethod_setting">إعدادات طريقة الإدخال</string>
@@ -99,11 +101,13 @@
     <string name="apps">تطبيقاتي</string>
     <string name="google">متجر التطبيقات</string>
     <string name="settings">الإعدادات</string>
-    <string name="project_setting">إعدادات العرض</string>
+    <string name="projection_settings">إعدادات العرض</string>
+    <string name="projection">إعدادات العرض</string>
     <string name="wireless_network">الشبكة اللاسلكية</string>
     <string name="apps_manager">إعدادات التطبيقات</string>
     <string name="date_time">التاريخ والوقت</string>
     <string name="other_settings">إعدادات أخرى</string>
+    <string name="others">إعدادات أخرى</string>
     <string name="system_info">معلومات النظام</string>
     <string name="boot_input">مصدر الإدخال عند التشغيل</string>
     <string name="boot_apps">تشغيل التطبيقات عند بدء التشغيل</string>
@@ -224,7 +228,8 @@
     <string name="picture_mode_custom_name">مخصص</string>
     <string name="Eshare">مشاركة الشاشة</string>
     <string name="Filemanager">إدارة الملفات</string>
-    <string name="network_setting">إعدادات الشبكة</string>
+    <string name="network_settings">إعدادات الشبكة</string>
+    <string name="network">الشبكة</string>
     <string name="choose_ap">اختر نطاق AP</string>
     <string name="network_disconnect_tip">يرجى الاتصال بالشبكة والمحاولة مرة أخرى!</string>
     <string name="data_err">حدث خطأ في جلب البيانات!</string>

@@ -74,7 +74,8 @@
 	<string name="update_firmware">Lokales Update</string>
 	<string name="all_apps">Alle Anwendungen</string>
 	<string name="app_manager_settings">Anwendungseinstellungen</string>
-	<string name="bluetooth">Bluetooth-Einstellungen</string>
+	<string name="bluetooth_settings">Bluetooth-Einstellungen</string>
+	<string name="bluetooth">Bluetooth</string>
 	<string name="bluetooth_switch">Bluetooth-Schalter</string>
 	<string name="search_bluetooth">Bluetooth-Geräte suchen</string>
 	<string name="paired_devices">Gepaarte Geräte</string>
@@ -86,6 +87,7 @@
 	<string name="timezone">Zeitzone</string>
 	<string name="time_format">24-Stunden-Format verwenden</string>
 	<string name="language_keyboard">Sprache und Tastatur</string>
+	<string name="language_keyboard2">Sprache und Tastatur</string>
 	<string name="language_setting">Spracheinstellungen</string>
 	<string name="inputmethod">Eingabemethode</string>
 	<string name="inputmethod_setting">Eingabemethodeinstellungen</string>
@@ -99,11 +101,13 @@
 	<string name="apps">Meine Anwendungen</string>
 	<string name="google">Anwendungs-Shop</string>
 	<string name="settings">Einstellungen</string>
-	<string name="project_setting">Projektionseinstellungen</string>
+	<string name="projection_settings">Projektionseinstellungen</string>
+	<string name="projection">Projektionseinstellungen</string>
 	<string name="wireless_network">Drahtloses Netzwerk</string>
 	<string name="apps_manager">Anwendungseinstellungen</string>
 	<string name="date_time">Datum und Uhrzeit</string>
 	<string name="other_settings">Weitere Einstellungen</string>
+	<string name="others">Weitere Einstellungen</string>
 	<string name="system_info">Systeminformationen</string>
 	<string name="boot_input">Externen Eingang beim Start</string>
 	<string name="boot_apps">Startanwendungen</string>
@@ -224,8 +228,9 @@
     <string name="picture_mode_custom_name">Benutzerdefiniert</string>
     <string name="Eshare">Screen Mirroring</string>
     <string name="Filemanager">Dateimanager</string>
-    <string name="network_setting">Netzwerkeinstellungen</string>
-    <string name="choose_ap">AP-Frequenzband wählen</string>
+    <string name="network_settings">Netzwerkeinstellungen</string>
+	<string name="network">Netzwerk</string>
+	<string name="choose_ap">AP-Frequenzband wählen</string>
     <string name="network_disconnect_tip">Bitte vernetzen Sie sich und versuchen Sie es erneut!</string>
     <string name="data_err">Datenabruffehler!</string>
     <string name="usb_debug">USB-Debugging</string>

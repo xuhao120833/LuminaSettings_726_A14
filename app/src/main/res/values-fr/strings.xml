@@ -74,7 +74,8 @@
 	<string name="update_firmware">Mise à jour locale</string>
 	<string name="all_apps">Toutes les applications</string>
 	<string name="app_manager_settings">Paramètres des applications</string>
-	<string name="bluetooth">Paramètres Bluetooth</string>
+	<string name="bluetooth_settings">Paramètres Bluetooth</string>
+	<string name="bluetooth">Bluetooth</string>
 	<string name="bluetooth_switch">Interrupteur Bluetooth</string>
 	<string name="search_bluetooth">Rechercher des appareils Bluetooth</string>
 	<string name="paired_devices">Appareils appairés</string>
@@ -86,6 +87,7 @@
 	<string name="timezone">Fuseau horaire</string>
 	<string name="time_format">Utiliser le format 24 heures</string>
 	<string name="language_keyboard">Langue et clavier</string>
+	<string name="language_keyboard2">Langue et clavier</string>
 	<string name="language_setting">Paramètres de langue</string>
 	<string name="inputmethod">Méthode de saisie</string>
 	<string name="inputmethod_setting">Paramètres de la méthode de saisie</string>
@@ -99,11 +101,13 @@
 	<string name="apps">Mes applications</string>
 	<string name="google">Boutique d\'applications</string>
 	<string name="settings">Paramètres</string>
-	<string name="project_setting">Paramètres de projection</string>
+	<string name="projection_settings">Paramètres de projection</string>
+	<string name="projection">Paramètres de projection</string>
 	<string name="wireless_network">Réseau sans fil</string>
 	<string name="apps_manager">Paramètres des applications</string>
 	<string name="date_time">Date et heure</string>
 	<string name="other_settings">Autres paramètres</string>
+	<string name="others">Autres paramètres</string>
 	<string name="system_info">Informations système</string>
 	<string name="boot_input">Entrée externe au démarrage</string>
 	<string name="boot_apps">Applications à démarrer</string>
@@ -224,7 +228,8 @@
 	<string name="picture_mode_custom_name">Personnalisé</string>
 	<string name="Eshare">Partage d\'écran</string>
 	<string name="Filemanager">Gestionnaire de fichiers</string>
-	<string name="network_setting">Paramètres réseau</string>
+	<string name="network_settings">Paramètres réseau</string>
+	<string name="network">Réseau</string>
 	<string name="choose_ap">Choisir la bande AP</string>
 	<string name="network_disconnect_tip">Veuillez vous connecter au réseau avant de réessayer !</string>
 	<string name="data_err">Erreur lors de l\'obtention des données !</string>
