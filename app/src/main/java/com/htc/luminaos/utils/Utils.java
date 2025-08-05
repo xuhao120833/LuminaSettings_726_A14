@@ -37,15 +37,15 @@ public class Utils {
     public static String specialAppsList ="";
 
     public static int[] drawablesId = {
-            R.drawable.background_main,
-            R.drawable.background_custom,
-            R.drawable.background1,
-            R.drawable.background5,
-            R.drawable.background10,
-            R.drawable.background11,
+            R.drawable.background_main2,
+            R.drawable.background_custom2,
+            R.drawable.background1_2,
+            R.drawable.background5_2,
+            R.drawable.background10_2,
+            R.drawable.background11_2,
             R.drawable.background12,
             R.drawable.background0,
-            R.drawable.background13,
+            R.drawable.background13_2,
     };
 
     //实际启动信源用到的名称 HDMI1,HDMI2,CVBS1

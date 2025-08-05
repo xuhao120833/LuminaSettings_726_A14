@@ -201,15 +201,15 @@ public class MyApplication extends Application {
             Utils.drawables.add(getResources().getDrawable(R.drawable.wallpaper_add));
 //            isDataInitialized.postValue(true);//UI线程用setValue
         } else {
-            Utils.drawables.add(getResources().getDrawable(R.drawable.background_main));
-            Utils.drawables.add(R.drawable.background_custom);
-            Utils.drawables.add(R.drawable.background1);
-            Utils.drawables.add(R.drawable.background5);
-            Utils.drawables.add(R.drawable.background10);
-            Utils.drawables.add(R.drawable.background11);
+            Utils.drawables.add(getResources().getDrawable(R.drawable.background_main2));
+            Utils.drawables.add(R.drawable.background_custom2);
+            Utils.drawables.add(R.drawable.background1_2);
+            Utils.drawables.add(R.drawable.background5_2);
+            Utils.drawables.add(R.drawable.background10_2);
+            Utils.drawables.add(R.drawable.background11_2);
             Utils.drawables.add(R.drawable.background12);
             Utils.drawables.add(R.drawable.background0);
-            Utils.drawables.add(R.drawable.background13);
+            Utils.drawables.add(R.drawable.background13_2);
             copyMyWallpaper();
             Utils.drawables.add(getResources().getDrawable(R.drawable.wallpaper_add));
             // 数据加载完成后更新 LiveData
