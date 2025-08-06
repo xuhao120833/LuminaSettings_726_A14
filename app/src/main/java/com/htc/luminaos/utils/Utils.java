@@ -57,6 +57,8 @@ public class Utils {
     //全局时区列表
     public static ArrayList<HashMap> list = null;
 
+    public static boolean btAnim = false;
+
     /**
      * 打印 Intent 的 Extras 信息
      *

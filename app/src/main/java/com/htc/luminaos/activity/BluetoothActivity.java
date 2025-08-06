@@ -35,6 +35,7 @@ import com.htc.luminaos.receiver.BondStateReceiver;
 import com.htc.luminaos.receiver.MyBlueBoothCallBack;
 import com.htc.luminaos.receiver.MyBlueBoothReceiver;
 import com.htc.luminaos.utils.Contants;
+import com.htc.luminaos.utils.Utils;
 import com.htc.luminaos.widget.SpacesItemDecoration;
 
 import java.lang.reflect.InvocationTargetException;
@@ -369,6 +370,7 @@ public class BluetoothActivity extends BaseActivity implements BluetoothCallBcak
 
     private void searchAnim(boolean isAnim) {
         if (!isAnim) {
+            Utils.btAnim = false;
             bluetoothBinding.refreshIv.setVisibility(View.GONE);
             bluetoothBinding.refreshIv.clearAnimation();
             return;
@@ -396,6 +398,7 @@ public class BluetoothActivity extends BaseActivity implements BluetoothCallBcak
                 // TODO Auto-generated method stub
             }
         });
+        Utils.btAnim = true;
         bluetoothBinding.refreshIv.startAnimation(anim);
     }
 
@@ -657,13 +660,13 @@ public class BluetoothActivity extends BaseActivity implements BluetoothCallBcak
     @Override
     public boolean onKey(View v, int keyCode, KeyEvent event) {
         int id = v.getId();
-        //解决按下键焦点跑到文件管理器的问题
         if ((id == R.id.rl_search_ble) && keyCode == KeyEvent.KEYCODE_DPAD_DOWN) {
             Log.d(TAG, " keCode " + keyCode + " " + event.getEventTime());
             if ((bluetoothBinding.rlSearchBle.hasFocus()) && event.getAction() == KeyEvent.ACTION_DOWN) {
-                return bondList.isEmpty() && scanList.isEmpty();
+                return (bondList.isEmpty() && scanList.isEmpty()) || Utils.btAnim;
             }
         }
         return false;
     }
+
 }
