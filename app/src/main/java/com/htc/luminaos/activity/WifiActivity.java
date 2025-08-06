@@ -306,7 +306,8 @@ public class WifiActivity extends BaseActivity implements WifiEnabledReceiver.Wi
                         newWifiList.remove(j);
                     }
                 }
-                if (isAdd) {
+//                if (isAdd) {
+                if (isAdd && !wifiList.get(i).SSID.isEmpty()) {
                     newWifiList.add(wifiList.get(i));
                 }
             }
