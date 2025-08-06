@@ -16,6 +16,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -2527,4 +2528,71 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
         short_list = loadHomeAppData();
         handler.sendEmptyMessage(204);
     }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        Log.d(TAG," onConfigurationChanged ");
+        super.onConfigurationChanged(newConfig);
+
+        if(!Utils.cur_language.isEmpty()) {
+            String[] parts = Utils.cur_language.split("-");
+            Locale locale;
+            String db_cur_language;
+            if (parts.length == 2) {
+                locale = new Locale(parts[0], parts[1]);
+                db_cur_language = Utils.cur_language;
+            } else {
+                locale = new Locale(Utils.cur_language);
+                db_cur_language = Utils.cur_language+"-";
+            }
+            Log.d(TAG," onConfigurationChanged Utils.cur_language "+Utils.cur_language);
+            // 1. 设置新的语言
+//            Locale.setDefault(locale);
+            Configuration config = getResources().getConfiguration();
+            config.setLocale(locale);
+            // 2. 创建新的 Resources 实例
+            Context context = createConfigurationContext(config);
+            Resources newResources = context.getResources();
+            // 3. 用新的资源手动设置 UI 文本
+            updateUITexts(newResources);
+
+            setListModulesText(db_cur_language);
+        }
+    }
+
+    private void updateUITexts(Resources res) {
+        customBinding.eshareText.setText(res.getString(R.string.Eshare));
+        customBinding.fileText.setText(res.getString(R.string.Filemanager));
+        customBinding.settingsText.setText(res.getString(R.string.settings));
+    }
+
+    private void setListModulesText(String db_cur_language) {
+
+        Hashtable<String, String> mHashtable1 = DBUtils.getInstance(this).getHashtableFromListModules("list1");
+        Hashtable<String, String> mHashtable3 = DBUtils.getInstance(this).getHashtableFromListModules("list3");
+        Hashtable<String, String> mHashtable4 = DBUtils.getInstance(this).getHashtableFromListModules("list4");
+        Log.d(TAG, "setListModulesText" + db_cur_language);
+        if (mHashtable1 != null) {
+            String text = mHashtable1.get(db_cur_language);
+            Log.d(TAG, "setListModulesText text eshareText" + text);
+            if (text != null && !text.isEmpty()) {
+                customBinding.eshareText.setText(text);
+            }
+        }
+        if (mHashtable3 != null) {
+            String text = mHashtable3.get(db_cur_language);
+            Log.d(TAG, "setListModulesText text hdmiText" + text);
+            if (text != null && !text.isEmpty()) {
+                customBinding.hdmiText.setText(text);
+            }
+        }
+        if (mHashtable4 != null) {
+            String text = mHashtable4.get(db_cur_language);
+            Log.d(TAG, "setListModulesText text settingsText" + text);
+            if (text != null && !text.isEmpty()) {
+                customBinding.settingsText.setText(text);
+            }
+        }
+    }
+
 }

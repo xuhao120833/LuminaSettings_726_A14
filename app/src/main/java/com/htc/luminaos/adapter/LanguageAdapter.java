@@ -90,6 +90,12 @@ public class LanguageAdapter  extends RecyclerView.Adapter<LanguageAdapter.MyVie
                     setCur_language(language.getLocale().getLanguage()+language.getLocale().getCountry());
                     notifyDataSetChanged();
 
+                    if(!language.getLocale().getCountry().isEmpty()) {
+                        Utils.cur_language = language.getLocale().getLanguage()+"-"+language.getLocale().getCountry();
+                    } else {
+                        Utils.cur_language = language.getLocale().getLanguage();
+                    }
+
                     Utils.support_image_path = "";
                 }
             }

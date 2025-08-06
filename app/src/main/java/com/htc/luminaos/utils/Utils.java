@@ -58,6 +58,7 @@ public class Utils {
     public static ArrayList<HashMap> list = null;
 
     public static boolean btAnim = false;
+    public static String cur_language="";
 
     /**
      * 打印 Intent 的 Extras 信息

@@ -204,7 +204,8 @@
         <activity
             android:name=".activity.MainActivity"
             android:exported="true"
-            android:launchMode="singleInstance">
+            android:launchMode="singleInstance"
+            android:configChanges="locale|layoutDirection">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
