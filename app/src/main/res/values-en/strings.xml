@@ -280,7 +280,7 @@
     <string name="_16_9">16:9</string>
     <string name="_16_10">16:10</string>
     <string name="_4_3">4:3</string>
-    <string name="screen_zoom">Screen Zoom</string>
+    <string name="screen_zoom">Aspect Ratio</string>
     <string name="account">Account</string>
     <string name="wallpper_load">Background resources loading...</string>
     <string name="choose_source">Select Signal Source</string>

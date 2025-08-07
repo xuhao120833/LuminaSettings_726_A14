@@ -663,7 +663,8 @@ public class BluetoothActivity extends BaseActivity implements BluetoothCallBcak
         if ((id == R.id.rl_search_ble) && keyCode == KeyEvent.KEYCODE_DPAD_DOWN) {
             Log.d(TAG, " keCode " + keyCode + " " + event.getEventTime());
             if ((bluetoothBinding.rlSearchBle.hasFocus()) && event.getAction() == KeyEvent.ACTION_DOWN) {
-                return (bondList.isEmpty() && scanList.isEmpty()) || Utils.btAnim;
+//                return (bondList.isEmpty() && scanList.isEmpty()) || Utils.btAnim;//搜索不完成，禁止焦点移动到蓝牙Found列表
+                return bondList.isEmpty() && scanList.isEmpty();
             }
         }
         return false;

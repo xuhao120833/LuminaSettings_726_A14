@@ -269,6 +269,9 @@ public class AppsAdapter extends RecyclerView.Adapter<AppsAdapter.MyViewHolder> 
             icon = itemView.findViewById(R.id.app_icon);
 
             setLayout(name);
+            if(MyApplication.config.apps_name_shadow) {
+                name.setBackgroundColor(Color.parseColor("#80808080"));
+            }
         }
     }
 

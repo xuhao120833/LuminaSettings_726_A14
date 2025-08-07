@@ -122,6 +122,7 @@ public class Config {
     public boolean updateFirmware = true;
     public boolean onlineUpdate = true;
     public boolean serialNumber = true;
+    public boolean apps_name_shadow = false;
 
     public boolean AudioMode = false; //声音模式
     public boolean Menu120HZ = true;

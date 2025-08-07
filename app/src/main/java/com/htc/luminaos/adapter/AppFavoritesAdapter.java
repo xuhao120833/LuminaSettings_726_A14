@@ -73,6 +73,9 @@ public class AppFavoritesAdapter extends BaseAdapter {
 //			}
             convertView.setTag(viewholder);
             setLayout(viewholder.addapp_name);
+            if(MyApplication.config.apps_name_shadow) {
+                viewholder.addapp_name.setBackgroundColor(Color.parseColor("#80808080"));
+            }
         } else {
             viewholder = (ViewHolder) convertView.getTag();
         }
