@@ -523,7 +523,6 @@ public class DateTimeActivity extends BaseActivity implements View.OnKeyListener
         } catch (java.io.IOException ioe) {
             // LOGD("Unable to read timezones.xml file");
         }
-
         return myData;
     }
 
@@ -537,32 +536,25 @@ public class DateTimeActivity extends BaseActivity implements View.OnKeyListener
         int p = Math.abs(offset);
         StringBuilder name = new StringBuilder();
         name.append("GMT");
-
         if (offset < 0) {
             name.append('-');
         } else {
             name.append('+');
         }
-
         name.append(p / (Contants.HOURS_1));
         name.append(':');
-
         int min = p / 60000;
         min %= 60;
-
         if (min < 10) {
             name.append('0');
         }
         name.append(min);
-
         map.put(Contants.KEY_GMT, name.toString());
         map.put(Contants.KEY_OFFSET, offset);
-
 //        if (id.equals(TimeZone.getDefault().getID())) {
 //            Log.d(TAG," addItem id "+id);
 //            mDefault = myData.size()-1;
 //        }
-
         myData.add(map);
     }
 

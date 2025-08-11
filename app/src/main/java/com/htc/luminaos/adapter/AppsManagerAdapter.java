@@ -6,12 +6,14 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.net.Uri;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -104,6 +106,12 @@ public class AppsManagerAdapter extends RecyclerView.Adapter<AppsManagerAdapter.
                             });
 
                             dialog.show();
+                            Button positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
+                            if (positiveButton != null) {
+                                positiveButton.setBackgroundColor(Color.parseColor("#4684f3")); // #80 是 50% 透明度，后面是黑色
+                                positiveButton.setTextColor(Color.WHITE); // 白色文字，方便看
+                                positiveButton.setPadding(40, 20, 40, 20); // 给按钮留点内边距
+                            }
                             return;
                         }
 

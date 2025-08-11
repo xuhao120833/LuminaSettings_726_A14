@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
 import android.view.animation.ScaleAnimation;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -157,6 +158,12 @@ public class AppsAdapter extends RecyclerView.Adapter<AppsAdapter.MyViewHolder> 
                 });
 
                 dialog.show();
+                Button positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
+                if (positiveButton != null) {
+                    positiveButton.setBackgroundColor(Color.parseColor("#4684f3")); // #80 是 50% 透明度，后面是黑色
+                    positiveButton.setTextColor(Color.WHITE); // 白色文字，方便看
+                    positiveButton.setPadding(40, 20, 40, 20); // 给按钮留点内边距
+                }
                 return true;
             }
 
@@ -224,6 +231,13 @@ public class AppsAdapter extends RecyclerView.Adapter<AppsAdapter.MyViewHolder> 
             });
 
             dialog.show();
+
+            Button positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
+            if (positiveButton != null) {
+                positiveButton.setBackgroundColor(Color.parseColor("#4684f3")); // #80 是 50% 透明度，后面是黑色
+                positiveButton.setTextColor(Color.WHITE); // 白色文字，方便看
+                positiveButton.setPadding(40, 20, 40, 20); // 给按钮留点内边距
+            }
             return true;
         }
 
