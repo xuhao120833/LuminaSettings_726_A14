@@ -51,9 +51,11 @@ public class InitAngleActivity extends BaseActivity {
         KeystoneUtils_726.resetKeystone();
         KeystoneUtils_726.writeGlobalSettings(getApplicationContext(), KeystoneUtils_726.ZOOM_VALUE, 0);
         KeystoneUtils_726.writeSystemProperties(KeystoneUtils_726.PROP_ZOOM_VALUE,0);
-        SystemProperties.set("persist.sys.keystone_offset", "0");
 
         KeystoneUtils_726.writeSystemProperties(KeystoneUtils_726.PROP_ZOOM_SCALE,0);
+
+        SystemProperties.set("persist.sys.keystone_offset", "0");
+        SystemProperties.set("persist.sys.keystonefinalAngle", "0");
     }
 
     private void initView() {

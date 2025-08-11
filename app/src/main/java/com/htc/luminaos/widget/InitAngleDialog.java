@@ -92,6 +92,7 @@ public class InitAngleDialog extends BaseDialog implements View.OnClickListener 
         projectActivity.All = 0;
         projectActivity.updateZoomView();
         SystemProperties.set("persist.sys.keystone_offset", "0");
+        SystemProperties.set("persist.sys.keystonefinalAngle", "0");
     }
 
     @Override

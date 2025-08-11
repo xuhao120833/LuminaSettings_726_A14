@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.SystemProperties;
 import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
@@ -980,6 +981,9 @@ public class CorrectionActivity extends BaseActivity {
                 KeystoneUtils_726.writeSystemProperties(KeystoneUtils_726.PROP_ZOOM_VALUE,0);
 
                 KeystoneUtils_726.writeSystemProperties(KeystoneUtils_726.PROP_ZOOM_SCALE,0);
+
+                SystemProperties.set("persist.sys.keystone_offset", "0");
+                SystemProperties.set("persist.sys.keystonefinalAngle", "0");
 
                 dialoge.dismiss();
                 direction_value_x.setText("0");

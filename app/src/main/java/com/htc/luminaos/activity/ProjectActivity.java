@@ -1106,6 +1106,11 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
                 //画面比例复位
                 KeystoneUtils_726.writeSystemProperties(KeystoneUtils_726.PROP_ZOOM_SCALE, 0);
                 updateSzoomTv();
+
+                //角度清零
+                SystemProperties.set("persist.sys.keystone_offset", "0");
+                SystemProperties.set("persist.sys.keystonefinalAngle", "0");
+
                 dialoge.dismiss();
             }
         });
