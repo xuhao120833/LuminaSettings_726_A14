@@ -546,6 +546,13 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
         customBinding.shortcutsRv.addItemDecoration(new SpacesItemDecoration(0,
                 (int) getResources().getDimension(R.dimen.x_43), 0, 0));
         customBinding.shortcutsRv.setLayoutManager(layoutManager);
+
+        if (MyApplication.config.layout_select == 2 || MyApplication.config.layout_select == 3) {
+            customBinding.icon1border.setBackground(null);
+            customBinding.icon2border.setBackground(null);
+            customBinding.icon3border.setBackground(null);
+            customBinding.icon4border.setBackground(null);
+        }
     }
 
     private void initData() {

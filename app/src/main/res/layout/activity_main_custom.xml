@@ -235,6 +235,7 @@
 
         <ImageView
             android:id="@+id/icon1"
+            android:scaleType="fitXY"
             android:layout_width="@dimen/x_313"
             android:layout_height="@dimen/y_167"/>
     </RelativeLayout>
@@ -250,6 +251,7 @@
 
         <ImageView
             android:id="@+id/icon2"
+            android:scaleType="fitXY"
             android:layout_width="@dimen/x_313"
             android:layout_height="@dimen/y_167"/>
     </RelativeLayout>
@@ -265,6 +267,7 @@
 
         <ImageView
             android:id="@+id/icon3"
+            android:scaleType="fitXY"
             android:layout_width="@dimen/x_313"
             android:layout_height="@dimen/y_167"/>
     </RelativeLayout>
@@ -281,6 +284,7 @@
 
         <ImageView
             android:id="@+id/icon4"
+            android:scaleType="fitXY"
             android:layout_width="@dimen/x_313"
             android:layout_height="@dimen/y_167"/>
     </RelativeLayout>
