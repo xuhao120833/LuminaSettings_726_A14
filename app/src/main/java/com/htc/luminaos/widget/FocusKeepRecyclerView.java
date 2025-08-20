@@ -109,16 +109,29 @@ public class FocusKeepRecyclerView extends RecyclerView {
 
     @Override
     public void requestChildFocus(View child, View focused) {
-        //Log.i(TAG, "nextchild= " + child + ",focused = " + focused);
-        if (!hasFocus()) {
-            //recyclerview 子view 重新获取焦点，调用移入焦点的事件监听
-            if (mFocusGainListener != null) {
-                mFocusGainListener.onFocusGain(child, focused);
+        try {
+            //Log.i(TAG, "nextchild= " + child + ",focused = " + focused);
+            if (!hasFocus()) {
+                //recyclerview 子view 重新获取焦点，调用移入焦点的事件监听
+                if (mFocusGainListener != null) {
+                    mFocusGainListener.onFocusGain(child, focused);
+                }
             }
+
+            if (child != null && indexOfChild(child) != -1) {
+                super.requestChildFocus(child, focused);
+                RecyclerView.ViewHolder vh = getChildViewHolder(child);
+                if (vh != null) {
+                    mCurrentFocusPosition = vh.getAdapterPosition();
+                }
+            }
+
+//            super.requestChildFocus(child, focused);//执行过super.requestChildFocus之后hasFocus会变成true
+//            mCurrentFocusPosition = getChildViewHolder(child).getAdapterPosition();
+            // Log.i(TAG,"focusPos = "+mCurrentFocusPosition)
+        }catch (Exception e) {
+            e.printStackTrace();
         }
-        super.requestChildFocus(child, focused);//执行过super.requestChildFocus之后hasFocus会变成true
-        mCurrentFocusPosition = getChildViewHolder(child).getAdapterPosition();
-       // Log.i(TAG,"focusPos = "+mCurrentFocusPosition);
     }
 
     //实现焦点记忆的关键代码

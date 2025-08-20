@@ -337,8 +337,21 @@ public class MainSettingActivity extends BaseActivity {
         Log.d(TAG," handleDisplayBroadcast ");
         Context applicationContext = getApplicationContext();
 
-        applicationContext.unregisterReceiver(MainActivity.displaySettingsReceiver);
-        MainActivity.displaySettingsReceiver = null;
+        if (MainActivity.displaySettingsReceiver != null) {
+            try {
+                applicationContext.unregisterReceiver(MainActivity.displaySettingsReceiver);
+            } catch (Exception e) {
+                // 避免重复反注册时报错
+                Log.w(TAG, "Receiver not registered: " + e.getMessage());
+            }
+            MainActivity.displaySettingsReceiver = null;
+        } else {
+            // 如果之前没注册过，直接返回，不需要重复注册
+            Log.d(TAG, "Receiver not registered yet, skipping unregister.");
+        }
+
+//        applicationContext.unregisterReceiver(MainActivity.displaySettingsReceiver);
+//        MainActivity.displaySettingsReceiver = null;
         MainActivity.displaySettingsReceiver = new DisplaySettingsReceiver(applicationContext);
         IntentFilter displayFilter = new IntentFilter();
         displayFilter.addAction(DisplaySettingsReceiver.DisplayAction);

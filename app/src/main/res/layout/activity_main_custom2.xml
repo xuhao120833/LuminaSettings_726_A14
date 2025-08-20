@@ -478,7 +478,7 @@
         android:clipChildren="false"
         android:clipToPadding="false"
         android:padding="@dimen/y_17"
-        tools:listitem="@layout/shortcuts_item_custom" />
+        tools:listitem="@layout/shortcuts_item_custom3" />
 
 
 </RelativeLayout>

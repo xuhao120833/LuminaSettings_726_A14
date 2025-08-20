@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+<!--    <item android:state_focused="true"  >-->
+<!--        <shape android:shape="oval">-->
+<!--            <size-->
+<!--                android:width="160px"-->
+<!--                android:height="160px" />-->
+<!--            <stroke android:color="#ffffff" android:width="8px"/>-->
+<!--&lt;!&ndash;            <solid android:color="#20000000"/>&ndash;&gt;-->
+<!--        </shape>-->
+<!--    </item>-->
+
+    <item>
+        <shape android:shape="oval">
+            <size
+                android:width="@dimen/x_107"
+                android:height="@dimen/y_107" />
+            <solid android:color="#6789DE"/>
+        </shape>
+    </item>
+</selector>

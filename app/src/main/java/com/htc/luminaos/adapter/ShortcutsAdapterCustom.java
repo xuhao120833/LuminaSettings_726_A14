@@ -25,6 +25,7 @@ import androidx.annotation.NonNull;
 import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.htc.luminaos.MyApplication;
 import com.htc.luminaos.R;
 import com.htc.luminaos.activity.AppFavoritesActivity;
 import com.htc.luminaos.entry.ShortInfoBean;
@@ -73,9 +74,12 @@ public class ShortcutsAdapterCustom extends RecyclerView.Adapter<ShortcutsAdapte
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-
-        MyViewHolder myViewHolder = new MyViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.shortcuts_item_custom, viewGroup,false));
-//        MyViewHolder myViewHolder = new MyViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.shortcuts_item_custom, null));
+        MyViewHolder myViewHolder = null;
+        if(MyApplication.config.layout_select == 2 || MyApplication.config.layout_select == 3) {
+            myViewHolder = new MyViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.shortcuts_item_custom3, viewGroup,false));
+        } else {
+            myViewHolder = new MyViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.shortcuts_item_custom, viewGroup,false));
+        }
         myViewHolder.setIsRecyclable(false);
         return myViewHolder;
     }

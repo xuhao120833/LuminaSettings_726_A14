@@ -1,29 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-<!--    &lt;!&ndash; 获取焦点状态 &ndash;&gt;-->
-<!--    <item android:state_focused="true">-->
-<!--        <layer-list>-->
-<!--            &lt;!&ndash; 白色外圈 &ndash;&gt;-->
-<!--            <item>-->
-<!--                <shape>-->
-<!--                    <solid android:color="#FFFFFF" /> &lt;!&ndash; 白色 &ndash;&gt;-->
-<!--                    <corners android:radius="100px" /> &lt;!&ndash; 圆角半径 &ndash;&gt;-->
-<!--                </shape>-->
-<!--            </item>-->
-<!--            &lt;!&ndash; 内部的半透明黑色圆角背景 &ndash;&gt;-->
-<!--            <item android:left="2dp" android:right="2dp" android:top="2dp" android:bottom="2dp">-->
-<!--                <shape>-->
-<!--                    <solid android:color="#50000000" /> &lt;!&ndash; 黑色透明度50% &ndash;&gt;-->
-<!--                    <corners android:radius="100px" /> &lt;!&ndash; 圆角半径 &ndash;&gt;-->
-<!--                </shape>-->
-<!--            </item>-->
-<!--        </layer-list>-->
-<!--    </item>-->
 
     <!-- 正常状态 -->
     <item>
         <shape>
-            <solid android:color="#66ffffff" />
+            <stroke android:width="@dimen/x_3" android:color="#769DFE" />
+            <solid android:color="#00ffffff" />
             <corners android:radius="106px" /> <!-- 圆角半径 -->
         </shape>
     </item>

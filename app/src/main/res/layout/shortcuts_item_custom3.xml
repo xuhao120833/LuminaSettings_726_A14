@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.htc.luminaos.widget.RLRelativelayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_item"
+    style="@style/focusStyle"
+    android:clickable="true"
+    android:layout_width="@dimen/x_107"
+    android:layout_height="@dimen/y_107"
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    android:layout_gravity="center_vertical"
+    android:outlineProvider="none"
+    android:background="@drawable/home_app_custom3">
+
+    <com.htc.luminaos.view.MyCircleImageView
+        android:id="@+id/icon"
+        android:layout_width="@dimen/x_107"
+        android:layout_height="@dimen/y_107"
+        android:duplicateParentState="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:src="@drawable/home_app_add" />
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone">
+
+    </TextView>
+
+
+</com.htc.luminaos.widget.RLRelativelayout>
+
+    <!--<?xml version="1.0" encoding="utf-8"?>-->
+    <!--<com.htc.luminaos.widget.RLRelativelayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--    android:id="@+id/rl_item"-->
+    <!--    android:layout_width="160px"-->
+    <!--    android:layout_height="160px"-->
+    <!--    android:layout_gravity="center_vertical"-->
+    <!--    android:padding="8px"-->
+    <!--    style="@style/focusStyle"-->
+    <!--    android:background="@drawable/home_app_custom">-->
+
+    <!--    <de.hdodenhof.circleimageview.CircleImageView-->
+    <!--        android:id="@+id/icon"-->
+    <!--        android:layout_width="152px"-->
+    <!--        android:layout_height="152px"-->
+    <!--        android:duplicateParentState="true"-->
+    <!--        android:src="@drawable/home_app_add" />-->
+
+
+    <!--</com.htc.luminaos.widget.RLRelativelayout>-->
