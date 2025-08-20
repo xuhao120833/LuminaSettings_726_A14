@@ -620,6 +620,10 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
     @Override
     public void setBatteryLevel(String level) {
         Log.d(TAG, "电池状态 setBatteryLevel");
+        if(level == null) {
+            Log.d(TAG, "setBatteryLevel level为空返回");
+            return;
+        }
         switch (level) {
             case "0":
                 if (SystemPropertiesUtil.getSystemProperty(SystemPropertiesUtil.batteryDc).equals("1")) {
