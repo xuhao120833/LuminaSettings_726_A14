@@ -125,12 +125,15 @@ public class Config {
     public boolean apps_name_shadow = false;
 
     public boolean AudioMode = false; //声音模式
-    public boolean Menu120HZ = true;
-    public boolean Menu200HZ = true;
+    public boolean Menu100HZ = true;
     public boolean Menu500HZ = true;
-    public boolean Menu1D2KHZ = true;
-    public boolean Menu3KHZ = true;
-    public boolean Menu7D5KHZ = true;
+    public boolean Menu2KHZ = true;
+    public boolean Menu4KHZ = true;
+    public boolean Menu6KHZ = true;
+    public boolean Menu8KHZ = true;
+    public boolean Menu10KHZ = true;
     public boolean Menu12KHZ = true;
+    public boolean Menu14KHZ = true;
+    public boolean Menu18KHZ = true;
 
 }

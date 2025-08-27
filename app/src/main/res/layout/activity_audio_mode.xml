@@ -98,7 +98,7 @@
             android:layout_height="wrap_content">
 
             <RelativeLayout
-                android:id="@+id/rl_120hz"
+                android:id="@+id/rl_100hz"
                 style="@style/focusStyle"
                 android:layout_width="@dimen/x_1080"
                 android:layout_height="@dimen/y_80"
@@ -106,19 +106,19 @@
                 android:background="@drawable/main_settings_bg">
 
                 <TextView
-                    android:id="@+id/iv_120hz"
+                    android:id="@+id/iv_100hz"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/x_50"
                     android:layout_marginTop="@dimen/y_4"
                     android:duplicateParentState="true"
-                    android:text="&lt;120Hz"
+                    android:text="100Hz"
                     android:layout_centerVertical="true"
                     android:textColor="@color/tv_color"
                     android:textSize="@dimen/x_27" />
 
                 <View
-                    android:id="@+id/right_120"
+                    android:id="@+id/right_100"
                     android:layout_width="@dimen/x_53"
                     android:layout_height="@dimen/y_53"
                     android:layout_alignParentEnd="true"
@@ -128,7 +128,7 @@
                     android:duplicateParentState="true" />
 
                 <View
-                    android:id="@+id/left_120"
+                    android:id="@+id/left_100"
                     android:layout_width="@dimen/x_53"
                     android:layout_height="@dimen/y_53"
                     android:layout_alignParentEnd="true"
@@ -138,7 +138,7 @@
                     android:duplicateParentState="true" />
 
                 <TextView
-                    android:id="@+id/tv_120hz"
+                    android:id="@+id/tv_100hz"
                     android:layout_width="@dimen/x_368"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
@@ -150,64 +150,6 @@
                     android:textColor="@color/tv_color"
                     android:textSize="@dimen/x_23" />
 
-
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/rl_200hz"
-                style="@style/focusStyle"
-                android:layout_width="@dimen/x_1080"
-                android:layout_height="@dimen/y_80"
-                android:layout_below="@id/rl_120hz"
-                android:layout_marginStart="@dimen/x_100"
-                android:layout_marginTop="@dimen/y_19"
-                android:background="@drawable/main_settings_bg">
-
-                <TextView
-                    android:id="@+id/iv_200hz"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/x_50"
-                    android:layout_marginTop="@dimen/y_4"
-                    android:duplicateParentState="true"
-                    android:text="200Hz"
-                    android:layout_centerVertical="true"
-                    android:textColor="@color/tv_color"
-                    android:textSize="@dimen/x_27" />
-
-                <View
-                    android:id="@+id/right_200"
-                    android:layout_width="@dimen/x_53"
-                    android:layout_height="@dimen/y_53"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="@dimen/x_50"
-                    android:background="@drawable/arrow_right_bg"
-                    android:duplicateParentState="true" />
-
-                <View
-                    android:id="@+id/left_200"
-                    android:layout_width="@dimen/x_53"
-                    android:layout_height="@dimen/y_53"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="@dimen/x_468"
-                    android:background="@drawable/arrow_left_bg"
-                    android:duplicateParentState="true" />
-
-                <TextView
-                    android:id="@+id/tv_200hz"
-                    android:layout_width="@dimen/x_368"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="@dimen/x_103"
-                    android:duplicateParentState="true"
-                    android:gravity="center"
-                    android:text="100"
-                    android:textColor="@color/tv_color"
-                    android:textSize="@dimen/x_23" />
 
 
             </RelativeLayout>
@@ -217,7 +159,7 @@
                 style="@style/focusStyle"
                 android:layout_width="@dimen/x_1080"
                 android:layout_height="@dimen/y_80"
-                android:layout_below="@id/rl_200hz"
+                android:layout_below="@id/rl_100hz"
                 android:layout_marginStart="@dimen/x_100"
                 android:layout_marginTop="@dimen/y_19"
                 android:background="@drawable/main_settings_bg">
@@ -267,10 +209,11 @@
                     android:textColor="@color/tv_color"
                     android:textSize="@dimen/x_23" />
 
+
             </RelativeLayout>
 
             <RelativeLayout
-                android:id="@+id/rl_1d2khz"
+                android:id="@+id/rl_2khz"
                 style="@style/focusStyle"
                 android:layout_width="@dimen/x_1080"
                 android:layout_height="@dimen/y_80"
@@ -280,19 +223,19 @@
                 android:background="@drawable/main_settings_bg">
 
                 <TextView
-                    android:id="@+id/iv_1d2khz"
+                    android:id="@+id/iv_2khz"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/x_50"
                     android:layout_marginTop="@dimen/y_4"
                     android:duplicateParentState="true"
-                    android:text="1.2KHz"
+                    android:text="2KHz"
                     android:layout_centerVertical="true"
                     android:textColor="@color/tv_color"
                     android:textSize="@dimen/x_27" />
 
                 <View
-                    android:id="@+id/right_1d2k"
+                    android:id="@+id/right_2k"
                     android:layout_width="@dimen/x_53"
                     android:layout_height="@dimen/y_53"
                     android:layout_alignParentEnd="true"
@@ -302,7 +245,7 @@
                     android:duplicateParentState="true" />
 
                 <View
-                    android:id="@+id/left_1d2k"
+                    android:id="@+id/left_2k"
                     android:layout_width="@dimen/x_53"
                     android:layout_height="@dimen/y_53"
                     android:layout_alignParentEnd="true"
@@ -312,7 +255,7 @@
                     android:duplicateParentState="true" />
 
                 <TextView
-                    android:id="@+id/tv_1d2khz"
+                    android:id="@+id/tv_2khz"
                     android:layout_width="@dimen/x_368"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
@@ -327,85 +270,29 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:id="@+id/rl_3khz"
+                android:id="@+id/rl_4khz"
                 style="@style/focusStyle"
                 android:layout_width="@dimen/x_1080"
                 android:layout_height="@dimen/y_80"
-                android:layout_below="@id/rl_1d2khz"
-                android:layout_marginStart="@dimen/x_100"
-                android:layout_marginTop="17dp"
-                android:background="@drawable/main_settings_bg">
-
-                <TextView
-                    android:id="@+id/iv_3khz"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="@dimen/x_50"
-                    android:layout_marginTop="@dimen/y_4"
-                    android:duplicateParentState="true"
-                    android:text="3KHz"
-                    android:textColor="@color/tv_color"
-                    android:textSize="@dimen/x_27" />
-
-                <View
-                    android:id="@+id/right_3k"
-                    android:layout_width="@dimen/x_53"
-                    android:layout_height="@dimen/y_53"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="@dimen/x_50"
-                    android:background="@drawable/arrow_right_bg"
-                    android:duplicateParentState="true" />
-
-                <View
-                    android:id="@+id/left_3k"
-                    android:layout_width="@dimen/x_53"
-                    android:layout_height="@dimen/y_53"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="@dimen/x_468"
-                    android:background="@drawable/arrow_left_bg"
-                    android:duplicateParentState="true" />
-
-                <TextView
-                    android:id="@+id/tv_3khz"
-                    android:layout_width="@dimen/x_368"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="@dimen/x_103"
-                    android:duplicateParentState="true"
-                    android:gravity="center"
-                    android:text="100"
-                    android:textColor="@color/tv_color"
-                    android:textSize="@dimen/x_23" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/rl_7d5khz"
-                style="@style/focusStyle"
-                android:layout_width="@dimen/x_1080"
-                android:layout_height="@dimen/y_80"
-                android:layout_below="@id/rl_3khz"
+                android:layout_below="@id/rl_2khz"
                 android:layout_marginStart="@dimen/x_100"
                 android:layout_marginTop="@dimen/y_19"
                 android:background="@drawable/main_settings_bg">
 
                 <TextView
-                    android:id="@+id/iv_7d5khz"
+                    android:id="@+id/iv_4khz"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/x_50"
                     android:layout_marginTop="@dimen/y_4"
                     android:duplicateParentState="true"
-                    android:text="7.5KHz"
+                    android:text="4KHz"
                     android:layout_centerVertical="true"
                     android:textColor="@color/tv_color"
                     android:textSize="@dimen/x_27" />
 
                 <View
-                    android:id="@+id/right_7d5k"
+                    android:id="@+id/right_4k"
                     android:layout_width="@dimen/x_53"
                     android:layout_height="@dimen/y_53"
                     android:layout_alignParentEnd="true"
@@ -415,7 +302,7 @@
                     android:duplicateParentState="true" />
 
                 <View
-                    android:id="@+id/left_7d5k"
+                    android:id="@+id/left_4k"
                     android:layout_width="@dimen/x_53"
                     android:layout_height="@dimen/y_53"
                     android:layout_alignParentEnd="true"
@@ -425,7 +312,176 @@
                     android:duplicateParentState="true" />
 
                 <TextView
-                    android:id="@+id/tv_7d5khz"
+                    android:id="@+id/tv_4khz"
+                    android:layout_width="@dimen/x_368"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/x_103"
+                    android:duplicateParentState="true"
+                    android:gravity="center"
+                    android:text="100"
+                    android:textColor="@color/tv_color"
+                    android:textSize="@dimen/x_23" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_6khz"
+                style="@style/focusStyle"
+                android:layout_width="@dimen/x_1080"
+                android:layout_height="@dimen/y_80"
+                android:layout_below="@id/rl_4khz"
+                android:layout_marginStart="@dimen/x_100"
+                android:layout_marginTop="17dp"
+                android:background="@drawable/main_settings_bg">
+
+                <TextView
+                    android:id="@+id/iv_6khz"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/x_50"
+                    android:layout_marginTop="@dimen/y_4"
+                    android:duplicateParentState="true"
+                    android:text="6KHz"
+                    android:textColor="@color/tv_color"
+                    android:textSize="@dimen/x_27" />
+
+                <View
+                    android:id="@+id/right_6k"
+                    android:layout_width="@dimen/x_53"
+                    android:layout_height="@dimen/y_53"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/x_50"
+                    android:background="@drawable/arrow_right_bg"
+                    android:duplicateParentState="true" />
+
+                <View
+                    android:id="@+id/left_6k"
+                    android:layout_width="@dimen/x_53"
+                    android:layout_height="@dimen/y_53"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/x_468"
+                    android:background="@drawable/arrow_left_bg"
+                    android:duplicateParentState="true" />
+
+                <TextView
+                    android:id="@+id/tv_6khz"
+                    android:layout_width="@dimen/x_368"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/x_103"
+                    android:duplicateParentState="true"
+                    android:gravity="center"
+                    android:text="100"
+                    android:textColor="@color/tv_color"
+                    android:textSize="@dimen/x_23" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_8khz"
+                style="@style/focusStyle"
+                android:layout_width="@dimen/x_1080"
+                android:layout_height="@dimen/y_80"
+                android:layout_below="@id/rl_6khz"
+                android:layout_marginStart="@dimen/x_100"
+                android:layout_marginTop="@dimen/y_19"
+                android:background="@drawable/main_settings_bg">
+
+                <TextView
+                    android:id="@+id/iv_8khz"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/x_50"
+                    android:layout_marginTop="@dimen/y_4"
+                    android:duplicateParentState="true"
+                    android:text="8KHz"
+                    android:layout_centerVertical="true"
+                    android:textColor="@color/tv_color"
+                    android:textSize="@dimen/x_27" />
+
+                <View
+                    android:id="@+id/right_8k"
+                    android:layout_width="@dimen/x_53"
+                    android:layout_height="@dimen/y_53"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/x_50"
+                    android:background="@drawable/arrow_right_bg"
+                    android:duplicateParentState="true" />
+
+                <View
+                    android:id="@+id/left_8k"
+                    android:layout_width="@dimen/x_53"
+                    android:layout_height="@dimen/y_53"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/x_468"
+                    android:background="@drawable/arrow_left_bg"
+                    android:duplicateParentState="true" />
+
+                <TextView
+                    android:id="@+id/tv_8khz"
+                    android:layout_width="@dimen/x_368"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/x_103"
+                    android:duplicateParentState="true"
+                    android:gravity="center"
+                    android:text="100"
+                    android:textColor="@color/tv_color"
+                    android:textSize="@dimen/x_23" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_10khz"
+                style="@style/focusStyle"
+                android:layout_width="@dimen/x_1080"
+                android:layout_height="@dimen/y_80"
+                android:layout_below="@id/rl_8khz"
+                android:layout_marginStart="@dimen/x_100"
+                android:layout_marginTop="@dimen/y_19"
+                android:background="@drawable/main_settings_bg">
+
+                <TextView
+                    android:id="@+id/iv_10khz"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/x_50"
+                    android:layout_marginTop="@dimen/y_4"
+                    android:duplicateParentState="true"
+                    android:text="10KHz"
+                    android:layout_centerVertical="true"
+                    android:textColor="@color/tv_color"
+                    android:textSize="@dimen/x_27" />
+
+                <View
+                    android:id="@+id/right_10k"
+                    android:layout_width="@dimen/x_53"
+                    android:layout_height="@dimen/y_53"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/x_50"
+                    android:background="@drawable/arrow_right_bg"
+                    android:duplicateParentState="true" />
+
+                <View
+                    android:id="@+id/left_10k"
+                    android:layout_width="@dimen/x_53"
+                    android:layout_height="@dimen/y_53"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/x_468"
+                    android:background="@drawable/arrow_left_bg"
+                    android:duplicateParentState="true" />
+
+                <TextView
+                    android:id="@+id/tv_10khz"
                     android:layout_width="@dimen/x_368"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
@@ -443,7 +499,7 @@
                 style="@style/focusStyle"
                 android:layout_width="@dimen/x_1080"
                 android:layout_height="@dimen/y_80"
-                android:layout_below="@id/rl_7d5khz"
+                android:layout_below="@id/rl_10khz"
                 android:layout_marginStart="@dimen/x_100"
                 android:layout_marginTop="@dimen/y_19"
                 android:background="@drawable/main_settings_bg">
@@ -455,7 +511,7 @@
                     android:layout_marginStart="@dimen/x_50"
                     android:layout_marginTop="@dimen/y_4"
                     android:duplicateParentState="true"
-                    android:text="&gt;12KHz"
+                    android:text="12KHz"
                     android:layout_centerVertical="true"
                     android:textColor="@color/tv_color"
                     android:textSize="@dimen/x_27" />
@@ -494,7 +550,117 @@
                     android:textSize="@dimen/x_23" />
             </RelativeLayout>
 
+            <RelativeLayout
+                android:id="@+id/rl_14khz"
+                style="@style/focusStyle"
+                android:layout_width="@dimen/x_1080"
+                android:layout_height="@dimen/y_80"
+                android:layout_below="@id/rl_12khz"
+                android:layout_marginStart="@dimen/x_100"
+                android:layout_marginTop="@dimen/y_19"
+                android:background="@drawable/main_settings_bg">
 
+                <TextView
+                    android:id="@+id/iv_14khz"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/x_50"
+                    android:layout_marginTop="@dimen/y_4"
+                    android:duplicateParentState="true"
+                    android:text="14KHz"
+                    android:layout_centerVertical="true"
+                    android:textColor="@color/tv_color"
+                    android:textSize="@dimen/x_27" />
+
+                <View
+                    android:id="@+id/right_14k"
+                    android:layout_width="@dimen/x_53"
+                    android:layout_height="@dimen/y_53"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/x_50"
+                    android:background="@drawable/arrow_right_bg"
+                    android:duplicateParentState="true" />
+
+                <View
+                    android:id="@+id/left_14k"
+                    android:layout_width="@dimen/x_53"
+                    android:layout_height="@dimen/y_53"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/x_468"
+                    android:background="@drawable/arrow_left_bg"
+                    android:duplicateParentState="true" />
+
+                <TextView
+                    android:id="@+id/tv_14khz"
+                    android:layout_width="@dimen/x_368"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/x_103"
+                    android:duplicateParentState="true"
+                    android:gravity="center"
+                    android:text="100"
+                    android:textColor="@color/tv_color"
+                    android:textSize="@dimen/x_23" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_18khz"
+                style="@style/focusStyle"
+                android:layout_width="@dimen/x_1080"
+                android:layout_height="@dimen/y_80"
+                android:layout_below="@id/rl_14khz"
+                android:layout_marginStart="@dimen/x_100"
+                android:layout_marginTop="@dimen/y_19"
+                android:background="@drawable/main_settings_bg">
+
+                <TextView
+                    android:id="@+id/iv_18khz"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/x_50"
+                    android:layout_marginTop="@dimen/y_4"
+                    android:duplicateParentState="true"
+                    android:text="18KHz"
+                    android:layout_centerVertical="true"
+                    android:textColor="@color/tv_color"
+                    android:textSize="@dimen/x_27" />
+
+                <View
+                    android:id="@+id/right_18k"
+                    android:layout_width="@dimen/x_53"
+                    android:layout_height="@dimen/y_53"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/x_50"
+                    android:background="@drawable/arrow_right_bg"
+                    android:duplicateParentState="true" />
+
+                <View
+                    android:id="@+id/left_18k"
+                    android:layout_width="@dimen/x_53"
+                    android:layout_height="@dimen/y_53"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/x_468"
+                    android:background="@drawable/arrow_left_bg"
+                    android:duplicateParentState="true" />
+
+                <TextView
+                    android:id="@+id/tv_18khz"
+                    android:layout_width="@dimen/x_368"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/x_103"
+                    android:duplicateParentState="true"
+                    android:gravity="center"
+                    android:text="100"
+                    android:textColor="@color/tv_color"
+                    android:textSize="@dimen/x_23" />
+            </RelativeLayout>
 
         </RelativeLayout>
 

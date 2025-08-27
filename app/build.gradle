@@ -82,7 +82,7 @@ android {
 }
 
 static def getVersionNames() {
-    return "1.0.30"
+    return "1.0.32"
 }
 
 static def releaseTime() {
@@ -94,7 +94,7 @@ static def releaseCode() {
 
 dependencies {
     implementation 'com.android.support:appcompat-v7:28.0.0'
-    implementation files('libs/softwinner_726.jar')
+    implementation files('libs/softwinner_825.jar')
     implementation 'com.google.android.material:material:1.3.0'
     compileOnly files('libs/classes_726_a14.jar')
     implementation 'androidx.appcompat:appcompat:1.3.1'
