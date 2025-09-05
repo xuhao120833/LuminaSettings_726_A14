@@ -188,7 +188,6 @@ public class KeystoneUtils_726 {
         int[] xy_OppositeTo = new int[]{0, 0};
         switch (type) {
             case 1:
-
                 xy_OppositeTo = getKeystoneOppositeToLeftAndTopXY();
                 if (x >= minX && (x + xy_OppositeTo[0]) <= minH_size) {
                     ;

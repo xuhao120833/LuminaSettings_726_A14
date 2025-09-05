@@ -59,6 +59,7 @@ public class Utils {
 
     public static boolean btAnim = false;
     public static String cur_language="";
+    public static boolean audio_change = false;
 
     /**
      * 打印 Intent 的 Extras 信息

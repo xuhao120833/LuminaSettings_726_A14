@@ -16,6 +16,7 @@ import com.htc.luminaos.R;
 import com.htc.luminaos.databinding.ActivityAudioModeBinding;
 import com.htc.luminaos.databinding.ActivityPictureModeBinding;
 import com.htc.luminaos.utils.ReflectUtil;
+import com.htc.luminaos.utils.Utils;
 import com.softwinner.PQControl;
 import com.softwinner.TvAudioControl;
 import com.softwinner.tv.AwTvAudioManager;
@@ -55,6 +56,7 @@ public class AudioModeActivity extends BaseActivity implements View.OnKeyListene
     private static final String KEY_BQ_10 = "bq_10";
     private AudioManagerEx mAudioManagerEx = null;
     private Handler handler = new Handler();
+    private static String AUDIO_SFX_SYNC_FILE = "audio_sound_effects_sync_file";
     private static String TAG = "AudioModeActivity";
 
     @Override
@@ -71,6 +73,14 @@ public class AudioModeActivity extends BaseActivity implements View.OnKeyListene
     protected void onStart() {
         super.onStart();
         initData();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+//        if (sound_mode != 4) {
+            mAudioManagerEx.setAudioParameters(AUDIO_SFX_SYNC_FILE, "");
+//        }
     }
 
     private void initView() {
@@ -155,6 +165,7 @@ public class AudioModeActivity extends BaseActivity implements View.OnKeyListene
 
     private void initData() {
         sound_mode = getSettingModeValue();
+        Log.d(TAG, "initData sound_mode " + sound_mode);
         activityAudioModeBinding.audioModeTv.setText(soundMode_name[sound_mode]);
         updateAllEQValue();
         updateAudioStatus();
@@ -164,6 +175,10 @@ public class AudioModeActivity extends BaseActivity implements View.OnKeyListene
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.rl_audio_mode) {
+            if (sound_mode == 4 && Utils.audio_change) {
+                mAudioManagerEx.setAudioParameters(AUDIO_SFX_SYNC_FILE, "");
+                Utils.audio_change = false;
+            }
             sound_mode += 1;
             if (sound_mode == soundMode_name.length) {
                 sound_mode = 0;
@@ -175,69 +190,79 @@ public class AudioModeActivity extends BaseActivity implements View.OnKeyListene
                 public void run() {
                     updateAllEQValue();
                 }
-            },200);
+            }, 200);
 //            updateAllEQValue();
             updateAudioStatus();
-        } else if(id == R.id.rl_100hz) {
+        } else if (id == R.id.rl_100hz) {
             if (value_100hz == 100)
                 return;
-            value_100hz +=1;
+            value_100hz += 1;
             activityAudioModeBinding.tv100hz.setText(String.valueOf(value_100hz));
-            updateSettingIntValue(KEY_BQ_1,value_100hz);
+            updateSettingIntValue(KEY_BQ_1, value_100hz);
+            Utils.audio_change = true;
         } else if (id == R.id.rl_500hz) {
             if (value_500hz == 100)
                 return;
             value_500hz += 1;
             activityAudioModeBinding.tv500hz.setText(String.valueOf(value_500hz));
-            updateSettingIntValue(KEY_BQ_2,value_500hz);
+            updateSettingIntValue(KEY_BQ_2, value_500hz);
+            Utils.audio_change = true;
         } else if (id == R.id.rl_2khz) {
             if (value_2khz == 100)
                 return;
             value_2khz += 1;
             activityAudioModeBinding.tv2khz.setText(String.valueOf(value_2khz));
-            updateSettingIntValue(KEY_BQ_3,value_2khz);
+            updateSettingIntValue(KEY_BQ_3, value_2khz);
+            Utils.audio_change = true;
         } else if (id == R.id.rl_4khz) {
             if (value_4khz == 100)
                 return;
             value_4khz += 1;
             activityAudioModeBinding.tv4khz.setText(String.valueOf(value_4khz));
-            updateSettingIntValue(KEY_BQ_4,value_4khz);
+            updateSettingIntValue(KEY_BQ_4, value_4khz);
+            Utils.audio_change = true;
         } else if (id == R.id.rl_6khz) {
             if (value_6khz == 100)
                 return;
             value_6khz += 1;
             activityAudioModeBinding.tv6khz.setText(String.valueOf(value_6khz));
-            updateSettingIntValue(KEY_BQ_5,value_6khz);
+            updateSettingIntValue(KEY_BQ_5, value_6khz);
+            Utils.audio_change = true;
         } else if (id == R.id.rl_8khz) {
             if (value_8khz == 100)
                 return;
             value_8khz += 1;
             activityAudioModeBinding.tv8khz.setText(String.valueOf(value_8khz));
-            updateSettingIntValue(KEY_BQ_6,value_8khz);
+            updateSettingIntValue(KEY_BQ_6, value_8khz);
+            Utils.audio_change = true;
         } else if (id == R.id.rl_10khz) {
             if (value_10khz == 100)
                 return;
             value_10khz += 1;
             activityAudioModeBinding.tv10khz.setText(String.valueOf(value_10khz));
-            updateSettingIntValue(KEY_BQ_7,value_10khz);
+            updateSettingIntValue(KEY_BQ_7, value_10khz);
+            Utils.audio_change = true;
         } else if (id == R.id.rl_12khz) {
             if (value_12khz == 100)
                 return;
             value_12khz += 1;
             activityAudioModeBinding.tv12khz.setText(String.valueOf(value_12khz));
-            updateSettingIntValue(KEY_BQ_8,value_12khz);
+            updateSettingIntValue(KEY_BQ_8, value_12khz);
+            Utils.audio_change = true;
         } else if (id == R.id.rl_14khz) {
             if (value_14khz == 100)
                 return;
             value_14khz += 1;
             activityAudioModeBinding.tv14khz.setText(String.valueOf(value_14khz));
-            updateSettingIntValue(KEY_BQ_9,value_14khz);
+            updateSettingIntValue(KEY_BQ_9, value_14khz);
+            Utils.audio_change = true;
         } else if (id == R.id.rl_18khz) {
             if (value_18khz == 100)
                 return;
             value_18khz += 1;
             activityAudioModeBinding.tv18khz.setText(String.valueOf(value_18khz));
-            updateSettingIntValue(KEY_BQ_10,value_18khz);
+            updateSettingIntValue(KEY_BQ_10, value_18khz);
+            Utils.audio_change = true;
         }
     }
 
@@ -256,6 +281,10 @@ public class AudioModeActivity extends BaseActivity implements View.OnKeyListene
         if (keyCode == KeyEvent.KEYCODE_DPAD_LEFT && event.getAction() == KeyEvent.ACTION_DOWN) {
             int id = v.getId();
             if (id == R.id.rl_audio_mode) {
+                if (sound_mode == 4 && Utils.audio_change) {
+                    mAudioManagerEx.setAudioParameters(AUDIO_SFX_SYNC_FILE, "");
+                    Utils.audio_change = false;
+                }
                 sound_mode -= 1;
                 if (sound_mode == -1) {
                     sound_mode = soundMode_name.length - 1;
@@ -267,86 +296,100 @@ public class AudioModeActivity extends BaseActivity implements View.OnKeyListene
                     public void run() {
                         updateAllEQValue();
                     }
-                },200);
+                }, 200);
                 updateAudioStatus();
                 if (audioManager != null) {
                     audioManager.playSoundEffect(AudioManager.FX_FOCUS_NAVIGATION_DOWN);
                 }
                 audioManager = null;
-            } else if(id == R.id.rl_100hz) {
+            } else if (id == R.id.rl_100hz) {
                 if (value_100hz == -100)
                     return false;
-                value_100hz -=1;
+                value_100hz -= 1;
                 activityAudioModeBinding.tv100hz.setText(String.valueOf(value_100hz));
-                updateSettingIntValue(KEY_BQ_1,value_100hz);
+                updateSettingIntValue(KEY_BQ_1, value_100hz);
+                Utils.audio_change = true;
                 return true;
             } else if (id == R.id.rl_500hz) {
                 if (value_500hz == -100)
                     return false;
                 value_500hz -= 1;
                 activityAudioModeBinding.tv500hz.setText(String.valueOf(value_500hz));
-                updateSettingIntValue(KEY_BQ_2,value_500hz);
+                updateSettingIntValue(KEY_BQ_2, value_500hz);
+                Utils.audio_change = true;
                 return true;
             } else if (id == R.id.rl_2khz) {
                 if (value_2khz == -100)
                     return false;
                 value_2khz -= 1;
                 activityAudioModeBinding.tv2khz.setText(String.valueOf(value_2khz));
-                updateSettingIntValue(KEY_BQ_3,value_2khz);
+                updateSettingIntValue(KEY_BQ_3, value_2khz);
+                Utils.audio_change = true;
                 return true;
             } else if (id == R.id.rl_4khz) {
                 if (value_4khz == -100)
                     return false;
                 value_4khz -= 1;
                 activityAudioModeBinding.tv4khz.setText(String.valueOf(value_4khz));
-                updateSettingIntValue(KEY_BQ_4,value_4khz);
+                updateSettingIntValue(KEY_BQ_4, value_4khz);
+                Utils.audio_change = true;
                 return true;
             } else if (id == R.id.rl_6khz) {
                 if (value_6khz == -100)
                     return false;
                 value_6khz -= 1;
                 activityAudioModeBinding.tv6khz.setText(String.valueOf(value_6khz));
-                updateSettingIntValue(KEY_BQ_5,value_6khz);
+                updateSettingIntValue(KEY_BQ_5, value_6khz);
+                Utils.audio_change = true;
                 return true;
             } else if (id == R.id.rl_8khz) {
                 if (value_8khz == -100)
                     return false;
                 value_8khz -= 1;
                 activityAudioModeBinding.tv8khz.setText(String.valueOf(value_8khz));
-                updateSettingIntValue(KEY_BQ_6,value_8khz);
+                updateSettingIntValue(KEY_BQ_6, value_8khz);
+                Utils.audio_change = true;
                 return true;
             } else if (id == R.id.rl_10khz) {
                 if (value_10khz == -100)
                     return false;
                 value_10khz -= 1;
                 activityAudioModeBinding.tv10khz.setText(String.valueOf(value_10khz));
-                updateSettingIntValue(KEY_BQ_7,value_10khz);
+                updateSettingIntValue(KEY_BQ_7, value_10khz);
+                Utils.audio_change = true;
                 return true;
             } else if (id == R.id.rl_12khz) {
                 if (value_12khz == -100)
                     return false;
                 value_12khz -= 1;
                 activityAudioModeBinding.tv12khz.setText(String.valueOf(value_12khz));
-                updateSettingIntValue(KEY_BQ_8,value_12khz);
+                updateSettingIntValue(KEY_BQ_8, value_12khz);
+                Utils.audio_change = true;
                 return true;
             } else if (id == R.id.rl_14khz) {
                 if (value_14khz == -100)
                     return false;
                 value_14khz -= 1;
                 activityAudioModeBinding.tv14khz.setText(String.valueOf(value_14khz));
-                updateSettingIntValue(KEY_BQ_9,value_14khz);
+                updateSettingIntValue(KEY_BQ_9, value_14khz);
+                Utils.audio_change = true;
                 return true;
             } else if (id == R.id.rl_18khz) {
                 if (value_18khz == -100)
                     return false;
                 value_18khz -= 1;
                 activityAudioModeBinding.tv18khz.setText(String.valueOf(value_18khz));
-                updateSettingIntValue(KEY_BQ_10,value_18khz);
+                updateSettingIntValue(KEY_BQ_10, value_18khz);
+                Utils.audio_change = true;
                 return true;
             }
         } else if (keyCode == KeyEvent.KEYCODE_DPAD_RIGHT && event.getAction() == KeyEvent.ACTION_DOWN) {
             int id = v.getId();
             if (id == R.id.rl_audio_mode) {
+                if (sound_mode == 4 && Utils.audio_change) {
+                    mAudioManagerEx.setAudioParameters(AUDIO_SFX_SYNC_FILE, "");
+                    Utils.audio_change = false;
+                }
                 sound_mode += 1;
                 if (sound_mode == soundMode_name.length) {
                     sound_mode = 0;
@@ -358,81 +401,91 @@ public class AudioModeActivity extends BaseActivity implements View.OnKeyListene
                     public void run() {
                         updateAllEQValue();
                     }
-                },200);
+                }, 200);
                 updateAudioStatus();
                 if (audioManager != null) {
                     audioManager.playSoundEffect(AudioManager.FX_FOCUS_NAVIGATION_DOWN);
                 }
                 audioManager = null;
-            } else if(id == R.id.rl_100hz) {
+            } else if (id == R.id.rl_100hz) {
                 if (value_100hz == 100)
                     return false;
-                value_100hz +=1;
+                value_100hz += 1;
                 activityAudioModeBinding.tv100hz.setText(String.valueOf(value_100hz));
-                updateSettingIntValue(KEY_BQ_1,value_100hz);
+                updateSettingIntValue(KEY_BQ_1, value_100hz);
+                Utils.audio_change = true;
                 return true;
             } else if (id == R.id.rl_500hz) {
                 if (value_500hz == 100)
                     return false;
                 value_500hz += 1;
                 activityAudioModeBinding.tv500hz.setText(String.valueOf(value_500hz));
-                updateSettingIntValue(KEY_BQ_2,value_500hz);
+                updateSettingIntValue(KEY_BQ_2, value_500hz);
+                Utils.audio_change = true;
                 return true;
             } else if (id == R.id.rl_2khz) {
                 if (value_2khz == 100)
                     return false;
                 value_2khz += 1;
                 activityAudioModeBinding.tv2khz.setText(String.valueOf(value_2khz));
-                updateSettingIntValue(KEY_BQ_3,value_2khz);
+                updateSettingIntValue(KEY_BQ_3, value_2khz);
+                Utils.audio_change = true;
                 return true;
             } else if (id == R.id.rl_4khz) {
                 if (value_4khz == 100)
                     return false;
                 value_4khz += 1;
                 activityAudioModeBinding.tv4khz.setText(String.valueOf(value_4khz));
-                updateSettingIntValue(KEY_BQ_4,value_4khz);
+                updateSettingIntValue(KEY_BQ_4, value_4khz);
+                Utils.audio_change = true;
                 return true;
             } else if (id == R.id.rl_6khz) {
                 if (value_6khz == 100)
                     return false;
                 value_6khz += 1;
                 activityAudioModeBinding.tv6khz.setText(String.valueOf(value_6khz));
-                updateSettingIntValue(KEY_BQ_5,value_6khz);
+                updateSettingIntValue(KEY_BQ_5, value_6khz);
+                Utils.audio_change = true;
                 return true;
             } else if (id == R.id.rl_8khz) {
                 if (value_8khz == 100)
                     return false;
                 value_8khz += 1;
                 activityAudioModeBinding.tv8khz.setText(String.valueOf(value_8khz));
-                updateSettingIntValue(KEY_BQ_6,value_8khz);
+                updateSettingIntValue(KEY_BQ_6, value_8khz);
+                Utils.audio_change = true;
                 return true;
             } else if (id == R.id.rl_10khz) {
                 if (value_10khz == 100)
                     return false;
                 value_10khz += 1;
                 activityAudioModeBinding.tv10khz.setText(String.valueOf(value_10khz));
-                updateSettingIntValue(KEY_BQ_7,value_10khz);
+                updateSettingIntValue(KEY_BQ_7, value_10khz);
+                Utils.audio_change = true;
                 return true;
             } else if (id == R.id.rl_12khz) {
                 if (value_12khz == 100)
                     return false;
                 value_12khz += 1;
                 activityAudioModeBinding.tv12khz.setText(String.valueOf(value_12khz));
-                updateSettingIntValue(KEY_BQ_8,value_12khz);
+                updateSettingIntValue(KEY_BQ_8, value_12khz);
+                Utils.audio_change = true;
                 return true;
             } else if (id == R.id.rl_14khz) {
                 if (value_14khz == 100)
                     return false;
                 value_14khz += 1;
                 activityAudioModeBinding.tv14khz.setText(String.valueOf(value_14khz));
-                updateSettingIntValue(KEY_BQ_9,value_14khz);
+                updateSettingIntValue(KEY_BQ_9, value_14khz);
+                Utils.audio_change = true;
                 return true;
             } else if (id == R.id.rl_18khz) {
                 if (value_18khz == 100)
                     return false;
                 value_18khz += 1;
                 activityAudioModeBinding.tv18khz.setText(String.valueOf(value_18khz));
-                updateSettingIntValue(KEY_BQ_10,value_18khz);
+                updateSettingIntValue(KEY_BQ_10, value_18khz);
+                Utils.audio_change = true;
                 return true;
             }
         }
@@ -571,15 +624,15 @@ public class AudioModeActivity extends BaseActivity implements View.OnKeyListene
         if (mAudioManagerEx == null) {
             mAudioManagerEx = new AudioManagerEx(this);
         }
-        Log.d(TAG, "updateSettingModeValue value "+value);
+        Log.d(TAG, "updateSettingModeValue value " + value);
         mAudioManagerEx.setAudioParameters(AudioSettingParams.SW_PEQ_PRE_MODE, Integer.toString(value));
         return 0;
     }
 
     public int updateSettingIntValue(String key, int value) {
         int band = 0;
-        Log.d(TAG, "updateSettingValue key="+key+" value="+value);
-        switch(key) {
+        Log.d(TAG, "updateSettingValue key=" + key + " value=" + value);
+        switch (key) {
             case KEY_BQ_1:
                 band = 1;
                 break;
@@ -620,8 +673,8 @@ public class AudioModeActivity extends BaseActivity implements View.OnKeyListene
     private int getPEQIntValue(String key) {
         int value = 0;
         int band = 0;
-        Log.d(TAG, "getSettingIntValue "+key);
-        switch(key) {
+        Log.d(TAG, "getSettingIntValue " + key);
+        switch (key) {
             case KEY_BQ_1:
                 band = 1;
                 break;
@@ -684,7 +737,7 @@ public class AudioModeActivity extends BaseActivity implements View.OnKeyListene
             }
             Log.d(TAG, "getAudioPEQValue band=" + band + ", value=" + value);
             return value;
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return -1;
