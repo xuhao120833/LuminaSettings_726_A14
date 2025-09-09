@@ -329,5 +329,6 @@
     <string name="wifi_connect_success">Conectare reușită:</string>
     <string name="wifi_ssid_not_found">Nu se poate conecta la acest Wi-Fi, vă rugăm să verificați dacă rețeaua există</string>
     <string name="accessibility_title">Funcții de accesibilitate</string>
+    <string name="support">Suport</string>
 </resources>
 

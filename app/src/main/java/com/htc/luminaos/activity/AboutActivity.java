@@ -1,10 +1,14 @@
 package com.htc.luminaos.activity;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiInfo;
@@ -17,15 +21,23 @@ import android.os.Message;
 import android.os.SystemProperties;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Display;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.CustomTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.htc.luminaos.MyApplication;
 import com.htc.luminaos.R;
 import com.htc.luminaos.databinding.ActivityAboutBinding;
+import com.htc.luminaos.databinding.DialogSupportBinding;
 import com.htc.luminaos.utils.AppUtils;
 import com.htc.luminaos.utils.ClearMemoryUtils;
 import com.htc.luminaos.utils.Contants;
@@ -33,6 +45,7 @@ import com.htc.luminaos.utils.DeviceUtils;
 import com.htc.luminaos.utils.LogUtils;
 import com.htc.luminaos.utils.ShareUtil;
 import com.htc.luminaos.utils.ToastUtil;
+import com.htc.luminaos.utils.Utils;
 import com.htc.luminaos.widget.UpgradeCheckFailDialog;
 import com.htc.luminaos.widget.UpgradeCheckSuccessDialog;
 
@@ -111,6 +124,7 @@ public class AboutActivity extends BaseActivity {
         aboutBinding.rlDeviceModel.setOnClickListener(this);
         aboutBinding.rlUpdateFirmware.setOnClickListener(this);
         aboutBinding.rlOnlineUpdate.setOnClickListener(this);
+        aboutBinding.rlEmailImage.setOnClickListener(this);
         aboutBinding.rlDeviceModel.requestFocus();
         aboutBinding.rlDeviceModel.requestFocusFromTouch();
 
@@ -125,10 +139,12 @@ public class AboutActivity extends BaseActivity {
         aboutBinding.rlUpdateFirmware.setVisibility(MyApplication.config.updateFirmware ? View.VISIBLE : View.GONE);
         aboutBinding.rlOnlineUpdate.setVisibility(MyApplication.config.onlineUpdate ? View.VISIBLE : View.GONE);
         aboutBinding.rlEmail.setVisibility(MyApplication.config.email ? View.VISIBLE : View.GONE);
+        aboutBinding.rlEmailImage.setVisibility(MyApplication.config.about_support ? View.VISIBLE : View.GONE);
 
         aboutBinding.rlDeviceModel.setOnHoverListener(this);
         aboutBinding.rlUpdateFirmware.setOnHoverListener(this);
         aboutBinding.rlOnlineUpdate.setOnHoverListener(this);
+        aboutBinding.rlEmailImage.setOnHoverListener(this);
     }
 
     private void initData() {
@@ -136,12 +152,20 @@ public class AboutActivity extends BaseActivity {
         isDebug = sp.getBoolean(Contants.KEY_DEVELOPER_MODE, false);
         aboutBinding.deviceModelTv.setText(SystemProperties.get("persist.sys.modelName", "Projecter"));//产品型号
         aboutBinding.uiVersionTv.setText(SystemProperties.get("ro.build.version.incremental"));//产品ui版本
-        aboutBinding.androidVersionTv.setText(Build.VERSION.RELEASE);//android version
+        if(MyApplication.config.androidVersionNumber != 11) {
+            aboutBinding.androidVersionTv.setText(String.valueOf(MyApplication.config.androidVersionNumber));
+        } else {
+            aboutBinding.androidVersionTv.setText(Build.VERSION.RELEASE);//android version
+        }
         aboutBinding.serialNumberTv.setText(SystemProperties.get("ro.serialno", "unknow"));
 //        aboutBinding.serialNumberTv.setText(getProperty("ro.serialno","unknow"));
         getMemorySize();
         getStorageSize();
-        aboutBinding.resolutionTv.setText(getResolution());
+        if(MyApplication.config.resolution_string != null && !MyApplication.config.resolution_string.isEmpty()) {
+            aboutBinding.resolutionTv.setText(MyApplication.config.resolution_string);
+        } else {
+            aboutBinding.resolutionTv.setText(getResolution());
+        }
         //王冲日本 D048BQ D063 MAXZEN 要求显示分辨率854 X 480
 //        aboutBinding.resolutionTv.setText("854 X 480");
         aboutBinding.wirelessMacTv.setText(getWlanMacAddress());
@@ -181,6 +205,8 @@ public class AboutActivity extends BaseActivity {
             }
         } else if (id == R.id.rl_online_update) {
             AppUtils.startNewApp(this, "com.htc.htcotaupdate");
+        } else if (id == R.id.rl_email_image) {
+            showSupportDialog();
         }
         super.onClick(v);
     }
@@ -557,5 +583,45 @@ public class AboutActivity extends BaseActivity {
         } finally {
             return value;
         }
+    }
+
+    private void showSupportDialog() {
+        Dialog dialog = new Dialog(this, R.style.DialogTheme);
+        DialogSupportBinding supportBinding = DialogSupportBinding.inflate(LayoutInflater.from(this));
+        dialog.setContentView(supportBinding.getRoot());
+        File file = new File(Utils.support_image_path);
+        if (file.exists()) {
+            Glide.with(this)
+                    .load(file)
+                    .into(new CustomTarget<Drawable>() {
+                        @Override
+                        public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
+                            supportBinding.rlMain.setBackground(resource);
+                        }
+
+                        @Override
+                        public void onLoadCleared(@Nullable Drawable placeholder) {
+                            // 可选：清除背景或设置占位图
+                        }
+                    });
+        } else {
+            Log.e("ImageLoad", "File not found: " + Utils.support_image_path);
+        }
+        Window window = dialog.getWindow();
+        if (window != null) {
+            //去除系统自带的margin
+            window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            //设置dialog在界面中的属性
+            window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
+            //背景全透明
+            window.setDimAmount(0f);
+        }
+        WindowManager manager = getWindowManager();
+        Display d = manager.getDefaultDisplay(); // 获取屏幕宽、高度
+        WindowManager.LayoutParams params = window.getAttributes(); // 获取对话框当前的参数值
+        params.width = d.getWidth();
+        params.height = d.getHeight();
+        window.setAttributes(params);
+        dialog.show();
     }
 }

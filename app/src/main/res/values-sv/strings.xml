@@ -329,4 +329,6 @@
 	<string name="wifi_connect_success">Ansluten:</string>
 	<string name="wifi_ssid_not_found">Kan inte ansluta till detta Wi-Fi, kontrollera att nätverket finns</string>
 	<string name="accessibility_title">Tillgänglighetsfunktioner</string>
+	<string name="support">Support</string>
+
 </resources>

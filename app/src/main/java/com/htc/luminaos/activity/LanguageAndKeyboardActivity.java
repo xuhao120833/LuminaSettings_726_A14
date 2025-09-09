@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.database.ContentObserver;
 import android.nfc.Tag;
 import android.os.Bundle;
@@ -22,13 +23,16 @@ import android.view.inputmethod.InputMethodManager;
 import android.view.inputmethod.InputMethodSubtype;
 
 import com.android.internal.app.LocalePicker;
+import com.htc.luminaos.MyApplication;
 import com.htc.luminaos.R;
 import com.htc.luminaos.databinding.ActivityLanguageKeyboardBinding;
 import com.htc.luminaos.entry.InputMethodBean;
 import com.htc.luminaos.entry.Language;
+import com.htc.luminaos.utils.Utils;
 import com.htc.luminaos.widget.CustomInputMethodDialog;
 import com.htc.luminaos.widget.CustomLanguageDialog;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -65,6 +69,9 @@ public class LanguageAndKeyboardActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        if(Utils.support_image_path.isEmpty()) {
+            loadSupport();
+        }
     }
 
     @Override
@@ -491,4 +498,57 @@ public class LanguageAndKeyboardActivity extends BaseActivity {
             return false;
         }
     });
+
+    private void loadSupport() {
+        Log.d(TAG, "loadSupport");
+        if ((MyApplication.config.support_directory.isEmpty() || !MyApplication.config.support) && !MyApplication.config.about_support) {
+            Log.d(TAG, "loadSupport 配置不对不加载");
+            return;
+        }
+        String[] imageExtensions = {".jpg", ".jpeg", ".png", ".bmp", ".webp"};
+        File directory = new File(MyApplication.config.support_directory);
+        if (directory.exists() && directory.isDirectory()) {
+            File[] files = directory.listFiles();
+            if (files != null) {
+                for (File file : files) {
+                    if (file.isFile()) {
+                        if (judgeLanguage(file)) {
+                            Log.d(TAG, "找到当前语言的support图片路径 " + file.getAbsolutePath());
+                            break; // 找到一个匹配后就跳出循环
+                        }
+                    }
+                }
+                // 如果当前语言没找到，尝试找英文
+                Log.d(TAG, "loadSupport Utils.support_image_path " + Utils.support_image_path);
+                if (Utils.support_image_path.isEmpty()) {
+                    for (File file : files) {
+                        if (file.isFile() && file.getName().contains("_en")) {
+                            Utils.support_image_path = file.getAbsolutePath();
+                            Log.d(TAG, "找不到当前语言，使用英文support图片路径: " + file.getAbsolutePath());
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private boolean judgeLanguage(File file) {
+        String name = file.getName();
+        Locale currentLocale = Resources.getSystem().getConfiguration().getLocales().get(0);
+        String languageCode;
+        if ("zh".equals(currentLocale.getLanguage())) {
+            // 区分 zh-CN、zh-TW、zh-HK
+            languageCode = "_zh_" + currentLocale.getCountry();
+        } else {
+            // 其他语言只用语言码
+            languageCode = "_" + currentLocale.getLanguage();
+        }
+        Log.d(TAG, "当前语言码: judgeLanguage" + languageCode);
+        if (name.contains(languageCode)) {
+            Utils.support_image_path = file.getAbsolutePath();
+            return true;
+        }
+        return false;
+    }
 }

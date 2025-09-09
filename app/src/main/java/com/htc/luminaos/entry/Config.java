@@ -51,6 +51,7 @@ public class Config {
     public boolean account = true;
 
     public boolean email = false;
+    public boolean about_support = false;
 
     public String email_number = "";
 
@@ -113,7 +114,9 @@ public class Config {
     public boolean deviceModel = true;
     public boolean uiVersion = true;
     public boolean androidVersion = true;
+    public int androidVersionNumber = 11;
     public boolean resolution = true;
+    public String resolution_string = "";
     public boolean memory = true;
     public int memoryScale = 1;
     public boolean storage = true;

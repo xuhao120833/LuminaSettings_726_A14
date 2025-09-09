@@ -329,4 +329,5 @@
     <string name="wifi_connect_success">Σύνδεση επιτυχής:</string>
     <string name="wifi_ssid_not_found">Αδυναμία σύνδεσης σε αυτό το Wi-Fi, παρακαλώ ελέγξτε αν το δίκτυο υπάρχει</string>
     <string name="accessibility_title">Λειτουργίες προσβασιμότητας</string>
+    <string name="support">Υποστήριξη</string>
 </resources>

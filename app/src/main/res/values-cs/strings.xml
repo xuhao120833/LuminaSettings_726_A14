@@ -329,4 +329,5 @@
 	<string name="wifi_connect_success">Připojeno úspěšně:</string>
 	<string name="wifi_ssid_not_found">Nelze se připojit k této Wi-Fi, zkontrolujte prosím, zda síť existuje</string>
 	<string name="accessibility_title">Funkce usnadnění přístupu</string>
+	<string name="support">Podpora</string>
 </resources>

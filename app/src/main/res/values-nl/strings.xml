@@ -329,4 +329,5 @@
     <string name="wifi_connect_success">Verbonden:</string>
     <string name="wifi_ssid_not_found">Kan geen verbinding maken met dit wifi-netwerk, controleer of het netwerk bestaat</string>
     <string name="accessibility_title">Toegankelijkheidsfuncties</string>
+    <string name="support">Ondersteuning</string>
 </resources>

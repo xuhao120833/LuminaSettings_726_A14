@@ -329,5 +329,6 @@
     <string name="wifi_connect_success">Подключение успешно:</string>
     <string name="wifi_ssid_not_found">Не удаётся подключиться к Wi-Fi, проверьте, существует ли сеть</string>
     <string name="accessibility_title">Специальные возможности</string>
+    <string name="support">Поддержка</string>
 </resources>
 

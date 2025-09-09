@@ -329,4 +329,5 @@
     <string name="wifi_connect_success">התחברות הצליחה:</string>
     <string name="wifi_ssid_not_found">לא ניתן להתחבר ל-Wi-Fi זה, אנא ודא שהרשת קיימת</string>
     <string name="accessibility_title">נגישות</string>
+    <string name="support">תמיכה</string>
 </resources>

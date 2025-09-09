@@ -329,6 +329,7 @@
     <string name="wifi_connect_success">Kết nối thành công:</string>
     <string name="wifi_ssid_not_found">Không thể kết nối Wi-Fi này, vui lòng kiểm tra xem mạng có tồn tại không</string>
     <string name="accessibility_title">Trợ năng</string>
+    <string name="support">Hỗ trợ</string>
 </resources>
 
 

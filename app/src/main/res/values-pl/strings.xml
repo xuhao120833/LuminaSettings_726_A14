@@ -329,6 +329,7 @@
     <string name="wifi_connect_success">Połączono pomyślnie:</string>
     <string name="wifi_ssid_not_found">Nie można połączyć się z tą siecią Wi-Fi, sprawdź czy sieć istnieje</string>
     <string name="accessibility_title">Funkcje ułatwień dostępu</string>
+    <string name="support">Wsparcie</string>
 </resources>
 
 

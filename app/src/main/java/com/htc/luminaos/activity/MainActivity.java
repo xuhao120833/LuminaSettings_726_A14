@@ -2449,9 +2449,11 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
     }
 
     private void loadSupport() {
-        if (MyApplication.config.support_directory.isEmpty() || !MyApplication.config.support)
-            return;
         Log.d(TAG, "loadSupport");
+        if ((MyApplication.config.support_directory.isEmpty() || !MyApplication.config.support) && !MyApplication.config.about_support) {
+            Log.d(TAG, "loadSupport 配置不对不加载");
+            return;
+        }
         String[] imageExtensions = {".jpg", ".jpeg", ".png", ".bmp", ".webp"};
         File directory = new File(MyApplication.config.support_directory);
         if (directory.exists() && directory.isDirectory()) {
@@ -2465,7 +2467,6 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
                         }
                     }
                 }
-
                 // 如果当前语言没找到，尝试找英文
                 Log.d(TAG, "loadSupport Utils.support_image_path " + Utils.support_image_path);
                 if (Utils.support_image_path.isEmpty()) {
@@ -2483,9 +2484,15 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
 
     private boolean judgeLanguage(File file) {
         String name = file.getName();
-        Locale currentLocale;
-        currentLocale = Resources.getSystem().getConfiguration().getLocales().get(0);
-        String languageCode = "_" + currentLocale.getLanguage();
+        Locale currentLocale = Resources.getSystem().getConfiguration().getLocales().get(0);
+        String languageCode;
+        if ("zh".equals(currentLocale.getLanguage())) {
+            // 区分 zh-CN、zh-TW、zh-HK
+            languageCode = "_zh_" + currentLocale.getCountry();
+        } else {
+            // 其他语言只用语言码
+            languageCode = "_" + currentLocale.getLanguage();
+        }
         Log.d("JudgeLanguage", "当前语言码: " + languageCode);
         if (name.contains(languageCode)) {
             Utils.support_image_path = file.getAbsolutePath();
