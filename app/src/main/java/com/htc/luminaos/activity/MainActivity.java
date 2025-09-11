@@ -45,6 +45,8 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.htc.luminaos.MyApplication;
+import com.htc.luminaos.contentobserver.NotificationCallBack;
+import com.htc.luminaos.contentobserver.NotificationObserver;
 import com.htc.luminaos.databinding.DialogSupportBinding;
 import com.htc.luminaos.entry.SpecialApps;
 import com.htc.luminaos.receiver.AppCallBack;
@@ -171,7 +173,7 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class MainActivity extends BaseMainActivity implements BluetoothCallBcak, MyWifiCallBack, MyTimeCallBack,
-        NetWorkCallBack, UsbDeviceCallBack, AppCallBack, BatteryCallBack, View.OnKeyListener, UnlockCallBack {
+        NetWorkCallBack, UsbDeviceCallBack, AppCallBack, BatteryCallBack, View.OnKeyListener, UnlockCallBack, NotificationCallBack {
 
     private ActivityMainBinding mainBinding;
 
@@ -233,6 +235,7 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
 
     private ShortcutsAdapterCustom shortcutsAdapterCustom = null;
     private boolean dataOK = false;
+    private NotificationObserver notificationObserver = null;
 
     Runnable runnable = new Runnable() {
         @Override
@@ -353,6 +356,7 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
             StartupTimer.mark("setDefaultBackgroundById完成");
             initViewCustom();
             initDataCustom();
+            initContentObserver();
             StartupTimer.mark("initDataCustom完成");
 //            initReceiver();
 //            StartupTimer.mark("initReceiver完成");
@@ -525,6 +529,11 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
         customBinding.rlSupport.setOnHoverListener(this);
         customBinding.rlSupport.setOnFocusChangeListener(this);
         customBinding.rlSupport.setVisibility((MyApplication.config.support && !Utils.support_image_path.isEmpty()) ? View.VISIBLE : View.GONE);
+        //通知
+        customBinding.rlNotice.setOnClickListener(this);
+        customBinding.rlNotice.setOnHoverListener(this);
+        customBinding.rlNotice.setOnFocusChangeListener(this);
+        customBinding.rlNotice.setVisibility(MyApplication.config.notice ? View.VISIBLE : View.GONE);
         //电池状态
         initBattery();
         //U盘插入
@@ -620,7 +629,7 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
     @Override
     public void setBatteryLevel(String level) {
         Log.d(TAG, "电池状态 setBatteryLevel");
-        if(level == null) {
+        if (level == null) {
             Log.d(TAG, "setBatteryLevel level为空返回");
             return;
         }
@@ -915,7 +924,9 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
         String appname = null;
         String action = null;
         int id = v.getId();
-        if (id == R.id.rl_support) {
+        if (id == R.id.rl_notice) {
+            goAction("com.htc.notification/com.htc.notification.MainActivity");
+        } else if (id == R.id.rl_support) {
             showSupportDialog();
         } else if (id == R.id.rl_clear_memory) {
             goAction("com.htc.clearmemory/com.htc.clearmemory.MainActivity");
@@ -1519,6 +1530,8 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
         displaySettingsReceiver = null;
         unregisterReceiver(initAngleReceiver);
 //        unregisterReceiver(unlockReceiver);
+
+        getContentResolver().unregisterContentObserver(notificationObserver);
         super.onDestroy();
     }
 
@@ -2549,10 +2562,10 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
-        Log.d(TAG," onConfigurationChanged ");
+        Log.d(TAG, " onConfigurationChanged ");
         super.onConfigurationChanged(newConfig);
 
-        if(!Utils.cur_language.isEmpty()) {
+        if (!Utils.cur_language.isEmpty()) {
             String[] parts = Utils.cur_language.split("-");
             Locale locale;
             String db_cur_language;
@@ -2561,9 +2574,9 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
                 db_cur_language = Utils.cur_language;
             } else {
                 locale = new Locale(Utils.cur_language);
-                db_cur_language = Utils.cur_language+"-";
+                db_cur_language = Utils.cur_language + "-";
             }
-            Log.d(TAG," onConfigurationChanged Utils.cur_language "+Utils.cur_language);
+            Log.d(TAG, " onConfigurationChanged Utils.cur_language " + Utils.cur_language);
             // 1. 设置新的语言
 //            Locale.setDefault(locale);
             Configuration config = getResources().getConfiguration();
@@ -2613,4 +2626,23 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
         }
     }
 
+    @Override
+    public void changeNoticeIcon(int number) {
+        if (customBinding.notice != null) {
+            if (number == 1) {
+                customBinding.notice.setImageResource(R.drawable.bar_notice_on);
+            } else if (number == 0) {
+                customBinding.notice.setImageResource(R.drawable.bar_notice_off);
+            }
+        }
+    }
+
+    private void initContentObserver() {
+        int value = Settings.Global.getInt(getContentResolver(),"notification",1);
+        if(value == 1) {
+            customBinding.notice.setImageResource(R.drawable.bar_notice_on);
+        }
+        notificationObserver = new NotificationObserver(getApplicationContext(),this);
+        getContentResolver().registerContentObserver(Settings.Global.getUriFor("notification"), false, notificationObserver);
+    }
 }

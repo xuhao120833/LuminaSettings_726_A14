@@ -32,6 +32,7 @@ public class Config {
     //配置首页状态栏蓝牙、Wifi的跳转
     public String statusbar_bt = "";
     public String statusbar_wifi = "";
+    public boolean notice = false;
     public boolean bluetooth = true;
     public int layout_select = 1;
 

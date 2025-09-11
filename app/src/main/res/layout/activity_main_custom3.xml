@@ -64,6 +64,26 @@
     <!--        android:textStyle="bold" />-->
 
     <RelativeLayout
+        android:id="@+id/rl_notice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/y_40"
+        android:layout_marginEnd="@dimen/x_20"
+        style="@style/focusStyle"
+        android:clickable="true"
+        android:visibility="gone"
+        android:background="@drawable/circle_bar_bg_custom"
+        android:layout_toStartOf="@+id/rl_support">
+
+        <ImageView
+            android:id="@+id/notice"
+            android:layout_width="@dimen/x_53"
+            android:layout_height="@dimen/y_53"
+            android:padding="@dimen/y_3"
+            android:src="@drawable/bar_notice_off" />
+    </RelativeLayout>
+
+    <RelativeLayout
         android:id="@+id/rl_support"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
