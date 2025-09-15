@@ -61,6 +61,7 @@ public class AboutActivity extends BaseActivity {
     private static String TAG = "AboutActivity";
 
     private final long GBYTE = 1024 * 1024 * 1024;
+    private final long MBYTE = 1024 * 1024;
     List<Integer> ENTER_FACTORY_REBOOT = new ArrayList<>();
     List<Integer> ENTER_FACTORY = new ArrayList<>();
     List<Integer> ENTER_MAC = new ArrayList<>();
@@ -152,7 +153,7 @@ public class AboutActivity extends BaseActivity {
         isDebug = sp.getBoolean(Contants.KEY_DEVELOPER_MODE, false);
         aboutBinding.deviceModelTv.setText(SystemProperties.get("persist.sys.modelName", "Projecter"));//产品型号
         aboutBinding.uiVersionTv.setText(SystemProperties.get("ro.build.version.incremental"));//产品ui版本
-        if(MyApplication.config.androidVersionNumber != 11) {
+        if (MyApplication.config.androidVersionNumber != 11) {
             aboutBinding.androidVersionTv.setText(String.valueOf(MyApplication.config.androidVersionNumber));
         } else {
             aboutBinding.androidVersionTv.setText(Build.VERSION.RELEASE);//android version
@@ -161,7 +162,7 @@ public class AboutActivity extends BaseActivity {
 //        aboutBinding.serialNumberTv.setText(getProperty("ro.serialno","unknow"));
         getMemorySize();
         getStorageSize();
-        if(MyApplication.config.resolution_string != null && !MyApplication.config.resolution_string.isEmpty()) {
+        if (MyApplication.config.resolution_string != null && !MyApplication.config.resolution_string.isEmpty()) {
             aboutBinding.resolutionTv.setText(MyApplication.config.resolution_string);
         } else {
             aboutBinding.resolutionTv.setText(getResolution());
@@ -256,8 +257,8 @@ public class AboutActivity extends BaseActivity {
     private void getMemorySize() {
         String total_memory = "1GB";
         long memorySize = ClearMemoryUtils.getTotalMemorySize(this);
-        memorySize = memorySize * MyApplication.config.memoryScale;
-        try {
+        if (VerifyDDRStatus(memorySize)) {
+            memorySize = memorySize * MyApplication.config.memoryScale;
             if (memorySize > 8 * GBYTE)
                 total_memory = "10GB";
             else if (memorySize > 6 * GBYTE)
@@ -268,13 +269,27 @@ public class AboutActivity extends BaseActivity {
                 total_memory = "4GB";
             else if (memorySize > GBYTE)
                 total_memory = "2GB";
-        } catch (Exception e) {
-            total_memory = "1GB";
+            else
+                total_memory = "1GB";
+        } else {
+            memorySize = memorySize * MyApplication.config.memoryScale;
+            // 转成 MB 字符串
+            long memoryMB = memorySize / (1024L * 1024L);
+            total_memory = memoryMB + "MB";
         }
 
         aboutBinding.memoryTv.setText(total_memory + "/"
                 + ClearMemoryUtils.formatFileSize(ClearMemoryUtils
                 .getAvailableMemory(this) * MyApplication.config.memoryScale, false));
+    }
+
+    private boolean VerifyDDRStatus(long memorySize) {
+        if (memorySize < 800 * MBYTE) {
+            return false;
+        } else if (1024 * MBYTE < memorySize && memorySize < 1600 * MBYTE) {
+            return false;
+        }
+        return true;
     }
 
     private void getStorageSize() {
@@ -502,11 +517,11 @@ public class AboutActivity extends BaseActivity {
     }
 
     private void startSystemUpdate(String path) {
-        Log.d(TAG,"startSystemUpdate path"+path);
-        String newpath ="";
-        if(path.contains("/mnt/media_rw/")) {
+        Log.d(TAG, "startSystemUpdate path" + path);
+        String newpath = "";
+        if (path.contains("/mnt/media_rw/")) {
             newpath = path.replaceFirst("/mnt/media_rw/", "/storage/");
-            Log.d(TAG,"startSystemUpdate newpath"+newpath);
+            Log.d(TAG, "startSystemUpdate newpath" + newpath);
             Intent intent = new Intent();
             intent.setComponent(new ComponentName("com.softwinner.update", "com.softwinner.update.ui.AbUpdate"));
             Bundle bundle = new Bundle();
@@ -514,7 +529,7 @@ public class AboutActivity extends BaseActivity {
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             intent.putExtras(bundle);
             startActivity(intent);
-        }else {
+        } else {
             Intent intent = new Intent();
             intent.setComponent(new ComponentName("com.softwinner.update", "com.softwinner.update.ui.AbUpdate"));
             Bundle bundle = new Bundle();
@@ -554,14 +569,14 @@ public class AboutActivity extends BaseActivity {
     }
 
     private void showUpgradeCheckSuccessDialog(String path) {
-        Log.d(TAG,"showUpgradeCheckSuccessDialog "+path);
+        Log.d(TAG, "showUpgradeCheckSuccessDialog " + path);
         if (upgradeCheckSuccessDialog == null) {
-            Log.d(TAG,"new UpgradeCheckSuccessDialog "+path);
+            Log.d(TAG, "new UpgradeCheckSuccessDialog " + path);
             upgradeCheckSuccessDialog = new UpgradeCheckSuccessDialog(AboutActivity.this);
             upgradeCheckSuccessDialog.setOnClickCallBack(new UpgradeCheckSuccessDialog.OnClickCallBack() {
                 @Override
                 public void upgrade() {
-                    Log.d(TAG,"upgrade path" +path);
+                    Log.d(TAG, "upgrade path" + path);
                     startSystemUpdate(path);
                 }
             });
