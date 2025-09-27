@@ -63,7 +63,6 @@ public class DBUtils extends SQLiteOpenHelper {
         sharedPreferences = ShareUtil.getInstans(context);
     }
 
-
     @Override
     public void onCreate(SQLiteDatabase db) {
         try {

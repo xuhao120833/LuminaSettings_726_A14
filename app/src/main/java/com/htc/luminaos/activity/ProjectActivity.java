@@ -164,7 +164,8 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
         projectBinding.rlDeviceMode2.setOnHoverListener(this);
 //        if(MyApplication.config.low_noise_mode)
 //            maxMode = 1;
-        updateText(ReflectUtil.invokeGet_brightness_level()); //初始化设备模式的Text显示
+        cur_device_Mode = ReflectUtil.invokeGet_brightness_level();
+        updateText(cur_device_Mode); //初始化设备模式的Text显示
         projectBinding.rlDigitalZoom.setOnKeyListener(this);
         projectBinding.rlDigitalZoom.setOnHoverListener(this);
         projectBinding.rlDigitalZoom.setOnClickListener(this);

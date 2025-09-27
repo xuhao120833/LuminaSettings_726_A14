@@ -594,6 +594,15 @@ public class KeystoneUtils_726 {
         lb_Y = 0;
         UpdateKeystone();
         SystemProperties.set("persist.sys.zoom.value", lb_X + "," + lb_Y + "," + lt_X + "," + lt_Y + "," + rt_X + "," + rt_Y + "," + rb_X + "," + rb_Y);
+
+        SystemProperties.set(PROP_HTC_KEYSTONE_LT_X, String.valueOf(lt_X));
+        SystemProperties.set(PROP_HTC_KEYSTONE_LT_Y, String.valueOf(lt_Y));
+        SystemProperties.set(PROP_HTC_KEYSTONE_LB_X, String.valueOf(lb_X));
+        SystemProperties.set(PROP_HTC_KEYSTONE_LB_Y, String.valueOf(lb_Y));
+        SystemProperties.set(PROP_HTC_KEYSTONE_RT_X, String.valueOf(rt_X));
+        SystemProperties.set(PROP_HTC_KEYSTONE_RT_Y, String.valueOf(rt_Y));
+        SystemProperties.set(PROP_HTC_KEYSTONE_RB_X, String.valueOf(rb_X));
+        SystemProperties.set(PROP_HTC_KEYSTONE_RB_Y, String.valueOf(rb_Y));
     }
 
     public static void writeGlobalSettings(Context context, String key, int value) {
