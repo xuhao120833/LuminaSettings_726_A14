@@ -42,6 +42,7 @@ public class DBUtils extends SQLiteOpenHelper {
     private final String TABLENAME_FAVORITES = "table_favorites";
 
     private final String TABLENAME_FILTERAPPS = "filterApps";
+    private final String TABLENAME_STATUSBAR = "statusBar";
 
     private final String TABLENAME_MAINAPP = "mainApp";
 
@@ -92,6 +93,15 @@ public class DBUtils extends SQLiteOpenHelper {
                     "packageName TEXT);";
             db.execSQL(filterApps_sql);
 
+            // 创建statusBar表
+            Log.d(TAG, " 创建statusBar数据表 ");
+            String statusBar_sql = "CREATE TABLE " + TABLENAME_STATUSBAR + " (" +
+                    "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    "tag TEXT , " +
+                    "iconPath TEXT , " +
+                    "iconPath2 TEXT , " +
+                    "iconDirectory TEXT );";
+            db.execSQL(statusBar_sql);
 
             // 创建mainApp表
             Log.d(TAG, " 创建mainApp数据表 ");
@@ -139,6 +149,9 @@ public class DBUtils extends SQLiteOpenHelper {
         db.execSQL(favorites_sql);
 
         favorites_sql = "DROP TABLE IF EXISTS " + TABLENAME_FILTERAPPS;
+        db.execSQL(favorites_sql);
+
+        favorites_sql = "DROP TABLE IF EXISTS " + TABLENAME_STATUSBAR;
         db.execSQL(favorites_sql);
 
         favorites_sql = "DROP TABLE IF EXISTS " + TABLENAME_MAINAPP;
@@ -523,6 +536,81 @@ public class DBUtils extends SQLiteOpenHelper {
             } finally {
                 db.close();
             }
+        }
+    }
+
+    /***
+     * Time:2025/6/25
+     * Author:xuhao
+     * Usage:将从配置文件config中读出来的信息保存进本地的db数据库。
+     * @param tag
+     * @param iconPath
+     * @param iconPath2
+     * @param iconDirectory
+     */
+    public void insertStatusBarData(String tag, String iconPath, String iconPath2, String iconDirectory) {
+        synchronized (this) {
+            SQLiteDatabase db = getWritableDatabase();
+            ContentValues values = new ContentValues();
+            values.put("tag", tag);
+            values.put("iconPath", iconPath);
+            values.put("iconPath2", iconPath2);  // 插入 BLOB 数据
+            values.put("iconDirectory", iconDirectory);
+
+            // 检查是否存在相同的 tag
+            String selection = "tag = ?";
+            String[] selectionArgs = {tag};
+            int rowsAffected = db.update(TABLENAME_STATUSBAR, values, selection, selectionArgs);
+
+            if (rowsAffected == 0) {
+                // 如果没有记录被更新，说明不存在这个 tag，执行插入操作
+                long code = db.insert(TABLENAME_STATUSBAR, null, values);
+                if (code == -1) {
+                    Log.d(TAG, "MainApp插入数据失败");
+                } else {
+                    Log.d(TAG, "MainApp插入数据成功，行ID：" + code);
+                }
+            } else {
+                Log.d(TAG, "MainApp数据更新成功，更新行数：" + rowsAffected);
+            }
+            db.close();
+        }
+    }
+
+    public StatusBarItem queryStatusBarData(String tag) {
+        synchronized (this) {
+            SQLiteDatabase db = getReadableDatabase();
+            Cursor cursor = null;
+            String[] projection = {"iconPath", "iconPath2", "iconDirectory"};
+            String selection = "tag = ?";
+            String[] selectionArgs = {tag};
+            StatusBarItem item = null;
+
+            try {
+                cursor = db.query(
+                        TABLENAME_STATUSBAR,  // 表名
+                        projection,           // 要查询的列
+                        selection,            // WHERE 子句
+                        selectionArgs,        // WHERE 参数
+                        null, null, null);
+
+                if (cursor != null && cursor.moveToFirst()) {
+                    String iconPath = cursor.getString(cursor.getColumnIndexOrThrow("iconPath"));
+                    String iconPath2 = cursor.getString(cursor.getColumnIndexOrThrow("iconPath2"));
+                    String iconDirectory = cursor.getString(cursor.getColumnIndexOrThrow("iconDirectory"));
+                    Log.d(TAG,"queryStatusBarData "+tag+" "+iconPath+" "+iconPath2+" "+iconDirectory);
+                    item = new StatusBarItem(tag, iconPath, iconPath2, iconDirectory);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                // 关闭 Cursor 和数据库连接
+                if (cursor != null) {
+                    cursor.close();
+                }
+                db.close();
+            }
+            return item;
         }
     }
 
@@ -967,6 +1055,7 @@ public class DBUtils extends SQLiteOpenHelper {
             try {
                 db.delete(TABLENAME_FAVORITES, null, null);
                 db.delete(TABLENAME_FILTERAPPS,null,null);
+                db.delete(TABLENAME_STATUSBAR, null, null);
                 db.delete(TABLENAME_MAINAPP, null, null);
                 db.delete(TABLENAME_LISTMODULES, null, null);
                 db.delete(TABLENAME_BRANDLOGO, null, null);

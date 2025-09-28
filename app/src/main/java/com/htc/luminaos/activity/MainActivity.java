@@ -124,6 +124,7 @@ import com.htc.luminaos.utils.LogUtils;
 import com.htc.luminaos.utils.NetWorkUtils;
 import com.htc.luminaos.utils.ShareUtil;
 import com.htc.luminaos.utils.StartupTimer;
+import com.htc.luminaos.utils.StatusBarItem;
 import com.htc.luminaos.utils.SystemPropertiesUtil;
 import com.htc.luminaos.utils.TimeUtils;
 import com.htc.luminaos.utils.ToastUtil;
@@ -1138,6 +1139,7 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
                         // 设置首页的配置图标
                         try {
                             setDefaultMainIcon();
+                            setDefaultStatusBarIcon();
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -1160,6 +1162,9 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
 
                 //读取默认背景配置 这块提前放到MyApplication中
 //                readDefaultBackground(obj);
+
+                //读取快捷栏图标
+                readStatusBar(obj);
 
                 //读取首页四大APP图标
                 readMain(obj);
@@ -1211,6 +1216,87 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
         });
 
         return isLoad;
+    }
+
+    private void readStatusBar(JSONObject obj) {
+        try {
+            if (obj.has("statusBar")) {
+                JSONArray jsonarrray = obj.getJSONArray("statusBar");
+                for (int i = 0; i < jsonarrray.length(); i++) {
+                    JSONObject jsonobject = jsonarrray.getJSONObject(i);
+                    String tag = jsonobject.getString("tag");
+                    String iconPath = jsonobject.getString("iconPath");
+                    String iconPath2 = jsonobject.getString("iconPath2");
+                    String iconDirectory = jsonobject.getString("iconDirectory");
+
+                    Drawable drawable = FileUtils.loadImageAsDrawable(this, iconPath);
+                    setStatusBarIcon(tag, drawable);
+                    if (tag.equals("home_bluetooth")) {
+                        Utils.bt_disconnect = drawable;
+                        Utils.bt_connected = FileUtils.loadImageAsDrawable(this, iconPath2);
+                    }
+                    DBUtils.getInstance(this).insertStatusBarData(tag, iconPath, iconPath2, iconDirectory);
+
+                    Log.d(TAG, " 读取到的statusBar " + tag + iconPath + iconPath2 + iconDirectory);
+                }
+            } else {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        // 设置首页的配置图标
+                        try {
+                            setDefaultStatusBarIcon();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void setStatusBarIcon(String tag, Drawable drawable) {
+        Log.d(TAG, " setStatusBarIcon " + tag);
+        switch (tag) {
+            case "support":
+                setIcon(customBinding.support, drawable, R.drawable.bar_help);
+                break;
+//            case "battery":
+//                setIcon(customBinding.battery, drawable, R.drawable.battery_4);
+//                break;
+            case "usb_connect":
+                setIcon(customBinding.usbConnect, drawable, R.drawable.usb_green);
+                break;
+            case "clear_memory":
+                setIcon(customBinding.clearMemory, drawable, R.drawable.bar_clean);
+                break;
+            case "wallpaper":
+                setIcon(customBinding.wallpaper, drawable, R.drawable.wapper_custom);
+                break;
+            case "home_bluetooth":
+                setIcon(customBinding.homeBluetooth, drawable, R.drawable.bt_custom2);
+                break;
+            case "home_ethernet":
+                setIcon(customBinding.homeEthernet, drawable, R.drawable.bar_ethernet_green);
+                break;
+//            case "home_wifi":
+//                setIcon(customBinding.homeWifi, drawable, R.drawable.wifi_custom_4);
+//                break;
+        }
+    }
+
+    private void setDefaultStatusBarIcon() {
+        Log.d(TAG, " setDefaultStatusBarIcon ");
+        customBinding.support.setImageResource(R.drawable.bar_help);
+        customBinding.battery.setImageResource(R.drawable.battery_4);
+        customBinding.usbConnect.setImageResource(R.drawable.usb_green);
+        customBinding.clearMemory.setImageResource(R.drawable.bar_clean);
+        customBinding.wallpaper.setImageResource(R.drawable.wapper_custom);
+        customBinding.homeBluetooth.setImageResource(R.drawable.bt_custom2);
+        customBinding.homeEthernet.setImageResource(R.drawable.bar_ethernet_green);
+        customBinding.homeWifi.setImageResource(R.drawable.wifi_custom_4);
     }
 
     private void readDefaultBackground(JSONObject obj) {
@@ -1497,13 +1583,22 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
     }
 
     private void updateBle() {
+        Log.d(TAG, " updateBle ");
         boolean isConnected = BluetoothUtils.getInstance(this).isBluetoothConnected();
         if (isConnected) {
 //            mainBinding.homeBluetooth.setBackgroundResource(R.drawable.bluetooth_con);
-            customBinding.homeBluetooth.setImageResource(R.drawable.bt_custom_green);
+            if (Utils.bt_connected == null) {
+                customBinding.homeBluetooth.setImageResource(R.drawable.bt_custom_green);
+            } else {
+                customBinding.homeBluetooth.setImageDrawable(Utils.bt_connected);
+            }
         } else {
 //            mainBinding.homeBluetooth.setBackgroundResource(R.drawable.bluetooth_not);
-            customBinding.homeBluetooth.setImageResource(R.drawable.bt_custom2);
+            if (Utils.bt_disconnect == null) {
+                customBinding.homeBluetooth.setImageResource(R.drawable.bt_custom2);
+            } else {
+                customBinding.homeBluetooth.setImageDrawable(Utils.bt_disconnect);
+            }
         }
     }
 
@@ -1568,65 +1663,6 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
             customBinding.homeWifi.setImageResource(R.drawable.wifi_custom_4);
         }
     }
-
-//    View.OnFocusChangeListener focusChangeListener = new View.OnFocusChangeListener() {
-//        @Override
-//        public void onFocusChange(View v, boolean hasFocus) {
-//            AnimationSet animationSet = new AnimationSet(true);
-//            v.bringToFront();
-//            if (hasFocus) {
-//                ScaleAnimation scaleAnimation = new ScaleAnimation(1.0f, 1.50f,
-//                        1.0f, 1.50f, Animation.RELATIVE_TO_SELF, 0.5f,
-//                        Animation.RELATIVE_TO_SELF, 0.5f);
-//                scaleAnimation.setDuration(150);
-//                animationSet.addAnimation(scaleAnimation);
-//                animationSet.setFillAfter(true);
-//                v.startAnimation(animationSet);
-//            } else {
-//                ScaleAnimation scaleAnimation = new ScaleAnimation(1.50f, 1.0f,
-//                        1.50f, 1.0f, Animation.RELATIVE_TO_SELF, 0.5f,
-//                        Animation.RELATIVE_TO_SELF, 0.5f);
-//                animationSet.addAnimation(scaleAnimation);
-//                scaleAnimation.setDuration(150);
-//                animationSet.setFillAfter(true);
-//                v.startAnimation(animationSet);
-//            }
-//        }
-//    };
-
-//    @Override
-//    public void getWifiNumber(int count) {
-//
-//        List<ScanResult> wifiList = wifiManager.getScanResults();
-//        Log.d(TAG,"getWifiNumber "+count);
-//        switch (count) {
-//            case -1:
-////                mainBinding.homeWifi.setBackgroundResource(R.drawable.wifi_not);
-//                customBinding.homeWifi.setImageResource(R.drawable.wifi_custom_4);
-//                break;
-//            case 0:
-////                mainBinding.homeWifi.setBackgroundResource(R.drawable.bar_wifi_1_focus);
-//                customBinding.homeWifi.setImageResource(R.drawable.wifi_custom_green_1);
-//                break;
-//            case 1:
-////                mainBinding.homeWifi.setBackgroundResource(R.drawable.bar_wifi_2_focus);
-//                customBinding.homeWifi.setImageResource(R.drawable.wifi_custom_green_2);
-//                break;
-//            case 2:
-////                mainBinding.homeWifi.setBackgroundResource(R.drawable.bar_wifi_2_focus);
-//                customBinding.homeWifi.setImageResource(R.drawable.wifi_custom_green_3);
-//                break;
-//            case 3:
-////                mainBinding.homeWifi.setBackgroundResource(R.drawable.bar_wifi_2_focus);
-//                customBinding.homeWifi.setImageResource(R.drawable.wifi_custom_green_4);
-//                break;
-//            default:
-////                mainBinding.homeWifi.setBackgroundResource(R.drawable.bar_wifi_full_focus);
-//                customBinding.homeWifi.setImageResource(R.drawable.wifi_custom_green_4);
-//                break;
-//
-//        }
-//    }
 
     @Override
     public void getWifiNumber(int count) {
@@ -1734,18 +1770,130 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
 
     private void setIconOrText() {
 
-        //1、MainApp
+        //StatusBar
+        setStatusBar();
+
+        //MainApp
         setMainApp();
 
-        //2、ListModules
+        //ListModules
         setListModules();
 
-        //3、brandLogo
+        //brandLogo
         setbrandLogo();
 
-        //4、DefaultBackground   改成提前用setDefaultBackgroundById去设置背景
+        //DefaultBackground   改成提前用setDefaultBackgroundById去设置背景
 //        setDefaultBackground();
 
+    }
+
+    //wifi和电源图标太多 暂时不可配置
+    private void setStatusBar() {
+        Log.d(TAG, "setStatusBar");
+        StatusBarItem item = DBUtils.getInstance(this).queryStatusBarData("support");
+        String iconPath = item != null ? item.iconPath : "";
+        String iconPath2 = item != null ? item.iconPath2 : "";
+        Drawable drawable = FileUtils.loadImageAsDrawable(this, iconPath);
+        if (drawable != null) {
+            customBinding.support.setImageDrawable(drawable);
+        } else {
+            customBinding.support.setImageResource(R.drawable.bar_help);
+        }
+
+//        item = DBUtils.getInstance(this).queryStatusBarData("battery");
+//        iconPath = item != null ? item.iconPath : "";
+//        drawable = FileUtils.loadImageAsDrawable(this, iconPath);
+//        if (drawable != null) {
+//            customBinding.battery.setImageDrawable(drawable);
+//        } else {
+//            customBinding.battery.setImageResource(R.drawable.battery_4);
+//        }
+        Log.d(TAG, "setStatusBar battery.getDrawable() " + customBinding.battery.getDrawable());
+        if (customBinding.battery.getDrawable() == null) {
+            customBinding.battery.setImageResource(R.drawable.battery_4);
+        }
+
+        item = DBUtils.getInstance(this).queryStatusBarData("usb_connect");
+        iconPath = item != null ? item.iconPath : "";
+        drawable = FileUtils.loadImageAsDrawable(this, iconPath);
+        if (drawable != null) {
+            customBinding.usbConnect.setImageDrawable(drawable);
+        } else {
+            customBinding.usbConnect.setImageResource(R.drawable.usb_green);
+        }
+
+        item = DBUtils.getInstance(this).queryStatusBarData("clear_memory");
+        iconPath = item != null ? item.iconPath : "";
+        drawable = FileUtils.loadImageAsDrawable(this, iconPath);
+        if (drawable != null) {
+            customBinding.clearMemory.setImageDrawable(drawable);
+        } else {
+            customBinding.clearMemory.setImageResource(R.drawable.bar_clean);
+        }
+
+        item = DBUtils.getInstance(this).queryStatusBarData("wallpaper");
+        iconPath = item != null ? item.iconPath : "";
+        drawable = FileUtils.loadImageAsDrawable(this, iconPath);
+        if (drawable != null) {
+            customBinding.wallpaper.setImageDrawable(drawable);
+        } else {
+            customBinding.wallpaper.setImageResource(R.drawable.wapper_custom);
+        }
+
+        item = DBUtils.getInstance(this).queryStatusBarData("home_bluetooth");
+        iconPath = item != null ? item.iconPath : "";
+        iconPath2 = item != null ? item.iconPath2 : "";
+        drawable = FileUtils.loadImageAsDrawable(this, iconPath);
+        Utils.bt_disconnect = drawable;
+        Utils.bt_connected = FileUtils.loadImageAsDrawable(this, iconPath2);
+        Log.d(TAG, " home_bluetooth ");
+        updateBle();
+//        if (drawable != null) {
+//            customBinding.homeBluetooth.setImageDrawable(drawable);
+//        } else {
+//            customBinding.homeBluetooth.setImageResource(R.drawable.bt_custom2);
+//        }
+
+        item = DBUtils.getInstance(this).queryStatusBarData("home_ethernet");
+        iconPath = item != null ? item.iconPath : "";
+        drawable = FileUtils.loadImageAsDrawable(this, iconPath);
+        if (drawable != null) {
+            customBinding.homeEthernet.setImageDrawable(drawable);
+        } else {
+            customBinding.homeEthernet.setImageResource(R.drawable.bar_ethernet_green);
+        }
+
+//        item = DBUtils.getInstance(this).queryStatusBarData("home_wifi");
+//        iconPath = item != null ? item.iconPath : "";
+//        drawable = FileUtils.loadImageAsDrawable(this, iconPath);
+//        if (drawable != null) {
+//            customBinding.homeWifi.setImageDrawable(drawable);
+//        } else {
+//            c
+//        }
+        Log.d(TAG, "setStatusBar homeWifi.getDrawable() " + customBinding.homeWifi.getDrawable());
+//        if(customBinding.homeWifi.getDrawable() == null) {
+//            customBinding.homeWifi.setImageResource(R.drawable.wifi_custom_4);
+        updateWifiIcon(customBinding.homeWifi);
+//        }
+    }
+
+    private void updateWifiIcon(ImageView wifiIconView) {
+        WifiManager wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+        if (wifiManager == null || !wifiManager.isWifiEnabled()) {
+            Log.d(TAG, "Wi-Fi is disabled");
+            wifiIconView.setImageResource(R.drawable.wifi_custom_4);
+            return;
+        }
+
+        WifiInfo wifiInfo = wifiManager.getConnectionInfo();
+        if (wifiInfo == null || wifiInfo.getNetworkId() == -1) {
+            Log.d(TAG, "Not connected to any Wi-Fi network");
+            wifiIconView.setImageResource(R.drawable.wifi_custom_4);
+            return;
+        }
+
+        getWifiNumber(getStrength(getApplicationContext()));
     }
 
     private void setMainApp() {
@@ -2644,5 +2792,31 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
         }
         notificationObserver = new NotificationObserver(getApplicationContext(),this);
         getContentResolver().registerContentObserver(Settings.Global.getUriFor("notification"), false, notificationObserver);
+    }
+
+    /**
+     * 获取信号
+     *
+     * @param context
+     * @return
+     */
+    public int getStrength(Context context) {
+        WifiManager wifiManager = (WifiManager) context
+                .getSystemService(Context.WIFI_SERVICE);
+        WifiInfo info = wifiManager.getConnectionInfo();
+        if (info.getBSSID() != null) {
+            int strength = WifiManager.calculateSignalLevel(info.getRssi(), 4);
+
+            int level = info.getRssi();
+            // 链接速度
+            // int speed = info.getLinkSpeed();
+            // 链接速度单位
+            // String units = WifiInfo.LINK_SPEED_UNITS;
+            // Wifi源名称
+            // String ssid = info.getSSID();
+            Log.d(TAG, "getStrength信号强度更新 " + strength + " " + level);
+            return level;
+        }
+        return 0;
     }
 }

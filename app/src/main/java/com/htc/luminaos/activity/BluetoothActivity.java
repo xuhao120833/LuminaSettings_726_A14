@@ -7,6 +7,7 @@ import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothHidHost;
 import android.bluetooth.BluetoothProfile;
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -24,6 +25,7 @@ import android.view.animation.AnimationUtils;
 import android.view.animation.LinearInterpolator;
 import android.widget.CompoundButton;
 
+import com.htc.luminaos.MyApplication;
 import com.htc.luminaos.R;
 import com.htc.luminaos.adapter.BluetoothBondAdapter;
 import com.htc.luminaos.adapter.BluetoothFoundAdapter;
@@ -101,6 +103,10 @@ public class BluetoothActivity extends BaseActivity implements BluetoothCallBcak
         bluetoothBinding.rlSearchBle.setOnClickListener(this);
         bluetoothBinding.rlSearchBle.setOnKeyListener(this);
         bluetoothBinding.rlSearchBle.setOnHoverListener(this);
+        bluetoothBinding.rlBluetoothSpeaker.setOnClickListener(this);
+        bluetoothBinding.rlBluetoothSpeaker.setOnKeyListener(this);
+        bluetoothBinding.rlBluetoothSpeaker.setOnHoverListener(this);
+        bluetoothBinding.rlBluetoothSpeaker.setVisibility(MyApplication.config.btSpeaker ? View.VISIBLE : View.GONE);
         bluetoothBinding.pairRv.setItemAnimator(null);
         bluetoothBinding.pairRv.addItemDecoration(new SpacesItemDecoration(0, 0, SpacesItemDecoration.px2dp(4), 0));
         bluetoothBinding.availableRv.setItemAnimator(null);
@@ -603,6 +609,12 @@ public class BluetoothActivity extends BaseActivity implements BluetoothCallBcak
             bluetoothBinding.bluetoothSwitch.setChecked(!bluetoothBinding.bluetoothSwitch.isChecked());
         } else if (id == R.id.rl_search_ble) {
             startScanning(bluetoothAdapter);
+        } else if (id == R.id.rl_bluetooth_speaker) {
+            Intent intent = new Intent();
+            intent.setComponent(new ComponentName("com.htc.closedialog", "com.htc.closedialog.BluetoothSpeakerActivity"));
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK); // 如果你是在非 Activity 中启动
+            startActivity(intent);
         }
     }
 

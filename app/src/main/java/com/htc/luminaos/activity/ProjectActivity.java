@@ -34,6 +34,7 @@ import com.htc.luminaos.receiver.VaFocusReceiver;
 import com.htc.luminaos.settings.utils.Constants;
 import com.htc.luminaos.utils.AppUtils;
 import com.htc.luminaos.utils.Contants;
+import com.htc.luminaos.utils.DeviceModeManager;
 import com.htc.luminaos.utils.KeystoneUtils;
 import com.htc.luminaos.utils.KeystoneUtils_726;
 import com.htc.luminaos.utils.LogUtils;
@@ -86,7 +87,7 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
     double zoom_step_y = (double) KeystoneUtils_726.lcd_h / 100;
     private SharedPreferences sharedPreferences;
 
-    private int cur_device_Mode = 0;
+//    private int cur_device_Mode = 0;
     long cur_time = 0;
 
     Handler handler = new Handler();
@@ -109,6 +110,7 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
     private int mB = 50;
     private int maxMode = 2;
     AudioManagerEx audioManagerEx;
+    DeviceModeManager modeManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -162,10 +164,20 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
         projectBinding.rlDeviceMode2.setOnKeyListener(this);
         projectBinding.rlDeviceMode2.setOnClickListener(this);
         projectBinding.rlDeviceMode2.setOnHoverListener(this);
+
 //        if(MyApplication.config.low_noise_mode)
 //            maxMode = 1;
-        cur_device_Mode = ReflectUtil.invokeGet_brightness_level();
-        updateText(cur_device_Mode); //初始化设备模式的Text显示
+        modeManager = new DeviceModeManager(MyApplication.config.deviceModes);
+        // 获取当前真实亮度模式（反射接口返回的模式）
+        int initMode = ReflectUtil.invokeGet_brightness_level();
+        if (!modeManager.getModes().contains(initMode)) {
+            initMode = modeManager.getModes().isEmpty() ? 0 : modeManager.getModes().get(0);
+        }
+        modeManager.setCurrentMode(initMode);
+        modeManager.updateText(projectBinding);
+//        cur_device_Mode = ReflectUtil.invokeGet_brightness_level();
+//        updateText(cur_device_Mode); //初始化设备模式的Text显示
+
         projectBinding.rlDigitalZoom.setOnKeyListener(this);
         projectBinding.rlDigitalZoom.setOnHoverListener(this);
         projectBinding.rlDigitalZoom.setOnClickListener(this);
@@ -249,8 +261,8 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
         projectBinding.rlDigitalZoom.setVisibility(MyApplication.config.wholeZoom ? View.VISIBLE : View.GONE);
         projectBinding.rlScreenZoom.setVisibility(MyApplication.config.screenZoom ? View.VISIBLE : View.GONE);
         projectBinding.rlAutoKeystone.setVisibility(MyApplication.config.autoKeystone ? View.VISIBLE : View.GONE);
-        projectBinding.rlArcSwitch.setVisibility(MyApplication.config.arcSwitch?View.VISIBLE:View.GONE);
-        if ((boolean)ShareUtil.get(this,Contants.KEY_DEVELOPER_MODE,false) || MyApplication.config.initAngleCorrect){
+        projectBinding.rlArcSwitch.setVisibility(MyApplication.config.arcSwitch ? View.VISIBLE : View.GONE);
+        if ((boolean) ShareUtil.get(this, Contants.KEY_DEVELOPER_MODE, false) || MyApplication.config.initAngleCorrect) {
             projectBinding.rlInitAngle.setVisibility(View.VISIBLE);
         } else {
             projectBinding.rlInitAngle.setVisibility(View.GONE);
@@ -273,7 +285,7 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
             if (SystemProperties.get("persist.sys.focusupdn", "0").equals("1")) {
                 //自动梯形
                 projectBinding.rlAutoKeystone.setVisibility(View.VISIBLE);
-                if ((boolean)ShareUtil.get(this,Contants.KEY_DEVELOPER_MODE,false) || MyApplication.config.initAngleCorrect){
+                if ((boolean) ShareUtil.get(this, Contants.KEY_DEVELOPER_MODE, false) || MyApplication.config.initAngleCorrect) {
                     projectBinding.rlInitAngle.setVisibility(View.VISIBLE);
                 } else {
                     projectBinding.rlInitAngle.setVisibility(View.GONE);
@@ -285,7 +297,7 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
 
         } else {
             projectBinding.rlAutoKeystone.setVisibility(View.VISIBLE);
-            if ((boolean)ShareUtil.get(this,Contants.KEY_DEVELOPER_MODE,false) || MyApplication.config.initAngleCorrect){
+            if ((boolean) ShareUtil.get(this, Contants.KEY_DEVELOPER_MODE, false) || MyApplication.config.initAngleCorrect) {
                 projectBinding.rlInitAngle.setVisibility(View.VISIBLE);
             } else {
                 projectBinding.rlInitAngle.setVisibility(View.GONE);
@@ -379,7 +391,7 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
 
         audioManagerEx = new AudioManagerEx(this);
         ArrayList<String> audioDevices = audioManagerEx.getAudioDeviceActive(AudioManagerEx.AUDIO_OUTPUT_ACTIVE);
-        if (audioDevices!=null && audioDevices.size()>0)
+        if (audioDevices != null && audioDevices.size() > 0)
             projectBinding.arcSwitch.setChecked(audioDevices.get(0).equals("AUDIO_ARC"));
     }
 
@@ -456,13 +468,13 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
             startNewActivity(PictureModeActivity.class);
 //            startNewActivity(DisplaySettingsActivity.class);
         } else if (id == R.id.rl_color_temp) {
-            if (mColorTemp==2){
+            if (mColorTemp == 2) {
                 mColorTemp = 0;
-            }else {
-                mColorTemp +=1;
+            } else {
+                mColorTemp += 1;
             }
             updateColorTemp(mColorTemp);
-        }else if (id == R.id.rl_audio_mode) {
+        } else if (id == R.id.rl_audio_mode) {
             startNewActivity(AudioModeActivity.class);
         } else if (id == R.id.rl_power_mode) {
             old_project_mode = cur_project_mode;
@@ -527,13 +539,20 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
                 cur_project_mode++;
             updateProjectMode();
         } else if (id == R.id.rl_device_mode2) {
+//            Log.d(TAG, "onClick向右切换设备模式");
+//            cur_device_Mode++;
+//            if (cur_device_Mode > maxMode) {
+//                cur_device_Mode = 0;
+//            }
+//            updateText(cur_device_Mode);
+//            ReflectUtil.invokeSet_brightness_level(cur_device_Mode);
             Log.d(TAG, "onClick向右切换设备模式");
-            cur_device_Mode++;
-            if (cur_device_Mode > maxMode) {
-                cur_device_Mode = 0;
-            }
-            updateText(cur_device_Mode);
-            ReflectUtil.invokeSet_brightness_level(cur_device_Mode);
+            // 切换到下一个模式（循环，自动跳过配置文件不允许的模式）
+            int newMode = modeManager.nextMode();
+            // 更新 UI
+            modeManager.updateText(projectBinding);
+            // 设置亮度模式
+            ReflectUtil.invokeSet_brightness_level(newMode);
         } else if (id == R.id.rl_digital_zoom) {
             if (All >= ZOOM_MAX)
                 return;
@@ -579,7 +598,7 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
         } else if (id == R.id.arc_switch || id == R.id.rl_arc_switch) {
             boolean isChecked = projectBinding.arcSwitch.isChecked();
             projectBinding.arcSwitch.setChecked(!isChecked);
-            updateAudioDevice(!isChecked?"AUDIO_ARC":"AUDIO_SPEAKER");
+            updateAudioDevice(!isChecked ? "AUDIO_ARC" : "AUDIO_SPEAKER");
         }
     }
 
@@ -664,17 +683,24 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
             } else if (id == R.id.rl_device_mode2) {
                 if (event.getAction() != KeyEvent.ACTION_DOWN)
                     return false;
+//                Log.d(TAG, "向左切换设备模式");
+//                cur_device_Mode--;
+//                if (cur_device_Mode < 0) {
+//                    cur_device_Mode = maxMode;
+//                }
+//                updateText(cur_device_Mode);
+//                ReflectUtil.invokeSet_brightness_level(cur_device_Mode);
+////                    break;
+//                return true;
                 Log.d(TAG, "向左切换设备模式");
-                cur_device_Mode--;
-                if (cur_device_Mode < 0) {
-                    cur_device_Mode = maxMode;
-                }
-                updateText(cur_device_Mode);
-                ReflectUtil.invokeSet_brightness_level(cur_device_Mode);
-//                    break;
+                // 使用 DeviceModeManager 切换到上一个模式
+                int newMode = modeManager.prevMode();
+                // 更新 UI
+                modeManager.updateText(projectBinding);
+                // 设置亮度模式
+                ReflectUtil.invokeSet_brightness_level(newMode);
                 return true;
             }
-
         } else if (keyCode == KeyEvent.KEYCODE_DPAD_RIGHT) {
             int id = v.getId();
             if (id == R.id.rl_project_mode) {
@@ -728,12 +754,16 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
                 if (event.getAction() != KeyEvent.ACTION_DOWN)
                     return false;
                 Log.d(TAG, "向右切换设备模式");
-                cur_device_Mode++;
-                if (cur_device_Mode > maxMode) {
-                    cur_device_Mode = 0;
-                }
-                updateText(cur_device_Mode);
-                ReflectUtil.invokeSet_brightness_level(cur_device_Mode);
+//                cur_device_Mode++;
+//                if (cur_device_Mode > maxMode) {
+//                    cur_device_Mode = 0;
+//                }
+//                updateText(cur_device_Mode);
+//                ReflectUtil.invokeSet_brightness_level(cur_device_Mode);
+                int newMode = modeManager.nextMode();
+                modeManager.updateText(projectBinding);
+                ReflectUtil.invokeSet_brightness_level(newMode);
+
 //                    break;
                 return true;
             }
@@ -748,7 +778,7 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
                 projectBinding.deviceModeTv.setText(getString(R.string.device_mode0));
                 break;
             case 1:
-                if(MyApplication.config.low_noise_mode) {
+                if (MyApplication.config.low_noise_mode) {
                     projectBinding.deviceModeTv.setText(getString(R.string.device_mode3));
                 } else {
                     projectBinding.deviceModeTv.setText(getString(R.string.device_mode1));
@@ -1184,9 +1214,9 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
         r = 100 - r;
         b = 100 - b;
 
-        if((SystemProperties.get("persist.sys.camok", "0").equals("1") && !SystemProperties.get("persist.sys.focusupdn", "0").equals("1"))){
+        if ((SystemProperties.get("persist.sys.camok", "0").equals("1") && !SystemProperties.get("persist.sys.focusupdn", "0").equals("1"))) {
             updateScaleZoom(zoom_scale);
-        }else{
+        } else {
             changeform(l, t, r, b, "ratio");
         }
 
@@ -1246,7 +1276,7 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
 //        updateB(false);
     }
 
-    private void updateAudioDevice(String value){
+    private void updateAudioDevice(String value) {
         ArrayList<String> channels = new ArrayList<>();
         channels.add(value);
         audioManagerEx.setAudioDeviceActive(channels, AudioManagerEx.AUDIO_OUTPUT_ACTIVE);

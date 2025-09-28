@@ -35,6 +35,7 @@ public class Config {
     public boolean notice = false;
     public boolean bluetooth = true;
     public int layout_select = 1;
+    public boolean btSpeaker = false;
 
     public boolean displayPictureModeWeiMiTitle = false;
 
@@ -55,6 +56,7 @@ public class Config {
     public boolean about_support = false;
 
     public String email_number = "";
+    public String deviceModes = "0,1,2";
 
     public boolean set_password = false;
 

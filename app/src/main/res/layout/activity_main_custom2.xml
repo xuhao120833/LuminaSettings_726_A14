@@ -99,8 +99,7 @@
             android:id="@+id/support"
             android:layout_width="@dimen/x_53"
             android:layout_height="@dimen/y_53"
-            android:padding="@dimen/y_3"
-            android:src="@drawable/bar_help" />
+            android:padding="@dimen/y_3"/>
     </RelativeLayout>
 
     <RelativeLayout
@@ -119,8 +118,7 @@
             android:id="@+id/battery"
             android:layout_width="@dimen/x_53"
             android:layout_height="@dimen/y_53"
-            android:padding="@dimen/y_3"
-            android:src="@drawable/battery_4" />
+            android:padding="@dimen/y_3"/>
     </RelativeLayout>
 
     <RelativeLayout
@@ -139,8 +137,7 @@
             android:id="@+id/usb_connect"
             android:layout_width="@dimen/x_53"
             android:layout_height="@dimen/y_53"
-            android:padding="@dimen/y_3"
-            android:src="@drawable/usb_green" />
+            android:padding="@dimen/y_3"/>
 
     </RelativeLayout>
 
@@ -159,8 +156,7 @@
             android:id="@+id/clear_memory"
             android:layout_width="@dimen/x_53"
             android:layout_height="@dimen/y_53"
-            android:padding="@dimen/y_3"
-            android:src="@drawable/bar_clean" />
+            android:padding="@dimen/y_3"/>
     </RelativeLayout>
 
     <RelativeLayout
@@ -178,8 +174,7 @@
             android:id="@+id/wallpaper"
             android:layout_width="@dimen/x_53"
             android:layout_height="@dimen/y_53"
-            android:padding="@dimen/y_3"
-            android:src="@drawable/wapper_custom" />
+            android:padding="@dimen/y_3"/>
     </RelativeLayout>
 
     <RelativeLayout
@@ -198,8 +193,7 @@
             android:layout_width="@dimen/x_53"
             android:layout_height="@dimen/y_53"
             android:padding="@dimen/y_2"
-            android:layout_centerInParent="true"
-            android:src="@drawable/bt_custom2" />
+            android:layout_centerInParent="true"/>
     </RelativeLayout>
 
     <RelativeLayout
@@ -218,8 +212,7 @@
             android:id="@+id/home_ethernet"
             android:layout_width="@dimen/x_53"
             android:layout_height="@dimen/y_53"
-            android:padding="@dimen/y_2"
-            android:src="@drawable/bar_ethernet_green" />
+            android:padding="@dimen/y_2"/>
     </RelativeLayout>
 
     <RelativeLayout
@@ -237,8 +230,7 @@
             android:id="@+id/home_wifi"
             android:layout_width="@dimen/x_53"
             android:layout_height="@dimen/y_53"
-            android:padding="@dimen/y_3"
-            android:src="@drawable/wifi_custom_4" />
+            android:padding="@dimen/y_3"/>
     </RelativeLayout>
 
 
