@@ -27,6 +27,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -152,7 +153,8 @@ public class AboutActivity extends BaseActivity {
         sp = ShareUtil.getInstans(this);
         isDebug = sp.getBoolean(Contants.KEY_DEVELOPER_MODE, false);
         aboutBinding.deviceModelTv.setText(SystemProperties.get("persist.sys.modelName", "Projecter"));//产品型号
-        aboutBinding.uiVersionTv.setText(SystemProperties.get("ro.build.version.incremental"));//产品ui版本
+//        aboutBinding.uiVersionTv.setText(SystemProperties.get("ro.build.version.incremental"));//产品ui版本
+        updateTextViewWithModifiedVersion(aboutBinding.uiVersionTv);//产品ui版本读取属性更换前缀
         if (MyApplication.config.androidVersionNumber != 11) {
             aboutBinding.androidVersionTv.setText(String.valueOf(MyApplication.config.androidVersionNumber));
         } else {
@@ -174,6 +176,27 @@ public class AboutActivity extends BaseActivity {
         aboutBinding.emailNumber.setText(MyApplication.config.email_number);
         initQuickKey();
     }
+
+    private void updateTextViewWithModifiedVersion(TextView textView) {
+        String version = SystemProperties.get("ro.build.version.incremental","");
+        String prefix = SystemProperties.get("persist.display.prefix","");
+
+        if (!version.isEmpty() && !prefix.isEmpty()) {
+            // 找第一个点，替换前缀
+            int dotIndex = version.indexOf('.');
+            if (dotIndex != -1) {
+                String suffix = version.substring(dotIndex); // 包括第一个点
+                String newVersion = prefix + suffix;
+                textView.setText(newVersion);
+            } else {
+                // 没有点，直接用 prefix
+                textView.setText(prefix);
+            }
+        } else if(!version.isEmpty()){
+            textView.setText(version); // 如果拿不到prefix，就显示原来的
+        }
+    }
+
 
     @Override
     public void onClick(View v) {
