@@ -269,6 +269,7 @@ public class OtherSettingsActivity extends BaseActivity implements View.OnKeyLis
             startNewActivity(AccountActivity.class);
         } else if (id == R.id.rl_accessibility) {
             Intent intent = new Intent("android.settings.ACCESSIBILITY_SETTINGS");
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             intent.addCategory(Intent.CATEGORY_DEFAULT);
             startActivity(intent);
         } else if (id == R.id.rl_developer) {

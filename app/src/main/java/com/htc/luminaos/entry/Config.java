@@ -59,6 +59,8 @@ public class Config {
     public String deviceModes = "0,1,2";
 
     public boolean set_password = false;
+    //热点隐藏
+    public boolean settings_hotspot = true;
 
     public int brightnessDefault = 50;
     public int contrastDefault = 50;

@@ -78,6 +78,12 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
         startActivity(intent);
     }
 
+    public void startNewActivityClearTask(Class<?> cls) {
+        Intent intent = new Intent(this, cls);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+    }
+
     public void startNewActivityWifi(Class<?> cls) {
         Intent intent = new Intent(this, cls);
 //        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -87,7 +93,7 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
 
     public void startNewActivityBlue(Class<?> cls) {
         Intent intent = new Intent(this, cls);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
 

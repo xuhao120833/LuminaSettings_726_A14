@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 
+import com.htc.luminaos.MyApplication;
 import com.htc.luminaos.R;
 import com.htc.luminaos.databinding.ActivityNetworkBinding;
 
@@ -36,6 +37,11 @@ public class NetworkActivity extends BaseActivity {
             networkBinding.rlWiredNetwork.setVisibility(View.VISIBLE);
         }else {
             networkBinding.rlWiredNetwork.setVisibility(View.GONE);
+        }
+        if (MyApplication.config.settings_hotspot) {
+            networkBinding.rlHotspot.setVisibility(View.VISIBLE);
+        } else {
+            networkBinding.rlHotspot.setVisibility(View.GONE);
         }
     }
 

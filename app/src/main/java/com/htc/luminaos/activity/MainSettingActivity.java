@@ -306,21 +306,21 @@ public class MainSettingActivity extends BaseActivity {
         //原生逻辑
         int id = v.getId();
         if (id == R.id.rl_wifi) {
-            startNewActivity(NetworkActivity.class);
+            startNewActivityClearTask(NetworkActivity.class);
         } else if (id == R.id.rl_bluetooth) {
             startNewActivityBlue(BluetoothActivity.class);
         } else if (id == R.id.rl_project) {
-            startNewActivity(ProjectActivity.class);
+            startNewActivityClearTask(ProjectActivity.class);
         } else if (id == R.id.rl_apps_manager) {
-            startNewActivity(AppsManagerActivity.class);
+            startNewActivityClearTask(AppsManagerActivity.class);
         } else if (id == R.id.rl_language) {
-            startNewActivity(LanguageAndKeyboardActivity.class);
+            startNewActivityClearTask(LanguageAndKeyboardActivity.class);
         } else if (id == R.id.rl_date_time) {
-            startNewActivity(DateTimeActivity.class);
+            startNewActivityClearTask(DateTimeActivity.class);
         } else if (id == R.id.rl_other) {
-            startNewActivity(OtherSettingsActivity.class);
+            startNewActivityClearTask(OtherSettingsActivity.class);
         } else if (id == R.id.rl_about) {
-            startNewActivity(AboutActivity.class);
+            startNewActivityClearTask(AboutActivity.class);
         }
     }
 

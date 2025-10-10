@@ -7,8 +7,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -134,6 +136,15 @@ public class AppsAdapter extends RecyclerView.Adapter<AppsAdapter.MyViewHolder> 
 
             boolean[] result = AppUtils.checkIfSystemAppAndCanUninstall(mContext, info.getApplicationInfo().packageName);
             if (result[0] && !result[1]) {
+
+//                // 将 dp 转 px
+//                float radiusDp = 22.5f;
+//                float radiusPx = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, radiusDp, mContext.getResources().getDisplayMetrics());
+//                // 创建圆角背景
+                GradientDrawable dialogBackground = new GradientDrawable();
+                dialogBackground.setColor(Color.WHITE); // 对话框背景色
+                dialogBackground.setCornerRadius(mContext.getResources().getDimension(R.dimen.x_15));
+
                 AlertDialog dialog =new AlertDialog.Builder(mContext)
                         .setTitle(mContext.getString(R.string.hint)) // 对话框标题
                         .setMessage(mContext.getString(R.string.system_app_cannot_uninstalled)) // 对话框内容
@@ -158,11 +169,25 @@ public class AppsAdapter extends RecyclerView.Adapter<AppsAdapter.MyViewHolder> 
                 });
 
                 dialog.show();
+
+                if (dialog.getWindow() != null) {
+                    dialog.getWindow().setBackgroundDrawable(dialogBackground);
+                }
+
                 Button positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
+//                if (positiveButton != null) {
+//                    positiveButton.setBackgroundColor(Color.parseColor("#4684f3")); // #80 是 50% 透明度，后面是黑色
+//                    positiveButton.setTextColor(Color.WHITE); // 白色文字，方便看
+//                    positiveButton.setPadding(40, 20, 40, 20); // 给按钮留点内边距
+//                }
                 if (positiveButton != null) {
-                    positiveButton.setBackgroundColor(Color.parseColor("#4684f3")); // #80 是 50% 透明度，后面是黑色
-                    positiveButton.setTextColor(Color.WHITE); // 白色文字，方便看
-                    positiveButton.setPadding(40, 20, 40, 20); // 给按钮留点内边距
+                    GradientDrawable buttonBackground = new GradientDrawable();
+                    buttonBackground.setColor(Color.parseColor("#4684f3")); // 蓝色背景
+                    buttonBackground.setCornerRadius(mContext.getResources().getDimension(R.dimen.x_15)); // 同样的圆角
+                    positiveButton.setBackground(buttonBackground);
+
+                    positiveButton.setTextColor(Color.WHITE);
+                    positiveButton.setPadding(40, 20, 40, 20);
                 }
                 return true;
             }
@@ -207,6 +232,15 @@ public class AppsAdapter extends RecyclerView.Adapter<AppsAdapter.MyViewHolder> 
 
         boolean[] result = AppUtils.checkIfSystemAppAndCanUninstall(mContext, info.getApplicationInfo().packageName);
         if (result[0] && !result[1]) {
+
+//            // 将 dp 转 px
+//            float radiusDp = 22.5f;
+//            float radiusPx = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, radiusDp, mContext.getResources().getDisplayMetrics());
+//            // 创建圆角背景
+            GradientDrawable dialogBackground = new GradientDrawable();
+            dialogBackground.setColor(Color.WHITE); // 对话框背景色
+            dialogBackground.setCornerRadius(mContext.getResources().getDimension(R.dimen.x_15));
+
             AlertDialog dialog =new AlertDialog.Builder(mContext)
                     .setTitle(mContext.getString(R.string.hint)) // 对话框标题
                     .setMessage(mContext.getString(R.string.system_app_cannot_uninstalled)) // 对话框内容
@@ -232,11 +266,24 @@ public class AppsAdapter extends RecyclerView.Adapter<AppsAdapter.MyViewHolder> 
 
             dialog.show();
 
+            if (dialog.getWindow() != null) {
+                dialog.getWindow().setBackgroundDrawable(dialogBackground);
+            }
+
             Button positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
+//            if (positiveButton != null) {
+//                positiveButton.setBackgroundColor(Color.parseColor("#4684f3")); // #80 是 50% 透明度，后面是黑色
+//                positiveButton.setTextColor(Color.WHITE); // 白色文字，方便看
+//                positiveButton.setPadding(40, 20, 40, 20); // 给按钮留点内边距
+//            }
             if (positiveButton != null) {
-                positiveButton.setBackgroundColor(Color.parseColor("#4684f3")); // #80 是 50% 透明度，后面是黑色
-                positiveButton.setTextColor(Color.WHITE); // 白色文字，方便看
-                positiveButton.setPadding(40, 20, 40, 20); // 给按钮留点内边距
+                GradientDrawable buttonBackground = new GradientDrawable();
+                buttonBackground.setColor(Color.parseColor("#4684f3")); // 蓝色背景
+                buttonBackground.setCornerRadius(mContext.getResources().getDimension(R.dimen.x_15)); // 同样的圆角
+                positiveButton.setBackground(buttonBackground);
+
+                positiveButton.setTextColor(Color.WHITE);
+                positiveButton.setPadding(40, 20, 40, 20);
             }
             return true;
         }
