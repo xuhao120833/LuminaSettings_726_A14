@@ -60,6 +60,10 @@ public class MainCustomBindingWrapper {
     public View icon2border;
     public View icon3border;
     public View icon4border;
+    public View icon5border;
+    public View icon6border;
+    public View icon7border;
+    public View icon8border;
 
     public MainCustomBindingWrapper(ActivityMainCustomBinding b) {
         root = b.getRoot();
@@ -202,5 +206,9 @@ public class MainCustomBindingWrapper {
         icon2border = b.icon2Border;
         icon3border = b.icon3Border;
         icon4border = b.icon4Border;
+        icon5border = b.icon5Border;
+        icon6border = b.icon6Border;
+        icon7border = b.icon7Border;
+        icon8border = b.icon8Border;
     }
 }

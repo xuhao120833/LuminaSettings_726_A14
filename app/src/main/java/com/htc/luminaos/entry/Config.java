@@ -35,6 +35,7 @@ public class Config {
     public boolean notice = false;
     public boolean bluetooth = true;
     public int layout_select = 1;
+    public boolean select_border = false;
     public boolean btSpeaker = false;
 
     public boolean displayPictureModeWeiMiTitle = false;

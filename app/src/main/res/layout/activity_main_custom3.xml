@@ -280,7 +280,7 @@
             android:id="@+id/icon2_border"
             android:layout_width="@dimen/x_278"
             android:layout_height="@dimen/y_169"
-            android:background="@drawable/home_app_bg3"
+            android:background="@drawable/home_app_bg2"
             android:layout_centerInParent="true"
             android:visibility="gone"
             />
@@ -371,8 +371,16 @@
             android:textSize="@dimen/y_27"
             android:letterSpacing="0.05"
             >
-
         </TextView>
+
+        <View
+            android:id="@+id/icon5_border"
+            android:layout_width="@dimen/x_278"
+            android:layout_height="@dimen/y_169"
+            android:background="@drawable/home_app_bg3"
+            android:layout_centerInParent="true"
+            android:visibility="gone"
+            />
 
     </RelativeLayout>
 
@@ -411,6 +419,15 @@
             android:letterSpacing="0.05">
 
         </TextView>
+
+        <View
+            android:id="@+id/icon6_border"
+            android:layout_width="@dimen/x_278"
+            android:layout_height="@dimen/y_169"
+            android:background="@drawable/home_app_bg3"
+            android:layout_centerInParent="true"
+            android:visibility="gone"
+            />
     </RelativeLayout>
 
     <RelativeLayout
@@ -449,6 +466,15 @@
 
         </TextView>
 
+        <View
+            android:id="@+id/icon7_border"
+            android:layout_width="@dimen/x_278"
+            android:layout_height="@dimen/y_169"
+            android:background="@drawable/home_app_bg3"
+            android:layout_centerInParent="true"
+            android:visibility="gone"
+            />
+
     </RelativeLayout>
 
     <RelativeLayout
@@ -486,6 +512,15 @@
             android:letterSpacing="0.05">
 
         </TextView>
+
+        <View
+            android:id="@+id/icon8_border"
+            android:layout_width="@dimen/x_278"
+            android:layout_height="@dimen/y_169"
+            android:background="@drawable/home_app_bg3"
+            android:layout_centerInParent="true"
+            android:visibility="gone"
+            />
 
     </RelativeLayout>
 

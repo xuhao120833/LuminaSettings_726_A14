@@ -557,12 +557,12 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
                 (int) getResources().getDimension(R.dimen.x_43), 0, 0));
         customBinding.shortcutsRv.setLayoutManager(layoutManager);
 
-        if (MyApplication.config.layout_select == 2 || MyApplication.config.layout_select == 3) {
-            customBinding.icon1border.setBackground(null);
-            customBinding.icon2border.setBackground(null);
-            customBinding.icon3border.setBackground(null);
-            customBinding.icon4border.setBackground(null);
-        }
+//        if (MyApplication.config.layout_select == 2 || MyApplication.config.layout_select == 3) {
+//            customBinding.icon1border.setBackground(null);
+//            customBinding.icon2border.setBackground(null);
+//            customBinding.icon3border.setBackground(null);
+//            customBinding.icon4border.setBackground(null);
+//        }
     }
 
     private void initData() {
@@ -2541,7 +2541,7 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
             }
         }
 
-        if (hasFocus && (MyApplication.config.layout_select == 2 || MyApplication.config.layout_select == 3)) {
+        if (hasFocus && MyApplication.config.layout_select == 2 && MyApplication.config.select_border) {
             if (id == R.id.home_netflix) {
                 customBinding.icon1border.setVisibility(View.VISIBLE);
             } else if (id == R.id.home_youtube) {
@@ -2552,7 +2552,7 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
                 customBinding.icon4border.setVisibility(View.VISIBLE);
             }
 
-        } else if (!hasFocus && (MyApplication.config.layout_select == 2 || MyApplication.config.layout_select == 3)) {
+        } else if (!hasFocus && MyApplication.config.layout_select == 2 && MyApplication.config.select_border) {
             if (id == R.id.home_netflix) {
                 customBinding.icon1border.setVisibility(View.GONE);
             } else if (id == R.id.home_youtube) {
@@ -2561,6 +2561,45 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
                 customBinding.icon3border.setVisibility(View.GONE);
             } else if (id == R.id.rl_Google) {
                 customBinding.icon4border.setVisibility(View.GONE);
+            }
+        }
+
+        if (hasFocus && MyApplication.config.layout_select == 3 && MyApplication.config.select_border) {
+            if (id == R.id.home_netflix) {
+                customBinding.icon1border.setVisibility(View.VISIBLE);
+            } else if (id == R.id.home_youtube) {
+                customBinding.icon2border.setVisibility(View.VISIBLE);
+            } else if (id == R.id.home_disney) {
+                customBinding.icon3border.setVisibility(View.VISIBLE);
+            } else if (id == R.id.rl_Google) {
+                customBinding.icon4border.setVisibility(View.VISIBLE);
+            } else if (id == R.id.home_eshare) {
+                customBinding.icon5border.setVisibility(View.VISIBLE);
+            } else if (id == R.id.rl_usb) {
+                customBinding.icon6border.setVisibility(View.VISIBLE);
+            } else if (id == R.id.rl_hdmi1) {
+                customBinding.icon7border.setVisibility(View.VISIBLE);
+            } else if (id == R.id.rl_settings) {
+                customBinding.icon8border.setVisibility(View.VISIBLE);
+            }
+
+        } else if (!hasFocus && MyApplication.config.layout_select == 3 && MyApplication.config.select_border) {
+            if (id == R.id.home_netflix) {
+                customBinding.icon1border.setVisibility(View.GONE);
+            } else if (id == R.id.home_youtube) {
+                customBinding.icon2border.setVisibility(View.GONE);
+            } else if (id == R.id.home_disney) {
+                customBinding.icon3border.setVisibility(View.GONE);
+            } else if (id == R.id.rl_Google) {
+                customBinding.icon4border.setVisibility(View.GONE);
+            } else if (id == R.id.home_eshare) {
+                customBinding.icon5border.setVisibility(View.GONE);
+            } else if (id == R.id.rl_usb) {
+                customBinding.icon6border.setVisibility(View.GONE);
+            } else if (id == R.id.rl_hdmi1) {
+                customBinding.icon7border.setVisibility(View.GONE);
+            } else if (id == R.id.rl_settings) {
+                customBinding.icon8border.setVisibility(View.GONE);
             }
         }
 
