@@ -208,6 +208,8 @@ public class KeystoneUtils_726 {
                 //y = lcd_h - y;
                 lt_X = x;
                 lt_Y = y;
+                SystemProperties.set(PROP_HTC_KEYSTONE_LT_X, String.valueOf(lt_X));
+                SystemProperties.set(PROP_HTC_KEYSTONE_LT_Y, String.valueOf(lt_Y));
                 UpdateKeystone();
                 break;
             case 2:
@@ -229,6 +231,8 @@ public class KeystoneUtils_726 {
                 }
                 lb_X = x;
                 lb_Y = y;
+                SystemProperties.set(PROP_HTC_KEYSTONE_LB_X, String.valueOf(lb_X));
+                SystemProperties.set(PROP_HTC_KEYSTONE_LB_Y, String.valueOf(lb_Y));
                 UpdateKeystone();
                 break;
             case 3:
@@ -251,6 +255,8 @@ public class KeystoneUtils_726 {
                 //y = lcd_h - y;
                 rt_X = x;
                 rt_Y = y;
+                SystemProperties.set(PROP_HTC_KEYSTONE_RT_X, String.valueOf(rt_X));
+                SystemProperties.set(PROP_HTC_KEYSTONE_RT_Y, String.valueOf(rt_Y));
                 UpdateKeystone();
                 break;
             case 4:
@@ -272,6 +278,8 @@ public class KeystoneUtils_726 {
                 }
                 rb_X = x;
                 rb_Y = y;
+                SystemProperties.set(PROP_HTC_KEYSTONE_RB_X, String.valueOf(rb_X));
+                SystemProperties.set(PROP_HTC_KEYSTONE_RB_Y, String.valueOf(rb_Y));
                 UpdateKeystone();
                 break;
         }
@@ -301,7 +309,6 @@ public class KeystoneUtils_726 {
     public static void UpdateKeystoneZOOMNC() {
         SystemProperties.set("persist.sys.zoom.value", lb_X + "," + lb_Y + "," + lt_X + "," + lt_Y + "," + rt_X + "," + rt_Y + "," + rb_X + "," + rb_Y);
         Log.d("UpdateKeystoneZOOMNC ", lb_X + "," + lb_Y + "," + lt_X + "," + lt_Y + "," + rt_X + "," + rt_Y + "," + rb_X + "," + rb_Y);
-
 //        writeParcelToFlinger(lt_X, lt_Y, rt_X, rt_Y, lb_X, lb_Y, rb_X, rb_Y);
     }
 

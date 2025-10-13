@@ -1194,7 +1194,7 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
     }
 
     //全局缩放和比例兼容
-    public void set_screen_zoom(int l, int t, int r, int b, int scaleMode) { //画面比例无摄像头
+    public void set_screen_zoom(int l, int t, int r, int b, int scaleMode) {
         if (scaleMode == 0) {
             scale = 1D;
             step_x = 16;
@@ -1256,8 +1256,7 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
 //        int oldScale = KeystoneUtils_726.readGlobalSettings(this, "zoom_scale_old", 0);
         int old_ratio = KeystoneUtils_726.readSystemProperties(KeystoneUtils_726.PROP_ZOOM_SCALE_OLD, 0);
         Log.d(TAG, "a=" + a + " oldScale=" + old_ratio + " scale=" + scale);
-        int[] tpData = scUtils.getpxRatioxy(px4, py4, old_ratio,
-                scale, a, KeystoneUtils_726.lcd_w, KeystoneUtils_726.lcd_h);
+        int[] tpData = scUtils.getpxRatioxy(px4, py4, old_ratio, scale, a, KeystoneUtils_726.lcd_w, KeystoneUtils_726.lcd_h);
         if (tpData[8] == 1) {
             KeystoneUtils_726.optKeystoneFun(tpData);
         }
