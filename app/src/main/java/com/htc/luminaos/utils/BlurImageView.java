@@ -29,7 +29,7 @@ public class BlurImageView {
      * @return
      */
 //    public static Bitmap BoxBlurFilter(Bitmap bmp) {
-//        Log.d(TAG,"执行BoxBlurFilter前");
+//        LogUtils.d(TAG,"执行BoxBlurFilter前");
 //        int width = bmp.getWidth();
 //        int height = bmp.getHeight();
 //
@@ -41,15 +41,15 @@ public class BlurImageView {
 //        }
 //        //缩小完毕
 //
-//        Log.d(TAG,"执行BoxBlurFilter inPixels前");
+//        LogUtils.d(TAG,"执行BoxBlurFilter inPixels前");
 //        int[] inPixels = new int[width * height];
-//        Log.d(TAG,"执行BoxBlurFilter inPixels后");
-//        Log.d(TAG,"执行BoxBlurFilter outPixels前");
+//        LogUtils.d(TAG,"执行BoxBlurFilter inPixels后");
+//        LogUtils.d(TAG,"执行BoxBlurFilter outPixels前");
 //        int[] outPixels = new int[width * height];
-//        Log.d(TAG,"执行BoxBlurFilter outPixels后");
-//        Log.d(TAG,"执行BoxBlurFilter Bitmap.createBitmap前");
+//        LogUtils.d(TAG,"执行BoxBlurFilter outPixels后");
+//        LogUtils.d(TAG,"执行BoxBlurFilter Bitmap.createBitmap前");
 //        Bitmap bitmap = Bitmap.createBitmap(width, height,Bitmap.Config.ARGB_8888);
-//        Log.d(TAG,"执行BoxBlurFilter Bitmap.createBitmap后");
+//        LogUtils.d(TAG,"执行BoxBlurFilter Bitmap.createBitmap后");
 //        bmp.getPixels(inPixels, 0, width, 0, 0, width, height);
 //        for (int i = 0; i < ITERATIONS; i++) {
 //            blur(inPixels, outPixels, width, height, HRADIUS);

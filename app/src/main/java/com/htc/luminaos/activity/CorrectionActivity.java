@@ -24,6 +24,7 @@ import com.htc.luminaos.R;
 import com.htc.luminaos.databinding.ResetKeystoreLayoutBinding;
 import com.htc.luminaos.utils.KeystoneUtils;
 import com.htc.luminaos.utils.KeystoneUtils_726;
+import com.htc.luminaos.utils.LogUtils;
 
 import androidx.annotation.Nullable;
 
@@ -223,13 +224,13 @@ public class CorrectionActivity extends BaseActivity {
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent keyEvent) {
-        Log.d(TAG, " 手动矫正onKeyDown " + keyCode);
+        LogUtils.d(TAG, " 手动矫正onKeyDown " + keyCode);
         boolean ret;
         int repeatCount = keyEvent.getRepeatCount();
         if (repeatCount == 0) {
             key_move_step = 1;
         }
-        Log.d(TAG, " 手动矫正onKeyDown keyCode " + keyCode + " keyEvent " + keyEvent + " repeatCount " + repeatCount + " key_move_step " + key_move_step);
+        LogUtils.d(TAG, " 手动矫正onKeyDown keyCode " + keyCode + " keyEvent " + keyEvent + " repeatCount " + repeatCount + " key_move_step " + key_move_step);
         ret = calculationValue(keyCode, keyEvent, key_move_step);
         if (key_move_step < 8) {
             key_move_step++;
@@ -244,7 +245,7 @@ public class CorrectionActivity extends BaseActivity {
         int keyCode = keyEvent.getKeyCode();
 
         if ((keyCode == KeyEvent.KEYCODE_MENU || keyCode == KeyEvent.KEYCODE_SETTINGS) && action == KeyEvent.ACTION_DOWN) {
-            Log.d(TAG,"dispatchKeyEvent MENU键或者Settings键唤出矫正复位 " +keyCode);
+            LogUtils.d(TAG,"dispatchKeyEvent MENU键或者Settings键唤出矫正复位 " +keyCode);
             menu_press(keyEvent);
             return true;
         }
@@ -275,7 +276,7 @@ public class CorrectionActivity extends BaseActivity {
 
 
     private void L(String l) {
-        Log.i("CorrectionActivity", l);
+        LogUtils.i("CorrectionActivity", l);
     }
 
     /**
@@ -350,7 +351,7 @@ public class CorrectionActivity extends BaseActivity {
     private boolean calculationValue(int keyCode, KeyEvent keyEvent, int step) {
         int[] xy = new int[]{0, 0};
         int type = 1;
-        Log.d(TAG, " 手动矫正calculationValue g_cur_left " + g_cur_left + " g_cur_right " + g_cur_right + " g_cur_top " + g_cur_top + " g_cur_bottom " + g_cur_bottom);
+        LogUtils.d(TAG, " 手动矫正calculationValue g_cur_left " + g_cur_left + " g_cur_right " + g_cur_right + " g_cur_top " + g_cur_top + " g_cur_bottom " + g_cur_bottom);
         if (keyCode == KeyEvent.KEYCODE_DPAD_LEFT) {
             if (!g_cur_left) return true;
         } else if (keyCode == KeyEvent.KEYCODE_DPAD_RIGHT) {
@@ -365,7 +366,7 @@ public class CorrectionActivity extends BaseActivity {
             if (check_lt.isChecked()) {
                 type = 1;
                 xy = KeystoneUtils_726.getKeystoneLeftAndTopXY();
-                Log.d("test3", "xy[0] " + xy[0] + "xy[1]" + xy[1]);
+                LogUtils.d("test3", "xy[0] " + xy[0] + "xy[1]" + xy[1]);
             } else if (check_lb.isChecked()) {
                 type = 2;
                 xy = KeystoneUtils_726.getKeystoneLeftAndBottomXY();
@@ -378,11 +379,11 @@ public class CorrectionActivity extends BaseActivity {
             }
         }
         if (type == 1) {
-            Log.d("keyCode", "" + keyCode);
+            LogUtils.d("keyCode", "" + keyCode);
             if (keyCode == KeyEvent.KEYCODE_DPAD_LEFT) {
                 int x = xy[0] - step;
                 xy[0] = x;
-                Log.d("test3", "xy[0] " + xy[0] + "xy[1]" + xy[1]);
+                LogUtils.d("test3", "xy[0] " + xy[0] + "xy[1]" + xy[1]);
                 KeystoneUtils_726.setkeystoneValue(type, xy);
                 refreshState();
                 return true;
@@ -517,10 +518,10 @@ public class CorrectionActivity extends BaseActivity {
                     left = false;
                 }
                 int temp = x + xy_OppositeTo[0];
-                Log.d(TAG, " 手动矫正refreshStateValueUI check_lt right = false " + " x " + x + " y " + y + " xy_OppositeTo[0] " + xy_OppositeTo[0] + " xy_OppositeTo[1] " + xy_OppositeTo[1]
+                LogUtils.d(TAG, " 手动矫正refreshStateValueUI check_lt right = false " + " x " + x + " y " + y + " xy_OppositeTo[0] " + xy_OppositeTo[0] + " xy_OppositeTo[1] " + xy_OppositeTo[1]
                         + " x + xy_OppositeTo[0] " + x + xy_OppositeTo[0] + " KeystoneUtils_726.minH_size " + KeystoneUtils_726.minH_size + " temp " + temp);
                 if (x + xy_OppositeTo[0] >= 500) {
-                    Log.d(TAG, " 手动矫正refreshStateValueUI check_lt right = false");
+                    LogUtils.d(TAG, " 手动矫正refreshStateValueUI check_lt right = false");
                     right = false;
                 }
                 if (y <= KeystoneUtils_726.minY) {
@@ -530,7 +531,7 @@ public class CorrectionActivity extends BaseActivity {
                     bottom = false;
                 }
                 textv_lt.setText(String.valueOf(xy[0]) + "," + String.valueOf(xy[1]));
-                Log.d(TAG, " 手动矫正refreshStateValueUI check_lt left " + left + " right " + right + " top " + top + " bottom " + bottom
+                LogUtils.d(TAG, " 手动矫正refreshStateValueUI check_lt left " + left + " right " + right + " top " + top + " bottom " + bottom
                         + " x " + x + " y " + y + " xy_OppositeTo[0] " + xy_OppositeTo[0] + " xy_OppositeTo[1] " + xy_OppositeTo[1]);
 
             } else if (check_lb.isChecked()) {
@@ -553,7 +554,7 @@ public class CorrectionActivity extends BaseActivity {
                     top = false;
                 }
                 textv_lb.setText(String.valueOf(xy[0]) + "," + String.valueOf(xy[1]));
-                Log.d(TAG, " 手动矫正refreshStateValueUI check_lb left " + left + " right " + right + " top " + top + " bottom " + bottom
+                LogUtils.d(TAG, " 手动矫正refreshStateValueUI check_lb left " + left + " right " + right + " top " + top + " bottom " + bottom
                         + " x " + x + " y " + y + " xy_OppositeTo[0] " + xy_OppositeTo[0] + " xy_OppositeTo[1] " + xy_OppositeTo[1]);
             } else if (check_rt.isChecked()) {
                 type = 3;
@@ -576,7 +577,7 @@ public class CorrectionActivity extends BaseActivity {
                 }
                 textv_rt.setText(String.valueOf(xy[0]) + "," + String.valueOf(xy[1]));
 
-                Log.d(TAG, " 手动矫正refreshStateValueUI check_rt left " + left + " right " + right + " top " + top + " bottom " + bottom
+                LogUtils.d(TAG, " 手动矫正refreshStateValueUI check_rt left " + left + " right " + right + " top " + top + " bottom " + bottom
                         + " x " + x + " y " + y + " xy_OppositeTo[0] " + xy_OppositeTo[0] + " xy_OppositeTo[1] " + xy_OppositeTo[1]);
             } else if (check_rb.isChecked()) {
                 type = 4;
@@ -598,7 +599,7 @@ public class CorrectionActivity extends BaseActivity {
                 }
                 textv_rb.setText(String.valueOf(xy[0]) + "," + String.valueOf(xy[1]));
 
-                Log.d(TAG, " 手动矫正refreshStateValueUI check_rb left " + left + " right " + right + " top " + top + " bottom " + bottom
+                LogUtils.d(TAG, " 手动矫正refreshStateValueUI check_rb left " + left + " right " + right + " top " + top + " bottom " + bottom
                         + " x " + x + " y " + y + " xy_OppositeTo[0] " + xy_OppositeTo[0] + " xy_OppositeTo[1] " + xy_OppositeTo[1]);
             }
             // 更新
@@ -924,11 +925,11 @@ public class CorrectionActivity extends BaseActivity {
 
 //    @Override
 //    public boolean onKey(View v, int keyCode, KeyEvent event) {
-//        Log.d(TAG, " 手动矫正 onKey");
+//        LogUtils.d(TAG, " 手动矫正 onKey");
 //        if (event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_MENU) {
-//            Log.d(TAG, " 手动矫正 Enter事件");
+//            LogUtils.d(TAG, " 手动矫正 Enter事件");
 //            if (event.isLongPress()) {
-//                Log.d(TAG, " 手动矫正 Enter键长按事件");
+//                LogUtils.d(TAG, " 手动矫正 Enter键长按事件");
 //                try {
 //                    ShowResetKeystoreDialog();
 //                } catch (Exception e) {
@@ -1000,7 +1001,7 @@ public class CorrectionActivity extends BaseActivity {
     }
 
     private void menu_press(KeyEvent keyEvent) {
-        Log.d(TAG, " 手动矫正 menu_long_press");
+        LogUtils.d(TAG, " 手动矫正 menu_long_press");
         try {
             ShowResetKeystoreDialog();
         } catch (Exception e) {

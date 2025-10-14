@@ -9,6 +9,7 @@ import android.view.View;
 
 import com.htc.luminaos.databinding.ActivityBluetoothIncomingFileConfirmBinding;
 import com.htc.luminaos.receiver.BluetoothInformingCallback;
+import com.htc.luminaos.utils.LogUtils;
 import com.htc.luminaos.widget.BlutoothIncomingFileConfirmDialog;
 
 public class BluetoothIncomingFileConfirmActivity extends BaseActivity implements View.OnClickListener, BluetoothInformingCallback {
@@ -25,7 +26,7 @@ public class BluetoothIncomingFileConfirmActivity extends BaseActivity implement
         super.onCreate(savedInstanceState);
         Intent intent = getIntent();
         if (!BluetoothDevice.ACTION_INCOMINGFILE_CONFIRM_REQUEST.equals(intent.getAction())) {
-            Log.e(TAG, "Error: this activity may be started only with intent " +
+            LogUtils.e(TAG, "Error: this activity may be started only with intent " +
                     BluetoothDevice.ACTION_INCOMINGFILE_CONFIRM_REQUEST);
             finish();
             return;
@@ -52,7 +53,7 @@ public class BluetoothIncomingFileConfirmActivity extends BaseActivity implement
 
 //    @Override
 //    public void onClick(View v) {
-//        Log.d(TAG,"onclick");
+//        LogUtils.d(TAG,"onclick");
 //        switch (v.getId()){
 //            case R.id.accpet:
 //                onTransfer();

@@ -7,6 +7,8 @@ import android.os.Handler;
 import android.provider.Settings;
 import android.util.Log;
 
+import com.htc.luminaos.utils.LogUtils;
+
 public class NotificationObserver extends ContentObserver {
 
     private Context mContext = null;
@@ -23,7 +25,7 @@ public class NotificationObserver extends ContentObserver {
         super.onChange(selfChange, uri);
         try {
             int value = Settings.Global.getInt(mContext.getContentResolver(), "notification");
-            Log.d("Observer", "notification changed: " + value);
+            LogUtils.d("Observer", "notification changed: " + value);
             callBack.changeNoticeIcon(value);
         } catch (Exception e) {
             e.printStackTrace();

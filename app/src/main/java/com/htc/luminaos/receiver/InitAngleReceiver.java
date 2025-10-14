@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.util.Log;
 
 import com.htc.luminaos.activity.InitAngleActivity;
+import com.htc.luminaos.utils.LogUtils;
 
 public class InitAngleReceiver extends BroadcastReceiver {
     private Context mContext;
@@ -21,7 +22,7 @@ public class InitAngleReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        Log.d(TAG," 收到广播 "+intent.getAction());
+        LogUtils.d(TAG," 收到广播 "+intent.getAction());
         if(intent.getAction().equals("com.htc.INITANGLE")) {
             startNewActivity(InitAngleActivity.class);
         }

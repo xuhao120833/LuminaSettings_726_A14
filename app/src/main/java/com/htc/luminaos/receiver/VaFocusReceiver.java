@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
+import com.htc.luminaos.utils.LogUtils;
+
 public class VaFocusReceiver extends BroadcastReceiver {
 
     VaFocusCallBack vaFocusCallBack;
@@ -19,7 +21,7 @@ public class VaFocusReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         if ("intent.htc.vafocus".equals(intent.getAction())) {
             // 处理广播
-            Log.d("VaFocusReceiver", "Received vaFocus broadcast!");
+            LogUtils.d("VaFocusReceiver", "Received vaFocus broadcast!");
 
             vaFocusCallBack.vaFocusChange();
         }

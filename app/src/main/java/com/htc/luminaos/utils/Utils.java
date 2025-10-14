@@ -74,19 +74,19 @@ public class Utils {
      */
     public static void logIntentExtras(Intent intent, String tag) {
         if (intent == null) {
-            Log.d(tag, "logIntentExtras Intent is null");
+            LogUtils.d(tag, "logIntentExtras Intent is null");
             return;
         }
 
         Bundle extras = intent.getExtras();
         if (extras != null) {
-            Log.d(tag, "logIntentExtras Intent extras:");
+            LogUtils.d(tag, "logIntentExtras Intent extras:");
             for (String key : extras.keySet()) {
                 Object value = extras.get(key);
-                Log.d(tag, "[" + key + "] = " + value);
+                LogUtils.d(tag, "[" + key + "] = " + value);
             }
         } else {
-            Log.d(tag, "logIntentExtras No extras in the Intent");
+            LogUtils.d(tag, "logIntentExtras No extras in the Intent");
         }
     }
 

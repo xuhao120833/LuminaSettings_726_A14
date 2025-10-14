@@ -35,7 +35,7 @@ public class DeviceModeManager {
         } else if (!modes.isEmpty()) {
             currentMode = modes.get(0); // 回退到第一个支持模式
         }
-        Log.d(TAG, "初始化设备模式: " + currentMode);
+        LogUtils.d(TAG, "初始化设备模式: " + currentMode);
     }
 
 
@@ -65,7 +65,7 @@ public class DeviceModeManager {
         } else {
             currentMode = modes.get(index + 1);
         }
-        Log.d(TAG, "切换到设备模式: " + currentMode);
+        LogUtils.d(TAG, "切换到设备模式: " + currentMode);
         return currentMode;
     }
 
@@ -78,7 +78,7 @@ public class DeviceModeManager {
         } else {
             currentMode = modes.get(index - 1);
         }
-        Log.d(TAG, "切换到设备模式: " + currentMode);
+        LogUtils.d(TAG, "切换到设备模式: " + currentMode);
         return currentMode;
     }
 

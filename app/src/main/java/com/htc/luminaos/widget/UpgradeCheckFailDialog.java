@@ -16,6 +16,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import com.htc.luminaos.R;
 import com.htc.luminaos.databinding.UpgradeCheckFailBinding;
+import com.htc.luminaos.utils.LogUtils;
 
 
 /**
@@ -31,7 +32,7 @@ public class UpgradeCheckFailDialog extends Dialog implements View.OnClickListen
 
     @Override
     public void onClick(View v) {
-        Log.d(TAG,"onclick");
+        LogUtils.d(TAG,"onclick");
         int id = v.getId();
         if (id == R.id.enter) {
             if (mcallback != null)

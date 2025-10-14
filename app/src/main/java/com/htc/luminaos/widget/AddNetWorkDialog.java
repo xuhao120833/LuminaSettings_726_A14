@@ -51,6 +51,7 @@ import androidx.annotation.NonNull;
 import com.htc.luminaos.R;
 import com.htc.luminaos.utils.InputMethodUtil;
 import com.htc.luminaos.utils.LinkWifi;
+import com.htc.luminaos.utils.LogUtils;
 import com.htc.luminaos.utils.Utils;
 
 import java.util.ArrayList;
@@ -101,10 +102,10 @@ public class AddNetWorkDialog extends BaseDialog {
             WifiInfo wifiInfo = mWifiManager.getConnectionInfo();
             if (wifiInfo == null || wifiInfo.getSSID() == null) return;
             String currentSsid = wifiInfo.getSSID().replace("\"", "");
-            Log.d(TAG, "收到 NETWORK_STATE_CHANGED_ACTION: " + currentSsid);
+            LogUtils.d(TAG, "收到 NETWORK_STATE_CHANGED_ACTION: " + currentSsid);
             if (currentSsid.equals(ssid)) {
                 if (info.isConnected()) {
-                    Log.d(TAG, "连接成功: " + currentSsid);
+                    LogUtils.d(TAG, "连接成功: " + currentSsid);
                     Toast.makeText(mContext, mContext.getString(R.string.wifi_connect_success) + currentSsid, Toast.LENGTH_SHORT).show();
                     if(connectingDialog != null & connectingDialog.isShowing())
                         connectingDialog.dismiss();
@@ -169,7 +170,7 @@ public class AddNetWorkDialog extends BaseDialog {
             networkName_et.setOnEditorActionListener(new TextView.OnEditorActionListener() {
                 @Override
                 public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                    Log.d("editor", "actionId " + actionId);
+                    LogUtils.d("editor", "actionId " + actionId);
                     if (actionId == EditorInfo.IME_ACTION_NEXT || actionId == EditorInfo.IME_ACTION_DONE
                             || actionId == EditorInfo.IME_ACTION_SEND || actionId == EditorInfo.IME_ACTION_GO) {
                         InputMethodManager inputMethodManager = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -199,7 +200,7 @@ public class AddNetWorkDialog extends BaseDialog {
             password_et.setOnEditorActionListener(new TextView.OnEditorActionListener() {
                 @Override
                 public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                    Log.d("editor", "actionId " + actionId);
+                    LogUtils.d("editor", "actionId " + actionId);
                     if (actionId == EditorInfo.IME_ACTION_NEXT || actionId == EditorInfo.IME_ACTION_DONE
                             || actionId == EditorInfo.IME_ACTION_SEND || actionId == EditorInfo.IME_ACTION_GO) {
 
@@ -248,9 +249,9 @@ public class AddNetWorkDialog extends BaseDialog {
                                     wifiInfo.getSupplicantState() == SupplicantState.COMPLETED &&
                                     wifiInfo.getSSID() != null &&
                                     wifiInfo.getSSID().equals("\"" + ssid + "\"")) {
-                                Log.d(TAG, " 隐藏网络连接成功");
+                                LogUtils.d(TAG, " 隐藏网络连接成功");
                             } else {
-                                Log.d(TAG, " 隐藏网络连接失败，可能不存在");
+                                LogUtils.d(TAG, " 隐藏网络连接失败，可能不存在");
                                 Toast.makeText(mContext, mContext.getString(R.string.wifi_ssid_not_found), Toast.LENGTH_SHORT).show();
                                 mWifiManager.removeNetwork(netID);
                                 mWifiManager.saveConfiguration();
@@ -345,9 +346,9 @@ public class AddNetWorkDialog extends BaseDialog {
                                 wifiInfo.getSupplicantState() == SupplicantState.COMPLETED &&
                                 wifiInfo.getSSID() != null &&
                                 wifiInfo.getSSID().equals("\"" + ssid + "\"")) {
-                            Log.d(TAG, " 网络连接成功");
+                            LogUtils.d(TAG, " 网络连接成功");
                         } else {
-                            Log.d(TAG, " 网络连接失败，可能不存在");
+                            LogUtils.d(TAG, " 网络连接失败，可能不存在");
                             Toast.makeText(mContext, mContext.getString(R.string.wifi_ssid_not_found), Toast.LENGTH_SHORT).show();
                             mWifiManager.removeNetwork(netID);
                             mWifiManager.saveConfiguration();

@@ -15,6 +15,7 @@ import com.htc.luminaos.R;
 import com.htc.luminaos.databinding.ActivityOtherSettingsBinding;
 import com.htc.luminaos.service.TimeOffService;
 import com.htc.luminaos.utils.Contants;
+import com.htc.luminaos.utils.LogUtils;
 import com.htc.luminaos.utils.ShareUtil;
 import com.htc.luminaos.utils.Utils;
 import com.htc.luminaos.widget.FactoryResetDialog;
@@ -136,7 +137,7 @@ public class OtherSettingsActivity extends BaseActivity implements View.OnKeyLis
         time_off_title = getResources().getStringArray(R.array.time_off_title);
         time_off_value = getResources().getIntArray(R.array.time_off_value);
         cur_time_off_index = (int) ShareUtil.get(this, Contants.TimeOffIndex, 0);
-        Log.d(TAG, " initData cur_time_off_index " + cur_time_off_index);
+        LogUtils.d(TAG, " initData cur_time_off_index " + cur_time_off_index);
         otherSettingsBinding.timerOffTv.setText(time_off_title[cur_time_off_index]);
         /*if ((boolean) ShareUtil.get(this, Contants.TimeOffStatus,false)){
             int  timeOffTime =(int) ShareUtil.get(this, Contants.TimeOffTime,0);
@@ -190,7 +191,7 @@ public class OtherSettingsActivity extends BaseActivity implements View.OnKeyLis
 
     private int getCurScreenSaverIndex() {
         int screen_off_timeout = Settings.System.getInt(getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, 300000);
-        Log.d(TAG, "getCurScreenSaverIndex screen_off_timeout " + screen_off_timeout);
+        LogUtils.d(TAG, "getCurScreenSaverIndex screen_off_timeout " + screen_off_timeout);
         for (int i = 0; i < screen_saver_value.length; i++) {
             if (screen_off_timeout == screen_saver_value[i])
                 return i;
@@ -199,13 +200,13 @@ public class OtherSettingsActivity extends BaseActivity implements View.OnKeyLis
     }
 
     private void updateScreenSaver(int index) {
-        Log.d(TAG, "updateScreenSaver screen_saver_value[index] " + screen_saver_value[index]);
+        LogUtils.d(TAG, "updateScreenSaver screen_saver_value[index] " + screen_saver_value[index]);
         Settings.System.putInt(getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, screen_saver_value[index]);
         otherSettingsBinding.screenSaverTv.setText(screen_saver_title[index]);
     }
 
     private void setTimeOff(int index) {
-        Log.d(TAG, " 定时关机时间为 " + time_off_title.length + " " + index);
+        LogUtils.d(TAG, " 定时关机时间为 " + time_off_title.length + " " + index);
         otherSettingsBinding.timerOffTv.setText(time_off_title[index]);
         ShareUtil.put(this, Contants.TimeOffIndex, index);
         Intent intent = new Intent(this, TimeOffService.class);
@@ -262,7 +263,7 @@ public class OtherSettingsActivity extends BaseActivity implements View.OnKeyLis
             mAwTvSystemManager.setPowerOnMode(curPowerMode == 1 ?
                     AwTvSystemTypes.EnumPowerMode.valueOf(1) : AwTvSystemTypes.EnumPowerMode.valueOf(0));
         } else if (id == R.id.rl_account) {
-            Log.d(TAG, "打开Google账号切换界面");
+            LogUtils.d(TAG, "打开Google账号切换界面");
 //            Intent intent = new Intent(Settings.ACTION_SYNC_SETTINGS);
 //            intent.putExtra(Settings.EXTRA_ACCOUNT_TYPES, new String[]{"com.google"});
 //            startActivity(intent);

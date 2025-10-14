@@ -114,7 +114,7 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.d(TAG, "执行onCreate ProjectActivity");
+        LogUtils.d(TAG, "执行onCreate ProjectActivity");
         super.onCreate(savedInstanceState);
         projectBinding = ActivityProjectBinding.inflate(LayoutInflater.from(this));
         setContentView(projectBinding.getRoot());
@@ -127,7 +127,7 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
 
     @Override
     protected void onResume() {
-        Log.d(TAG, "执行onResume ProjectActivity");
+        LogUtils.d(TAG, "执行onResume ProjectActivity");
         super.onResume();
 //        All = KeystoneUtils_726.readGlobalSettings(this, KeystoneUtils_726.ZOOM_VALUE, 0);
         All = KeystoneUtils_726.readSystemProperties(KeystoneUtils_726.PROP_ZOOM_VALUE, 0);
@@ -396,9 +396,9 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
     }
 
     private void updateSzoomTv() {
-        Log.d(TAG, "updateSzoomTv zoom_scale" + zoom_scale);
+        LogUtils.d(TAG, "updateSzoomTv zoom_scale" + zoom_scale);
         zoom_scale = KeystoneUtils_726.readSystemProperties(KeystoneUtils_726.PROP_ZOOM_SCALE, zoom_scale);
-        Log.d(TAG, "updateSzoomTv zoom_scale" + zoom_scale);
+        LogUtils.d(TAG, "updateSzoomTv zoom_scale" + zoom_scale);
         switch (zoom_scale) {
             case 0:
                 projectBinding.screenZoomeTv.setText(screen_zoom[0]);
@@ -532,21 +532,21 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
             startNewActivity(InitAngleActivity.class);
         } else if (id == R.id.rl_project_mode) {
             old_project_mode = cur_project_mode;
-            Log.d(TAG, "onClick向右切换安装模式");
+            LogUtils.d(TAG, "onClick向右切换安装模式");
             if (cur_project_mode == project_name.size() - 1)
                 cur_project_mode = 0;
             else
                 cur_project_mode++;
             updateProjectMode();
         } else if (id == R.id.rl_device_mode2) {
-//            Log.d(TAG, "onClick向右切换设备模式");
+//            LogUtils.d(TAG, "onClick向右切换设备模式");
 //            cur_device_Mode++;
 //            if (cur_device_Mode > maxMode) {
 //                cur_device_Mode = 0;
 //            }
 //            updateText(cur_device_Mode);
 //            ReflectUtil.invokeSet_brightness_level(cur_device_Mode);
-            Log.d(TAG, "onClick向右切换设备模式");
+            LogUtils.d(TAG, "onClick向右切换设备模式");
             // 切换到下一个模式（循环，自动跳过配置文件不允许的模式）
             int newMode = modeManager.nextMode();
             // 更新 UI
@@ -576,7 +576,7 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
             if (zoom_scale > 2)
                 zoom_scale = 0;
             set_screen_zoom(All, All, All, All, zoom_scale);
-            Log.d(TAG, " writeSystemProperties KeystoneUtils_726.PROP_ZOOM_SCALE ");
+            LogUtils.d(TAG, " writeSystemProperties KeystoneUtils_726.PROP_ZOOM_SCALE ");
             KeystoneUtils_726.writeSystemProperties(KeystoneUtils_726.PROP_ZOOM_SCALE, zoom_scale);
             updateSzoomTv();
         } else if (id == R.id.screen_zoom_left) {
@@ -634,7 +634,7 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
         if (keyCode == KeyEvent.KEYCODE_DPAD_LEFT) {
             int id = v.getId();
             if (id == R.id.rl_project_mode) {
-                Log.d(TAG, "向左切换安装模式");
+                LogUtils.d(TAG, "向左切换安装模式");
                 if (event.getAction() != KeyEvent.ACTION_DOWN)
                     return false;
                 old_project_mode = cur_project_mode;
@@ -673,7 +673,7 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
                 if (zoom_scale < 0)
                     zoom_scale = 2;
                 set_screen_zoom(All, All, All, All, zoom_scale);
-                Log.d(TAG, " KEYCODE_DPAD_LEFT writeSystemProperties KeystoneUtils_726.PROP_ZOOM_SCALE ");
+                LogUtils.d(TAG, " KEYCODE_DPAD_LEFT writeSystemProperties KeystoneUtils_726.PROP_ZOOM_SCALE ");
                 KeystoneUtils_726.writeSystemProperties(KeystoneUtils_726.PROP_ZOOM_SCALE, zoom_scale);
                 updateSzoomTv();
 //                    break;
@@ -683,7 +683,7 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
             } else if (id == R.id.rl_device_mode2) {
                 if (event.getAction() != KeyEvent.ACTION_DOWN)
                     return false;
-//                Log.d(TAG, "向左切换设备模式");
+//                LogUtils.d(TAG, "向左切换设备模式");
 //                cur_device_Mode--;
 //                if (cur_device_Mode < 0) {
 //                    cur_device_Mode = maxMode;
@@ -692,7 +692,7 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
 //                ReflectUtil.invokeSet_brightness_level(cur_device_Mode);
 ////                    break;
 //                return true;
-                Log.d(TAG, "向左切换设备模式");
+                LogUtils.d(TAG, "向左切换设备模式");
                 // 使用 DeviceModeManager 切换到上一个模式
                 int newMode = modeManager.prevMode();
                 // 更新 UI
@@ -704,7 +704,7 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
         } else if (keyCode == KeyEvent.KEYCODE_DPAD_RIGHT) {
             int id = v.getId();
             if (id == R.id.rl_project_mode) {
-                Log.d(TAG, "向右切换安装模式");
+                LogUtils.d(TAG, "向右切换安装模式");
                 if (event.getAction() != KeyEvent.ACTION_DOWN)
                     return false;
                 old_project_mode = cur_project_mode;
@@ -743,7 +743,7 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
                 if (zoom_scale > 2)
                     zoom_scale = 0;
                 set_screen_zoom(All, All, All, All, zoom_scale);
-                Log.d(TAG, " KEYCODE_DPAD_RIGHT writeSystemProperties KeystoneUtils_726.PROP_ZOOM_SCALE ");
+                LogUtils.d(TAG, " KEYCODE_DPAD_RIGHT writeSystemProperties KeystoneUtils_726.PROP_ZOOM_SCALE ");
                 KeystoneUtils_726.writeSystemProperties(KeystoneUtils_726.PROP_ZOOM_SCALE, zoom_scale);
                 updateSzoomTv();
 //                    break;
@@ -753,7 +753,7 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
             } else if (id == R.id.rl_device_mode2) {
                 if (event.getAction() != KeyEvent.ACTION_DOWN)
                     return false;
-                Log.d(TAG, "向右切换设备模式");
+                LogUtils.d(TAG, "向右切换设备模式");
 //                cur_device_Mode++;
 //                if (cur_device_Mode > maxMode) {
 //                    cur_device_Mode = 0;
@@ -806,7 +806,7 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
         //tvDisplayManager.factorySetPanelValue(AwTvDisplayTypes.EnumPanelConfigType.E_AW_PANEL_CONFIG_MIRROR, cur_project_mode);
 
 //        new Handler(Looper.getMainLooper()).postDelayed(() -> {
-//            Log.d(TAG," 延时5s执行tvDisplayManager.factorySetPanelValue");
+//            LogUtils.d(TAG," 延时5s执行tvDisplayManager.factorySetPanelValue");
 //            tvDisplayManager.factorySetPanelValue(AwTvDisplayTypes.EnumPanelConfigType.E_AW_PANEL_CONFIG_MIRROR, cur_project_mode);
 //        }, 5000); // 延迟 5 秒（5000 毫秒）
     }
@@ -884,7 +884,7 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
     }
 
 //    public void changeform(int l, int t, int right, int bottom, String key) {
-//        Log.d("changeform before ", KeystoneUtils_726.lt_X + "," + KeystoneUtils_726.lt_Y + "," + KeystoneUtils_726.lb_X  + "," + KeystoneUtils_726.lb_Y
+//        LogUtils.d("changeform before ", KeystoneUtils_726.lt_X + "," + KeystoneUtils_726.lt_Y + "," + KeystoneUtils_726.lb_X  + "," + KeystoneUtils_726.lb_Y
 //                + "," + KeystoneUtils_726.rt_X + "," + KeystoneUtils_726.rt_Y + "," + KeystoneUtils_726.rb_X + "," + KeystoneUtils_726.rb_Y);
 //
 //        KeystoneUtils_726.lt_X = Integer.parseInt(df.format(((100 - 100 * scale) * zoom_step_x + (100 - l) * step_x) * 1000 / KeystoneUtils_726.lcd_w));
@@ -899,15 +899,15 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
 //        KeystoneUtils_726.rb_X = 1000 - Integer.parseInt(df.format((KeystoneUtils_726.lcd_w * scale - (100 - right) * step_x) * 1000 / KeystoneUtils_726.lcd_w));
 //        KeystoneUtils_726.rb_Y = Integer.parseInt(df.format(((100 - bottom) * step_y) * 1000 / KeystoneUtils_726.lcd_h));
 //
-//        Log.d("changeform after ", KeystoneUtils_726.lt_X + "," + KeystoneUtils_726.lt_Y + "," + KeystoneUtils_726.lb_X  + "," + KeystoneUtils_726.lb_Y
+//        LogUtils.d("changeform after ", KeystoneUtils_726.lt_X + "," + KeystoneUtils_726.lt_Y + "," + KeystoneUtils_726.lb_X  + "," + KeystoneUtils_726.lb_Y
 //                + "," + KeystoneUtils_726.rt_X + "," + KeystoneUtils_726.rt_Y + "," + KeystoneUtils_726.rb_X + "," + KeystoneUtils_726.rb_Y);
 //
 ////        if (getAuto()) {
-////            Log.d(TAG," UpdateKeystoneZOOM(false) ");
+////            LogUtils.d(TAG," UpdateKeystoneZOOM(false) ");
 ////            KeystoneUtils_726.UpdateKeystoneZOOM(false);
 //////            sendKeystoneBroadcast();
 ////        } else {
-////            Log.d(TAG," UpdateKeystoneZOOM(true) ");
+////            LogUtils.d(TAG," UpdateKeystoneZOOM(true) ");
 ////            KeystoneUtils_726.UpdateKeystoneZOOM(true);
 ////        }
 //        KeystoneUtils_726.UpdateKeystoneZOOMNC();
@@ -928,7 +928,7 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
         offset_x = ((KeystoneUtils_726.lcd_w - temp_w) + (step_x * All)) / 2;
         offset_y = (step_y * All) / 2;
 
-        Log.d("changeform before ", "offset_x=" + offset_x + "," + "offset_y=" + offset_y + "," + "temp_w=" + temp_w + "," + "temp_h=" + temp_h + "," + "step_x=" + step_x + "," + "step_y=" + step_y + "," + "All=" + All);
+        LogUtils.d("changeform before ", "offset_x=" + offset_x + "," + "offset_y=" + offset_y + "," + "temp_w=" + temp_w + "," + "temp_h=" + temp_h + "," + "step_x=" + step_x + "," + "step_y=" + step_y + "," + "All=" + All);
 
         KeystoneUtils_726.lt_X = offset_x;
         KeystoneUtils_726.lt_Y = offset_y;
@@ -976,7 +976,7 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
 
         DecimalFormat df = new DecimalFormat("0.00", DecimalFormatSymbols.getInstance(Locale.CHINA));
         float a = Float.parseFloat(df.format((max_value - zoom * 2) * 0.01).replace(",", "."));
-        Log.d(TAG, "float  a =" + a);
+        LogUtils.d(TAG, "float  a =" + a);
 //        int old_ratio = KeystoneUtils_726.readGlobalSettings(this, "zoom_scale_old", 0);
 //        int ratio = KeystoneUtils_726.readGlobalSettings(this, "zoom_scale", 0);
         int old_ratio = KeystoneUtils_726.readSystemProperties(KeystoneUtils_726.PROP_ZOOM_SCALE_OLD, 0);
@@ -988,7 +988,7 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
     }
 
     private void sendKeystoneBroadcast(String key) {
-        Log.d(TAG, " 发送自动梯形校正的广播 ");
+        LogUtils.d(TAG, " 发送自动梯形校正的广播 ");
         Intent intent = new Intent("android.intent.hotack_keystone");
         intent.addFlags(Intent.FLAG_RECEIVER_FOREGROUND);
         intent.putExtra(key, 1);
@@ -1186,7 +1186,7 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
 
     @Override
     public void vaFocusChange() {
-        Log.d(TAG, " vaFocusChange " + All);
+        LogUtils.d(TAG, " vaFocusChange " + All);
         All = 0;
         projectBinding.digitalZoomTv.setText("0");
         projectBinding.digitalZoomRight.setVisibility(View.VISIBLE);
@@ -1255,7 +1255,7 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
         float a = Float.parseFloat(df.format((100 - KeystoneUtils_726.readSystemProperties(KeystoneUtils_726.PROP_ZOOM_VALUE, 0) * 2) * 0.01).replace(",", "."));
 //        int oldScale = KeystoneUtils_726.readGlobalSettings(this, "zoom_scale_old", 0);
         int old_ratio = KeystoneUtils_726.readSystemProperties(KeystoneUtils_726.PROP_ZOOM_SCALE_OLD, 0);
-        Log.d(TAG, "a=" + a + " oldScale=" + old_ratio + " scale=" + scale);
+        LogUtils.d(TAG, "a=" + a + " oldScale=" + old_ratio + " scale=" + scale);
         int[] tpData = scUtils.getpxRatioxy(px4, py4, old_ratio, scale, a, KeystoneUtils_726.lcd_w, KeystoneUtils_726.lcd_h);
         if (tpData[8] == 1) {
             KeystoneUtils_726.optKeystoneFun(tpData);

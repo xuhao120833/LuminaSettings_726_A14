@@ -51,6 +51,7 @@ import androidx.annotation.NonNull;
 
 import com.htc.luminaos.R;
 import com.htc.luminaos.databinding.WifiConnectDialogBinding;
+import com.htc.luminaos.utils.LogUtils;
 import com.htc.luminaos.utils.Utils;
 
 import java.util.List;
@@ -99,7 +100,7 @@ public class WifiConnectDialog extends BaseDialog implements View.OnClickListene
 
     @Override
     public void onClick(View v) {
-        Log.d("xuhao", "onclick");
+        LogUtils.d("xuhao", "onclick");
         int id = v.getId();
         if (id == R.id.enter) {
             if (wifiConnectDialogBinding.etPassword.getText().toString().isEmpty() ||
@@ -121,7 +122,7 @@ public class WifiConnectDialog extends BaseDialog implements View.OnClickListene
         } else if (id == R.id.cancel) {
             dismiss();
         } else if (id == R.id.password_visibility) {
-            Log.d(TAG, " wifiConnectDialogBinding.etPassword.getInputType() " + wifiConnectDialogBinding.etPassword.getInputType());
+            LogUtils.d(TAG, " wifiConnectDialogBinding.etPassword.getInputType() " + wifiConnectDialogBinding.etPassword.getInputType());
             if (wifiConnectDialogBinding.etPassword.getInputType() == (InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD)) {
                 // 显示密码
                 wifiConnectDialogBinding.etPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
@@ -246,10 +247,10 @@ public class WifiConnectDialog extends BaseDialog implements View.OnClickListene
             if (WifiManager.SUPPLICANT_STATE_CHANGED_ACTION.equals(action)) {
                 //请求连接的状态发生改变，（已经加入到一个接入点）
                 int supl_error = intent.getIntExtra(WifiManager.EXTRA_SUPPLICANT_ERROR, -1);
-                Log.d(TAG, " 收到SUPPLICANT_STATE_CHANGED_ACTION "+supl_error);
+                LogUtils.d(TAG, " 收到SUPPLICANT_STATE_CHANGED_ACTION "+supl_error);
                 if (supl_error == WifiManager.ERROR_AUTHENTICATING) {
                     Utils.logIntentExtras(intent, TAG);
-                    Log.d(TAG, " 收到SUPPLICANT_STATE_CHANGED_ACTION,执行passwordErrorDialog " + supl_error);
+                    LogUtils.d(TAG, " 收到SUPPLICANT_STATE_CHANGED_ACTION,执行passwordErrorDialog " + supl_error);
                     if (passwordErrorDialog == null) {
                         passwordErrorDialog = new PasswordErrorDialog(mContext, R.style.DialogTheme);
                     }
@@ -285,7 +286,7 @@ public class WifiConnectDialog extends BaseDialog implements View.OnClickListene
                             break;
                     }
 
-                    Log.d("WIFI", "state " + networkInfo.getState());
+                    LogUtils.d("WIFI", "state " + networkInfo.getState());
                 }
 
             }
@@ -353,7 +354,7 @@ public class WifiConnectDialog extends BaseDialog implements View.OnClickListene
         wifiConnectDialogBinding.etPassword.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                Log.d(TAG, "actionId " + actionId);
+                LogUtils.d(TAG, "actionId " + actionId);
                 if (actionId == EditorInfo.IME_ACTION_NEXT || actionId == EditorInfo.IME_ACTION_DONE
                         || actionId == EditorInfo.IME_ACTION_SEND || actionId == EditorInfo.IME_ACTION_GO) {
                     //隐藏软键盘
@@ -430,14 +431,14 @@ public class WifiConnectDialog extends BaseDialog implements View.OnClickListene
     }
 
     private void showErrorDialog() {
-        Log.d(TAG, " showErrorDialog");
+        LogUtils.d(TAG, " showErrorDialog");
         AlertDialog dialog = new AlertDialog.Builder(mContext)
                 .setTitle(mContext.getString(R.string.hint)) // 对话框标题
                 .setMessage(mContext.getString(R.string.Authentication_error)) // 对话框内容
                 .setPositiveButton(mContext.getString(R.string.enter), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Log.d(TAG, " showErrorDialog onClick dialog.dismiss()");
+                        LogUtils.d(TAG, " showErrorDialog onClick dialog.dismiss()");
                         dialog.dismiss(); // 点击“确定”按钮时，关闭对话框
                     }
                 })
@@ -448,7 +449,7 @@ public class WifiConnectDialog extends BaseDialog implements View.OnClickListene
             @Override
             public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
                 if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
-                    Log.d(TAG, " showErrorDialog KEYCODE_BACK dialog.dismiss()");
+                    LogUtils.d(TAG, " showErrorDialog KEYCODE_BACK dialog.dismiss()");
                     dialog.dismiss(); // 按下返回键时关闭对话框
                     return true; // 表示已经处理了返回键事件
                 }

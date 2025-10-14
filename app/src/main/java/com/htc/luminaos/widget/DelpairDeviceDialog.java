@@ -18,6 +18,7 @@ import android.view.WindowManager;
 
 import com.htc.luminaos.R;
 import com.htc.luminaos.databinding.DeleteDeviceDialogBinding;
+import com.htc.luminaos.utils.LogUtils;
 
 /**
  * Author:
@@ -34,7 +35,7 @@ public class DelpairDeviceDialog extends Dialog implements View.OnClickListener 
 
     @Override
     public void onClick(View v) {
-        Log.d("xuhao","onclick");
+        LogUtils.d("xuhao","onclick");
         int id = v.getId();
         if (id == R.id.enter) {
             mcallback.onDelPairedClick();

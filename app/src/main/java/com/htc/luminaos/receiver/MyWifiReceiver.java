@@ -9,6 +9,8 @@ import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.util.Log;
 
+import com.htc.luminaos.utils.LogUtils;
+
 import java.util.List;
 
 /**
@@ -82,7 +84,7 @@ public class MyWifiReceiver extends BroadcastReceiver {
 			// String units = WifiInfo.LINK_SPEED_UNITS;
 			// Wifi源名称
 			// String ssid = info.getSSID();
-			Log.d(TAG,"getStrength信号强度更新 "+strength + " "+level);
+			LogUtils.d(TAG,"getStrength信号强度更新 "+strength + " "+level);
 			return level;
 		}
 		return 0;

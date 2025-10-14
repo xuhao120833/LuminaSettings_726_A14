@@ -37,6 +37,7 @@ import com.htc.luminaos.receiver.BondStateReceiver;
 import com.htc.luminaos.receiver.MyBlueBoothCallBack;
 import com.htc.luminaos.receiver.MyBlueBoothReceiver;
 import com.htc.luminaos.utils.Contants;
+import com.htc.luminaos.utils.LogUtils;
 import com.htc.luminaos.utils.Utils;
 import com.htc.luminaos.widget.SpacesItemDecoration;
 
@@ -164,7 +165,7 @@ public class BluetoothActivity extends BaseActivity implements BluetoothCallBcak
                 // 搜索到的不是已经绑定的蓝牙设备
                 try {
                     if (device.getBondState() != BluetoothDevice.BOND_BONDED && device.getName() != null) {
-                        Log.i(TAG, "device " + device.getName());
+                        LogUtils.i(TAG, "device " + device.getName());
                         if (!scanList.contains(device) && !device.getName().isEmpty()) {
                             scanList.add(device);
                             Message message = handler.obtainMessage();
@@ -208,7 +209,7 @@ public class BluetoothActivity extends BaseActivity implements BluetoothCallBcak
 //                        connectDeviceFromA2DP(device);
 //                    } else if (device.getBluetoothClass().getMajorDeviceClass() == BluetoothClass.Device.Major.PERIPHERAL) {
 //                        if (isKeyboardDevice(device.getUuids())) {
-//                            Log.i("zouguanrong", "-----connectKeyboard----");
+//                            LogUtils.i("zouguanrong", "-----connectKeyboard----");
 //                            connectKeyboard(device);
 //                        } else {
 //                            connectDeviceFromA2DP(device);
@@ -257,7 +258,7 @@ public class BluetoothActivity extends BaseActivity implements BluetoothCallBcak
             return;
         }
         synchronized (this) {
-            Log.d(TAG, "connect " + this);
+            LogUtils.d(TAG, "connect " + this);
             mDevice.connect();
         }
     }
@@ -419,7 +420,7 @@ public class BluetoothActivity extends BaseActivity implements BluetoothCallBcak
             // 得到蓝牙状态的方法
             Set<BluetoothDevice> devices = bluetoothAdapter.getBondedDevices();
             for (BluetoothDevice device : devices) {
-                //Log.d(TAG,"pair device "+device.getName());
+                //LogUtils.d(TAG,"pair device "+device.getName());
                 if (device != null) {
                     list.add(device);
                 }
@@ -673,7 +674,7 @@ public class BluetoothActivity extends BaseActivity implements BluetoothCallBcak
     public boolean onKey(View v, int keyCode, KeyEvent event) {
         int id = v.getId();
         if ((id == R.id.rl_search_ble) && keyCode == KeyEvent.KEYCODE_DPAD_DOWN) {
-            Log.d(TAG, " keCode " + keyCode + " " + event.getEventTime());
+            LogUtils.d(TAG, " keCode " + keyCode + " " + event.getEventTime());
             if ((bluetoothBinding.rlSearchBle.hasFocus()) && event.getAction() == KeyEvent.ACTION_DOWN) {
 //                return (bondList.isEmpty() && scanList.isEmpty()) || Utils.btAnim;//搜索不完成，禁止焦点移动到蓝牙Found列表
                 return bondList.isEmpty() && scanList.isEmpty();

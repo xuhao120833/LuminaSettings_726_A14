@@ -17,6 +17,7 @@ import android.view.WindowManager;
 
 import com.htc.luminaos.R;
 import com.htc.luminaos.databinding.WifiConnectNoDialogBinding;
+import com.htc.luminaos.utils.LogUtils;
 
 
 /**
@@ -34,7 +35,7 @@ public class WifiConnectNoPasswordDialog extends Dialog implements View.OnClickL
 
     @Override
     public void onClick(View v) {
-        Log.d(TAG,"onclick");
+        LogUtils.d(TAG,"onclick");
         int id = v.getId();
         if (id == R.id.enter) {
             if (mcallback != null)

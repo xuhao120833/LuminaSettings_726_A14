@@ -105,7 +105,7 @@ public class WallPaperActivity extends BaseActivity {
                     int receivedPosition = msg.arg1;
                     FocusKeepRecyclerView.ViewHolder viewHolder = wallPaperBinding.wallpaperRv.findViewHolderForAdapterPosition(receivedPosition);
                     if (viewHolder != null) {
-                        Log.d(TAG, " 图片背景选择 receivedPosition" + receivedPosition);
+                        LogUtils.d(TAG, " 图片背景选择 receivedPosition" + receivedPosition);
                         View itemView = viewHolder.itemView;
                         ImageView check = itemView.findViewById(R.id.check);
                         check.setImageResource(R.drawable.check_no);
@@ -160,7 +160,7 @@ public class WallPaperActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        Log.d(TAG, " 执行onResume");
+        LogUtils.d(TAG, " 执行onResume");
     }
 
     @Override
@@ -174,7 +174,7 @@ public class WallPaperActivity extends BaseActivity {
 //            MutableLiveData<Boolean> mutableLiveData = myApplication.getIsDataInitialized();
             Boolean isInitialized = myApplication.getIsDataInitialized().getValue();
             if (!isInitialized) {
-                Log.d(TAG, " 背景资源还在加载中");
+                LogUtils.d(TAG, " 背景资源还在加载中");
                 //显示动画
                 showLottieLoading();
                 //监听LiveData
@@ -186,7 +186,7 @@ public class WallPaperActivity extends BaseActivity {
                     }
                 });
             } else if (isInitialized) {
-                Log.d(TAG, " 背景资源已经加载完成");
+                LogUtils.d(TAG, " 背景资源已经加载完成");
             }
         }
     }
@@ -217,7 +217,7 @@ public class WallPaperActivity extends BaseActivity {
         Bundle bundle = intent.getExtras();
         if (bundle != null) {
             String path = bundle.getString("filePath");
-            Log.d(TAG, " 接收到路径 " + path);
+            LogUtils.d(TAG, " 接收到路径 " + path);
             if (path != null && !path.isEmpty()) {
                 FocusKeepRecyclerView wallpaperRv = wallPaperBinding.wallpaperRv;
                 RecyclerView.Adapter adapter = wallpaperRv.getAdapter();
@@ -227,11 +227,11 @@ public class WallPaperActivity extends BaseActivity {
                         @Override
                         public void onGlobalLayout() {
                             // 确保 RecyclerView 已完成布局
-                            Log.d(TAG, "RecyclerView 已完成布局");
+                            LogUtils.d(TAG, "RecyclerView 已完成布局");
                             // 获取目标项的 ViewHolder
                             RecyclerView.ViewHolder viewHolder = wallpaperRv.findViewHolderForAdapterPosition(position);
                             if (viewHolder != null) {//不需要滚动的
-                                Log.d(TAG, "找到目标项，设置焦点");
+                                LogUtils.d(TAG, "找到目标项，设置焦点");
                                 viewHolder.itemView.requestFocus();
                                 viewHolder.itemView.performClick();
                             } else {//需要滚动的
@@ -243,11 +243,11 @@ public class WallPaperActivity extends BaseActivity {
                                         if (newState == RecyclerView.SCROLL_STATE_IDLE) {
                                             RecyclerView.ViewHolder scrolledViewHolder = wallpaperRv.findViewHolderForAdapterPosition(position);
                                             if (scrolledViewHolder != null) {
-                                                Log.e(TAG, "滚动后切背景");
+                                                LogUtils.e(TAG, "滚动后切背景");
                                                 scrolledViewHolder.itemView.requestFocus();
                                                 scrolledViewHolder.itemView.performClick();
                                             } else {
-                                                Log.e(TAG, "无法找到指定位置的 ViewHolder");
+                                                LogUtils.e(TAG, "无法找到指定位置的 ViewHolder");
                                             }
                                             // 滚动完成后移除监听器，避免重复调用
                                             wallpaperRv.removeOnScrollListener(this);
@@ -255,7 +255,7 @@ public class WallPaperActivity extends BaseActivity {
                                     }
                                 });
                                 wallpaperRv.smoothScrollToPosition(position);
-                                Log.e(TAG, "目标项不可见，无法设置焦点");
+                                LogUtils.e(TAG, "目标项不可见，无法设置焦点");
                             }
                             // 移除监听器，避免多次调用
                             wallpaperRv.getViewTreeObserver().removeOnGlobalLayoutListener(this);
@@ -324,15 +324,15 @@ public class WallPaperActivity extends BaseActivity {
 //        try (FileOutputStream fos = new FileOutputStream(tempFile)) {
 //            // 使用 Bitmap.compress 压缩数据，直接将数据写入文件
 //            bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
-//            Log.d(TAG, "文件拷贝成功: " + tempFile.getAbsolutePath());
+//            LogUtils.d(TAG, "文件拷贝成功: " + tempFile.getAbsolutePath());
 //            fos.flush();
 //        } catch (IOException e) {
 //            e.printStackTrace();
-//            Log.e(TAG, "文件拷贝失败: " + e.getMessage());
+//            LogUtils.e(TAG, "文件拷贝失败: " + e.getMessage());
 //        } finally {
 //            // 确保资源释放
 //            System.gc(); // 提醒 JVM 执行垃圾回收
-//            Log.d(TAG, "内存和 CPU 资源已释放");
+//            LogUtils.d(TAG, "内存和 CPU 资源已释放");
 //        }
 //    }
 
@@ -355,10 +355,10 @@ public class WallPaperActivity extends BaseActivity {
                 bos.write(buffer, 0, length);
             }
             bos.flush(); // 刷新缓冲区
-            Log.d(TAG, "文件拷贝成功: " + tempFile.getAbsolutePath());
+            LogUtils.d(TAG, "文件拷贝成功: " + tempFile.getAbsolutePath());
         } catch (IOException e) {
             e.printStackTrace();
-            Log.e(TAG, "文件拷贝失败: " + e.getMessage());
+            LogUtils.e(TAG, "文件拷贝失败: " + e.getMessage());
         } finally {
             try {
                 inputStream.close(); // 关闭输入流
@@ -367,7 +367,7 @@ public class WallPaperActivity extends BaseActivity {
             }
             // 确保资源释放
             System.gc(); // 提醒 JVM 执行垃圾回收
-            Log.d(TAG, "内存和 CPU 资源已释放");
+            LogUtils.d(TAG, "内存和 CPU 资源已释放");
         }
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), resId);
         //判断图片大小，如果超过限制就做缩小处理
@@ -421,15 +421,15 @@ public class WallPaperActivity extends BaseActivity {
         try (FileOutputStream fos = new FileOutputStream(tempFile)) {
             // 使用 Bitmap.compress 压缩数据，直接将数据写入文件
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
-            Log.d(TAG, "文件拷贝成功: " + tempFile.getAbsolutePath());
+            LogUtils.d(TAG, "文件拷贝成功: " + tempFile.getAbsolutePath());
             fos.flush();
         } catch (IOException e) {
             e.printStackTrace();
-            Log.e(TAG, "文件拷贝失败: " + e.getMessage());
+            LogUtils.e(TAG, "文件拷贝失败: " + e.getMessage());
         } finally {
             // 确保资源释放
             System.gc(); // 提醒 JVM 执行垃圾回收
-            Log.d(TAG, "内存和 CPU 资源已释放");
+            LogUtils.d(TAG, "内存和 CPU 资源已释放");
         }
     }
 
@@ -476,15 +476,15 @@ public class WallPaperActivity extends BaseActivity {
 //        try (FileOutputStream fos = new FileOutputStream(tempFile)) {
 //            // 使用 Bitmap.compress 压缩数据，直接将数据写入文件
 //            bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
-//            Log.d(TAG, "文件拷贝成功: " + tempFile.getAbsolutePath());
+//            LogUtils.d(TAG, "文件拷贝成功: " + tempFile.getAbsolutePath());
 //            fos.flush();
 //        } catch (IOException e) {
 //            e.printStackTrace();
-//            Log.e(TAG, "文件拷贝失败: " + e.getMessage());
+//            LogUtils.e(TAG, "文件拷贝失败: " + e.getMessage());
 //        } finally {
 //            // 确保资源释放
 //            System.gc(); // 提醒 JVM 执行垃圾回收
-//            Log.d(TAG, "内存和 CPU 资源已释放");
+//            LogUtils.d(TAG, "内存和 CPU 资源已释放");
 //        }
 //    }
 
@@ -507,14 +507,14 @@ public class WallPaperActivity extends BaseActivity {
                 bos.write(buffer, 0, length);
             }
             bos.flush();  // 刷新缓冲区
-            Log.d(TAG, "文件拷贝成功: " + tempFile.getAbsolutePath());
+            LogUtils.d(TAG, "文件拷贝成功: " + tempFile.getAbsolutePath());
         } catch (IOException e) {
             e.printStackTrace();
-            Log.e(TAG, "文件拷贝失败: " + e.getMessage());
+            LogUtils.e(TAG, "文件拷贝失败: " + e.getMessage());
         } finally {
             // 确保资源释放
             System.gc(); // 提醒 JVM 执行垃圾回收
-            Log.d(TAG, "内存和 CPU 资源已释放");
+            LogUtils.d(TAG, "内存和 CPU 资源已释放");
         }
         Bitmap bitmap = BitmapFactory.decodeFile(path);
         int width = bitmap.getWidth();
@@ -595,7 +595,7 @@ public class WallPaperActivity extends BaseActivity {
         Bundle bundle = intent.getExtras();
         if (bundle != null) {
             String path = bundle.getString("filePath");
-            Log.d(TAG, " 接收到路径 " + path);
+            LogUtils.d(TAG, " 接收到路径 " + path);
             String copypath = copyFileToWallpaperFolder(path);
 //            Utils.drawables.remove(Utils.drawables.size() - 1);
             //插入倒数第二个
@@ -611,10 +611,10 @@ public class WallPaperActivity extends BaseActivity {
 //        File targetDir = new File(targetDirPath);
 //        // 检查并创建目标文件夹
 //        if (!targetDir.exists() && !targetDir.mkdirs()) {
-//            Log.e(TAG, "无法创建目标文件夹: " + targetDirPath);
+//            LogUtils.e(TAG, "无法创建目标文件夹: " + targetDirPath);
 //            return "-1";
 //        }
-//        Log.d(TAG, "目标文件夹已存在或创建成功: " + targetDirPath);
+//        LogUtils.d(TAG, "目标文件夹已存在或创建成功: " + targetDirPath);
 //        // 创建目标文件对象（保持与源文件相同的文件名）
 //        File sourceFile = new File(sourcePath);
 //        File targetFile = new File(targetDir, sourceFile.getName());
@@ -628,10 +628,10 @@ public class WallPaperActivity extends BaseActivity {
 //            }
 //            fis.close();
 //            fos.close();
-//            Log.d(TAG, "文件拷贝成功: " + targetFile.getAbsolutePath());
+//            LogUtils.d(TAG, "文件拷贝成功: " + targetFile.getAbsolutePath());
 //            return targetFile.getAbsolutePath();
 //        } catch (IOException e) {
-//            Log.e(TAG, "文件拷贝失败: " + e.getMessage());
+//            LogUtils.e(TAG, "文件拷贝失败: " + e.getMessage());
 //            return "-1";
 //        }
 //    }
@@ -642,10 +642,10 @@ public class WallPaperActivity extends BaseActivity {
         File targetDir = new File(targetDirPath);
         // 检查并创建目标文件夹
         if (!targetDir.exists() && !targetDir.mkdirs()) {
-            Log.e(TAG, "无法创建目标文件夹: " + targetDirPath);
+            LogUtils.e(TAG, "无法创建目标文件夹: " + targetDirPath);
             return "-1";
         }
-        Log.d(TAG, "目标文件夹已存在或创建成功: " + targetDirPath);
+        LogUtils.d(TAG, "目标文件夹已存在或创建成功: " + targetDirPath);
         // 创建目标文件对象（保持与源文件相同的文件名）
         File sourceFile = new File(sourcePath);
         File targetFile = new File(targetDir, sourceFile.getName());
@@ -660,15 +660,15 @@ public class WallPaperActivity extends BaseActivity {
             while (transferred < size) {
                 transferred += srcChannel.transferTo(transferred, size - transferred, destChannel);
             }
-            Log.d(TAG, "文件拷贝成功: " + targetFile.getAbsolutePath());
+            LogUtils.d(TAG, "文件拷贝成功: " + targetFile.getAbsolutePath());
             return targetFile.getAbsolutePath();
         } catch (IOException e) {
-            Log.e(TAG, "文件拷贝失败: " + e.getMessage());
+            LogUtils.e(TAG, "文件拷贝失败: " + e.getMessage());
             return "-1";
         } finally {
             // 确保所有资源被释放
             System.gc(); // 提醒 JVM 执行垃圾回收
-            Log.d(TAG, "内存和 CPU 资源已释放");
+            LogUtils.d(TAG, "内存和 CPU 资源已释放");
         }
     }
 

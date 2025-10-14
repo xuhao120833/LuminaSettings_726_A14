@@ -20,6 +20,7 @@ import android.view.View;
 import com.htc.luminaos.R;
 import com.htc.luminaos.adapter.AccoutsManagerAdapter;
 import com.htc.luminaos.databinding.ActivityAccountBinding;
+import com.htc.luminaos.utils.LogUtils;
 import com.htc.luminaos.widget.AccountSyncDialog;
 import com.htc.luminaos.widget.SpacesItemDecoration;
 
@@ -43,7 +44,7 @@ public class AccountActivity extends BaseActivity implements AccountSyncDialog.A
             String action = intent.getAction();
             if (AccountManager.LOGIN_ACCOUNTS_CHANGED_ACTION.equals(action) && adapter != null) {
                 // 账号列表发生变化（添加、移除、更新等）
-                Log.d(TAG, "Google 账号发生变更 action" + action);
+                LogUtils.d(TAG, "Google 账号发生变更 action" + action);
                 List<Account> newAccounts = getDynamicRawDataToIndex(getApplicationContext());
                 accounts.clear();
                 accounts.addAll(newAccounts);
@@ -120,7 +121,7 @@ public class AccountActivity extends BaseActivity implements AccountSyncDialog.A
         } else if (viewId == R.id.sync_switch) {
             showDialog();
         } else if (viewId == R.id.rl_account_add) {
-            Log.d(TAG, " 添加谷歌账号");
+            LogUtils.d(TAG, " 添加谷歌账号");
 //                String[] mAuthorities = new String[]{"com.google"};
             Intent intent = new Intent(ACTION_ADD_ACCOUNT);
 //                intent.putExtra(EXTRA_USER, myUserHandle);
@@ -142,18 +143,18 @@ public class AccountActivity extends BaseActivity implements AccountSyncDialog.A
 
         final AccountManager accountManager = AccountManager.get(context);
         final Account[] accounts = accountManager.getAccounts();
-        Log.d(TAG, "getDynamicRawDataToIndex accounts length " + accounts.length);
+        LogUtils.d(TAG, "getDynamicRawDataToIndex accounts length " + accounts.length);
         if (accounts.length == 0)
             return indexRaws;
         for (Account account : accounts) {
             indexRaws.add(account);
-            Log.d(TAG, "getDynamicRawDataToIndex account name " + account.name + " type " + account.type);
+            LogUtils.d(TAG, "getDynamicRawDataToIndex account name " + account.name + " type " + account.type);
         }
         return indexRaws;
     }
 
     private void showDialog() {
-        Log.d(TAG, "showDialog sync" + sync);
+        LogUtils.d(TAG, "showDialog sync" + sync);
         AccountSyncDialog accountSyncDialog = new AccountSyncDialog(this, !sync, myUserHandle, this);
         accountSyncDialog.show();
     }

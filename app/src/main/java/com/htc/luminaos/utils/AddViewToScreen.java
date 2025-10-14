@@ -12,7 +12,7 @@ public class AddViewToScreen {
     private static String TAG = "AddViewToScreen";
 
     public void addView(View v, WindowManager.LayoutParams p) {
-        Log.d(TAG, "v.isAttachedToWindow() " + String.valueOf(v.isAttachedToWindow()));
+        LogUtils.d(TAG, "v.isAttachedToWindow() " + String.valueOf(v.isAttachedToWindow()));
         try {
             v.clearFocus();
             wm.addView(v, p);
@@ -28,7 +28,7 @@ public class AddViewToScreen {
 
     public void clearView(View v) {
         if (v != null) {
-            Log.d(TAG, "clearView");
+            LogUtils.d(TAG, "clearView");
             try {
                 wm.removeViewImmediate(v);
             } catch (Exception e) {

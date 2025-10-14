@@ -39,7 +39,7 @@ public class ImageUtils {
                 inSampleSize *= 2;
             }
         }
-        Log.d(TAG, " 图片缩略图 calculateInSampleSize options.inSampleSize " + options.inSampleSize + " inSampleSize " +inSampleSize);
+        LogUtils.d(TAG, " 图片缩略图 calculateInSampleSize options.inSampleSize " + options.inSampleSize + " inSampleSize " +inSampleSize);
         return (int)inSampleSize;
     }
 
@@ -51,12 +51,12 @@ public class ImageUtils {
      */
     public static Drawable loadImageFromPath(String filePath, Context context) {
         if (filePath == null || filePath.isEmpty()) {
-            Log.e(TAG, "文件路径为空");
+            LogUtils.e(TAG, "文件路径为空");
             return null;
         }
         File file = new File(filePath);
         if (!file.exists() || !file.isFile()) {
-            Log.e(TAG, "文件不存在或不是有效的文件：" + filePath);
+            LogUtils.e(TAG, "文件不存在或不是有效的文件：" + filePath);
             return null;
         }
         try {
@@ -66,10 +66,10 @@ public class ImageUtils {
                 // 转换为 Drawable 并返回
                 return new BitmapDrawable(context.getResources(), bitmap);
             } else {
-                Log.e(TAG, "无法解码图片文件：" + filePath);
+                LogUtils.e(TAG, "无法解码图片文件：" + filePath);
             }
         } catch (Exception e) {
-            Log.e(TAG, "加载图片时发生错误：" + e.getMessage());
+            LogUtils.e(TAG, "加载图片时发生错误：" + e.getMessage());
         }
         return null;
     }

@@ -31,6 +31,7 @@ import com.htc.luminaos.activity.AppFavoritesActivity;
 import com.htc.luminaos.entry.ShortInfoBean;
 import com.htc.luminaos.utils.AppUtils;
 import com.htc.luminaos.utils.DBUtils;
+import com.htc.luminaos.utils.LogUtils;
 import com.htc.luminaos.utils.Utils;
 import com.htc.luminaos.view.MyCircleImageView;
 
@@ -53,7 +54,7 @@ public class ShortcutsAdapterCustom extends RecyclerView.Adapter<ShortcutsAdapte
     android.os.Handler handler = new Handler();
 
     public ShortcutsAdapterCustom(Context mContext, ArrayList<ShortInfoBean> short_list) {
-        Log.d(TAG," 创建ShortcutsAdapterCustom ");
+        LogUtils.d(TAG," 创建ShortcutsAdapterCustom ");
         this.mContext = mContext;
         this.short_list = short_list;
     }
@@ -86,13 +87,13 @@ public class ShortcutsAdapterCustom extends RecyclerView.Adapter<ShortcutsAdapte
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, final int i) {
-        Log.d(TAG, "Shortcuts short_list.size() " + short_list.size());
+        LogUtils.d(TAG, "Shortcuts short_list.size() " + short_list.size());
         if (i < short_list.size() && short_list.get(i).getAppname() != null && short_list.get(i).getAppicon() != null&& i > 0) {
-            Log.d(TAG, "Shortcuts appName存在 ");
+            LogUtils.d(TAG, "Shortcuts appName存在 ");
             myViewHolder.icon.setImageDrawable(short_list.get(i).getAppicon());
             myViewHolder.name.setText(short_list.get(i).getAppname());
         } else if (i < short_list.size() && i > 0) {
-            Log.d(TAG, "Shortcuts appName为NULL ");
+            LogUtils.d(TAG, "Shortcuts appName为NULL ");
             String appName = DBUtils.getInstance(mContext).getFavoritesAppName(short_list.get(i).getPackageName());
             Drawable drawable = DBUtils.getInstance(mContext).getFavoritesIcon(short_list.get(i).getPackageName());
             if (appName != null && !appName.isEmpty()) {
@@ -130,13 +131,13 @@ public class ShortcutsAdapterCustom extends RecyclerView.Adapter<ShortcutsAdapte
             public void onFocusChange(View v, boolean hasFocus) {
                 synchronized (Utils.class) {
                     if (hasFocus) {
-                        Log.d("触发焦点获取", " 画白圈");
+                        LogUtils.d("触发焦点获取", " 画白圈");
                         MyCircleImageView myCircleImageView = (MyCircleImageView) v.findViewById(R.id.icon);
                         myCircleImageView.hasFocus = true;
                         myCircleImageView.invalidate();
 
                     } else {
-                        Log.d("触发焦点获取", " 恢复默认");
+                        LogUtils.d("触发焦点获取", " 恢复默认");
                         MyCircleImageView myCircleImageView = (MyCircleImageView) v.findViewById(R.id.icon);
                         myCircleImageView.hasFocus = false;
                         myCircleImageView.invalidate();

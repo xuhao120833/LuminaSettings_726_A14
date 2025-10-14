@@ -2,14 +2,9 @@ package com.htc.luminaos.utils;
 
 import android.util.Log;
 
-/**
- * Author:
- * Date:
- * Description:
- */
 public class LogUtils {
     private static String TAG = "LogUtils";
-    private static boolean debug =true;
+    public static boolean debug = true;
 
     public static void d(String msg){
         if (!debug)

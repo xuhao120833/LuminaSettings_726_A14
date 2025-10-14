@@ -231,7 +231,7 @@ public class WifiHotUtil {
 		config.SSID = SSID;
 
 		config.apBand = APband;
-		Log.i("hxdmsg", " apBand: " + APband);
+		LogUtils.i("hxdmsg", " apBand: " + APband);
 		if (Type == WifiSecurityType.WIFICIPHER_NOPASS) {
 			config.allowedKeyManagement.set(KeyMgmt.NONE);
 		} else if (Type == WifiSecurityType.WIFICIPHER_WPA) {
@@ -244,7 +244,7 @@ public class WifiHotUtil {
 			config.preSharedKey = Password;
 		}
 		boolean b = mWifiManager.setWifiApConfiguration(config);
-		Log.i("hxdmsg", " mWifiManger.setWifiApConfiguration: " + b);
+		LogUtils.i("hxdmsg", " mWifiManger.setWifiApConfiguration: " + b);
 		return b;
 	}
 
@@ -263,14 +263,14 @@ public class WifiHotUtil {
 		wcfg.allowedProtocols.clear();
 
 		if (Type == WifiSecurityType.WIFICIPHER_NOPASS) {
-			// if(DEBUG)Log.d(TAG, "wifi ap----no password");
+			// if(DEBUG)LogUtils.d(TAG, "wifi ap----no password");
 			wcfg.allowedAuthAlgorithms.set(
 					AuthAlgorithm.OPEN, true);
 			wcfg.wepKeys[0] = "";
 			wcfg.allowedKeyManagement.set(KeyMgmt.NONE);
 			wcfg.wepTxKeyIndex = 0;
 		} else if (Type == WifiSecurityType.WIFICIPHER_WPA) {
-			// if(DEBUG)Log.d(TAG, "wifi ap----wpa");
+			// if(DEBUG)LogUtils.d(TAG, "wifi ap----wpa");
 			// 密码至少8位，否则使用默认密码
 			if (null != password && password.length() >= 8) {
 				wcfg.preSharedKey = password;
@@ -290,7 +290,7 @@ public class WifiHotUtil {
 			wcfg.allowedPairwiseCiphers
 					.set(WifiConfiguration.PairwiseCipher.CCMP);
 		} else if (Type == WifiSecurityType.WIFICIPHER_WPA2) {
-			// if(DEBUG)Log.d(TAG, "wifi ap---- wpa2");
+			// if(DEBUG)LogUtils.d(TAG, "wifi ap---- wpa2");
 			// 密码至少8位，否则使用默认密码
 			if (null != password && password.length() >= 8) {
 				wcfg.preSharedKey = password;
@@ -314,18 +314,18 @@ public class WifiHotUtil {
 			Method method = mWifiManager.getClass().getMethod(
 					"setWifiApConfiguration", wcfg.getClass());
 			Boolean rt = (Boolean) method.invoke(mWifiManager, wcfg);
-			// if(DEBUG) Log.d(TAG, " rt = " + rt);
+			// if(DEBUG) LogUtils.d(TAG, " rt = " + rt);
 
-			Log.d(TAG, " rt = " + rt);
+			LogUtils.d(TAG, " rt = " + rt);
 
 		} catch (NoSuchMethodException e) {
-			// Log.e(TAG, e.getMessage());
+			// LogUtils.e(TAG, e.getMessage());
 		} catch (IllegalArgumentException e) {
-			// Log.e(TAG, e.getMessage());
+			// LogUtils.e(TAG, e.getMessage());
 		} catch (IllegalAccessException e) {
-			// Log.e(TAG, e.getMessage());
+			// LogUtils.e(TAG, e.getMessage());
 		} catch (InvocationTargetException e) {
-			// Log.e(TAG, e.getMessage());
+			// LogUtils.e(TAG, e.getMessage());
 		}
 		return setWifiApEnabled();
 	}
@@ -341,7 +341,7 @@ public class WifiHotUtil {
 		// try {
 		// Thread.sleep(200);
 		// } catch (Exception e) {
-		// // Log.e(TAG, e.getMessage());
+		// // LogUtils.e(TAG, e.getMessage());
 		// return false;
 		// }
 		// }
@@ -355,7 +355,7 @@ public class WifiHotUtil {
 		//
 		// Thread.sleep(200);
 		// } catch (Exception e) {
-		// // Log.e(TAG, e.getMessage());
+		// // LogUtils.e(TAG, e.getMessage());
 		// return false;
 		// }
 		// }
@@ -381,7 +381,7 @@ public class WifiHotUtil {
 		// method1.invoke(mWifiManager, null, true);
 		// Thread.sleep(200);
 		// } catch (Exception e) {
-		// // Log.e(TAG, e.getMessage());
+		// // LogUtils.e(TAG, e.getMessage());
 		// return false;
 		// }
 		return true;
@@ -394,9 +394,9 @@ public class WifiHotUtil {
 					.getMethod("getWifiApState");
 			state = (Integer) method2.invoke(mWifiManager);
 		} catch (Exception e) {
-			// Log.e(TAG, e.getMessage());
+			// LogUtils.e(TAG, e.getMessage());
 		}
-		// if(DEBUG)Log.i("WifiAP", "getWifiAPState.state " + state);
+		// if(DEBUG)LogUtils.i("WifiAP", "getWifiAPState.state " + state);
 		return state;
 	}
 
@@ -411,13 +411,13 @@ public class WifiHotUtil {
 		@Override
 		public void onTetheringStarted() {
 			// update();
-			Log.i("hxdmsg", " execute onTetheringStarted------");
+			LogUtils.i("hxdmsg", " execute onTetheringStarted------");
 		}
 
 		@Override
 		public void onTetheringFailed() {
 			// update();
-			Log.i("hxdmsg", " execute onThtheringFailed--------");
+			LogUtils.i("hxdmsg", " execute onThtheringFailed--------");
 		}
 
 		private void update() {

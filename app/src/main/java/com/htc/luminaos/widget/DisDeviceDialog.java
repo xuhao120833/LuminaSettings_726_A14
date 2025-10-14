@@ -18,6 +18,7 @@ import android.view.WindowManager;
 
 import com.htc.luminaos.R;
 import com.htc.luminaos.databinding.DisDeviceDialogBinding;
+import com.htc.luminaos.utils.LogUtils;
 
 /**
         * Author:
@@ -35,7 +36,7 @@ public class DisDeviceDialog extends Dialog implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        Log.d(TAG,"onclick");
+        LogUtils.d(TAG,"onclick");
         int id = v.getId();
         if (id == R.id.enter) {
             mcallback.onEnterClick();

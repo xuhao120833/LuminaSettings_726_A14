@@ -21,6 +21,7 @@ import com.htc.luminaos.databinding.ActivitySettingsCustomBinding;
 import com.htc.luminaos.databinding.MainSettingsCustomBinding;
 import com.htc.luminaos.databinding.SettingsCustomBinding;
 import com.htc.luminaos.receiver.DisplaySettingsReceiver;
+import com.htc.luminaos.utils.LogUtils;
 
 public class MainSettingActivity extends BaseActivity {
 
@@ -334,7 +335,7 @@ public class MainSettingActivity extends BaseActivity {
     }
 
     private void handleDisplayBroadcast() {
-        Log.d(TAG," handleDisplayBroadcast ");
+        LogUtils.d(TAG," handleDisplayBroadcast ");
         Context applicationContext = getApplicationContext();
 
         if (MainActivity.displaySettingsReceiver != null) {
@@ -342,12 +343,12 @@ public class MainSettingActivity extends BaseActivity {
                 applicationContext.unregisterReceiver(MainActivity.displaySettingsReceiver);
             } catch (Exception e) {
                 // 避免重复反注册时报错
-                Log.w(TAG, "Receiver not registered: " + e.getMessage());
+                LogUtils.d(TAG, "Receiver not registered: " + e.getMessage());
             }
             MainActivity.displaySettingsReceiver = null;
         } else {
             // 如果之前没注册过，直接返回，不需要重复注册
-            Log.d(TAG, "Receiver not registered yet, skipping unregister.");
+            LogUtils.d(TAG, "Receiver not registered yet, skipping unregister.");
         }
 
 //        applicationContext.unregisterReceiver(MainActivity.displaySettingsReceiver);

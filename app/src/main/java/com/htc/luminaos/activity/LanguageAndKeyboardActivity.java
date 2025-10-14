@@ -28,6 +28,7 @@ import com.htc.luminaos.R;
 import com.htc.luminaos.databinding.ActivityLanguageKeyboardBinding;
 import com.htc.luminaos.entry.InputMethodBean;
 import com.htc.luminaos.entry.Language;
+import com.htc.luminaos.utils.LogUtils;
 import com.htc.luminaos.utils.Utils;
 import com.htc.luminaos.widget.CustomInputMethodDialog;
 import com.htc.luminaos.widget.CustomLanguageDialog;
@@ -97,7 +98,7 @@ public class LanguageAndKeyboardActivity extends BaseActivity {
     @SuppressLint("SetTextI18n")
     private void initData() {
         languageKeyboardBinding.keyboardTv.setText(getKeyBoardDefault());
-        Log.d(TAG, " initData默认输入法 " + getKeyBoardDefault());
+        LogUtils.d(TAG, " initData默认输入法 " + getKeyBoardDefault());
         Locale currentLocale = Locale.getDefault();
         // 获取当前语言的显示名称（本地化）
         String displayLanguage = currentLocale.getDisplayLanguage(currentLocale);
@@ -110,7 +111,7 @@ public class LanguageAndKeyboardActivity extends BaseActivity {
                 super.onChange(selfChange);
                 // 当输入法设置变化时，更新当前输入法
                 String currentInputMethod = getKeyBoardDefault();
-                Log.d(TAG, " inputMethodObserver默认输入法 " + getKeyBoardDefault());
+                LogUtils.d(TAG, " inputMethodObserver默认输入法 " + getKeyBoardDefault());
                 languageKeyboardBinding.keyboardTv.setText(currentInputMethod);
             }
         };
@@ -183,7 +184,7 @@ public class LanguageAndKeyboardActivity extends BaseActivity {
         int finalSize = 0;
         for (int i = 0; i < origSize; i++) {
             String s = locales[i];
-            Log.d(TAG, " buildLangListItem locales[i] " + locales[i] + " " + locales.length);
+            LogUtils.d(TAG, " buildLangListItem locales[i] " + locales[i] + " " + locales.length);
             String language = "";
             String country = "";
             Locale l = null;
@@ -207,7 +208,7 @@ public class LanguageAndKeyboardActivity extends BaseActivity {
             } else {
                 if (preprocess[finalSize - 1].getLocale().getLanguage().equals(language)
                         && (language.equals("zh") || language.equals("en"))) {  //只有中文、英文区分具体的国家码
-                    Log.d(TAG, " 语言列表 language " + language + " s " + s + " l.getDisplayLanguage(l)" + l.getDisplayLanguage(l));
+                    LogUtils.d(TAG, " 语言列表 language " + language + " s " + s + " l.getDisplayLanguage(l)" + l.getDisplayLanguage(l));
                     preprocess[finalSize - 1].setLabel(toTitleCase(getDisplayName(preprocess[finalSize - 1].getLocale())));
                     preprocess[finalSize++] = new Language(toTitleCase(getDisplayName(l)), l);
                 } else if (preprocess[finalSize - 1].getLocale().getLanguage().equals(language)) {
@@ -226,7 +227,7 @@ public class LanguageAndKeyboardActivity extends BaseActivity {
         Language mLocales2[] = new Language[finalSize];
         for (int i = 0; i < finalSize; i++) {
             mLocales2[i] = preprocess[i];
-            Log.d(TAG, " 语言列表 getLabel " + mLocales2[i].getLabel());
+            LogUtils.d(TAG, " 语言列表 getLabel " + mLocales2[i].getLabel());
             //阿拉伯语
             if (mLocales2[i].getLabel().contains("[XB]")) {
                 mLocales2[i].setLabel("العربية  (XB)");
@@ -238,12 +239,12 @@ public class LanguageAndKeyboardActivity extends BaseActivity {
         }
         Arrays.sort(mLocales2);
         for (int b = 0; b < mLocales2.length; b++) {
-            Log.d(TAG, " 语言列表 排序后 getLabel " + mLocales2[b].getLabel() + " " + mLocales2.length
+            LogUtils.d(TAG, " 语言列表 排序后 getLabel " + mLocales2[b].getLabel() + " " + mLocales2.length
                     +" "+mLocales2[b].getLocale().getLanguage()+" "+mLocales2[b].getLocale().getCountry());
         }
         // Arrays.sort(preprocess);
         mLocales = new ArrayList<>(Arrays.asList(mLocales2));
-        Log.d(TAG, " buildLangListItem 最后的列表长度 " + mLocales.size());
+        LogUtils.d(TAG, " buildLangListItem 最后的列表长度 " + mLocales.size());
     }
 
 //    最全的语言列表 覆盖204个国家
@@ -256,11 +257,11 @@ public class LanguageAndKeyboardActivity extends BaseActivity {
 //        Arrays.sort(systemLocales, Comparator.comparing(Locale::getLanguage));
 //        List<Language> preprocess = new ArrayList<>();
 //        Set<String> processedLanguages = new HashSet<>();
-//        Log.d(TAG, "语言列表 systemLocales: " + systemLocales.length);
+//        LogUtils.d(TAG, "语言列表 systemLocales: " + systemLocales.length);
 //        for (Locale locale : systemLocales) {
 //            String languageCode = locale.getLanguage();
 //            String countryCode = locale.getCountry();
-//            Log.d(TAG, "语言列表 languageCode: " + languageCode);
+//            LogUtils.d(TAG, "语言列表 languageCode: " + languageCode);
 //            // 检查是否有国家代码并过滤
 //            if (languageCode.isEmpty())
 //                continue;
@@ -291,9 +292,9 @@ public class LanguageAndKeyboardActivity extends BaseActivity {
 //        preprocess.sort((a, b) -> a.getLabel().compareTo(b.getLabel()));
 //        // 转换为最终需要的 List 数据结构
 //        mLocales = new ArrayList<>(preprocess);
-//        Log.d(TAG, "最完整的语言列表长度: " + mLocales.size());
+//        LogUtils.d(TAG, "最完整的语言列表长度: " + mLocales.size());
 //        for (Language lang : mLocales) {
-//            Log.d(TAG, "语言列表 getLabel: " + lang.getLabel());
+//            LogUtils.d(TAG, "语言列表 getLabel: " + lang.getLabel());
 //        }
 //    }
 
@@ -381,7 +382,7 @@ public class LanguageAndKeyboardActivity extends BaseActivity {
         for (int i = 0; i < N; ++i) {
             InputMethodInfo property = mInputMethodList.get(i);
             String prefKey = property.getId();
-            // Log.i(TAG, mLastInputMethodId+"===+prefKey=="+prefKey);
+            // LogUtils.i(TAG, mLastInputMethodId+"===+prefKey=="+prefKey);
             CharSequence label = property.loadLabel(getPackageManager());
             boolean systemIME = isSystemIme(property);
             // Add a check box.
@@ -475,7 +476,7 @@ public class LanguageAndKeyboardActivity extends BaseActivity {
     }
 
     private void setLanguage(Language locale) {
-        Log.i("hxdii", "the choose locale:" + locale.getLocale().toString());
+        LogUtils.i("hxdii", "the choose locale:" + locale.getLocale().toString());
 
         LocalePicker.updateLocale(locale.getLocale());
         if (!mHandler.hasMessages(0)) {
@@ -500,9 +501,9 @@ public class LanguageAndKeyboardActivity extends BaseActivity {
     });
 
     private void loadSupport() {
-        Log.d(TAG, "loadSupport");
+        LogUtils.d(TAG, "loadSupport");
         if ((MyApplication.config.support_directory.isEmpty() || !MyApplication.config.support) && !MyApplication.config.about_support) {
-            Log.d(TAG, "loadSupport 配置不对不加载");
+            LogUtils.d(TAG, "loadSupport 配置不对不加载");
             return;
         }
         String[] imageExtensions = {".jpg", ".jpeg", ".png", ".bmp", ".webp"};
@@ -513,18 +514,18 @@ public class LanguageAndKeyboardActivity extends BaseActivity {
                 for (File file : files) {
                     if (file.isFile()) {
                         if (judgeLanguage(file)) {
-                            Log.d(TAG, "找到当前语言的support图片路径 " + file.getAbsolutePath());
+                            LogUtils.d(TAG, "找到当前语言的support图片路径 " + file.getAbsolutePath());
                             break; // 找到一个匹配后就跳出循环
                         }
                     }
                 }
                 // 如果当前语言没找到，尝试找英文
-                Log.d(TAG, "loadSupport Utils.support_image_path " + Utils.support_image_path);
+                LogUtils.d(TAG, "loadSupport Utils.support_image_path " + Utils.support_image_path);
                 if (Utils.support_image_path.isEmpty()) {
                     for (File file : files) {
                         if (file.isFile() && file.getName().contains("_en")) {
                             Utils.support_image_path = file.getAbsolutePath();
-                            Log.d(TAG, "找不到当前语言，使用英文support图片路径: " + file.getAbsolutePath());
+                            LogUtils.d(TAG, "找不到当前语言，使用英文support图片路径: " + file.getAbsolutePath());
                             break;
                         }
                     }
@@ -544,7 +545,7 @@ public class LanguageAndKeyboardActivity extends BaseActivity {
             // 其他语言只用语言码
             languageCode = "_" + currentLocale.getLanguage();
         }
-        Log.d(TAG, "当前语言码: judgeLanguage" + languageCode);
+        LogUtils.d(TAG, "当前语言码: judgeLanguage" + languageCode);
         if (name.contains(languageCode)) {
             Utils.support_image_path = file.getAbsolutePath();
             return true;

@@ -33,7 +33,7 @@ public class MyTimeReceiver extends BroadcastReceiver {
 	                    || Intent.ACTION_CONFIGURATION_CHANGED.equals(action)
 	                    || Intent.ACTION_USER_SWITCHED.equals(action)
 	                    ||action.equals(Intent.ACTION_TIME_TICK)) {
-		    	 //Log.i(TAG, action);
+		    	 //LogUtils.i(TAG, action);
 		    	 mCallBack.changeTime();
 		     }
 		}

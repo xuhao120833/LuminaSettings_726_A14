@@ -12,6 +12,7 @@ import android.util.Log;
 import androidx.core.app.NotificationCompat;
 
 import com.htc.luminaos.R;
+import com.htc.luminaos.utils.LogUtils;
 
 
 public class KeepAliveService extends Service {
@@ -20,7 +21,7 @@ public class KeepAliveService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        Log.d(TAG, " 启动KeepAliveService ");
+        LogUtils.d(TAG, " 启动KeepAliveService ");
 
         NotificationChannel channel = new NotificationChannel(
                 "keep_alive_channel",                  // Channel ID

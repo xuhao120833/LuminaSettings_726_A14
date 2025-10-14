@@ -20,6 +20,7 @@ import com.htc.luminaos.R;
 import com.htc.luminaos.databinding.ActivityPowerBinding;
 import com.htc.luminaos.service.TimeOffService;
 import com.htc.luminaos.utils.Contants;
+import com.htc.luminaos.utils.LogUtils;
 import com.htc.luminaos.utils.ShareUtil;
 
 import java.lang.reflect.Method;
@@ -57,7 +58,7 @@ public class PowerActivity extends AppCompatActivity implements View.OnClickList
                 }
             }else if (message.what == 201){
                 pm.reboot(null);
-                Log.d(Tag,"reboot");
+                LogUtils.d(Tag,"reboot");
             }
             return false;
         }

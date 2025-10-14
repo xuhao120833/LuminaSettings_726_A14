@@ -7,6 +7,7 @@ import android.util.Log;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.htc.luminaos.utils.LogUtils;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -148,7 +149,7 @@ public class RequestManager {
 			final Response response = call.execute();
 			response.body().string();
 		} catch (Exception e) {
-			Log.d(TAG, e.toString());
+			LogUtils.d(TAG, e.toString());
 		}
 	}
 
@@ -190,10 +191,10 @@ public class RequestManager {
 			// 请求执行成功
 			if (response.isSuccessful()) {
 				// 获取返回数据 可以是String，bytes ,byteStream
-				Log.d(TAG, "response ----->" + response.body().string());
+				LogUtils.d(TAG, "response ----->" + response.body().string());
 			}
 		} catch (Exception e) {
-			Log.d(TAG, e.toString());
+			LogUtils.d(TAG, e.toString());
 		}
 	}
 
@@ -226,10 +227,10 @@ public class RequestManager {
 			// 执行请求
 			Response response = call.execute();
 			if (response.isSuccessful()) {
-				Log.d(TAG, "response ----->" + response.body().string());
+				LogUtils.d(TAG, "response ----->" + response.body().string());
 			}
 		} catch (Exception e) {
-			Log.d(TAG, e.toString());
+			LogUtils.d(TAG, e.toString());
 		}
 	}
 	
@@ -242,7 +243,7 @@ public class RequestManager {
 			
 			@Override
 			public void onReqSuccess(String result) {
-				//Log.i(TAG, "BASE_URL 1"+BASE_URL);
+				//LogUtils.i(TAG, "BASE_URL 1"+BASE_URL);
 				callBack.onReqSuccess(result);
 			}
 			
@@ -253,7 +254,7 @@ public class RequestManager {
 				}else{
 					BASE_URL=BASE_URL3;
 				}
-//				Log.i(TAG, "BASE_URL 2"+BASE_URL);
+//				LogUtils.i(TAG, "BASE_URL 2"+BASE_URL);
 				requestAsyn(actionUrl, requestType, paramsMap, callBack);
 			}
 		});
@@ -326,7 +327,7 @@ public class RequestManager {
 				@Override
 				public void onFailure(Call call, IOException e) {
 					failedCallBack("访问失败", callBack);
-					Log.d(TAG, e.toString());
+					LogUtils.d(TAG, e.toString());
 				}
 
 				@Override
@@ -334,7 +335,7 @@ public class RequestManager {
 						throws IOException {
 					if (response.isSuccessful()) {
 						String string = response.body().string();
-						Log.d(TAG, "response ----->" + string);
+						LogUtils.d(TAG, "response ----->" + string);
 						successCallBack((T) string, callBack);
 					} else {
 						failedCallBack("服务器错误", callBack);
@@ -343,7 +344,7 @@ public class RequestManager {
 			});
 			return call;
 		} catch (Exception e) {
-			Log.d(TAG, e.toString());
+			LogUtils.d(TAG, e.toString());
 		}
 		return null;
 	}
@@ -378,7 +379,7 @@ public class RequestManager {
 			RequestBody body = RequestBody.create(MEDIA_TYPE_JSON, params);
 			String requestUrl = String.format("%s/%s", BASE_URL, actionUrl);
 			
-			Log.d(TAG, requestUrl+"params:  "+params);
+			LogUtils.d(TAG, requestUrl+"params:  "+params);
 			
 			final Request request = addHeaders().url(requestUrl).post(body)
 					.build();
@@ -387,7 +388,7 @@ public class RequestManager {
 				@Override
 				public void onFailure(Call call, IOException e) {
 					failedCallBack("访问失败", callBack);
-					Log.d(TAG, e.toString());
+					LogUtils.d(TAG, e.toString());
 				}
 
 				@Override
@@ -395,7 +396,7 @@ public class RequestManager {
 						throws IOException {
 					if (response.isSuccessful()) {
 						String string = response.body().string();
-						Log.d(TAG, "response ----->" + string);
+						LogUtils.d(TAG, "response ----->" + string);
 						successCallBack((T) string, callBack);
 					} else {
 						failedCallBack("服务器错误", callBack);
@@ -404,7 +405,7 @@ public class RequestManager {
 			});
 			return call;
 		} catch (Exception e) {
-			Log.d(TAG, e.toString());
+			LogUtils.d(TAG, e.toString());
 		}
 		return null;
 	}
@@ -432,12 +433,12 @@ public class RequestManager {
 			
 			String params = jsonObject.toString();
 			
-			Log.d(TAG, params);
+			LogUtils.d(TAG, params);
 			
 			RequestBody body = RequestBody.create(MEDIA_TYPE_JSON, params);
 			String requestUrl = String.format("%s/%s", BASE_URL, actionUrl);
 			
-			Log.d(TAG, requestUrl);
+			LogUtils.d(TAG, requestUrl);
 			
 			final Request request = addHeadersCurrent(paramsMap,isConn).url(requestUrl).post(body)
 					.build();
@@ -445,18 +446,18 @@ public class RequestManager {
 			call.enqueue(new Callback() {
 				@Override
 				public void onFailure(Call call, IOException e) {
-					Log.d("test"," onFailure  ---->");
+					LogUtils.d("test"," onFailure  ---->");
 					failedCallBack("访问失败 net err", callBack);
-					//Log.d(TAG, e.toString());
+					//LogUtils.d(TAG, e.toString());
 				}
 
 				@Override
 				public void onResponse(Call call, Response response)
 						throws IOException {
-					Log.d("test"," onResponse  ---->");
+					LogUtils.d("test"," onResponse  ---->");
 					if (response.isSuccessful()) {
 						String string = response.body().string();
-						//Log.d(TAG, "response ----->" + string);
+						//LogUtils.d(TAG, "response ----->" + string);
 						successCallBack((T) string, callBack);
 					} else {
 						failedCallBack("服务器错误 err", callBack);
@@ -465,7 +466,7 @@ public class RequestManager {
 			});
 			return call;
 		} catch (Exception e) {
-			//Log.d(TAG, e.toString());
+			//LogUtils.d(TAG, e.toString());
 			failedCallBack("访问失败 e"+ e.getMessage(), callBack);
 		}
 		return null;
@@ -499,7 +500,7 @@ public class RequestManager {
 			
 			String params = jsonObject.toString();
 			
-			Log.d(TAG, "params: "+params);
+			LogUtils.d(TAG, "params: "+params);
 			
 			RequestBody body = RequestBody.create(MEDIA_TYPE_JSON, params);
 			String requestUrl = String.format("%s/%s", BASE_URL, actionUrl);
@@ -512,7 +513,7 @@ public class RequestManager {
 				@Override
 				public void onFailure(Call call, IOException e) {
 					failedCallBack("访问失败", callBack);
-					Log.d(TAG, e.toString());
+					LogUtils.d(TAG, e.toString());
 				}
 
 				@Override
@@ -520,7 +521,7 @@ public class RequestManager {
 						throws IOException {
 					if (response.isSuccessful()) {
 						String string = response.body().string();
-						Log.d(TAG, "response ----->" + string);
+						LogUtils.d(TAG, "response ----->" + string);
 						successCallBack((T) string, callBack);
 					} else {
 						failedCallBack("服务器错误", callBack);
@@ -529,7 +530,7 @@ public class RequestManager {
 			});
 			return call;
 		} catch (Exception e) {
-			Log.d(TAG, e.toString());
+			LogUtils.d(TAG, e.toString());
 			failedCallBack("访问失败"+ e.getMessage(), callBack);
 		}
 		return null;
@@ -565,7 +566,7 @@ public class RequestManager {
 				@Override
 				public void onFailure(Call call, IOException e) {
 					failedCallBack("访问失败", callBack);
-					Log.d(TAG, e.toString());
+					LogUtils.d(TAG, e.toString());
 				}
 
 				@Override
@@ -573,7 +574,7 @@ public class RequestManager {
 						throws IOException {
 					if (response.isSuccessful()) {
 						String string = response.body().string();
-						Log.d(TAG, "response ----->" + string);
+						LogUtils.d(TAG, "response ----->" + string);
 						successCallBack((T) string, callBack);
 					} else {
 						failedCallBack("服务器错误", callBack);
@@ -582,7 +583,7 @@ public class RequestManager {
 			});
 			return call;
 		} catch (Exception e) {
-			Log.d(TAG, e.toString());
+			LogUtils.d(TAG, e.toString());
 		}
 		return null;
 	}
@@ -678,7 +679,7 @@ public class RequestManager {
 		call.enqueue(new Callback() {
 			@Override
 			public void onFailure(Call call, IOException e) {
-				Log.d(TAG, e.toString());
+				LogUtils.d(TAG, e.toString());
 				failedCallBack("下载失败", callBack);
 			}
 
@@ -691,19 +692,19 @@ public class RequestManager {
 				FileOutputStream fos = null;
 				try {
 					long total = response.body().contentLength();
-					Log.d(TAG, "total------>" + total);
+					LogUtils.d(TAG, "total------>" + total);
 					long current = 0;
 					is = response.body().byteStream();
 					fos = new FileOutputStream(file);
 					while ((len = is.read(buf)) != -1) {
 						current += len;
 						fos.write(buf, 0, len);
-						Log.d(TAG, "current------>" + current);
+						LogUtils.d(TAG, "current------>" + current);
 					}
 					fos.flush();
 					successCallBack((T) file, callBack);
 				} catch (IOException e) {
-					Log.d(TAG, e.toString());
+					LogUtils.d(TAG, e.toString());
 					failedCallBack("下载失败", callBack);
 				} finally {
 					try {
@@ -714,7 +715,7 @@ public class RequestManager {
 							fos.close();
 						}
 					} catch (IOException e) {
-						Log.d(TAG, e.toString());
+						LogUtils.d(TAG, e.toString());
 						failedCallBack("下载失败", callBack);
 					}
 				}
@@ -752,7 +753,7 @@ public class RequestManager {
 		call.enqueue(new Callback() {
 			@Override
 			public void onFailure(Call call, IOException e) {
-				Log.d(TAG, e.toString());
+				LogUtils.d(TAG, e.toString());
 				isDownload=false;
 				failedProgressCallBack("下载失败", callBack);
 			}
@@ -766,7 +767,7 @@ public class RequestManager {
 				FileOutputStream fos = null;
 				try {
 					final long total = response.body().contentLength();
-					//Log.d(TAG, "total------>" + total);
+					//LogUtils.d(TAG, "total------>" + total);
 					long current = 0;
 					
 					current_=0;
@@ -796,7 +797,7 @@ public class RequestManager {
 						current += len;
 						current_=current;
 						fos.write(buf, 0, len);
-						//Log.d(TAG, "current------>" + current);
+						//LogUtils.d(TAG, "current------>" + current);
 //						progressCallBack(total, current, callBack);
 					}
 					fos.flush();
@@ -811,7 +812,7 @@ public class RequestManager {
 					}
 					successProgressCallBack((T) file, callBack);
 				} catch (IOException e) {
-					Log.d(TAG, e.toString());
+					LogUtils.d(TAG, e.toString());
 					isDownload=false;
 					failedProgressCallBack("下载失败", callBack);
 				} finally {
@@ -823,7 +824,7 @@ public class RequestManager {
 							fos.close();
 						}
 					} catch (IOException e) {
-						Log.d(TAG, e.toString());
+						LogUtils.d(TAG, e.toString());
 						isDownload=false;
 						failedProgressCallBack("下载失败", callBack);
 					}

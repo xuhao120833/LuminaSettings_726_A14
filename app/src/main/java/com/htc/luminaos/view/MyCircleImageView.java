@@ -9,6 +9,7 @@ import android.util.Log;
 import android.widget.RelativeLayout;
 
 import com.htc.luminaos.R;
+import com.htc.luminaos.utils.LogUtils;
 
 public class MyCircleImageView extends de.hdodenhof.circleimageview.CircleImageView {
     public boolean hasFocus;
@@ -45,14 +46,14 @@ public class MyCircleImageView extends de.hdodenhof.circleimageview.CircleImageV
     protected void onFocusChanged(boolean focused, int direction, android.graphics.Rect previouslyFocusedRect) {
         super.onFocusChanged(focused, direction, previouslyFocusedRect);
 //        hasFocus = focused;
-        Log.d("触发焦点获取", " 开始画白色圆环 focused" + focused);
+        LogUtils.d("触发焦点获取", " 开始画白色圆环 focused" + focused);
 //        invalidate(); // 重新绘制View
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
 
-        Log.d("触发焦点获取", " this.isFocused "+this.isFocused());
+        LogUtils.d("触发焦点获取", " this.isFocused "+this.isFocused());
         if (hasFocus || rl_item.isFocused()) {
             super.onDraw(canvas);
             // 绘制白色圆环
@@ -62,14 +63,14 @@ public class MyCircleImageView extends de.hdodenhof.circleimageview.CircleImageV
             float cx = width / 2.0f;
             float cy = height / 2.0f;
 
-            Log.d("触发焦点获取", " 开始画白色圆环 " + width + " " + height + " " + radius + " " + cx + " " + cy + " " + this);
+            LogUtils.d("触发焦点获取", " 开始画白色圆环 " + width + " " + height + " " + radius + " " + cx + " " + cy + " " + this);
 
             // 圆环应绘制在外侧，因此需要考虑边框的厚度
             canvas.drawCircle(cx, cy, radius - 4, borderPaint); // 半径减去一半的边框厚度
             hasFocus = false;
         } else {
             super.onDraw(canvas);
-            Log.d("触发焦点获取", " 去掉白环 " + this);
+            LogUtils.d("触发焦点获取", " 去掉白环 " + this);
         }
     }
 }

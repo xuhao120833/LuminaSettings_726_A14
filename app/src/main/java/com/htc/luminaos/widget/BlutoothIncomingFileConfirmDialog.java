@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.htc.luminaos.R;
 import com.htc.luminaos.databinding.BluetoothincomingBinding;
 import com.htc.luminaos.receiver.BluetoothInformingCallback;
+import com.htc.luminaos.utils.LogUtils;
 
 /**
  * Author:
@@ -74,7 +75,7 @@ public class BlutoothIncomingFileConfirmDialog extends Dialog implements View.On
     }
 
     private void init() {
-        Log.d(TAG," 执行AppDetailDialog init");
+        LogUtils.d(TAG," 执行AppDetailDialog init");
         binding = BluetoothincomingBinding.inflate(LayoutInflater.from(mContext));
         /*View view = LayoutInflater.from(mContext).inflate(
                 R.layout.wifi_settings_layout, null);*/

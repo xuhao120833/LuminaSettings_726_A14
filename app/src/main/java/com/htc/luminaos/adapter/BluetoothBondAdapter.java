@@ -24,6 +24,7 @@ import android.widget.TextView;
 
 import com.htc.luminaos.R;
 import com.htc.luminaos.utils.ClsUtils;
+import com.htc.luminaos.utils.LogUtils;
 import com.htc.luminaos.widget.DelpairDeviceDialog;
 import com.htc.luminaos.widget.DisDeviceDialog;
 
@@ -224,7 +225,7 @@ public class BluetoothBondAdapter extends RecyclerView.Adapter<BluetoothBondAdap
     public void disconnect(BluetoothDevice mDevice) {
         synchronized (this) {
 
-            Log.d(TAG, "Disconnect " + this);
+            LogUtils.d(TAG, "Disconnect " + this);
             mDevice.disconnect();
         }
         // Disconnect  PBAP server in case its connected
@@ -262,9 +263,9 @@ public class BluetoothBondAdapter extends RecyclerView.Adapter<BluetoothBondAdap
             if (state != BluetoothDevice.BOND_NONE) {
                 final boolean successful = mDevice.removeBond();
                 if (successful) {
-                    Log.d(TAG, "蓝牙解绑成功 " + mDevice.getName());
+                    LogUtils.d(TAG, "蓝牙解绑成功 " + mDevice.getName());
                 } else {
-                    Log.d(TAG, "蓝牙解绑失败 " + mDevice.getName());
+                    LogUtils.d(TAG, "蓝牙解绑失败 " + mDevice.getName());
                 }
             }
         }
@@ -275,7 +276,7 @@ public class BluetoothBondAdapter extends RecyclerView.Adapter<BluetoothBondAdap
             return;
         }
         synchronized (this) {
-            Log.d(TAG, "connect " + this);
+            LogUtils.d(TAG, "connect " + this);
             mDevice.connect();
         }
     }
@@ -351,11 +352,11 @@ public class BluetoothBondAdapter extends RecyclerView.Adapter<BluetoothBondAdap
         public void onConnectionStateChange(BluetoothGatt gatt, int status, int newState) {
             super.onConnectionStateChange(gatt, status, newState);
             if (newState == BluetoothProfile.STATE_CONNECTED) {
-                Log.d("Bluetooth", "Connected to GATT server.");
+                LogUtils.d("Bluetooth", "Connected to GATT server.");
                 // 连接成功后开始发现服务
                 gatt.discoverServices();
             } else if (newState == BluetoothProfile.STATE_DISCONNECTED) {
-                Log.d("Bluetooth", "Disconnected from GATT server.");
+                LogUtils.d("Bluetooth", "Disconnected from GATT server.");
             }
         }
 
@@ -363,10 +364,10 @@ public class BluetoothBondAdapter extends RecyclerView.Adapter<BluetoothBondAdap
         public void onServicesDiscovered(BluetoothGatt gatt, int status) {
             super.onServicesDiscovered(gatt, status);
             if (status == BluetoothGatt.GATT_SUCCESS) {
-                Log.d("Bluetooth", "Services discovered.");
+                LogUtils.d("Bluetooth", "Services discovered.");
                 // 这里可以处理服务发现后的操作
             } else {
-                Log.d("Bluetooth", "Service discovery failed.");
+                LogUtils.d("Bluetooth", "Service discovery failed.");
             }
         }
 
@@ -374,7 +375,7 @@ public class BluetoothBondAdapter extends RecyclerView.Adapter<BluetoothBondAdap
         public void onCharacteristicRead(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic, int status) {
             super.onCharacteristicRead(gatt, characteristic, status);
             if (status == BluetoothGatt.GATT_SUCCESS) {
-                Log.d("Bluetooth", "Characteristic read: " + characteristic.getValue());
+                LogUtils.d("Bluetooth", "Characteristic read: " + characteristic.getValue());
                 // 处理读取到的特征值
             }
         }
@@ -383,7 +384,7 @@ public class BluetoothBondAdapter extends RecyclerView.Adapter<BluetoothBondAdap
         public void onCharacteristicWrite(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic, int status) {
             super.onCharacteristicWrite(gatt, characteristic, status);
             if (status == BluetoothGatt.GATT_SUCCESS) {
-                Log.d("Bluetooth", "Characteristic written: " + characteristic.getValue());
+                LogUtils.d("Bluetooth", "Characteristic written: " + characteristic.getValue());
                 // 处理写入后的操作
             }
         }

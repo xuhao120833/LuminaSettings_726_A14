@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.htc.luminaos.R;
 import com.htc.luminaos.entry.InputMethodBean;
+import com.htc.luminaos.utils.LogUtils;
 
 import java.util.ArrayList;
 
@@ -67,7 +68,7 @@ public class InputMethodAdapter extends RecyclerView.Adapter<InputMethodAdapter.
                 Settings.Secure.putString(mContext.getContentResolver(),
                         Settings.Secure.DEFAULT_INPUT_METHOD,
                         bean.getPrefkey());
-                Log.d(TAG," bean.getPrefkey() "+bean.getPrefkey());
+                LogUtils.d(TAG," bean.getPrefkey() "+bean.getPrefkey());
                 setCurrentPosition(i);
                 notifyDataSetChanged();
             }

@@ -5,6 +5,8 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.widget.RelativeLayout;
 
+import com.htc.luminaos.utils.LogUtils;
+
 /**
  * Author: Xuhao
  * Date:
@@ -29,7 +31,7 @@ public class RLRelativelayout extends RelativeLayout {
 
     @Override
     public boolean isFocused() {
-        Log.d("getChildCount",getChildCount()+"");
+        LogUtils.d("getChildCount",getChildCount()+"");
         if (getChildCount()==0)
             return super.isFocused();
 

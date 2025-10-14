@@ -8,6 +8,8 @@ import android.os.SystemProperties;
 import android.util.Log;
 import android.view.KeyEvent;
 
+import com.htc.luminaos.utils.LogUtils;
+
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.LineNumberReader;
@@ -170,9 +172,9 @@ public class Constants {
 		if (crc_hex.length()==1){
 			crc_hex = "0"+crc_hex;
 		}
-		Log.d(TAG,"CRC "+crc_hex);
+		LogUtils.d(TAG,"CRC "+crc_hex);
 		boolean status = crc_hex.equals(String.valueOf(dataChar[152])+ dataChar[153]);
-		Log.d(TAG,"CRC check="+status);
+		LogUtils.d(TAG,"CRC check="+status);
 		return status?3:2;
 	}
 

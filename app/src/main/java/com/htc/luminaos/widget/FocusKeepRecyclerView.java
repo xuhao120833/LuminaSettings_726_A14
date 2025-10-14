@@ -64,7 +64,7 @@ public class FocusKeepRecyclerView extends RecyclerView {
     //覆写focusSearch寻焦策略
     @Override
     public View focusSearch(View focused, int direction) {
-        //Log.i(TAG, "focusSearch " + focused + ",direction= " + direction);
+        //LogUtils.i(TAG, "focusSearch " + focused + ",direction= " + direction);
         View view = super.focusSearch(focused, direction);
         if (focused == null) {
             return view;
@@ -110,7 +110,7 @@ public class FocusKeepRecyclerView extends RecyclerView {
     @Override
     public void requestChildFocus(View child, View focused) {
         try {
-            //Log.i(TAG, "nextchild= " + child + ",focused = " + focused);
+            //LogUtils.i(TAG, "nextchild= " + child + ",focused = " + focused);
             if (!hasFocus()) {
                 //recyclerview 子view 重新获取焦点，调用移入焦点的事件监听
                 if (mFocusGainListener != null) {
@@ -128,7 +128,7 @@ public class FocusKeepRecyclerView extends RecyclerView {
 
 //            super.requestChildFocus(child, focused);//执行过super.requestChildFocus之后hasFocus会变成true
 //            mCurrentFocusPosition = getChildViewHolder(child).getAdapterPosition();
-            // Log.i(TAG,"focusPos = "+mCurrentFocusPosition)
+            // LogUtils.i(TAG,"focusPos = "+mCurrentFocusPosition)
         }catch (Exception e) {
             e.printStackTrace();
         }
@@ -158,12 +158,12 @@ public class FocusKeepRecyclerView extends RecyclerView {
     @Override
     protected int getChildDrawingOrder(int childCount, int i) {
         View focusedChild = getFocusedChild();
-        //Log.i(TAG,"focusedChild ="+focusedChild);
+        //LogUtils.i(TAG,"focusedChild ="+focusedChild);
         if(focusedChild== null){
             return super.getChildDrawingOrder(childCount, i);
         }else{
             int index = indexOfChild(focusedChild);
-            //Log.i(TAG, " index = " + index + ",i=" + i + ",count=" + childCount);
+            //LogUtils.i(TAG, " index = " + index + ",i=" + i + ",count=" + childCount);
             if(i == childCount-1){
                 return index;
             }

@@ -8,6 +8,8 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.widget.ScrollView;
 
+import com.htc.luminaos.utils.LogUtils;
+
 public class CustomScrollView  extends ScrollView {
     AudioManager audioManager ;
     private Context mContext;
@@ -42,7 +44,7 @@ public class CustomScrollView  extends ScrollView {
     public boolean dispatchKeyEvent(KeyEvent keyEvent) {
 
         Boolean result = super.dispatchKeyEvent(keyEvent);
-        Log.d(TAG," dispatchKeyEvent结果 "+result+" "+getButtonSound());
+        LogUtils.d(TAG," dispatchKeyEvent结果 "+result+" "+getButtonSound());
         if (keyEvent.getAction() == KeyEvent.ACTION_DOWN && result && getButtonSound()&& keyEvent.getKeyCode()!=KeyEvent.KEYCODE_DPAD_CENTER)
         {
             audioManager.playSoundEffect(AudioManager.FX_FOCUS_NAVIGATION_DOWN);

@@ -17,6 +17,7 @@ import android.view.WindowManager;
 import com.htc.luminaos.R;
 import com.htc.luminaos.databinding.UpgradeCheckFailBinding;
 import com.htc.luminaos.databinding.UpgradeCheckSuccessBinding;
+import com.htc.luminaos.utils.LogUtils;
 
 
 /**
@@ -32,12 +33,12 @@ public class UpgradeCheckSuccessDialog extends Dialog implements View.OnClickLis
 
     @Override
     public void onClick(View v) {
-        Log.d(TAG,"onclick");
+        LogUtils.d(TAG,"onclick");
         int id = v.getId();
         if (id == R.id.enter) {
-            Log.d(TAG,"R.id.enter");
+            LogUtils.d(TAG,"R.id.enter");
             if (mcallback != null) {
-                Log.d(TAG,"mcallback.upgrade()");
+                LogUtils.d(TAG,"mcallback.upgrade()");
                 mcallback.upgrade();
             }
             dismiss();

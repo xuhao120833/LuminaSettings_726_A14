@@ -21,6 +21,7 @@ import com.htc.luminaos.R;
 import com.htc.luminaos.adapter.TimezoneAdapter;
 import com.htc.luminaos.databinding.TimeZoneLayoutBinding;
 import com.htc.luminaos.utils.Contants;
+import com.htc.luminaos.utils.LogUtils;
 
 import org.xmlpull.v1.XmlPullParserException;
 import java.util.ArrayList;
@@ -128,9 +129,9 @@ public class TimezoneDialog extends BaseDialog implements View.OnClickListener {
 //    private void searchindex(ArrayList<HashMap> list){
 //        for (int i = 0; i < list.size(); i++) {
 //            HashMap map = list.get(i);
-////            Log.d(TAG," map.get(Contants.KEY_ID)"+map.get(Contants.KEY_ID)+" "+i+" "+TimeZone.getDefault().getID());
+////            LogUtils.d(TAG," map.get(Contants.KEY_ID)"+map.get(Contants.KEY_ID)+" "+i+" "+TimeZone.getDefault().getID());
 //            if (map.get(Contants.KEY_ID).equals(TimeZone.getDefault().getID())) {
-////                Log.d(TAG," map.get(Contants.KEY_ID)"+map.get(Contants.KEY_ID)+" "+i);
+////                LogUtils.d(TAG," map.get(Contants.KEY_ID)"+map.get(Contants.KEY_ID)+" "+i);
 //                mDefault = i;
 //                return;
 //            }
@@ -138,13 +139,13 @@ public class TimezoneDialog extends BaseDialog implements View.OnClickListener {
 
 
     private void searchindex(ArrayList<HashMap> list) {
-        Log.d(TAG," TimeZone.getDefault().getID() "+TimeZone.getDefault().getID());
+        LogUtils.d(TAG," TimeZone.getDefault().getID() "+TimeZone.getDefault().getID());
         for (int i = 0; i < list.size(); i++) {
             HashMap map = list.get(i);
-            Log.d(TAG," map.get(Contants.KEY_ID) "+map.get(Contants.KEY_ID));
+            LogUtils.d(TAG," map.get(Contants.KEY_ID) "+map.get(Contants.KEY_ID));
             if (map.get(Contants.KEY_ID).equals(TimeZone.getDefault().getID())) {
                 mDefault = i;
-                Log.d(TAG," map.get(Contants.KEY_ID)"+map.get(Contants.KEY_ID)+" "+i);
+                LogUtils.d(TAG," map.get(Contants.KEY_ID)"+map.get(Contants.KEY_ID)+" "+i);
                 // 将选中的元素移动到列表的第一个位置
                 list.remove(i);         // 从原位置移除
                 list.add(0, map);       // 添加到列表第一个位置
@@ -175,7 +176,7 @@ public class TimezoneDialog extends BaseDialog implements View.OnClickListener {
 //                    String id = xrp.getAttributeValue(0);
 //                    String displayName = xrp.nextText();
 //                    addItem(myData, id, displayName, date);
-////                    Log.d(TAG," getZones "+id+" "+displayName);
+////                    LogUtils.d(TAG," getZones "+id+" "+displayName);
 //                }
 //                while (xrp.getEventType() != XmlResourceParser.END_TAG) {
 //                    xrp.next();
@@ -224,7 +225,7 @@ public class TimezoneDialog extends BaseDialog implements View.OnClickListener {
 //        map.put(Contants.KEY_OFFSET, offset);
 //
 ////        if (id.equals(TimeZone.getDefault().getID())) {
-////            Log.d(TAG," addItem id "+id);
+////            LogUtils.d(TAG," addItem id "+id);
 ////            mDefault = myData.size()-1;
 ////        }
 //
@@ -288,7 +289,7 @@ public class TimezoneDialog extends BaseDialog implements View.OnClickListener {
                 timeZoneInfo.put("id", id); // 时区 ID
                 timeZoneInfo.put("displayName", timeZone.getDisplayName(false, TimeZone.SHORT, Locale.getDefault())); // 时区显示名称
                 timeZoneList.add(timeZoneInfo);
-                Log.d(TAG," timeZoneInfo信息 "+id+"  "+timeZoneInfo.get(id));
+                LogUtils.d(TAG," timeZoneInfo信息 "+id+"  "+timeZoneInfo.get(id));
             }
         }
 

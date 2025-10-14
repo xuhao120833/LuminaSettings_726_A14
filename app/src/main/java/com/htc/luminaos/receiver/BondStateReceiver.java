@@ -8,6 +8,7 @@ import android.util.Log;
 
 import com.htc.luminaos.utils.Constants;
 import com.htc.luminaos.utils.Contants;
+import com.htc.luminaos.utils.LogUtils;
 
 /**
  * @author 作者：zgr
@@ -31,7 +32,7 @@ public class BondStateReceiver extends BroadcastReceiver {
         if (action.equals(BluetoothDevice.ACTION_BOND_STATE_CHANGED)) {
             BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
             String name = device.getName();
-            Log.d(TAG, "device name: " + name);
+            LogUtils.d(TAG, "device name: " + name);
             int bondState = intent.getIntExtra(BluetoothDevice.EXTRA_BOND_STATE,
                     BluetoothDevice.BOND_NONE);
             int previousBondState = intent.getIntExtra(
@@ -39,21 +40,21 @@ public class BondStateReceiver extends BroadcastReceiver {
 
             if (bondState == BluetoothDevice.BOND_NONE &&
                     previousBondState == BluetoothDevice.BOND_BONDING) { //配对失败
-                Log.d(TAG, "BOND_NONE 删除配对  配对失败");
+                LogUtils.d(TAG, "BOND_NONE 删除配对  配对失败");
                 mcallback.bondState(Contants.BOND_FAIL, device);
                 return;
             }
             switch (bondState) {
 //                case BluetoothDevice.BOND_NONE://取消配对/未配对
-//                    Log.d(TAG, "BOND_NONE 删除配对  配对失败");
+//                    LogUtils.d(TAG, "BOND_NONE 删除配对  配对失败");
 //                    mcallback.bondState(Contants.BOND_FAIL, device);
 //                    break;
                 case BluetoothDevice.BOND_BONDING://正在配对
-                    Log.d(TAG, "BOND_BONDING 正在配对");
+                    LogUtils.d(TAG, "BOND_BONDING 正在配对");
                     mcallback.bondState(Contants.BONDING, device);
                     break;
                 case BluetoothDevice.BOND_BONDED://配对结束
-                    Log.d(TAG, "BOND_BONDED 配对成功");
+                    LogUtils.d(TAG, "BOND_BONDED 配对成功");
                     mcallback.bondState(Contants.BOND_SUCCESSFUL, device);
                     break;
             }

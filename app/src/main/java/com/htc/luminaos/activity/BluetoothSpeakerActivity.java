@@ -20,6 +20,7 @@ import android.view.View;
 
 import com.htc.luminaos.R;
 import com.htc.luminaos.databinding.ActivityBluetoothSpeakerBinding;
+import com.htc.luminaos.utils.LogUtils;
 
 import java.io.FileInputStream;
 
@@ -139,13 +140,13 @@ public class BluetoothSpeakerActivity extends Activity {
 
     @Override
     protected void onPause() {
-        Log.d(TAG,"onPause()");
+        LogUtils.d(TAG,"onPause()");
         super.onPause();
     }
 
     @Override
     protected void onStop() {
-        Log.d(TAG,"onStop()");
+        LogUtils.d(TAG,"onStop()");
         PrjScreen.set_led_power(3,1);
         SwitchBluetoothSpeaker(0);
         unregisterReceiver(broadcastReceiver);
@@ -155,7 +156,7 @@ public class BluetoothSpeakerActivity extends Activity {
 
     @Override
     protected void onDestroy() {
-        Log.d(TAG,"onDestroy()");
+        LogUtils.d(TAG,"onDestroy()");
         super.onDestroy();
     }
 }

@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.htc.luminaos.R;
 import com.htc.luminaos.databinding.ActivityPasswordVerifyBinding;
+import com.htc.luminaos.utils.LogUtils;
 import com.htc.luminaos.utils.PasswordUtils;
 
 
@@ -105,7 +106,7 @@ public class PasswordVerifyActivity extends AppCompatActivity implements View.On
         } else if (id == R.id.enter) {
             checkPassword();
         } else if (id == R.id.rl_eye1) {
-            Log.d(TAG, " wifiConnectDialogBinding.etPassword.getInputType() " + passwordVerifyBinding.Password1.getInputType());
+            LogUtils.d(TAG, " wifiConnectDialogBinding.etPassword.getInputType() " + passwordVerifyBinding.Password1.getInputType());
             if (passwordVerifyBinding.Password1.getInputType() == (InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD)) {
                 // 显示密码
                 passwordVerifyBinding.Password1.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
@@ -116,7 +117,7 @@ public class PasswordVerifyActivity extends AppCompatActivity implements View.On
                 passwordVerifyBinding.eye1.setImageResource(R.drawable.password_eye_off); // 替换为隐藏密码的图标
             }
         } else if (id == R.id.rl_eye2) {
-            Log.d(TAG, " wifiConnectDialogBinding.etPassword.getInputType() " + passwordVerifyBinding.Password2.getInputType());
+            LogUtils.d(TAG, " wifiConnectDialogBinding.etPassword.getInputType() " + passwordVerifyBinding.Password2.getInputType());
             if (passwordVerifyBinding.Password2.getInputType() == (InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD)) {
                 // 显示密码
                 passwordVerifyBinding.Password2.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
@@ -139,7 +140,7 @@ public class PasswordVerifyActivity extends AppCompatActivity implements View.On
         }
 
         PasswordUtils.setNewPassword(getApplicationContext(),password1);
-        Log.d(TAG," startNewActivity(MainActivity.class) ");
+        LogUtils.d(TAG," startNewActivity(MainActivity.class) ");
         PasswordUtils.sessionVerified = true;
         startNewActivity(MainActivity.class);
     }

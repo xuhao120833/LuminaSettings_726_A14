@@ -58,14 +58,14 @@ public class WiredActivity extends BaseActivity implements View.OnKeyListener {
             String action = intent.getAction();
             if (ConnectivityManager.CONNECTIVITY_ACTION.equals(action)) {
                 NetworkInfo info = intent.getParcelableExtra(ConnectivityManager.EXTRA_NETWORK_INFO);
-                Log.d(TAG, "onReceive ===" + info.toString());
+                LogUtils.d(TAG, "onReceive ===" + info.toString());
                 if (null != info && ConnectivityManager.TYPE_ETHERNET == info.getType()) {
                     if (NetworkInfo.State.CONNECTED == info.getState()) {
-                        Log.d(TAG, "onReceive === 收到有线网络已连接的广播");
+                        LogUtils.d(TAG, "onReceive === 收到有线网络已连接的广播");
                         wiredNetworkLayoutBinding.wiredTv.setText(getString(R.string.connected));
                         initNetworkInfo();
                     } else if (NetworkInfo.State.DISCONNECTED == info.getState()) {
-                        Log.d(TAG, "onReceive === 收到有线网络已断开的广播");
+                        LogUtils.d(TAG, "onReceive === 收到有线网络已断开的广播");
                         wiredNetworkLayoutBinding.wiredTv.setText(getString(R.string.not_connected));
                         resetNetworkInfo();
                     }
@@ -89,7 +89,7 @@ public class WiredActivity extends BaseActivity implements View.OnKeyListener {
 //                case R.id.dns_tv:
 ////                    break;
 //                case R.id.dns2_tv:
-//                    Log.d(TAG," 执行到editTextFocusChange");
+//                    LogUtils.d(TAG," 执行到editTextFocusChange");
 //                    editTextFocusChange();
 //                    break;
 //            }
@@ -148,11 +148,11 @@ public class WiredActivity extends BaseActivity implements View.OnKeyListener {
         loadIpConfiguration();
 //        updateEthernetStatus();
         if (isNetworkConnect()){
-            Log.d(TAG,"onResume isNetworkConnect");
+            LogUtils.d(TAG,"onResume isNetworkConnect");
             wiredNetworkLayoutBinding.wiredTv.setText(getString(R.string.connected));
             initNetworkInfo();
         }else {
-            Log.d(TAG,"onResume 网络未连接");
+            LogUtils.d(TAG,"onResume 网络未连接");
             wiredNetworkLayoutBinding.wiredTv.setText(getString(R.string.not_connected));
             resetNetworkInfo();
         }
@@ -250,7 +250,7 @@ public class WiredActivity extends BaseActivity implements View.OnKeyListener {
         String[] ifaces = mEthManager.getAvailableInterfaces();
         if (ifaces.length > 0) {
             mInterfaceName = ifaces[0];
-            Log.d(TAG," loadIpConfiguration ifaces.length > 0 mInterfaceName "+mInterfaceName);
+            LogUtils.d(TAG," loadIpConfiguration ifaces.length > 0 mInterfaceName "+mInterfaceName);
             mIpConfiguration = mEthManager.getConfiguration(mInterfaceName);
         }
     }
@@ -261,11 +261,11 @@ public class WiredActivity extends BaseActivity implements View.OnKeyListener {
     }
 
     private void updateEthernetStatus(){
-        Log.d(TAG,"updateEthernetStatus getIpAssignment "+mIpConfiguration.getIpAssignment());
+        LogUtils.d(TAG,"updateEthernetStatus getIpAssignment "+mIpConfiguration.getIpAssignment());
         IpConfiguration.IpAssignment ipAssignment = mIpConfiguration.getIpAssignment();
 
         if (ipAssignment == IpConfiguration.IpAssignment.STATIC) {
-            Log.d(TAG,"  updateEthernetStatus STATIC");
+            LogUtils.d(TAG,"  updateEthernetStatus STATIC");
             wiredNetworkLayoutBinding.ipSettingTv.setText(getString(R.string.static_ip));
             wiredNetworkLayoutBinding.rlIpAddress.setEnabled(true);
             wiredNetworkLayoutBinding.rlGateway.setEnabled(true);
@@ -288,7 +288,7 @@ public class WiredActivity extends BaseActivity implements View.OnKeyListener {
             wiredNetworkLayoutBinding.rlMac.setAlpha(1.0f);
 
         }else if ((ipAssignment == IpConfiguration.IpAssignment.DHCP) || (ipAssignment == IpConfiguration.IpAssignment.UNASSIGNED)){
-            Log.d(TAG,"  updateEthernetStatus DHCP");
+            LogUtils.d(TAG,"  updateEthernetStatus DHCP");
             wiredNetworkLayoutBinding.ipSettingTv.setText(getString(R.string.dhcp));
             wiredNetworkLayoutBinding.rlIpAddress.setEnabled(false);
             wiredNetworkLayoutBinding.rlGateway.setEnabled(false);
@@ -495,13 +495,13 @@ public class WiredActivity extends BaseActivity implements View.OnKeyListener {
     }
 
     public void editTextFocusChange() {
-        Log.d(TAG, " 执行到editTextFocusChange ");
+        LogUtils.d(TAG, " 执行到editTextFocusChange ");
 //        setIP();
     }
 
     private void setIP() {
         if(mIpConfiguration.getIpAssignment() == IpConfiguration.IpAssignment.STATIC) {
-            Log.d(TAG,"执行setIP");
+            LogUtils.d(TAG,"执行setIP");
             String IP = wiredNetworkLayoutBinding.ipAddressTv.getText().toString();
             String GATEWAY = wiredNetworkLayoutBinding.gatewayTv.getText().toString();
             String NETMASK = "24";
@@ -510,29 +510,29 @@ public class WiredActivity extends BaseActivity implements View.OnKeyListener {
             StaticIpConfiguration staticConfig = new StaticIpConfiguration();
             if (TextUtils.isEmpty(IP)) {
 //            return "无效IP";
-                Log.d(TAG, "无效IP");
+                LogUtils.d(TAG, "无效IP");
             }
             Inet4Address ipaddr = null;
             try {
                 ipaddr = (Inet4Address) NetworkUtils.numericToInetAddress(IP);
             } catch (IllegalArgumentException | ClassCastException e) {
 //            return "无效IP";
-                Log.d(TAG, "无效IP");
+                LogUtils.d(TAG, "无效IP");
             }
             try {
                 if (TextUtils.isEmpty(NETMASK) || (0 > Integer.parseInt(NETMASK) || Integer.parseInt(NETMASK) > 32)) {
 //                return "无效网络前缀长度";
-                    Log.d(TAG, "无效网络前缀长度");
+                    LogUtils.d(TAG, "无效网络前缀长度");
                 }
             } catch (IllegalArgumentException | ClassCastException e) {
 //            return "无效网络前缀长度";
-                Log.d(TAG, "无效网络前缀长度");
+                LogUtils.d(TAG, "无效网络前缀长度");
             }
             try {
                 staticConfig.ipAddress = new LinkAddress(ipaddr, Integer.parseInt(NETMASK));
             } catch (IllegalArgumentException | ClassCastException e) {
 //            return "无效IP";
-                Log.d(TAG, "无效IP");
+                LogUtils.d(TAG, "无效IP");
             }
             if (!TextUtils.isEmpty(GATEWAY)) {
                 try {
@@ -540,7 +540,7 @@ public class WiredActivity extends BaseActivity implements View.OnKeyListener {
                     staticConfig.gateway = getwayaddr;
                 } catch (IllegalArgumentException | ClassCastException e) {
 //                return "无效网关";
-                    Log.d(TAG, "无效网关");
+                    LogUtils.d(TAG, "无效网关");
                 }
             }
             if (!TextUtils.isEmpty(DNS1)) {
@@ -549,7 +549,7 @@ public class WiredActivity extends BaseActivity implements View.OnKeyListener {
                     staticConfig.dnsServers.add(idns1);
                 } catch (IllegalArgumentException | ClassCastException e) {
 //                return "无效DNS1";
-                    Log.d(TAG, "无效DNS1");
+                    LogUtils.d(TAG, "无效DNS1");
                 }
             }
             if (!TextUtils.isEmpty(DNS2)) {
@@ -558,7 +558,7 @@ public class WiredActivity extends BaseActivity implements View.OnKeyListener {
                     staticConfig.dnsServers.add(idns2);
                 } catch (IllegalArgumentException | ClassCastException e) {
 //                return "无效DNS2";
-                    Log.d(TAG, "无效DNS2");
+                    LogUtils.d(TAG, "无效DNS2");
                 }
             }
             mIpConfiguration.setIpAssignment(IpConfiguration.IpAssignment.STATIC);

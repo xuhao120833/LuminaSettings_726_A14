@@ -19,6 +19,7 @@ import com.htc.luminaos.MyApplication;
 import com.htc.luminaos.R;
 import com.htc.luminaos.databinding.ActivityDisplaySettingsBinding;
 import com.htc.luminaos.utils.AddViewToScreen;
+import com.htc.luminaos.utils.LogUtils;
 import com.htc.luminaos.utils.ReflectUtil;
 import com.softwinner.PQControl;
 import com.softwinner.tv.AwTvDisplayManager;
@@ -77,7 +78,7 @@ public class DisplaySettingsReceiver extends BroadcastReceiver implements View.O
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        Log.d(TAG," 收到DisplaySettings的广播 ");
+        LogUtils.d(TAG," 收到DisplaySettings的广播 ");
         String action = intent.getAction();
         if (action.equals(DisplayAction)) {
             try {
@@ -87,25 +88,25 @@ public class DisplaySettingsReceiver extends BroadcastReceiver implements View.O
 //                if (show && !displaySettingsBinding.getRoot().isAttachedToWindow()) {
 //                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
 //                    String currentTime = sdf.format(new Date());
-//                    Log.d(TAG, "mavts.addView " + currentTime);
+//                    LogUtils.d(TAG, "mavts.addView " + currentTime);
 //                    mavts.addView(displaySettingsBinding.getRoot(), lp);
 //                } else if (!show && displaySettingsBinding.getRoot().isAttachedToWindow()) {
 //                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
 //                    String currentTime = sdf.format(new Date());
-//                    Log.d(TAG, "mavts.clearView " + currentTime);
+//                    LogUtils.d(TAG, "mavts.clearView " + currentTime);
 //                    mavts.clearView(displaySettingsBinding.getRoot());
 //                }
                 boolean attachedToWindow = SystemProperties.getBoolean("display.attach",false);
                 if (show && !attachedToWindow) {
                     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
                     String currentTime = sdf.format(new Date());
-                    Log.d(TAG, "mavts.addView " + currentTime);
+                    LogUtils.d(TAG, "mavts.addView " + currentTime);
                     mavts.addView(displaySettingsBinding.getRoot(), lp);
                     SystemProperties.set("display.attach", String.valueOf(true));
                 } else if (!show && attachedToWindow) {
                     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
                     String currentTime = sdf.format(new Date());
-                    Log.d(TAG, "mavts.clearView " + currentTime);
+                    LogUtils.d(TAG, "mavts.clearView " + currentTime);
                     mavts.clearView(displaySettingsBinding.getRoot());
                     SystemProperties.set("display.attach", String.valueOf(false));
                 }
@@ -186,7 +187,7 @@ public class DisplaySettingsReceiver extends BroadcastReceiver implements View.O
 
     private void initData() {
         String pictureName = pqControl.getPictureModeName();
-        Log.d(TAG, "pictureName " + pictureName);
+        LogUtils.d(TAG, "pictureName " + pictureName);
         for (int i = 0; i < picture_mode_values.length; i++) {
             if (picture_mode_values[i].equals(pictureName)) {
                 curPosition = i;
@@ -288,9 +289,9 @@ public class DisplaySettingsReceiver extends BroadcastReceiver implements View.O
                 return true;
 //                    break;
             } else if (id == R.id.rl_saturation) {
-                Log.d(TAG, "饱和度 向左");
+                LogUtils.d(TAG, "饱和度 向左");
                 if (mCurSaturation == 1) {
-                    Log.d(TAG, "饱和度 向左不执行");
+                    LogUtils.d(TAG, "饱和度 向左不执行");
                     return false;
                 }
 
@@ -373,9 +374,9 @@ public class DisplaySettingsReceiver extends BroadcastReceiver implements View.O
                 return true;
 //                    break;
             } else if (id == R.id.rl_sharpness) {
-                Log.d(TAG, "锐度 向右");
+                LogUtils.d(TAG, "锐度 向右");
                 if (mSharpness == 100) {
-                    Log.d(TAG, "锐度 向右不执行");
+                    LogUtils.d(TAG, "锐度 向右不执行");
                     return false;
                 }
 
@@ -508,9 +509,9 @@ public class DisplaySettingsReceiver extends BroadcastReceiver implements View.O
 
             updateSaturation(true);
         } else if (id == R.id.saturation_left) {
-            Log.d(TAG, "饱和度 向左");
+            LogUtils.d(TAG, "饱和度 向左");
             if (mCurSaturation == 1) {
-                Log.d(TAG, "饱和度 向左不执行");
+                LogUtils.d(TAG, "饱和度 向左不执行");
                 return;
             }
 
@@ -529,9 +530,9 @@ public class DisplaySettingsReceiver extends BroadcastReceiver implements View.O
 
             updateSaturation(true);
         } else if (id == R.id.rl_sharpness) {
-            Log.d(TAG, "锐度 向右");
+            LogUtils.d(TAG, "锐度 向右");
             if (mSharpness == 100) {
-                Log.d(TAG, "锐度 向右不执行");
+                LogUtils.d(TAG, "锐度 向右不执行");
                 return;
             }
 
@@ -550,9 +551,9 @@ public class DisplaySettingsReceiver extends BroadcastReceiver implements View.O
 
             updateSharpness(true);
         } else if (id == R.id.sharpness_right) {
-            Log.d(TAG, "锐度 向右");
+            LogUtils.d(TAG, "锐度 向右");
             if (mSharpness == 100) {
-                Log.d(TAG, "锐度 向右不执行");
+                LogUtils.d(TAG, "锐度 向右不执行");
                 return;
             }
 

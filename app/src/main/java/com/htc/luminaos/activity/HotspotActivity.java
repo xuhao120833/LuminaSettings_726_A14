@@ -27,6 +27,7 @@ import com.android.internal.annotations.VisibleForTesting;
 import com.htc.luminaos.R;
 import com.htc.luminaos.databinding.ActivityHotspotBinding;
 import com.htc.luminaos.receiver.HotspotReceiver;
+import com.htc.luminaos.utils.LogUtils;
 import com.htc.luminaos.utils.ToastUtil;
 import com.htc.luminaos.utils.WifiHotUtil;
 import com.htc.luminaos.widget.HotspotNameDialog;
@@ -239,7 +240,7 @@ public class HotspotActivity extends BaseActivity implements View.OnKeyListener 
             apBand = apBand == 1 ? 0 : 1;
             hotspotBinding.frequencyTv.setText(apBandArray[apBand]);
             writeConfig();
-            Log.d(TAG, " 确认键调整");
+            LogUtils.d(TAG, " 确认键调整");
         } else if (id == R.id.rl_enter) {
             if (!hotspotBinding.rlHotspotSwitch.isEnabled())
                 return;
@@ -274,7 +275,7 @@ public class HotspotActivity extends BaseActivity implements View.OnKeyListener 
             if (mWifiConfig != null && wifiHotUtil != null) {
 
                 if (mWifiManager.getWifiApState() == WifiManager.WIFI_AP_STATE_ENABLED) {
-                    Log.d("TetheringSettings",
+                    LogUtils.d("TetheringSettings",
                             "Wifi AP config changed while enabled, stop and restart");
                     mRestartWifiApAfterConfigChange = true;
                     mConnectivityManager
@@ -328,7 +329,7 @@ public class HotspotActivity extends BaseActivity implements View.OnKeyListener 
         if (mWifiConfig != null && wifiHotUtil != null) {
 
             if (mWifiManager.getWifiApState() == WifiManager.WIFI_AP_STATE_ENABLED) {
-                Log.d("TetheringSettings",
+                LogUtils.d("TetheringSettings",
                         "Wifi AP config changed while enabled, stop and restart");
                 mRestartWifiApAfterConfigChange = true;
                 mConnectivityManager
@@ -379,7 +380,7 @@ public class HotspotActivity extends BaseActivity implements View.OnKeyListener 
             } else if (id == R.id.rl_frequency) {
                 apBand = apBand == 1 ? 0 : 1;
                 hotspotBinding.frequencyTv.setText(apBandArray[apBand]);
-                Log.d(TAG, " 向左调整");
+                LogUtils.d(TAG, " 向左调整");
                 writeConfig();
                 return true;
 //                    break;
@@ -399,7 +400,7 @@ public class HotspotActivity extends BaseActivity implements View.OnKeyListener 
                 apBand = apBand == 1 ? 0 : 1;
                 hotspotBinding.frequencyTv.setText(apBandArray[apBand]);
                 writeConfig();
-                Log.d(TAG, " 向右调整");
+                LogUtils.d(TAG, " 向右调整");
                 return true;
 //                    break;
             }
@@ -470,7 +471,7 @@ public class HotspotActivity extends BaseActivity implements View.OnKeyListener 
             @Override
             public void aPState(int state) {
                 // 便携式热点的状态为：10---正在关闭；11---已关闭；12---正在开启；13---已开启
-                Log.i(TAG, "state==" + state);
+                LogUtils.i(TAG, "state==" + state);
                 switch (state) {
                     case 13:
                         initHotspotState();
@@ -543,12 +544,12 @@ public class HotspotActivity extends BaseActivity implements View.OnKeyListener 
 
         @Override
         public void onTetheringStarted() {
-            Log.i("hxdmsg", " execute onTetheringStarted");
+            LogUtils.i("hxdmsg", " execute onTetheringStarted");
         }
 
         @Override
         public void onTetheringFailed() {
-            Log.i("hxdmsg", " execute onThtheringFailed");
+            LogUtils.i("hxdmsg", " execute onThtheringFailed");
         }
 
 
@@ -579,7 +580,7 @@ public class HotspotActivity extends BaseActivity implements View.OnKeyListener 
         @Override
         public void onReceive(Context content, Intent intent) {
             String action = intent.getAction();
-            Log.d(TAG,
+            LogUtils.d(TAG,
                     "updating display config due to receiving broadcast action "
                             + action);
             // updateDisplayWithNewConfig();

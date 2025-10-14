@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
+import com.htc.luminaos.utils.LogUtils;
+
 public class UnlockReceiver extends BroadcastReceiver {
 
     private static String TAG = "UnlockReceiver";
@@ -18,7 +20,7 @@ public class UnlockReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        Log.d(TAG, "收到 ACTION_USER_UNLOCKED");
+        LogUtils.d(TAG, "收到 ACTION_USER_UNLOCKED");
         if (Intent.ACTION_USER_UNLOCKED.equals(intent.getAction())) {
             unlockCallBack.unLock();
         }

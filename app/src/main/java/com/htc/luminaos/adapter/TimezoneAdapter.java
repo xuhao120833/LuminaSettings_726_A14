@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.htc.luminaos.R;
 import com.htc.luminaos.utils.Contants;
+import com.htc.luminaos.utils.LogUtils;
 import com.htc.luminaos.utils.ScrollUtils;
 
 import java.util.ArrayList;
@@ -72,7 +73,7 @@ public class TimezoneAdapter extends RecyclerView.Adapter<TimezoneAdapter.MyView
             @Override
             public void onClick(View v) {
                 String timezone = (String) map.get(Contants.KEY_ID);
-                Log.d(TAG, " 切換时区 " + timezone);
+                LogUtils.d(TAG, " 切換时区 " + timezone);
                 alarm.setTimeZone(timezone);
                 setCurrentPosition(i);
                 notifyDataSetChanged();

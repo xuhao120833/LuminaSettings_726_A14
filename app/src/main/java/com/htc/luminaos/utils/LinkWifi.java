@@ -71,8 +71,8 @@ public class LinkWifi {
         if (existingConfigs != null && existingConfigs.size() > 0) {
 
             for (WifiConfiguration existingConfig : existingConfigs) {
-                //Log.i("zouguanrong","---1-->"+existingConfig.SSID);
-                //Log.i("zouguanrong","---2-->"+String.valueOf(existingConfig.networkId));
+                //LogUtils.i("zouguanrong","---1-->"+existingConfig.SSID);
+                //LogUtils.i("zouguanrong","---2-->"+String.valueOf(existingConfig.networkId));
                 if (existingConfig.SSID.toString().equals("\"" + SSID + "\"")) {
                     return existingConfig;
                 }
@@ -278,7 +278,7 @@ public class LinkWifi {
 
         WifiConfiguration config = this.IsExsits(SSID);
         if (config != null) {
-            // Log.w("Wmt", "####之前配置过这个网络，删掉它");
+            // LogUtils.w("Wmt", "####之前配置过这个网络，删掉它");
             // wifiManager.removeNetwork(config.networkId); // 如果之前配置过这个网络，删掉它
 
             // 本机之前配置过此wifi热点，调整优先级后，直接返回
@@ -310,7 +310,7 @@ public class LinkWifi {
             config.wepTxKeyIndex = 0;
             ShareUtil.put(context,SSID,"NONE");
         } else if (type == WifiCipherType.WIFI_CIPHER_WEP) {
-            Log.w("Wmt", "WEP加密，密码" + password);
+            LogUtils.d("Wmt", "WEP加密，密码" + password);
             config.preSharedKey = "\"" + password + "\"";
             config.hiddenSSID = true;
             config.allowedAuthAlgorithms

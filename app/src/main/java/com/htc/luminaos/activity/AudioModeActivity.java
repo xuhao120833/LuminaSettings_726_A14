@@ -15,6 +15,7 @@ import com.htc.luminaos.MyApplication;
 import com.htc.luminaos.R;
 import com.htc.luminaos.databinding.ActivityAudioModeBinding;
 import com.htc.luminaos.databinding.ActivityPictureModeBinding;
+import com.htc.luminaos.utils.LogUtils;
 import com.htc.luminaos.utils.ReflectUtil;
 import com.htc.luminaos.utils.Utils;
 import com.softwinner.PQControl;
@@ -165,7 +166,7 @@ public class AudioModeActivity extends BaseActivity implements View.OnKeyListene
 
     private void initData() {
         sound_mode = getSettingModeValue();
-        Log.d(TAG, "initData sound_mode " + sound_mode);
+        LogUtils.d(TAG, "initData sound_mode " + sound_mode);
         activityAudioModeBinding.audioModeTv.setText(soundMode_name[sound_mode]);
         updateAllEQValue();
         updateAudioStatus();
@@ -611,9 +612,9 @@ public class AudioModeActivity extends BaseActivity implements View.OnKeyListene
         if (mAudioManagerEx == null) {
             mAudioManagerEx = new AudioManagerEx(this);
         }
-        Log.d(TAG, "getSettingIntValue ");
+        LogUtils.d(TAG, "getSettingIntValue ");
         tempval = mAudioManagerEx.getAudioParameters(AudioSettingParams.SW_PEQ_PRE_MODE);
-        Log.d(TAG, "getSettingIntValue get value: " + tempval);
+        LogUtils.d(TAG, "getSettingIntValue get value: " + tempval);
         if (tempval != null && tempval.length() > 0) {
             value = Integer.parseInt(tempval);
         }
@@ -624,14 +625,14 @@ public class AudioModeActivity extends BaseActivity implements View.OnKeyListene
         if (mAudioManagerEx == null) {
             mAudioManagerEx = new AudioManagerEx(this);
         }
-        Log.d(TAG, "updateSettingModeValue value " + value);
+        LogUtils.d(TAG, "updateSettingModeValue value " + value);
         mAudioManagerEx.setAudioParameters(AudioSettingParams.SW_PEQ_PRE_MODE, Integer.toString(value));
         return 0;
     }
 
     public int updateSettingIntValue(String key, int value) {
         int band = 0;
-        Log.d(TAG, "updateSettingValue key=" + key + " value=" + value);
+        LogUtils.d(TAG, "updateSettingValue key=" + key + " value=" + value);
         switch (key) {
             case KEY_BQ_1:
                 band = 1;
@@ -673,7 +674,7 @@ public class AudioModeActivity extends BaseActivity implements View.OnKeyListene
     private int getPEQIntValue(String key) {
         int value = 0;
         int band = 0;
-        Log.d(TAG, "getSettingIntValue " + key);
+        LogUtils.d(TAG, "getSettingIntValue " + key);
         switch (key) {
             case KEY_BQ_1:
                 band = 1;
@@ -718,7 +719,7 @@ public class AudioModeActivity extends BaseActivity implements View.OnKeyListene
         }
         String bandval = Integer.toString(band) + ":" + value;
         mAudioManagerEx.setAudioParameters(AudioSettingParams.SW_PEQ_GAIN, bandval);
-        Log.d(TAG, "setAudioPEQValue item: band:value -> " + bandval);
+        LogUtils.d(TAG, "setAudioPEQValue item: band:value -> " + bandval);
         return 0;
     }
 
@@ -730,12 +731,12 @@ public class AudioModeActivity extends BaseActivity implements View.OnKeyListene
                 mAudioManagerEx = new AudioManagerEx(this);
             }
             tempval = mAudioManagerEx.getAudioParameters(AudioSettingParams.SW_PEQ_GAIN);
-            Log.d(TAG, "getAudioPEQValue: " + tempval);
+            LogUtils.d(TAG, "getAudioPEQValue: " + tempval);
             if (tempval != null && tempval.length() > 0) {
                 String[] tempArray = tempval.split(",");
                 value = Integer.parseInt(tempArray[band - 1]);
             }
-            Log.d(TAG, "getAudioPEQValue band=" + band + ", value=" + value);
+            LogUtils.d(TAG, "getAudioPEQValue band=" + band + ", value=" + value);
             return value;
         } catch (Exception e) {
             e.printStackTrace();

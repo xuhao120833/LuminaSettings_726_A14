@@ -18,6 +18,7 @@ import androidx.core.app.NotificationCompat;
 
 import com.htc.luminaos.R;
 import com.htc.luminaos.utils.Contants;
+import com.htc.luminaos.utils.LogUtils;
 import com.htc.luminaos.utils.ShareUtil;
 import com.htc.luminaos.widget.ShutDownDialog;
 
@@ -43,7 +44,7 @@ public class TimeOffService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        Log.d(TAG, "onCreate()");
+        LogUtils.d(TAG, "onCreate()");
         sharedPreferences = ShareUtil.getInstans(this);
         startForeground(1, createMinimalNotification());
     }
@@ -51,7 +52,7 @@ public class TimeOffService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         initData(intent);
-        Log.d(TAG, "onStartCommand()");
+        LogUtils.d(TAG, "onStartCommand()");
 
         if(timer != null) {
             timer.cancel();
@@ -80,7 +81,7 @@ public class TimeOffService extends Service {
                 stopSelf();
         }
         offTime = sharedPreferences.getInt(Contants.TimeOffTime, 0);
-        Log.d(TAG, " initData offTime " + offTime);
+        LogUtils.d(TAG, " initData offTime " + offTime);
     }
 
     private void restartTimer() {
@@ -105,9 +106,9 @@ public class TimeOffService extends Service {
             public void run() {
                 String topActivity = getTopActivity();
                 if(!topActivity.isEmpty() && !topActivity.contains("com.htc.hyk_test")) {
-                    Log.d(TAG, "createNewTimerTask topActivity " + topActivity);
+                    LogUtils.d(TAG, "createNewTimerTask topActivity " + topActivity);
                     if (0 < offTime && offTime <= 10) {
-                        Log.d(TAG, " createNewTimerTask offTime " + offTime);
+                        LogUtils.d(TAG, " createNewTimerTask offTime " + offTime);
                         handler.post(new Runnable() {
                             @Override
                             public void run() {
@@ -139,7 +140,7 @@ public class TimeOffService extends Service {
                     offTime -= 10;
                 } else {
                     //do nothing
-                    Log.d(TAG,"createNewTimerTask com.htc.hyk_test do nothing");
+                    LogUtils.d(TAG,"createNewTimerTask com.htc.hyk_test do nothing");
                 }
             }
         };
@@ -153,13 +154,13 @@ public class TimeOffService extends Service {
 
     @Override
     public boolean stopService(Intent name) {
-        Log.d(TAG, "stopService()");
+        LogUtils.d(TAG, "stopService()");
         return super.stopService(name);
     }
 
     @Override
     public void onDestroy() {
-        Log.d(TAG, "onDestroy()");
+        LogUtils.d(TAG, "onDestroy()");
         if (timer != null) {
             timer.cancel();
             timer = null;
@@ -172,13 +173,13 @@ public class TimeOffService extends Service {
             am = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
         List<ActivityManager.RunningTaskInfo> taskList = am.getRunningTasks(1);
         if (taskList == null || taskList.isEmpty()) {
-            Log.e(TAG, "No running tasks found");
+            LogUtils.e(TAG, "No running tasks found");
             return "";
         }
         ComponentName cn = taskList.get(0).topActivity;
         if(cn == null)
             return "";
-        Log.d(TAG, "getTopActivity = " + cn.getClassName());
+        LogUtils.d(TAG, "getTopActivity = " + cn.getClassName());
         return cn.getClassName();
     }
 

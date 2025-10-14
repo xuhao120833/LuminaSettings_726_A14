@@ -204,7 +204,7 @@ public class KeystoneUtils_726 {
                 } else if ((y + xy_OppositeTo[1]) > minV_size) {
                     y = minV_size - xy_OppositeTo[1];
                 }
-                Log.d("test3", "x " + x + "y" + y);
+                LogUtils.d("test3", "x " + x + "y" + y);
                 //y = lcd_h - y;
                 lt_X = x;
                 lt_Y = y;
@@ -293,27 +293,27 @@ public class KeystoneUtils_726 {
     private static void writeParcelToFlinger(int ltx, int lty, int rtx, int rty, int lbx, int lby, int rbx, int rby) {
         try {
 //            AwTvDisplayManager.getInstance().setKeystoreValue(100.0f,100.0f,ltx, lty, rtx, rty, lbx, lby, rbx, rby);
-            Log.d(TAG," writeParcelToFlinger ");
+            LogUtils.d(TAG," writeParcelToFlinger ");
             AwTvDisplayManager.getInstance().setKeystoreValue(100.0f,100.0f,lbx, lby, rbx, rby,ltx, lty, rtx, rty);
         } catch (Exception ex) {
-            Log.i(TAG, "error talk with surfaceflinger service");
+            LogUtils.i(TAG, "error talk with surfaceflinger service");
         }
     }
 
 
     public static void UpdateKeystone() {
-        Log.d("UpdateKeystone", "rb_X " + rb_X + "rb_Y " + rb_Y);
+        LogUtils.d("UpdateKeystone", "rb_X " + rb_X + "rb_Y " + rb_Y);
         writeParcelToFlinger(lt_X, lt_Y, rt_X, rt_Y, lb_X, lb_Y, rb_X, rb_Y);
     }
 
     public static void UpdateKeystoneZOOMNC() {
         SystemProperties.set("persist.sys.zoom.value", lb_X + "," + lb_Y + "," + lt_X + "," + lt_Y + "," + rt_X + "," + rt_Y + "," + rb_X + "," + rb_Y);
-        Log.d("UpdateKeystoneZOOMNC ", lb_X + "," + lb_Y + "," + lt_X + "," + lt_Y + "," + rt_X + "," + rt_Y + "," + rb_X + "," + rb_Y);
+        LogUtils.d("UpdateKeystoneZOOMNC ", lb_X + "," + lb_Y + "," + lt_X + "," + lt_Y + "," + rt_X + "," + rt_Y + "," + rb_X + "," + rb_Y);
 //        writeParcelToFlinger(lt_X, lt_Y, rt_X, rt_Y, lb_X, lb_Y, rb_X, rb_Y);
     }
 
     public static void UpdateKeystoneZOOM(boolean write) { //有摄像头
-        Log.d("UpdateKeystoneZOOM before ", lb_X + "," + lb_Y + "," + lt_X + "," + lt_Y + "," + rt_X + "," + rt_Y + "," + rb_X + "," + rb_Y);
+        LogUtils.d("UpdateKeystoneZOOM before ", lb_X + "," + lb_Y + "," + lt_X + "," + lt_Y + "," + rt_X + "," + rt_Y + "," + rb_X + "," + rb_Y);
         if (!write) {
             SystemProperties.set("persist.sys.zoom.value", lb_X + "," + lb_Y + "," + lt_X + "," + lt_Y + "," + rt_X + "," + rt_Y + "," + rb_X + "," + rb_Y);
             return;
@@ -327,11 +327,11 @@ public class KeystoneUtils_726 {
         float oflby = lb_Y / 1000.000f;
         float ofrbx = rb_X / 1000.000f;
         float ofrby = rb_Y / 1000.000f;
-        Log.d("UpdateKeystoneZOOM", " lcd_w " + lcd_w + " lcd_h " + lcd_h);
+        LogUtils.d("UpdateKeystoneZOOM", " lcd_w " + lcd_w + " lcd_h " + lcd_h);
 
         writeParcelToFlinger((int) (ofltx * lcd_w), (int) (oflty * lcd_h), (int) (ofrtx * lcd_w), (int) (ofrty * lcd_h), (int) (oflbx * lcd_w), (int) (oflby * lcd_h), (int) (ofrbx * lcd_w), (int) (ofrby * lcd_h));
         SystemProperties.set("persist.sys.zoom.value", lb_X + "," + lb_Y + "," + lt_X + "," + lt_Y + "," + rt_X + "," + rt_Y + "," + rb_X + "," + rb_Y);
-        Log.d("UpdateKeystoneZOOM after ", lb_X + "," + lb_Y + "," + lt_X + "," + lt_Y + "," + rt_X + "," + rt_Y + "," + rb_X + "," + rb_Y);
+        LogUtils.d("UpdateKeystoneZOOM after ", lb_X + "," + lb_Y + "," + lt_X + "," + lt_Y + "," + rt_X + "," + rt_Y + "," + rb_X + "," + rb_Y);
     }
 
     public static void setKeystoneNormalXY(int cur_mode, int new_mode) {
@@ -575,7 +575,7 @@ public class KeystoneUtils_726 {
         rb_X = tpData[6];
         rb_Y = tpData[7];
         SystemProperties.set("persist.sys.zoom.value", lb_X + "," + lb_Y + "," + lt_X + "," + lt_Y + "," + rt_X + "," + rt_Y + "," + rb_X + "," + rb_Y);
-        Log.d("UpdateKeystoneZOOMNC ", lb_X + "," + lb_Y + "," + lt_X + "," + lt_Y + "," + rt_X + "," + rt_Y + "," + rb_X + "," + rb_Y);
+        LogUtils.d("UpdateKeystoneZOOMNC ", lb_X + "," + lb_Y + "," + lt_X + "," + lt_Y + "," + rt_X + "," + rt_Y + "," + rb_X + "," + rb_Y);
         writeParcelToFlinger(lt_X, lt_Y, rt_X, rt_Y, lb_X, lb_Y, rb_X, rb_Y);
 
 //        DecimalFormat df = new DecimalFormat("0");//格式化小数

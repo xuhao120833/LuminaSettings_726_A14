@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.htc.luminaos.R;
 import com.htc.luminaos.utils.ClsUtils;
+import com.htc.luminaos.utils.LogUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -94,9 +95,9 @@ public class BluetoothFoundAdapter extends RecyclerView.Adapter<BluetoothFoundAd
 //                            device);
                         boolean result = startPairing(device);
                         if (result) {
-                            Log.i(TAG, "配对成功!");
+                            LogUtils.i(TAG, "配对成功!");
                         } else {
-                            Log.i(TAG, "配对失败!");
+                            LogUtils.i(TAG, "配对失败!");
                         }
                     } catch (Exception e) {
                         e.printStackTrace();

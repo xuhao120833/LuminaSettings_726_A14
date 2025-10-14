@@ -15,6 +15,7 @@ import com.htc.luminaos.R;
 import com.htc.luminaos.activity.MainActivity;
 import com.htc.luminaos.entry.Language;
 import com.htc.luminaos.receiver.DisplaySettingsReceiver;
+import com.htc.luminaos.utils.LogUtils;
 import com.htc.luminaos.utils.ScrollUtils;
 import com.htc.luminaos.utils.Utils;
 
@@ -69,7 +70,7 @@ public class LanguageAdapter  extends RecyclerView.Adapter<LanguageAdapter.MyVie
             cur_language = Locale.getDefault().getLanguage();
             locale = language.getLocale().getLanguage();
         }
-        Log.d(TAG," 语言环境 "+cur_language+" "+locale);
+        LogUtils.d(TAG," 语言环境 "+cur_language+" "+locale);
         if (cur_language.equals(locale)){
             myViewHolder.status.setVisibility(View.VISIBLE);
         }else {
@@ -84,7 +85,7 @@ public class LanguageAdapter  extends RecyclerView.Adapter<LanguageAdapter.MyVie
 //                } else {
 //                    cur_language = Locale.getDefault().getLanguage();
 //                }
-                Log.d(TAG,"cur_language "+cur_language+" language.get "+language.getLocale().getLanguage()+language.getLocale().getCountry());
+                LogUtils.d(TAG,"cur_language "+cur_language+" language.get "+language.getLocale().getLanguage()+language.getLocale().getCountry());
                 if (!cur_language.equals(language.getLocale().getLanguage()+language.getLocale().getCountry())) {
                     LocalePicker.updateLocale(language.getLocale());
                     setCur_language(language.getLocale().getLanguage()+language.getLocale().getCountry());

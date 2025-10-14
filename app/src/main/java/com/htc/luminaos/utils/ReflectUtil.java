@@ -37,13 +37,13 @@ public class ReflectUtil {
 
     public static int invokeGet_angle_offset(){
         try {
-            Log.d(TAG," 执行invokeGet_angle_offset ");
+            LogUtils.d(TAG," 执行invokeGet_angle_offset ");
             Method method = PrjScreen.class.getMethod("get_angle_offset");
-            Log.d(TAG," 执行invokeGet_angle_offset 返回值"+(int) method.invoke(PrjScreen.class));
+            LogUtils.d(TAG," 执行invokeGet_angle_offset 返回值"+(int) method.invoke(PrjScreen.class));
             return (int) method.invoke(PrjScreen.class);
 
         } catch (Exception e) {
-            Log.d(TAG," 执行invokeGet_angle_offset 报错了");
+            LogUtils.d(TAG," 执行invokeGet_angle_offset 报错了");
             e.printStackTrace();
         }
         return 0;

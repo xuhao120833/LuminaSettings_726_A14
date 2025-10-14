@@ -28,7 +28,7 @@ public class TimerManager {
             startTime = System.currentTimeMillis();
             isRunning = true;
             handler.post(timerRunnable); // 开始循环
-            Log.d(TAG, "Timer started.");
+            LogUtils.d(TAG, "Timer started.");
         }
     }
 
@@ -38,7 +38,7 @@ public class TimerManager {
             isRunning = false;
             handler.removeCallbacks(timerRunnable); // 移除回调
             elapsedTime = System.currentTimeMillis() - startTime; // 计算最终时间
-            Log.d(TAG, "Timer stopped.");
+            LogUtils.d(TAG, "Timer stopped.");
         }
     }
 
@@ -46,20 +46,20 @@ public class TimerManager {
 //    public long getElapsedTime() {
 //        long seconds = elapsedTime / 1000;
 //        long milliseconds = elapsedTime % 1000;
-//        Log.d(TAG, "TimerManager已经用了多少时间：" + seconds + " seconds " + milliseconds + " ms");
+//        LogUtils.d(TAG, "TimerManager已经用了多少时间：" + seconds + " seconds " + milliseconds + " ms");
 //        return elapsedTime;
 //    }
 
     public void getElapsedTime() {
         long seconds = elapsedTime / 1000;
         long milliseconds = elapsedTime % 1000;
-        Log.d(TAG, "TimerManager已经用了多少时间：" + seconds + " seconds " + milliseconds + " ms");
+        LogUtils.d(TAG, "TimerManager已经用了多少时间：" + seconds + " seconds " + milliseconds + " ms");
     }
 
     // 打印已用时间
     public void printElapsedTime() {
         long seconds = elapsedTime / 1000;
         long milliseconds = elapsedTime % 1000;
-        Log.d(TAG, "TimerManager最终用了多少时间：" + seconds + " seconds " + milliseconds + " ms");
+        LogUtils.d(TAG, "TimerManager最终用了多少时间：" + seconds + " seconds " + milliseconds + " ms");
     }
 }

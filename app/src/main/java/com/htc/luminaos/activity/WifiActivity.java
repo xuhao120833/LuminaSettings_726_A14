@@ -39,6 +39,7 @@ import com.htc.luminaos.adapter.WifiFoundAdapter;
 import com.htc.luminaos.databinding.ActivityWifiBinding;
 import com.htc.luminaos.receiver.WifiChanagerReceiver;
 import com.htc.luminaos.receiver.WifiEnabledReceiver;
+import com.htc.luminaos.utils.LogUtils;
 import com.htc.luminaos.utils.ShareUtil;
 import com.htc.luminaos.utils.Utils;
 import com.htc.luminaos.widget.AddNetWorkDialog;
@@ -89,7 +90,7 @@ public class WifiActivity extends BaseActivity implements WifiEnabledReceiver.Wi
 
                 //wifi已经刷新完毕
                 if (!action.isEmpty() && action.equals(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION) && !newWifiList.isEmpty()) {
-                    Log.d(TAG,"startanim(false) "+action);
+                    LogUtils.d(TAG,"startanim(false) "+action);
                     startanim(false);
                     action = "";
                 }
@@ -210,14 +211,14 @@ public class WifiActivity extends BaseActivity implements WifiEnabledReceiver.Wi
     };
 
     private void showErrorDialog() {
-        Log.d(TAG, " showErrorDialog");
+        LogUtils.d(TAG, " showErrorDialog");
         AlertDialog dialog = new AlertDialog.Builder(this)
                 .setTitle(getString(R.string.hint)) // 对话框标题
                 .setMessage(getString(R.string.Authentication_error)) // 对话框内容
                 .setPositiveButton(getString(R.string.enter), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Log.d(TAG, " showErrorDialog onClick dialog.dismiss()");
+                        LogUtils.d(TAG, " showErrorDialog onClick dialog.dismiss()");
                         dialog.dismiss(); // 点击“确定”按钮时，关闭对话框
                     }
                 })
@@ -227,7 +228,7 @@ public class WifiActivity extends BaseActivity implements WifiEnabledReceiver.Wi
             @Override
             public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
                 if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
-                    Log.d(TAG, " showErrorDialog KEYCODE_BACK dialog.dismiss()");
+                    LogUtils.d(TAG, " showErrorDialog KEYCODE_BACK dialog.dismiss()");
                     dialog.dismiss(); // 按下返回键时关闭对话框
                     return true; // 表示已经处理了返回键事件
                 }
@@ -287,7 +288,7 @@ public class WifiActivity extends BaseActivity implements WifiEnabledReceiver.Wi
         if (wifiList == null)
             return;
         boolean isAdd;
-        Log.d("xuhao", "wifiList.size() " + wifiList.size());
+        LogUtils.d("xuhao", "wifiList.size() " + wifiList.size());
         if (wifiList.size() > 0) {
             for (int i = 0; i < wifiList.size(); i++) {
                 isAdd = true;
@@ -401,7 +402,7 @@ public class WifiActivity extends BaseActivity implements WifiEnabledReceiver.Wi
 
     @Override
     public void wifiStatueChange(int state) {
-        Log.d("state", String.valueOf(state));
+        LogUtils.d("state", String.valueOf(state));
         if (state == 2 && connectingFlag) {
             handler.postDelayed(new Runnable() {
                 @Override
@@ -422,7 +423,7 @@ public class WifiActivity extends BaseActivity implements WifiEnabledReceiver.Wi
 
     @Override
     public void openWifi() {
-        Log.d(TAG, "openWifi()");
+        LogUtils.d(TAG, "openWifi()");
         updateViewShow(true);
     }
 

@@ -15,16 +15,16 @@ public class StartupTimer {
 
     public static void print(String tag) {
         Long last = null;
-        Log.d(tag, "—— 启动耗时分析 ——");
+        LogUtils.d(tag, "—— 启动耗时分析 ——");
         for (Map.Entry<String, Long> entry : timestamps.entrySet()) {
             if (last == null) {
-                Log.d(tag, entry.getKey() + " at " + entry.getValue() + "ms");
+                LogUtils.d(tag, entry.getKey() + " at " + entry.getValue() + "ms");
             } else {
-                Log.d(tag, entry.getKey() + " + " + (entry.getValue() - last) + " ms");
+                LogUtils.d(tag, entry.getKey() + " + " + (entry.getValue() - last) + " ms");
             }
             last = entry.getValue();
         }
-        Log.d(tag, "—— 结束 ——");
+        LogUtils.d(tag, "—— 结束 ——");
     }
 
     public static void clear() {

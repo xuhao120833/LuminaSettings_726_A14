@@ -97,7 +97,7 @@ public class AppDetailDialog extends Dialog implements View.OnClickListener {
     }
 
     private void init() {
-        Log.d(TAG," 执行AppDetailDialog init");
+        LogUtils.d(TAG," 执行AppDetailDialog init");
         appDetailLayoutBinding = AppDetailLayoutBinding.inflate(LayoutInflater.from(mContext));
         /*View view = LayoutInflater.from(mContext).inflate(
                 R.layout.wifi_settings_layout, null);*/
@@ -206,12 +206,12 @@ public class AppDetailDialog extends Dialog implements View.OnClickListener {
                             LogUtils.d("appDetail","invalid..."+uuidStr);
                             uuid = StorageManager.UUID_DEFAULT;
                         }
-                        /*Log.d("AppLog", "storage:" + uuid + " : " + storageVolume.getDescription(context) + " : " + storageVolume.getState());
-                        Log.d("AppLog", "getFreeBytes:" + Formatter.formatShortFileSize(context, storageStatsManager.getFreeBytes(uuid)));
-                        Log.d("AppLog", "getTotalBytes:" + Formatter.formatShortFileSize(context, storageStatsManager.getTotalBytes(uuid)));
+                        /*LogUtils.d("AppLog", "storage:" + uuid + " : " + storageVolume.getDescription(context) + " : " + storageVolume.getState());
+                        LogUtils.d("AppLog", "getFreeBytes:" + Formatter.formatShortFileSize(context, storageStatsManager.getFreeBytes(uuid)));
+                        LogUtils.d("AppLog", "getTotalBytes:" + Formatter.formatShortFileSize(context, storageStatsManager.getTotalBytes(uuid)));
                         StorageStats storageStats = storageStatsManager.queryStatsForPackage(uuid, packageName, user);
-                        /*Log.d("AppLog", "storage stats for app of package name:" + packageName + " : ");
-                        Log.d("AppLog", "getAppBytes:" + Formatter.formatShortFileSize(context, storageStats.getAppBytes()) + " getCacheBytes:" + Formatter.formatShortFileSize(context,
+                        /*LogUtils.d("AppLog", "storage stats for app of package name:" + packageName + " : ");
+                        LogUtils.d("AppLog", "getAppBytes:" + Formatter.formatShortFileSize(context, storageStats.getAppBytes()) + " getCacheBytes:" + Formatter.formatShortFileSize(context,
                                 storageStats.getCacheBytes()) + " getDataBytes:" + Formatter.formatShortFileSize(context, storageStats.getDataBytes()));
                         Message message = mHandler.obtainMessage();
                         message.what=1;
@@ -223,8 +223,8 @@ public class AppDetailDialog extends Dialog implements View.OnClickListener {
                     }*/
 
                     StorageStats storageStats = storageStatsManager.queryStatsForPackage(StorageManager.UUID_DEFAULT, packageName, user);
-                        /*Log.d("AppLog", "storage stats for app of package name:" + packageName + " : ");
-                        Log.d("AppLog", "getAppBytes:" + Formatter.formatShortFileSize(context, storageStats.getAppBytes()) + " getCacheBytes:" + Formatter.formatShortFileSize(context,
+                        /*LogUtils.d("AppLog", "storage stats for app of package name:" + packageName + " : ");
+                        LogUtils.d("AppLog", "getAppBytes:" + Formatter.formatShortFileSize(context, storageStats.getAppBytes()) + " getCacheBytes:" + Formatter.formatShortFileSize(context,
                                 storageStats.getCacheBytes()) + " getDataBytes:" + Formatter.formatShortFileSize(context, storageStats.getDataBytes()));*/
                     Message message = mHandler.obtainMessage();
                     message.what=1;
@@ -260,7 +260,7 @@ public class AppDetailDialog extends Dialog implements View.OnClickListener {
         try {
             context.startActivity(intent);
         } catch (ActivityNotFoundException e) {
-            Log.e("AppLog", "Start usage access settings activity fail!", e);
+            LogUtils.e("AppLog", "Start usage access settings activity fail! "+e);
         }
     }
 

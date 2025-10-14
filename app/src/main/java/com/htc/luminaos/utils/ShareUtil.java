@@ -108,7 +108,7 @@ public class ShareUtil {
 
 
     public static void clear(Context context) {
-        Log.d(TAG, " clear清空SharedPreferences");
+        LogUtils.d(TAG, " clear清空SharedPreferences");
         SharedPreferences sp = getInstans(context);
         SharedPreferences.Editor editor = sp.edit();
         editor.clear();

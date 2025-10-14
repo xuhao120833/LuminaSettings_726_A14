@@ -37,11 +37,11 @@ public class ClsUtils {
         try {
             Method[] hideMethod = clsShow.getMethods();
             for (Method name : hideMethod) {
-                Log.e("method name", name.getName());
+                LogUtils.e("method name", name.getName());
             }
             Field[] allFields = clsShow.getFields();
             for (Field name2 : allFields) {
-                Log.e("Field name", name2.getName());
+                LogUtils.e("Field name", name2.getName());
             }
         } catch (SecurityException e) {
             e.printStackTrace();

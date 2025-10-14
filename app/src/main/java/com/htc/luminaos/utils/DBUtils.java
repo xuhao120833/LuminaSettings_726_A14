@@ -69,7 +69,7 @@ public class DBUtils extends SQLiteOpenHelper {
         try {
             // TODO Auto-generated method stub
             //创建SpecialApps
-            Log.d(TAG, " 创建 specialApps 表 ");
+            LogUtils.d(TAG, " 创建 specialApps 表 ");
             String specialApps_sql = "CREATE TABLE " + TABLENAME_SPECIALAPPS + " (" +
                     "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     "appName TEXT , " +
@@ -81,20 +81,20 @@ public class DBUtils extends SQLiteOpenHelper {
 
 
             // 创建我的收藏表
-            Log.d(TAG, " 创建apps数据表 ");
+            LogUtils.d(TAG, " 创建apps数据表 ");
             String favorites_sql = "CREATE TABLE " + TABLENAME_FAVORITES
                     + " ( id integer primary key, appName TEXT, packagename text, iconData BLOB );";
             db.execSQL(favorites_sql);
 
 
-            Log.d(TAG, " 创建filterApps数据表 ");
+            LogUtils.d(TAG, " 创建filterApps数据表 ");
             String filterApps_sql = "CREATE TABLE " + TABLENAME_FILTERAPPS + " (" +
                     "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     "packageName TEXT);";
             db.execSQL(filterApps_sql);
 
             // 创建statusBar表
-            Log.d(TAG, " 创建statusBar数据表 ");
+            LogUtils.d(TAG, " 创建statusBar数据表 ");
             String statusBar_sql = "CREATE TABLE " + TABLENAME_STATUSBAR + " (" +
                     "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     "tag TEXT , " +
@@ -104,7 +104,7 @@ public class DBUtils extends SQLiteOpenHelper {
             db.execSQL(statusBar_sql);
 
             // 创建mainApp表
-            Log.d(TAG, " 创建mainApp数据表 ");
+            LogUtils.d(TAG, " 创建mainApp数据表 ");
             String mainApp_sql = "CREATE TABLE " + TABLENAME_MAINAPP + " (" +
                     "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     "tag TEXT , " +
@@ -115,7 +115,7 @@ public class DBUtils extends SQLiteOpenHelper {
 
 
             // 创建listModules表
-            Log.d(TAG, " 创建 listModules 表 ");
+            LogUtils.d(TAG, " 创建 listModules 表 ");
             String listModules_sql = "CREATE TABLE " + TABLENAME_LISTMODULES + " (" +
                     "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     "tag TEXT , " +
@@ -126,7 +126,7 @@ public class DBUtils extends SQLiteOpenHelper {
 
 
             // 创建brand品牌表
-            Log.d(TAG, " 创建brand品牌表");
+            LogUtils.d(TAG, " 创建brand品牌表");
             String brandLogo_sql = "CREATE TABLE " + TABLENAME_BRANDLOGO + " (" +
                     "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     "iconData BLOB );";
@@ -140,7 +140,7 @@ public class DBUtils extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
-        Log.d(TAG, " 执行onUpgrade ");
+        LogUtils.d(TAG, " 执行onUpgrade ");
         // TODO Auto-generated method stub
         String favorites_sql = "DROP TABLE IF EXISTS " + TABLENAME_SPECIALAPPS;
         db.execSQL(favorites_sql);
@@ -282,7 +282,7 @@ public class DBUtils extends SQLiteOpenHelper {
                 }
                 db.close();
             }
-            Log.d(TAG, "Shortcuts 读取iconDrawable " + iconDrawable);
+            LogUtils.d(TAG, "Shortcuts 读取iconDrawable " + iconDrawable);
             return iconDrawable;
         }
     }
@@ -311,7 +311,7 @@ public class DBUtils extends SQLiteOpenHelper {
                 }
                 db.close();
             }
-            Log.d(TAG, "Shortcuts 读取appName " + appName);
+            LogUtils.d(TAG, "Shortcuts 读取appName " + appName);
             return appName;
         }
     }
@@ -397,13 +397,13 @@ public class DBUtils extends SQLiteOpenHelper {
             SQLiteDatabase db = getWritableDatabase();
             SpecialApps specialApp = null; // 用于存储查询到的结果
             Cursor cursor = null;
-            Log.d(TAG, " querySpecialApps continent " + continent + " args " + countryCode);
+            LogUtils.d(TAG, " querySpecialApps continent " + continent + " args " + countryCode);
             try {
                 // 动态拼接 WHERE 条件  假定APPStre传来的数据是 亚洲|ZH
                 StringBuilder query = new StringBuilder("SELECT * FROM table_specialApps WHERE ");
                 List<String> args = new ArrayList<>();
                 if (continent != null && countryCode != null) { //第一轮精确查找，洲和国家同时满足
-                    Log.d(TAG, "querySpecialApps 首先第一种情况 精确匹配洲和国家码 ");
+                    LogUtils.d(TAG, "querySpecialApps 首先第一种情况 精确匹配洲和国家码 ");
                     query.append("continent = ? ");
                     args.add(continent); // 不再使用模糊匹配
                     query.append("AND ");
@@ -411,7 +411,7 @@ public class DBUtils extends SQLiteOpenHelper {
                     args.add(countryCode); // 精确匹配
                     cursor = db.rawQuery(query.toString(), args.toArray(new String[0]));
                     if (cursor == null || !cursor.moveToFirst()) { //第二轮只查找国家码，洲为空
-                        Log.d(TAG, "querySpecialApps 第二种情况 只匹配国家码");
+                        LogUtils.d(TAG, "querySpecialApps 第二种情况 只匹配国家码");
                         query.setLength(0); // 清空之前的查询
                         args.clear(); // 清空参数列表
                         query.append("SELECT * FROM table_specialApps WHERE ");
@@ -422,7 +422,7 @@ public class DBUtils extends SQLiteOpenHelper {
                         cursor = db.rawQuery(query.toString(), args.toArray(new String[0]));
                     }
                     if (cursor == null || !cursor.moveToFirst()) { //第三轮查找是否有同一个洲多个国家指定包含，如 亚洲，ZH|JA|TR 这种，指定了亚洲三个国家，对ZH也生效
-                        Log.d(TAG, "querySpecialApps 第三种情况 指定洲 ，如 亚洲,ZH|JA|KR，洲相同包含了ZH就行");
+                        LogUtils.d(TAG, "querySpecialApps 第三种情况 指定洲 ，如 亚洲,ZH|JA|KR，洲相同包含了ZH就行");
                         query.setLength(0); // 清空之前的查询
                         args.clear(); // 清空参数列表
                         // 使用 INSTR 实现包含逻辑
@@ -435,7 +435,7 @@ public class DBUtils extends SQLiteOpenHelper {
                         cursor = db.rawQuery(query.toString(), args.toArray(new String[0]));
                     }
                     if (cursor == null || !cursor.moveToFirst()) { //第四轮查找，查找洲相同，但是有指定非ZH图标的配置，例如亚洲,!JA 就对ZH生效
-                        Log.d(TAG, "querySpecialApps 第四种情况 亚洲,ZH 查找有没有让它生效的类似 亚洲,!JA 这种配置");
+                        LogUtils.d(TAG, "querySpecialApps 第四种情况 亚洲,ZH 查找有没有让它生效的类似 亚洲,!JA 这种配置");
                         // 第一次查询无结果，准备第二次查询
                         query.setLength(0); // 清空之前的查询
                         args.clear(); // 清空参数列表
@@ -450,7 +450,7 @@ public class DBUtils extends SQLiteOpenHelper {
                         cursor = db.rawQuery(query.toString(), args.toArray(new String[0]));
                     }
                     if (cursor == null || !cursor.moveToFirst()) { //第五轮查找，不指定洲，不同洲的国家放在一起，如ZH|RU|EN|
-                        Log.d(TAG, "querySpecialApps 第五种情况 不指定洲，不同洲放在一起 ZH|EN|RU");
+                        LogUtils.d(TAG, "querySpecialApps 第五种情况 不指定洲，不同洲放在一起 ZH|EN|RU");
                         query.setLength(0); // 清空之前的查询
                         args.clear(); // 清空参数列表
                         // 使用 INSTR 实现包含逻辑
@@ -462,7 +462,7 @@ public class DBUtils extends SQLiteOpenHelper {
                         cursor = db.rawQuery(query.toString(), args.toArray(new String[0]));
                     }
                     if (cursor == null || !cursor.moveToFirst()) { //第六轮查找，指定一个洲所有国家都生效的情况，即countryCode=""
-                        Log.d(TAG, "querySpecialApps 第六种情况 只指定一个洲，对洲内所有国家生效 ");
+                        LogUtils.d(TAG, "querySpecialApps 第六种情况 只指定一个洲，对洲内所有国家生效 ");
                         query.setLength(0); // 清空之前的查询
                         args.clear(); // 清空参数列表
                         query.append("SELECT * FROM table_specialApps WHERE ");
@@ -472,13 +472,13 @@ public class DBUtils extends SQLiteOpenHelper {
                         cursor = db.rawQuery(query.toString(), args.toArray(new String[0]));
                     }
                 } else if (continent != null && countryCode == null) { //应对 APPStore写值，其中有一个为空时的情况
-                    Log.d(TAG, "querySpecialApps AppStroe传来的countryCode 国家码为空");
+                    LogUtils.d(TAG, "querySpecialApps AppStroe传来的countryCode 国家码为空");
                     query.append("continent = ? ");
                     args.add(continent);
                     query.append(" AND (countryCode IS NULL OR countryCode = '') ");
                     cursor = db.rawQuery(query.toString(), args.toArray(new String[0]));
                 } else {
-                    Log.d(TAG, "querySpecialApps AppStroe传来的continent 洲为空");
+                    LogUtils.d(TAG, "querySpecialApps AppStroe传来的continent 洲为空");
 //                query.append("(continent IS NULL OR continent = '') ");
 //                query.append("AND ");
                     query.append("countryCode = ? ");
@@ -494,9 +494,9 @@ public class DBUtils extends SQLiteOpenHelper {
                     specialApp.setIconData(cursor.getBlob(cursor.getColumnIndexOrThrow("iconData")));
                     specialApp.setContinent(cursor.getString(cursor.getColumnIndexOrThrow("continent")));
                     specialApp.setCountryCode(cursor.getString(cursor.getColumnIndexOrThrow("countryCode")));
-                    Log.d(TAG, " querySpecialApps 查询到了结果 ");
+                    LogUtils.d(TAG, " querySpecialApps 查询到了结果 ");
                 } else {
-                    Log.d(TAG, " querySpecialApps 未查询到结果 ");
+                    LogUtils.d(TAG, " querySpecialApps 未查询到结果 ");
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -528,7 +528,7 @@ public class DBUtils extends SQLiteOpenHelper {
         synchronized (this) {
             SQLiteDatabase db = getWritableDatabase();
             try {
-                Log.d(TAG," clearSpecialAppsTableAndResetId 清空数据");
+                LogUtils.d(TAG," clearSpecialAppsTableAndResetId 清空数据");
                 db.execSQL("DELETE FROM " + TABLENAME_SPECIALAPPS);
                 db.execSQL("DELETE FROM sqlite_sequence WHERE name='" + TABLENAME_SPECIALAPPS + "';");
             } catch (Exception e) {
@@ -566,12 +566,12 @@ public class DBUtils extends SQLiteOpenHelper {
                 // 如果没有记录被更新，说明不存在这个 tag，执行插入操作
                 long code = db.insert(TABLENAME_STATUSBAR, null, values);
                 if (code == -1) {
-                    Log.d(TAG, "MainApp插入数据失败");
+                    LogUtils.d(TAG, "MainApp插入数据失败");
                 } else {
-                    Log.d(TAG, "MainApp插入数据成功，行ID：" + code);
+                    LogUtils.d(TAG, "MainApp插入数据成功，行ID：" + code);
                 }
             } else {
-                Log.d(TAG, "MainApp数据更新成功，更新行数：" + rowsAffected);
+                LogUtils.d(TAG, "MainApp数据更新成功，更新行数：" + rowsAffected);
             }
             db.close();
         }
@@ -598,7 +598,7 @@ public class DBUtils extends SQLiteOpenHelper {
                     String iconPath = cursor.getString(cursor.getColumnIndexOrThrow("iconPath"));
                     String iconPath2 = cursor.getString(cursor.getColumnIndexOrThrow("iconPath2"));
                     String iconDirectory = cursor.getString(cursor.getColumnIndexOrThrow("iconDirectory"));
-                    Log.d(TAG,"queryStatusBarData "+tag+" "+iconPath+" "+iconPath2+" "+iconDirectory);
+                    LogUtils.d(TAG,"queryStatusBarData "+tag+" "+iconPath+" "+iconPath2+" "+iconDirectory);
                     item = new StatusBarItem(tag, iconPath, iconPath2, iconDirectory);
                 }
             } catch (Exception e) {
@@ -642,12 +642,12 @@ public class DBUtils extends SQLiteOpenHelper {
                 // 如果没有记录被更新，说明不存在这个 tag，执行插入操作
                 long code = db.insert(TABLENAME_MAINAPP, null, values);
                 if (code == -1) {
-                    Log.d(TAG, "MainApp插入数据失败");
+                    LogUtils.d(TAG, "MainApp插入数据失败");
                 } else {
-                    Log.d(TAG, "MainApp插入数据成功，行ID：" + code);
+                    LogUtils.d(TAG, "MainApp插入数据成功，行ID：" + code);
                 }
             } else {
-                Log.d(TAG, "MainApp数据更新成功，更新行数：" + rowsAffected);
+                LogUtils.d(TAG, "MainApp数据更新成功，更新行数：" + rowsAffected);
             }
             db.close();
         }
@@ -664,9 +664,9 @@ public class DBUtils extends SQLiteOpenHelper {
                 values.put("packageName", packageName);
                 long code = db.insert(TABLENAME_FILTERAPPS, null, values);
                 if (code == -1) {
-                    Log.d(TAG, "FilterApps插入数据失败");
+                    LogUtils.d(TAG, "FilterApps插入数据失败");
                 } else {
-                    Log.d(TAG, "FilterApps插入数据成功，行ID：" + code);
+                    LogUtils.d(TAG, "FilterApps插入数据成功，行ID：" + code);
                 }
             }
             db.close();
@@ -695,12 +695,12 @@ public class DBUtils extends SQLiteOpenHelper {
                         String packageName = cursor.getString(cursor.getColumnIndex("packageName"));
                         packageName = packageName.trim();
                         packageNames[index++] = packageName;
-                        Log.d(TAG, " getFilterApps " + packageName);
+                        LogUtils.d(TAG, " getFilterApps " + packageName);
                     } while (cursor.moveToNext());
                 }
             } catch (Exception e) {
                 // 捕获异常并记录日志
-                Log.e(TAG, "读取数据失败", e);
+                LogUtils.e(TAG, "读取数据失败 "+e);
             } finally {
                 // 确保Cursor和数据库连接在完成后关闭
                 if (cursor != null) {
@@ -732,12 +732,12 @@ public class DBUtils extends SQLiteOpenHelper {
                 // 如果没有记录被更新，说明不存在这个 tag，执行插入操作
                 long code = db.insert(TABLENAME_LISTMODULES, null, values);
                 if (code == -1) {
-                    Log.d(TAG, "ListModules插入数据失败");
+                    LogUtils.d(TAG, "ListModules插入数据失败");
                 } else {
-                    Log.d(TAG, "ListModules插入数据成功，行ID：" + code);
+                    LogUtils.d(TAG, "ListModules插入数据成功，行ID：" + code);
                 }
             } else {
-                Log.d(TAG, "ListModules数据更新成功，更新行数：" + rowsAffected);
+                LogUtils.d(TAG, "ListModules数据更新成功，更新行数：" + rowsAffected);
             }
             db.close();
         }
@@ -756,12 +756,12 @@ public class DBUtils extends SQLiteOpenHelper {
                 // 如果没有记录被更新，说明表中还没有数据，执行插入操作
                 long code = db.insert(TABLENAME_BRANDLOGO, null, values);
                 if (code == -1) {
-                    Log.d(TAG, "BrandLogo插入数据失败");
+                    LogUtils.d(TAG, "BrandLogo插入数据失败");
                 } else {
-                    Log.d(TAG, "BrandLogo插入数据成功，行ID：" + code);
+                    LogUtils.d(TAG, "BrandLogo插入数据成功，行ID：" + code);
                 }
             } else {
-                Log.d(TAG, "BrandLogo数据更新成功，更新行数：" + rowsAffected);
+                LogUtils.d(TAG, "BrandLogo数据更新成功，更新行数：" + rowsAffected);
             }
             db.close();
         }
@@ -787,7 +787,7 @@ public class DBUtils extends SQLiteOpenHelper {
             if (cursor != null && cursor.moveToFirst()) {
                 String jsonString = cursor.getString(cursor.getColumnIndex("hashtable_data"));
 
-                Log.d(TAG, " 读取到的jsonString的值为 " + jsonString);
+                LogUtils.d(TAG, " 读取到的jsonString的值为 " + jsonString);
 
                 // 使用Gson将JSON字符串反序列化为Hashtable
                 Gson gson = new Gson();
@@ -795,7 +795,7 @@ public class DBUtils extends SQLiteOpenHelper {
                 }.getType();
                 hashtable = gson.fromJson(jsonString, type);
 
-                Log.d(TAG, " 获取到的阿拉伯语言 " + hashtable.get("ar"));
+                LogUtils.d(TAG, " 获取到的阿拉伯语言 " + hashtable.get("ar"));
 
                 cursor.close();  // 关闭Cursor
             }
@@ -824,9 +824,9 @@ public class DBUtils extends SQLiteOpenHelper {
                 if (cursor != null && cursor.moveToFirst()) {
                     action = cursor.getString(cursor.getColumnIndex("action"));
                 }
-                Log.d(TAG, "getActionFromListModules action " + action);
+                LogUtils.d(TAG, "getActionFromListModules action " + action);
             } catch (Exception e) {
-                Log.d(TAG, "getActionFromListModules查询失败", e);
+                LogUtils.d(TAG, "getActionFromListModules查询失败 "+e);
             } finally {
                 if (cursor != null) {
                     cursor.close();
@@ -949,7 +949,7 @@ public class DBUtils extends SQLiteOpenHelper {
                     byte[] iconData = cursor.getBlob(cursor.getColumnIndex("iconData"));
                     drawable = byteArrayToDrawable(iconData);  // 将字节数组转换为 Drawable
                 }
-                Log.d(TAG, "查询数据成功");
+                LogUtils.d(TAG, "查询数据成功");
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {
@@ -1042,7 +1042,7 @@ public class DBUtils extends SQLiteOpenHelper {
         Gson gson = new Gson();
         String jsonString = gson.toJson(hashtable);
 
-        Log.d(TAG, "序列化之后的hashtable_data值为 " + jsonString);
+        LogUtils.d(TAG, "序列化之后的hashtable_data值为 " + jsonString);
 
         // 创建ContentValues用于插入数据
         values.put("hashtable_data", jsonString);  // 将序列化后的字符串存入ContentValues

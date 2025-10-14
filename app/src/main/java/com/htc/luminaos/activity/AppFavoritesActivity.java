@@ -40,6 +40,7 @@ import com.htc.luminaos.receiver.AppCallBack;
 import com.htc.luminaos.receiver.AppReceiver;
 import com.htc.luminaos.utils.AppUtils;
 import com.htc.luminaos.utils.DBUtils;
+import com.htc.luminaos.utils.LogUtils;
 import com.htc.luminaos.utils.ShareUtil;
 import com.htc.luminaos.utils.ToastUtil;
 import com.htc.luminaos.utils.Utils;
@@ -165,7 +166,8 @@ public class AppFavoritesActivity extends BaseActivity implements AppCallBack {
                 if (Utils.specialApps != null) {
                     specialPackage = Utils.specialApps.getPackageName();
                 }
-                Log.d(tag, " setOnItemClickListener specialPackage " + specialPackage);
+                LogUtils.d(tag," setOnItemClickListener specialPackage " + specialPackage);
+//                LogUtils.d(tag, " setOnItemClickListener specialPackage " + specialPackage);
                 if (resident.contains(list.get(position).getApppackagename())
                         || list.get(position).getApppackagename().equals(specialPackage)) {
                     ToastUtil.showShortToast(AppFavoritesActivity.this, getString(R.string.resident_app));
@@ -176,12 +178,15 @@ public class AppFavoritesActivity extends BaseActivity implements AppCallBack {
                 int count = 0;
                 for (int i = 0; i < list.size(); i++) {
                     if (list.get(i).isCheck()) {
-                        Log.d(tag, " 快捷栏数量 list i " + i);
+                        LogUtils.d(tag," 快捷栏数量 list i " + i);
+//                        LogUtils.d(tag, " 快捷栏数量 list i " + i);
                         count += 1;
                     }
                 }
-                Log.d(tag, " 快捷栏数量 count " + count);
-                Log.d(tag, " 快捷栏数量 getFavoritesCount() " + DBUtils.getInstance(getApplicationContext()).getFavoritesCount());
+                LogUtils.d(tag," 快捷栏数量 count " + count);
+//                LogUtils.d(tag, " 快捷栏数量 count " + count);
+                LogUtils.d(tag," 快捷栏数量 getFavoritesCount() " + DBUtils.getInstance(getApplicationContext()).getFavoritesCount());
+//                LogUtils.d(tag, " 快捷栏数量 getFavoritesCount() " + DBUtils.getInstance(getApplicationContext()).getFavoritesCount());
                 //这里得分两种情况，有配置文件和没有配置文件
                 int favorites = 0;
                 int max = 0;
@@ -195,7 +200,7 @@ public class AppFavoritesActivity extends BaseActivity implements AppCallBack {
                 if (!file.exists()) {
                     favorites = count;
                     max = 7;
-                    Log.d(tag, " 快捷栏数量 !file.exists() ");
+                    LogUtils.d(tag, " 快捷栏数量 !file.exists() ");
                     if (favorites > max) {// count>favorites是新增
                         list.get(position).setCheck(!list.get(position).isCheck());
                         ToastUtil.showShortToast(AppFavoritesActivity.this, getString(R.string.short_max_tips));
@@ -221,7 +226,7 @@ public class AppFavoritesActivity extends BaseActivity implements AppCallBack {
                         favorites++;
                     }
                     max = 6;
-                    Log.d(tag, " 快捷栏数量 file.exists() " + favorites);
+                    LogUtils.d(tag, " 快捷栏数量 file.exists() " + favorites);
                     if (favorites > max && list.get(position).isCheck()) {
                         list.get(position).setCheck(!list.get(position).isCheck());
                         ToastUtil.showShortToast(AppFavoritesActivity.this, getString(R.string.short_max_tips));
@@ -281,7 +286,7 @@ public class AppFavoritesActivity extends BaseActivity implements AppCallBack {
                     @Override
                     public boolean onGenericMotion(View v, MotionEvent event) {
 
-                        Log.i(tag, "onGenericMotion");
+                        LogUtils.i(tag, "onGenericMotion");
                         if (0 != (event.getSource() & InputDevice.SOURCE_CLASS_POINTER)) {
                             switch (event.getAction()) {
                                 // process the scroll wheel movement…处理滚轮事�??
@@ -313,7 +318,7 @@ public class AppFavoritesActivity extends BaseActivity implements AppCallBack {
             public void onScrollStateChanged(AbsListView view, int scrollState) {
 
                 if (scrollState == SCROLL_STATE_IDLE) {
-                    Log.i(tag, "scrollState=" + scrollState);
+                    LogUtils.i(tag, "scrollState=" + scrollState);
                     appfavorites_gridview.setSelection(appfavorites_gridview
                             .getFirstVisiblePosition());
                 }
@@ -415,16 +420,16 @@ public class AppFavoritesActivity extends BaseActivity implements AppCallBack {
     @Override
     public void appUnInstall(String packageName) {
 
-        Log.d(tag, " 收到卸载广播" + packageName);
+        LogUtils.d(tag, " 收到卸载广播" + packageName);
 
         int code = DBUtils.getInstance(AppFavoritesActivity.this)
                 .deleteFavorites(packageName);
 
         if (code > 0) {
-            Log.d(tag, " 收到卸载广播,删除成功" + code);
+            LogUtils.d(tag, " 收到卸载广播,删除成功" + code);
             currentPackageName = packageName;
         } else {
-            Log.d(tag, " 收到卸载广播,删除失败" + code);
+            LogUtils.d(tag, " 收到卸载广播,删除失败" + code);
             currentPackageName = null;
         }
 

@@ -28,6 +28,7 @@ import com.htc.luminaos.R;
 import com.htc.luminaos.bean.StaticIpConfig;
 import com.htc.luminaos.databinding.ActivityWifiBinding;
 import com.htc.luminaos.databinding.ActivityWifiIpSet2Binding;
+import com.htc.luminaos.utils.LogUtils;
 import com.htc.luminaos.utils.NetWorkUtils;
 
 import java.util.ArrayList;
@@ -82,10 +83,10 @@ public class WifiIpSetActivity extends BaseActivity implements View.OnKeyListene
     @Override
     protected void onPause() {
         super.onPause(); // 确保调用父类的 onPause 方法
-        Log.d(TAG,"执行onPause 方法");
+        LogUtils.d(TAG,"执行onPause 方法");
 //        if(wifiIpSet2Binding.ip.hasFocus() || wifiIpSet2Binding.gateway.hasFocus() || wifiIpSet2Binding.netmask.hasFocus()
 //            || wifiIpSet2Binding.dns1.hasFocus() || wifiIpSet2Binding.dns2.hasFocus()) {
-//            Log.d(TAG,"onPause中执行editTextFocusChange方法");
+//            LogUtils.d(TAG,"onPause中执行editTextFocusChange方法");
 //            editTextFocusChange();
 //        }
     }
@@ -135,7 +136,7 @@ public class WifiIpSetActivity extends BaseActivity implements View.OnKeyListene
     }
 
     public void editTextFocusChange() {
-        Log.d(TAG, " 执行到editTextFocusChange ");
+        LogUtils.d(TAG, " 执行到editTextFocusChange ");
         staticIpConfig.setIp(wifiIpSet2Binding.ip.getText().toString().trim());
         staticIpConfig.setGateWay(wifiIpSet2Binding.gateway.getText().toString().trim());
         staticIpConfig.setNetMask(wifiIpSet2Binding.netmask.getText().toString().trim());
@@ -359,9 +360,9 @@ public class WifiIpSetActivity extends BaseActivity implements View.OnKeyListene
 
     private void setIpMode(StaticIpConfig staticIpConfig) {
         //设置ip
-        Log.d(TAG, "调用到setIpMode ");
+        LogUtils.d(TAG, "调用到setIpMode ");
         boolean success = netWorkUtils.setWiFiWithStaticIP(staticIpConfig);
-        Log.d(TAG, "IP模式切换成功 " + success + " " + staticIpConfig.isDhcp());
+        LogUtils.d(TAG, "IP模式切换成功 " + success + " " + staticIpConfig.isDhcp());
     }
 
 }

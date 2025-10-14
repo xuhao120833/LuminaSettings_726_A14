@@ -28,6 +28,7 @@ import com.htc.luminaos.MyApplication;
 import com.htc.luminaos.R;
 import com.htc.luminaos.entry.AppInfoBean;
 import com.htc.luminaos.utils.AppUtils;
+import com.htc.luminaos.utils.LogUtils;
 import com.htc.luminaos.utils.ScrollUtils;
 import com.htc.luminaos.widget.AppDetailDialog;
 
@@ -130,7 +131,8 @@ public class AppsAdapter extends RecyclerView.Adapter<AppsAdapter.MyViewHolder> 
     public boolean onKey(View v, int keyCode, KeyEvent event) {
 
         if((keyCode == KeyEvent.KEYCODE_MENU || keyCode == KeyEvent.KEYCODE_SETTINGS ) && event.getAction()==KeyEvent.ACTION_DOWN){
-            Log.d(TAG,"卸载收到MENU按键");
+//            LogUtils.d(TAG,"卸载收到MENU按键");
+            LogUtils.d(TAG,"卸载收到MENU按键");
             int position = ((RecyclerView) v.getParent()).getChildAdapterPosition(v);
             final AppInfoBean info = infoBeans.get(position);
 
@@ -226,7 +228,7 @@ public class AppsAdapter extends RecyclerView.Adapter<AppsAdapter.MyViewHolder> 
 
     @Override
     public boolean onLongClick(View v) {
-        Log.d(TAG,"卸载收到MENU按键");
+        LogUtils.d(TAG,"LongClick 卸载");
         int position = ((RecyclerView) v.getParent()).getChildAdapterPosition(v);
         final AppInfoBean info = infoBeans.get(position);
 

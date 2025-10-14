@@ -11,6 +11,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.SystemProperties;
 import android.util.DisplayMetrics;
 import android.util.Log;
 
@@ -23,9 +24,11 @@ import com.htc.luminaos.utils.Contants;
 import com.htc.luminaos.utils.FileUtils;
 import com.htc.luminaos.utils.KeystoneUtils;
 import com.htc.luminaos.utils.KeystoneUtils_726;
+import com.htc.luminaos.utils.LogUtils;
 import com.htc.luminaos.utils.ShareUtil;
 import com.htc.luminaos.utils.StartupTimer;
 import com.htc.luminaos.utils.Utils;
+import com.htc.luminaos.BuildConfig;
 
 import org.json.JSONObject;
 
@@ -61,6 +64,7 @@ public class MyApplication extends Application {
     public void onCreate() {
 //        StartupTimer.mark("MyApplication.onCreate() start");
         super.onCreate();
+        initLogTool();
         SharedPreferences sharedPreferences = ShareUtil.getInstans(getApplicationContext());
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putBoolean(Contants.TimeOffStatus, false);
@@ -69,7 +73,7 @@ public class MyApplication extends Application {
         try {
             if (new File(Contants.WALLPAPER_MAIN).exists()) {
                 Bitmap bitmap = BitmapFactory.decodeFile(Contants.WALLPAPER_MAIN);
-                if(bitmap != null) {
+                if (bitmap != null) {
                     int width = bitmap.getWidth();
                     int height = bitmap.getHeight();
                     //判断图片大小，如果超过限制就做缩小处理
@@ -107,6 +111,21 @@ public class MyApplication extends Application {
 //        StartupTimer.print(" MyApplication StartupTime");
     }
 
+    private void initLogTool() {
+        if (BuildConfig.DEBUG) {
+            Log.d(TAG," debug version");
+            LogUtils.debug = true;
+        } else {
+            Log.d(TAG," release version");
+            // Release 版本：一般关闭日志
+            LogUtils.debug = false;
+            if (SystemProperties.getBoolean("persist.htc.log_switch", false)) {
+                LogUtils.debug = true;
+            } else {
+                LogUtils.debug = false;
+            }
+        }
+    }
 
     private void parseConfigFile() {
         String configContent;
@@ -120,17 +139,17 @@ public class MyApplication extends Application {
         }
         if (configContent == null || configContent.equals(""))
             return;
-        Log.d(TAG, " 配置文件configContent " + configContent);
+        LogUtils.d(TAG, " 配置文件configContent " + configContent);
         try {
             Gson gson = new Gson();
             config = gson.fromJson(configContent, Config.class); //gson解析
-//            Log.d(TAG, " 配置文件apps " + config.apps.get(0).resident);
+//            LogUtils.d(TAG, " 配置文件apps " + config.apps.get(0).resident);
         } catch (Exception e) {
             e.printStackTrace();
         }
         Utils.sourceList = config.sourceList.split(",");
         Utils.sourceListTitle = config.sourceListTitle.split(",");
-        Log.d(TAG,"Utils.sourceList  sourceListTitle "+Utils.sourceList.length+" "+Utils.sourceListTitle.length);
+        LogUtils.d(TAG, "Utils.sourceList  sourceListTitle " + Utils.sourceList.length + " " + Utils.sourceListTitle.length);
         //读取背景的默认图片
         SharedPreferences sharedPreferences = ShareUtil.getInstans(getApplicationContext());
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -146,7 +165,7 @@ public class MyApplication extends Application {
         DisplayMetrics dm = getResources().getDisplayMetrics();
         int screenWidth = dm.widthPixels;
         int screenHeight = dm.heightPixels;
-        Log.d(TAG, "screenWidth " + screenWidth + " screenHeight " + screenHeight);
+        LogUtils.d(TAG, "screenWidth " + screenWidth + " screenHeight " + screenHeight);
         KeystoneUtils_726.lcd_h = screenHeight;
         KeystoneUtils_726.lcd_w = screenWidth;
         KeystoneUtils_726.minH_size = config.manualKeystoneWidth;
@@ -159,7 +178,7 @@ public class MyApplication extends Application {
             file = new File("/system/shortcuts.config");
         }
         if (!file.exists()) {
-            Log.d(TAG, " readBackground shortcuts.config文件不存在 ");
+            LogUtils.d(TAG, " readBackground shortcuts.config文件不存在 ");
             return;
         }
         try {
@@ -182,7 +201,7 @@ public class MyApplication extends Application {
             SharedPreferences.Editor editor = sharedPreferences.edit();
             if (obj.has("defaultbackground")) { //如果配置字段为空或者没有配置默认背景，则默认使用第一张图片作为背景。
                 String DefaultBackground = obj.getString("defaultbackground").trim();
-                Log.d(TAG, " readDefaultBackground " + DefaultBackground);
+                LogUtils.d(TAG, " readDefaultBackground " + DefaultBackground);
                 // 将字符串存入数据库；
                 editor.putString(Contants.DefaultBg, DefaultBackground);
                 editor.apply();
@@ -213,7 +232,7 @@ public class MyApplication extends Application {
             copyMyWallpaper();
             Utils.drawables.add(getResources().getDrawable(R.drawable.wallpaper_add));
             // 数据加载完成后更新 LiveData
-            Log.d(TAG,"执行完initWallpaperData");
+            LogUtils.d(TAG, "执行完initWallpaperData");
             isDataInitialized.postValue(true);//UI线程用setValue
         }
     }
@@ -277,9 +296,9 @@ public class MyApplication extends Application {
     private boolean copyCustomBg() {
         String[] imageExtensions = {".jpg", ".jpeg", ".png", ".bmp", ".webp"};
         File directory = new File(config.custombackground);
-        Log.d(TAG,"copyCustomBg 文件目录 "+config.custombackground);
+        LogUtils.d(TAG, "copyCustomBg 文件目录 " + config.custombackground);
         if (directory.exists() && directory.isDirectory()) {
-            Log.d(TAG,"copyCustomBg 目录存在 ");
+            LogUtils.d(TAG, "copyCustomBg 目录存在 ");
             File[] files = directory.listFiles();
             if (files != null) {//排序
                 // 按数字排序

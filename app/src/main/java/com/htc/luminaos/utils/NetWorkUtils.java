@@ -215,7 +215,7 @@ public class NetWorkUtils {
 //				success = true;
 //
 //			} catch (Exception e) {
-//				Log.e(TAG, e.getMessage());
+//				LogUtils.e(TAG, e.getMessage());
 //			} finally {
 //				Binder.restoreCallingIdentity(ident);
 //			}
@@ -249,7 +249,7 @@ public class NetWorkUtils {
                 }
             }
         } catch (Exception e) {
-            Log.e(TAG, e.getMessage());
+            LogUtils.e(TAG, e.getMessage());
         } finally {
             Binder.restoreCallingIdentity(ident);
         }
@@ -283,7 +283,7 @@ public class NetWorkUtils {
                 if (staticIpConfig.isDhcp()) {
                     switchToDHCP(mContext, wifiConfig);
                 } else {
-                    Log.d(TAG, "staticIpConfig.getIp() " + staticIpConfig.getIp());
+                    LogUtils.d(TAG, "staticIpConfig.getIp() " + staticIpConfig.getIp());
                     if (staticIpConfig.getIp() == null || staticIpConfig.getIp().isEmpty()) {
                         return false;
                     }
@@ -292,7 +292,7 @@ public class NetWorkUtils {
                 }
                 disconnectWiFi();
             } catch (Exception e) {
-                Log.e(TAG, e.getMessage());
+                LogUtils.e(TAG, e.getMessage());
                 return false;
             }
             return true;

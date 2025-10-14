@@ -19,6 +19,7 @@ import android.view.WindowManager;
 import com.htc.luminaos.R;
 import com.htc.luminaos.activity.AccountActivity;
 import com.htc.luminaos.databinding.AccountDeleteDialogBinding;
+import com.htc.luminaos.utils.LogUtils;
 
 /**
  * Author:
@@ -109,11 +110,11 @@ public class AccountDeleteDialog extends BaseDialog implements View.OnClickListe
             try {
                 Bundle result = future.getResult();
                 boolean success = result.getBoolean(AccountManager.KEY_BOOLEAN_RESULT, false);
-                Log.d(TAG, "AccountManagerCallback  success"+success);
+                LogUtils.d(TAG, "AccountManagerCallback  success"+success);
                 if (success) {
-                    Log.d(TAG, "账号删除成功！");
+                    LogUtils.d(TAG, "账号删除成功！");
                 } else {
-                    Log.d(TAG, "账号删除失败！");
+                    LogUtils.d(TAG, "账号删除失败！");
                 }
             } catch (Exception e) {
                 e.printStackTrace();

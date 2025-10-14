@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.htc.luminaos.activity.MainActivity;
+import com.htc.luminaos.utils.LogUtils;
 import com.htc.luminaos.utils.Utils;
 
 import java.io.File;
@@ -39,18 +40,18 @@ public class UsbDeviceReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         try {
-            Log.d(TAG, "UsbDeviceReceiver UsbDevice收到广播 intent.getAction() " + intent.getAction());
+            LogUtils.d(TAG, "UsbDeviceReceiver UsbDevice收到广播 intent.getAction() " + intent.getAction());
             if (Intent.ACTION_MEDIA_MOUNTED.equals(intent.getAction())) { // U盘插入且挂载完毕
                 StorageVolume storageVolume = (StorageVolume) intent.getParcelableExtra(StorageVolume.EXTRA_STORAGE_VOLUME);
                 String path = storageVolume.getPath();
-                Log.d(TAG, "UsbDeviceReceiver storageVolume.getPath()" + path);
+                LogUtils.d(TAG, "UsbDeviceReceiver storageVolume.getPath()" + path);
                 if(isExternalStoragePath(path)) {
                     Utils.hasUsbDevice = true;
                     Utils.usbDevicesNumber++;
                     if(activity.customBinding.rlUsbConnect.getVisibility() == View.GONE) {
                         callBack.UsbDeviceChange();
                     }
-                    Log.d(TAG, "UsbDeviceReceiver 有USB设备插入挂载成功 显示U盘图标" + Utils.usbDevicesNumber);
+                    LogUtils.d(TAG, "UsbDeviceReceiver 有USB设备插入挂载成功 显示U盘图标" + Utils.usbDevicesNumber);
                 }
             } else if (Intent.ACTION_MEDIA_UNMOUNTED.equals(intent.getAction())
                     || Intent.ACTION_MEDIA_BAD_REMOVAL.equals(intent.getAction())) { //U盘拔出卸载完毕
@@ -62,15 +63,15 @@ public class UsbDeviceReceiver extends BroadcastReceiver {
                     Utils.hasUsbDevice = false;
                 }
                 int usbCount = countUsbDevices(context);
-                Log.d(TAG, "UsbDeviceReceiver countUsbDevices "+usbCount);
+                LogUtils.d(TAG, "UsbDeviceReceiver countUsbDevices "+usbCount);
                 if (usbCount==0){
                     Utils.hasUsbDevice = false;
                 }
                 if (!Utils.hasUsbDevice) {
-                    Log.d(TAG, "UsbDeviceReceiver USB设备已经全部拔出 隐藏U盘图标");
+                    LogUtils.d(TAG, "UsbDeviceReceiver USB设备已经全部拔出 隐藏U盘图标");
                     callBack.UsbDeviceChange();
                 }
-                Log.d(TAG, "UsbDeviceReceiver 有USB设备拔出卸载 " + Utils.usbDevicesNumber);
+                LogUtils.d(TAG, "UsbDeviceReceiver 有USB设备拔出卸载 " + Utils.usbDevicesNumber);
 
             }
         } catch (Exception e) {
@@ -88,7 +89,7 @@ public class UsbDeviceReceiver extends BroadcastReceiver {
                 usbCount++;
             }
         }
-        Log.d(TAG, "checkUsb  开机检测到 "+usbCount+" 个U盘");
+        LogUtils.d(TAG, "checkUsb  开机检测到 "+usbCount+" 个U盘");
         return usbCount;
     }
 
