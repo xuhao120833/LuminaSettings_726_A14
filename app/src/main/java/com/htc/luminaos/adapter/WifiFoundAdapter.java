@@ -3,16 +3,12 @@ package com.htc.luminaos.adapter;
 import android.app.Service;
 import android.content.Context;
 import android.net.ConnectivityManager;
-import android.net.Network;
-import android.net.NetworkCapabilities;
-import android.net.NetworkInfo;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.text.TextUtils;
 import android.text.format.Formatter;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -22,7 +18,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.htc.luminaos.R;
-import com.htc.luminaos.activity.WifiActivity;
+import com.htc.luminaos.activity.settings.WifiActivity;
 import com.htc.luminaos.utils.LinkWifi;
 import com.htc.luminaos.utils.LogUtils;
 import com.htc.luminaos.widget.CustomConfigDisConnectDialog;
@@ -34,7 +30,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 /**

@@ -1,19 +1,14 @@
 package com.htc.luminaos.adapter;
 
-import android.Manifest;
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
-import android.bluetooth.BluetoothClass;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothGatt;
 import android.bluetooth.BluetoothGattCallback;
 import android.bluetooth.BluetoothGattCharacteristic;
 import android.bluetooth.BluetoothPbap;
 import android.bluetooth.BluetoothProfile;
-import android.content.Context;
-import android.content.pm.PackageManager;
 import android.os.SystemProperties;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -34,15 +29,7 @@ import java.util.List;
 import java.util.Map;
 
 import androidx.annotation.NonNull;
-import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.RecyclerView;
-
-import static com.htc.luminaos.activity.BluetoothActivity.a2dp;
-import static com.htc.luminaos.activity.BluetoothActivity.connectDeviceFromA2DP;
-import static com.htc.luminaos.activity.BluetoothActivity.connectKeyboard;
-import static com.htc.luminaos.activity.BluetoothActivity.isKeyboardDevice;
-import static com.htc.luminaos.activity.BluetoothActivity.mBluetoothProfile;
-import android.bluetooth.BluetoothCsipSetCoordinator;
 
 /**
  * Author:

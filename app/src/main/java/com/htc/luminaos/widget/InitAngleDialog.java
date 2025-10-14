@@ -1,7 +1,5 @@
 package com.htc.luminaos.widget;
 
-import static com.htc.luminaos.utils.Utils.list;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -11,39 +9,23 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemProperties;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
-
-import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.htc.luminaos.MyApplication;
 import com.htc.luminaos.R;
-import com.htc.luminaos.activity.ProjectActivity;
-import com.htc.luminaos.adapter.TimezoneAdapter;
+import com.htc.luminaos.activity.settings.ProjectActivity;
 import com.htc.luminaos.databinding.InitAngleLayoutBinding;
-import com.htc.luminaos.databinding.TimeZoneLayoutBinding;
-import com.htc.luminaos.utils.Constants;
-import com.htc.luminaos.utils.Contants;
-import com.htc.luminaos.utils.KeystoneUtils;
 import com.htc.luminaos.utils.KeystoneUtils_726;
 import com.htc.luminaos.utils.LogUtils;
 import com.htc.luminaos.utils.ReflectUtil;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Locale;
 import java.util.Objects;
-import java.util.TimeZone;
 
 /**
  * Author:

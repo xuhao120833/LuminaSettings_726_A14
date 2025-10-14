@@ -3,9 +3,8 @@ package com.htc.luminaos.receiver;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 
-import com.htc.luminaos.activity.InitAngleActivity;
+import com.htc.luminaos.activity.settings.InitAngleActivity;
 import com.htc.luminaos.utils.LogUtils;
 
 public class InitAngleReceiver extends BroadcastReceiver {

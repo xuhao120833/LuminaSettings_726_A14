@@ -9,7 +9,6 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.UserHandle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,7 +16,7 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.htc.luminaos.R;
-import com.htc.luminaos.activity.AccountActivity;
+import com.htc.luminaos.activity.settings.AccountActivity;
 import com.htc.luminaos.databinding.AccountDeleteDialogBinding;
 import com.htc.luminaos.utils.LogUtils;
 
