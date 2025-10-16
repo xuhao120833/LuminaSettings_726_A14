@@ -65,11 +65,6 @@ public class MyApplication extends Application {
 //        StartupTimer.mark("MyApplication.onCreate() start");
         super.onCreate();
         initLogTool();
-        SharedPreferences sharedPreferences = ShareUtil.getInstans(getApplicationContext());
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putBoolean(Contants.TimeOffStatus, false);
-        editor.putInt(Contants.TimeOffIndex, 0);
-        editor.apply();
         try {
             if (new File(Contants.WALLPAPER_MAIN).exists()) {
                 Bitmap bitmap = BitmapFactory.decodeFile(Contants.WALLPAPER_MAIN);

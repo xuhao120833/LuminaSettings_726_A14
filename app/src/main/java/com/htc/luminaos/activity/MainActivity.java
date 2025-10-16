@@ -32,6 +32,8 @@ import android.net.wifi.WifiManager;
 import android.os.Bundle;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.htc.luminaos.MyApplication;
@@ -67,6 +69,7 @@ import android.view.Display;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.RoundedCorners;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -102,6 +105,7 @@ import com.htc.luminaos.utils.BluetoothUtils;
 import com.htc.luminaos.utils.Constants;
 import com.htc.luminaos.utils.Contants;
 import com.htc.luminaos.utils.DBUtils;
+import com.htc.luminaos.utils.ImageBean;
 import com.htc.luminaos.utils.ImageUtils;
 import com.htc.luminaos.utils.LanguageUtil;
 import com.htc.luminaos.utils.LogUtils;
@@ -119,6 +123,10 @@ import com.htc.luminaos.utils.MainCustomBindingWrapper;
 import com.htc.luminaos.utils.WifiHotUtil;
 import com.htc.luminaos.widget.ManualQrDialog;
 import com.htc.luminaos.widget.SpacesItemDecoration;
+import com.youth.banner.adapter.BannerImageAdapter;
+import com.youth.banner.holder.BannerImageHolder;
+import com.youth.banner.indicator.CircleIndicator;
+import com.youth.banner.transformer.AlphaPageTransformer;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -158,6 +166,7 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
         NetWorkCallBack, UsbDeviceCallBack, AppCallBack, BatteryCallBack, View.OnKeyListener, UnlockCallBack, NotificationCallBack {
 
     private ActivityMainBinding mainBinding;
+    private Context mContext;
 
     public MainCustomBindingWrapper customBinding;
     private ArrayList<ShortInfoBean> short_list = new ArrayList<>();
@@ -226,10 +235,10 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
             if (!dataOK) {
                 initDataApp();
                 short_list = loadHomeAppData();
-                LogUtils.d(TAG," initDataCustom快捷图标 short_list " + short_list.size());
+                LogUtils.d(TAG, " initDataCustom快捷图标 short_list " + short_list.size());
 //                LogUtils.d(TAG, " initDataCustom快捷图标 short_list " + short_list.size());
 //                LogUtils.d(TAG, " initDataCustom handler" + handler);
-                LogUtils.d(TAG," initDataCustom handler" + handler);
+                LogUtils.d(TAG, " initDataCustom handler" + handler);
                 handler.sendEmptyMessage(204);
                 initReceiver();
                 dataOK = true;
@@ -250,7 +259,7 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
 //                    break;
                 case 204:
 //                    LogUtils.d(TAG, " handler 204");
-                    LogUtils.d(TAG," handler 204");
+                    LogUtils.d(TAG, " handler 204");
                     if (shortcutsAdapterCustom != null) {
                         shortcutsAdapterCustom.setShort_list(short_list);
                     } else {
@@ -300,7 +309,7 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
                     });
                 } else {
 //                    LogUtils.d(TAG, " 收到refreshApps的广播，且没有/system/others.config");
-                    LogUtils.d(TAG," 收到refreshApps的广播，且没有/system/others.config");
+                    LogUtils.d(TAG, " 收到refreshApps的广播，且没有/system/others.config");
                     short_list = loadHomeAppData();
                     handler.sendEmptyMessage(204);
                 }
@@ -332,6 +341,7 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
         //定制逻辑 xuhao add 20240717
         try {
             chooseLayout();
+            mContext = getApplicationContext();
 //            customBinding = ActivityMainCustomBinding.inflate(LayoutInflater.from(this));
             StartupTimer.mark("ActivityMainCustomBinding.inflate完成");
             setContentView(customBinding.root);
@@ -928,7 +938,11 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
                     requestChannelData();
                 }
             } else {
-                AppUtils.startNewApp(MainActivity.this, "com.htc.storeos");
+                if (Utils.gtvBanner) {
+                    AppUtils.startNewApp(MainActivity.this, "com.mm.droid.livetv.gtv");
+                } else {
+                    AppUtils.startNewApp(MainActivity.this, "com.htc.storeos");
+                }
             }
 //                AppUtils.startNewApp(MainActivity.this, "com.htc.storeos");
         } else if (id == R.id.rl_apps) {
@@ -1552,6 +1566,35 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
                     shortInfoBean.setAppicon(DBUtils.getInstance(this).byteArrayToDrawable(Utils.specialApps.getIconData()));
                     shortInfoBeans.add(shortInfoBean);
                     Utils.specialAppsList = "";
+
+                    //SpecialApp为GTV时，应用商店图标改成轮播巴西图片
+                    if (Utils.specialApps.getAppName().equals("GTV") && code.equals("BR")) {
+//                        handler.post(this::showGtvBanner);
+//                        showGtvBanner();
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                showGtvBanner();
+                                Utils.gtvBanner = true;
+                            }
+                        });
+                    }else {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                hideGtvBanner();
+                                Utils.gtvBanner = false;
+                            }
+                        });
+                    }
+                } else {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            hideGtvBanner();
+                            Utils.gtvBanner = false;
+                        }
+                    });
                 }
             }
         } catch (Exception e) {
@@ -1559,6 +1602,46 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
         }
     }
 
+    private void showGtvBanner() {
+        LogUtils.d(TAG, "useBanner: ");
+        List<ImageBean> images = new ArrayList<>();
+        for (int i = 1; i <= 6; i++) {
+            ImageBean dataBean = new ImageBean();
+            dataBean.setImageUrl("file:///android_asset/gtv_br/brazil_football_" + i + ".png");
+            images.add(dataBean);
+        }
+        customBinding.icon4.setVisibility(View.GONE);
+        customBinding.gtvBanner.setVisibility(View.VISIBLE);
+        customBinding.gtvBanner.start();
+        customBinding.gtvBanner.isAutoLoop(true);
+        customBinding.gtvBanner.setUserInputEnabled(false);
+        customBinding.gtvBanner.setAdapter(new BannerImageAdapter<ImageBean>(images) {
+            @Override
+            public void onBindView(BannerImageHolder holder, ImageBean data, int position, int size) {
+                // Log.i(TAG, "onBindView: " + data.imageUrl);
+
+                Glide.with(mContext)
+                        .load(data.getImageUrl())
+                        // 缓存原始+解码数据
+                        .diskCacheStrategy(DiskCacheStrategy.NONE)
+                        // 禁用内存缓存（调试用）
+                        .skipMemoryCache(true)
+                        .into(holder.imageView);
+            }
+        }, true).setIndicator(new CircleIndicator(mContext), false);
+    }
+
+    private void hideGtvBanner() {
+        LogUtils.d(TAG, "hideGtvBanner");
+        customBinding.icon4.setVisibility(View.VISIBLE);
+        customBinding.gtvBanner.setVisibility(View.GONE);
+        if (MyApplication.config.layout_select == 2 || MyApplication.config.layout_select == 3) {
+            customBinding.icon4.setImageResource(R.drawable.appstore2);
+        } else {
+            customBinding.icon4.setImageResource(R.drawable.appstore);
+        }
+        customBinding.gtvBanner.stop();
+    }
 
     @Override
     public boolean dispatchKeyEvent(KeyEvent event) {
@@ -1612,6 +1695,9 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
 //        unregisterReceiver(unlockReceiver);
 
         getContentResolver().unregisterContentObserver(notificationObserver);
+        if (Utils.gtvBanner) {
+            customBinding.gtvBanner.destroy();
+        }
         super.onDestroy();
     }
 
@@ -2247,7 +2333,7 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
                     mountInfo.contains("fat32") ||
                     mountInfo.contains("fuse");
         } catch (Exception e) {
-            LogUtils.e(TAG, "检查目录是否为 USB 设备时出错 "+e);
+            LogUtils.e(TAG, "检查目录是否为 USB 设备时出错 " + e);
             return false;
         }
     }
@@ -2273,7 +2359,7 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
             LogUtils.e(TAG, "检测到 output.toString() " + output.toString());
             return output.toString();
         } catch (IOException e) {
-            LogUtils.e(TAG, "获取挂载信息时出错 "+ e);
+            LogUtils.e(TAG, "获取挂载信息时出错 " + e);
             return "";
         }
     }
@@ -2639,7 +2725,7 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
             LogUtils.d(TAG, "loadSupport 配置不对不加载");
             return;
         }
-        String[] imageExtensions = {".jpg", ".jpeg", ".png", ".bmp", ".webp"};
+//        String[] imageExtensions = {".jpg", ".jpeg", ".png", ".bmp", ".webp"};
         File directory = new File(MyApplication.config.support_directory);
         if (directory.exists() && directory.isDirectory()) {
             File[] files = directory.listFiles();
@@ -2810,11 +2896,11 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
     }
 
     private void initContentObserver() {
-        int value = Settings.Global.getInt(getContentResolver(),"notification",1);
-        if(value == 1) {
+        int value = Settings.Global.getInt(getContentResolver(), "notification", 1);
+        if (value == 1) {
             customBinding.notice.setImageResource(R.drawable.bar_notice_on);
         }
-        notificationObserver = new NotificationObserver(getApplicationContext(),this);
+        notificationObserver = new NotificationObserver(getApplicationContext(), this);
         getContentResolver().registerContentObserver(Settings.Global.getUriFor("notification"), false, notificationObserver);
     }
 

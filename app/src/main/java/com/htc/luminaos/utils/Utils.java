@@ -65,6 +65,9 @@ public class Utils {
     public static boolean btAnim = false;
     public static String cur_language="";
     public static boolean audio_change = false;
+    public static String QUICK_GUID = "http://hotackiot.com:5503/ota/download/Manual/hp/";
+    public static String FAQ = "http://hotackiot.com:5503/ota/download/FAQ/hp/";
+    public static boolean gtvBanner = false;
 
     /**
      * 打印 Intent 的 Extras 信息

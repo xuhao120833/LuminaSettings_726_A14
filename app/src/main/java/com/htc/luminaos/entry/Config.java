@@ -29,6 +29,9 @@ public class Config {
     public boolean support = false;
     //support多语言目录
     public String support_directory = "";
+    //faq quick_guide
+    public String support_faq = "";
+    public String support_quick_guide = "";
     //配置首页状态栏蓝牙、Wifi的跳转
     public String statusbar_bt = "";
     public String statusbar_wifi = "";

@@ -35,7 +35,7 @@
     </string-array>
     <integer-array name="time_off_value" translatable="false">
         <item>0</item>
-        <item>300</item>
+        <item>80</item>
         <item>600</item>
         <item>1200</item>
         <item>3600</item>

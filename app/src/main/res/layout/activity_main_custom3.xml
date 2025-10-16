@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/rl_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -336,6 +337,14 @@
             android:layout_centerInParent="true"
             android:visibility="gone"
             />
+
+        <com.youth.banner.Banner
+            android:id="@+id/gtv_banner"
+            android:layout_width="@dimen/x_277"
+            android:layout_height="@dimen/y_167"
+            android:layout_gravity="center"
+            app:banner_radius="@dimen/x_20"
+            android:visibility="gone" />
     </RelativeLayout>
 
     <RelativeLayout

@@ -140,12 +140,7 @@ public class OtherSettingsActivity extends BaseActivity implements View.OnKeyLis
         cur_time_off_index = (int) ShareUtil.get(this, Contants.TimeOffIndex, 0);
         LogUtils.d(TAG, " initData cur_time_off_index " + cur_time_off_index);
         otherSettingsBinding.timerOffTv.setText(time_off_title[cur_time_off_index]);
-        /*if ((boolean) ShareUtil.get(this, Contants.TimeOffStatus,false)){
-            int  timeOffTime =(int) ShareUtil.get(this, Contants.TimeOffTime,0);
-            otherSettingsBinding.timerOffTv.setText(timeOffTime/60+"Min");
-        }else {
-            otherSettingsBinding.timerOffTv.setText(time_off_title[cur_time_off_index]);
-        }*/
+
         mAwTvSystemManager = AwTvSystemManager.getInstance(this);
         powerModes = getResources().getStringArray(R.array.power_mode_name);
         curPowerMode = mAwTvSystemManager.getPowerOnMode() == AwTvSystemTypes.EnumPowerMode.E_AW_POWER_MODE_DIRECT ? 1 : 0;

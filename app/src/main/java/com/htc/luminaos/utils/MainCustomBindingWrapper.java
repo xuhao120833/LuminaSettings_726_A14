@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.htc.luminaos.databinding.ActivityMainCustom2Binding;
 import com.htc.luminaos.databinding.ActivityMainCustom3Binding;
 import com.htc.luminaos.databinding.ActivityMainCustomBinding;
+import com.youth.banner.Banner;
 
 public class MainCustomBindingWrapper {
     public final View root;
@@ -45,6 +46,7 @@ public class MainCustomBindingWrapper {
     public ImageView icon2;
     public ImageView icon3;
     public ImageView icon4;
+    public Banner gtvBanner;
     public ImageView eshareIcon;
     public ImageView hdmiIcon;
     public ImageView settingsIcon;
@@ -99,6 +101,7 @@ public class MainCustomBindingWrapper {
         icon2 = b.icon2;
         icon3 = b.icon3;
         icon4 = b.icon4;
+        gtvBanner = b.gtvBanner;
         eshareIcon = b.eshareIcon;
         hdmiIcon = b.hdmiIcon;
         settingsIcon = b.settingsIcon;
@@ -144,6 +147,7 @@ public class MainCustomBindingWrapper {
         icon2 = b.icon2;
         icon3 = b.icon3;
         icon4 = b.icon4;
+        gtvBanner = b.gtvBanner;
         eshareIcon = b.eshareIcon;
         hdmiIcon = b.hdmiIcon;
         settingsIcon = b.settingsIcon;
@@ -193,6 +197,7 @@ public class MainCustomBindingWrapper {
         icon2 = b.icon2;
         icon3 = b.icon3;
         icon4 = b.icon4;
+        gtvBanner = b.gtvBanner;
         eshareIcon = b.eshareIcon;
         hdmiIcon = b.hdmiIcon;
         settingsIcon = b.settingsIcon;
