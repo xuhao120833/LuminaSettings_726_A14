@@ -330,4 +330,6 @@
     <string name="wifi_ssid_not_found">Tidak dapat terhubung ke Wi-Fi ini, harap periksa apakah jaringan tersedia</string>
     <string name="accessibility_title">Fungsi Aksesibilitas</string>
     <string name="support">Dukungan</string>
+    <string name="quick_guide">Panduan Mulai Cepat</string>
+    <string name="faq">FAQ</string>
 </resources>

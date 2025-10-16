@@ -330,4 +330,6 @@
     <string name="wifi_ssid_not_found">ვერ მოხერხდა კავშირი ამ Wi-Fi-სთან, გთხოვთ დაადასტუროთ ქსელის არსებობა</string>
     <string name="accessibility_title">შესაძლებლობის ფუნქცია</string>
     <string name="support">მხარდაჭერა</string>
+    <string name="quick_guide">სწრაფი დაწყების სახელმძღვანელო</string>
+    <string name="faq">FAQ</string>
 </resources>

@@ -330,4 +330,6 @@
 	<string name="wifi_ssid_not_found">Impossibile connettersi a questa rete Wi-Fi, verifica che la rete esista</string>
 	<string name="accessibility_title">Accessibilità</string>
 	<string name="support">Supporto</string>
+	<string name="quick_guide">Guida rapida</string>
+	<string name="faq">FAQ</string>
 </resources>

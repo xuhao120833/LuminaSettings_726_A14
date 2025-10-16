@@ -330,4 +330,6 @@
     <string name="wifi_ssid_not_found">Αδυναμία σύνδεσης σε αυτό το Wi-Fi, παρακαλώ ελέγξτε αν το δίκτυο υπάρχει</string>
     <string name="accessibility_title">Λειτουργίες προσβασιμότητας</string>
     <string name="support">Υποστήριξη</string>
+    <string name="quick_guide">Οδηγός γρήγορης εκκίνησης</string>
+    <string name="faq">Συχνές ερωτήσεις</string>
 </resources>

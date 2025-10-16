@@ -330,5 +330,7 @@
     <string name="wifi_ssid_not_found">Не удаётся подключиться к Wi-Fi, проверьте, существует ли сеть</string>
     <string name="accessibility_title">Специальные возможности</string>
     <string name="support">Поддержка</string>
+    <string name="quick_guide">Краткое руководство пользователя</string>
+    <string name="faq">FAQ</string>
 </resources>
 

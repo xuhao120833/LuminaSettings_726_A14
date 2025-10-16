@@ -330,4 +330,6 @@
     <string name="wifi_ssid_not_found">이 Wi-Fi에 연결할 수 없습니다. 네트워크가 존재하는지 확인하세요.</string>
     <string name="accessibility_title">접근성 기능</string>
     <string name="support">지원</string>
+    <string name="quick_guide">빠른 시작 가이드</string>
+    <string name="faq">FAQ</string>
 </resources>

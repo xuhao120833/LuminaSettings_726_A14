@@ -330,5 +330,7 @@
     <string name="wifi_ssid_not_found">ไม่สามารถเชื่อมต่อ Wi-Fi นี้ได้ กรุณาตรวจสอบว่าเครือข่ายมีอยู่จริงหรือไม่</string>
     <string name="accessibility_title">คุณสมบัติการช่วยการเข้าถึง</string>
     <string name="support">การสนับสนุน</string>
+    <string name="quick_guide">คู่มือเริ่มต้นอย่างรวดเร็ว</string>
+    <string name="faq">FAQ</string>
 </resources>
 

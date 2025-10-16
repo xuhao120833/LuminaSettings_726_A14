@@ -330,6 +330,8 @@
     <string name="wifi_ssid_not_found">Nem lehet csatlakozni ehhez a Wi-Fi hálózathoz, kérjük, ellenőrizze, hogy a hálózat létezik-e</string>
     <string name="accessibility_title">Kisegítő lehetőségek</string>
     <string name="support">Támogatás</string>
+    <string name="quick_guide">Gyorsindítási útmutató</string>
+    <string name="faq">FAQ</string>
 </resources>
 
 

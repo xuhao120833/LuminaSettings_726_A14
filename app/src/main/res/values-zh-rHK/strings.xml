@@ -330,4 +330,6 @@
 	<string name="wifi_ssid_not_found">無法連線此 Wi-Fi，請確認網路是否存在</string>
 	<string name="accessibility_title">無障礙功能</string>
 	<string name="support">支援</string>
+	<string name="quick_guide">快速入門指南</string>
+	<string name="faq">FAQ</string>
 </resources>

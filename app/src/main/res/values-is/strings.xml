@@ -330,4 +330,6 @@
     <string name="wifi_ssid_not_found">Ekki er hægt að tengjast þessu Wi-Fi, vinsamlegast athugaðu hvort netið sé til.</string>
     <string name="accessibility_title">Aðgengi</string>
     <string name="support">Stuðningur</string>
+    <string name="quick_guide">Flýtiræsingarleiðbeiningar</string>
+    <string name="faq">FAQ</string>
 </resources>

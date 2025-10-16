@@ -330,4 +330,6 @@
 	<string name="wifi_ssid_not_found">Nelze se připojit k této Wi-Fi, zkontrolujte prosím, zda síť existuje</string>
 	<string name="accessibility_title">Funkce usnadnění přístupu</string>
 	<string name="support">Podpora</string>
+	<string name="quick_guide">Stručná příručka pro rychlý start</string>
+	<string name="faq">FAQ</string>
 </resources>

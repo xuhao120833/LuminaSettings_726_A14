@@ -330,5 +330,7 @@
 	<string name="wifi_ssid_not_found">Verbindung zu diesem WLAN konnte nicht hergestellt werden. Bitte prüfen Sie, ob das Netzwerk vorhanden ist.</string>
 	<string name="accessibility_title">Barrierefreiheit</string>
 	<string name="support">Unterstützung</string>
+	<string name="quick_guide">Schnellstartanleitung</string>
+	<string name="faq">FAQ</string>
 </resources>
 

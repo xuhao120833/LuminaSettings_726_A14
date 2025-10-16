@@ -2,6 +2,8 @@ package com.htc.luminaos.activity;
 
 import static com.htc.luminaos.utils.BlurImageView.MAX_BITMAP_SIZE;
 import static com.htc.luminaos.utils.BlurImageView.narrowBitmap;
+import static com.htc.luminaos.utils.Utils.FAQ;
+import static com.htc.luminaos.utils.Utils.QUICK_GUID;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
@@ -54,10 +56,12 @@ import com.htc.luminaos.receiver.UsbDeviceCallBack;
 import com.htc.luminaos.service.KeepAliveService;
 import com.htc.luminaos.service.TimeOffService;
 import com.htc.luminaos.utils.BatteryCallBack;
+import com.htc.luminaos.utils.FaqGuideUtils;
 import com.htc.luminaos.utils.FileUtils;
 
 import android.os.Environment;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.os.SystemProperties;
 import android.os.storage.StorageManager;
@@ -76,6 +80,7 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.htc.luminaos.R;
 import com.google.gson.Gson;
@@ -105,6 +110,7 @@ import com.htc.luminaos.utils.BluetoothUtils;
 import com.htc.luminaos.utils.Constants;
 import com.htc.luminaos.utils.Contants;
 import com.htc.luminaos.utils.DBUtils;
+import com.htc.luminaos.utils.GenerateQrBitmap;
 import com.htc.luminaos.utils.ImageBean;
 import com.htc.luminaos.utils.ImageUtils;
 import com.htc.luminaos.utils.LanguageUtil;
@@ -138,6 +144,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -923,7 +931,11 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
         if (id == R.id.rl_notice) {
             goAction("com.htc.notification/com.htc.notification.MainActivity");
         } else if (id == R.id.rl_support) {
-            showSupportDialog();
+            if (!MyApplication.config.support_faq.isEmpty() || !MyApplication.config.support_quick_guide.isEmpty()) {
+                FaqGuideUtils.checkAndOpenUrls(MyApplication.config.support_faq, MyApplication.config.support_quick_guide,this);
+            } else {
+                showSupportDialog();
+            }
         } else if (id == R.id.rl_clear_memory) {
             goAction("com.htc.clearmemory/com.htc.clearmemory.MainActivity");
         } else if (id == R.id.rl_wallpapers) {
@@ -1578,7 +1590,7 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
                                 Utils.gtvBanner = true;
                             }
                         });
-                    }else {
+                    } else {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {

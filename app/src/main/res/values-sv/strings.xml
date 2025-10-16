@@ -330,5 +330,6 @@
 	<string name="wifi_ssid_not_found">Kan inte ansluta till detta Wi-Fi, kontrollera att nätverket finns</string>
 	<string name="accessibility_title">Tillgänglighetsfunktioner</string>
 	<string name="support">Support</string>
-
+	<string name="quick_guide">Snabbstartsguide</string>
+	<string name="faq">FAQ</string>
 </resources>

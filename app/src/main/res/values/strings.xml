@@ -330,4 +330,6 @@
     <string name="wifi_ssid_not_found">Unable to connect to this Wi-Fi. Please check if the network exists.</string>
     <string name="accessibility_title">Accessibility</string>
     <string name="support">Support</string>
+    <string name="quick_guide">Quick Start Guide</string>
+    <string name="faq">FAQ</string>
 </resources>

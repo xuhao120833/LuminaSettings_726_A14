@@ -43,6 +43,7 @@ import com.htc.luminaos.utils.AppUtils;
 import com.htc.luminaos.utils.ClearMemoryUtils;
 import com.htc.luminaos.utils.Contants;
 import com.htc.luminaos.utils.DeviceUtils;
+import com.htc.luminaos.utils.FaqGuideUtils;
 import com.htc.luminaos.utils.LogUtils;
 import com.htc.luminaos.utils.ShareUtil;
 import com.htc.luminaos.utils.ToastUtil;
@@ -230,7 +231,11 @@ public class AboutActivity extends BaseActivity {
         } else if (id == R.id.rl_online_update) {
             AppUtils.startNewApp(this, "com.htc.htcotaupdate");
         } else if (id == R.id.rl_email_image) {
-            showSupportDialog();
+            if (!MyApplication.config.support_faq.isEmpty() || !MyApplication.config.support_quick_guide.isEmpty()) {
+                FaqGuideUtils.checkAndOpenUrls(MyApplication.config.support_faq, MyApplication.config.support_quick_guide,this);
+            } else {
+                showSupportDialog();
+            }
         }
         super.onClick(v);
     }

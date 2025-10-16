@@ -330,5 +330,7 @@
     <string name="wifi_ssid_not_found">Kan ikke oprette forbindelse til Wi-Fi. Kontroller, om netværket findes.</string>
     <string name="accessibility_title">Tilgængelighedsfunktioner</string>
     <string name="support">Understøttelse</string>
+    <string name="quick_guide">Hurtig startvejledning</string>
+    <string name="faq">FAQ</string>
 </resources>
 

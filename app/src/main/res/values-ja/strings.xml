@@ -330,4 +330,6 @@
     <string name="wifi_ssid_not_found">このWi-Fiに接続できません。ネットワークが存在するか確認してください。</string>
     <string name="accessibility_title">アクセシビリティ機能</string>
     <string name="support">サポート</string>
+    <string name="quick_guide">クイックスタートガイド</string>
+    <string name="faq">FAQ</string>
 </resources>
