@@ -75,6 +75,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.RoundedCorners;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
@@ -951,7 +952,11 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
                 }
             } else {
                 if (Utils.gtvBanner) {
-                    AppUtils.startNewApp(MainActivity.this, "com.mm.droid.livetv.gtv");
+                    if (!AppUtils.startNewApp(MainActivity.this, "com.mm.droid.livetv.gtv")) {
+                        appName = "GTV";
+                        requestChannelData();
+                    }
+//                    AppUtils.startNewApp(MainActivity.this, "com.mm.droid.livetv.gtv");
                 } else {
                     AppUtils.startNewApp(MainActivity.this, "com.htc.storeos");
                 }
@@ -1627,6 +1632,9 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
         customBinding.gtvBanner.start();
         customBinding.gtvBanner.isAutoLoop(true);
         customBinding.gtvBanner.setUserInputEnabled(false);
+        customBinding.gtvBanner.setDescendantFocusability(ViewGroup.FOCUS_BLOCK_DESCENDANTS);
+        customBinding.gtvBanner.setFocusable(false);
+
         customBinding.gtvBanner.setAdapter(new BannerImageAdapter<ImageBean>(images) {
             @Override
             public void onBindView(BannerImageHolder holder, ImageBean data, int position, int size) {
@@ -1635,9 +1643,9 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
                 Glide.with(mContext)
                         .load(data.getImageUrl())
                         // 缓存原始+解码数据
-                        .diskCacheStrategy(DiskCacheStrategy.NONE)
-                        // 禁用内存缓存（调试用）
-                        .skipMemoryCache(true)
+                        .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
+                        // 禁用内存缓存（调试用）true打开
+                        .skipMemoryCache(false)
                         .into(holder.imageView);
             }
         }, true).setIndicator(new CircleIndicator(mContext), false);

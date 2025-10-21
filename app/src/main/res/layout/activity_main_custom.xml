@@ -287,8 +287,8 @@
 
     <RelativeLayout
         android:id="@+id/rl_Google"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/x_313"
+        android:layout_height="@dimen/y_167"
         style="@style/focusStyle"
         android:layout_marginTop="@dimen/y_31"
         android:layout_marginStart="@dimen/x_24"
@@ -303,8 +303,8 @@
 
         <com.youth.banner.Banner
             android:id="@+id/gtv_banner"
-            android:layout_width="@dimen/x_313"
-            android:layout_height="@dimen/y_167"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
             app:banner_radius="@dimen/x_20"
             android:visibility="gone" />

@@ -505,26 +505,20 @@ public class AboutActivity extends BaseActivity {
                         File[] files = subtmp.listFiles(new FileFilter() {
                             @Override
                             public boolean accept(File arg0) {
-
                                 if (arg0.isDirectory()) {
                                     return false;
                                 }
-
                                 if (arg0.getName().equals(OTA_PACKAGE_FILE)) {
-
                                     return true;
                                 }
                                 return false;
                             }
                         });
-
                         if (files != null && files.length > 0) {
-
                             return files[0].getAbsolutePath();
                         }
                     } else {
                         if (subtmp.getName().equals(OTA_PACKAGE_FILE)) {
-
                             return subtmp.getAbsolutePath();
                         } else {
                             continue;
@@ -534,7 +528,6 @@ public class AboutActivity extends BaseActivity {
                 }
             } else if (tmp.isFile()) {
                 if (tmp.getName().equals(OTA_PACKAGE_FILE)) {
-
                     return tmp.getAbsolutePath();
                 } else {
                     continue;
