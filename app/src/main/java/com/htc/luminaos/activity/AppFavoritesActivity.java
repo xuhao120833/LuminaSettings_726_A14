@@ -289,7 +289,7 @@ public class AppFavoritesActivity extends BaseActivity implements AppCallBack {
                         LogUtils.i(tag, "onGenericMotion");
                         if (0 != (event.getSource() & InputDevice.SOURCE_CLASS_POINTER)) {
                             switch (event.getAction()) {
-                                // process the scroll wheel movement…处理滚轮事�??
+                                // process the scroll wheel movement…处理滚轮事件??
                                 case MotionEvent.ACTION_SCROLL:
                                     // 获得垂直坐标上的滚动方向,也就是滚轮向下滚
                                     if (event

@@ -933,7 +933,7 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
             goAction("com.htc.notification/com.htc.notification.MainActivity");
         } else if (id == R.id.rl_support) {
             if (!MyApplication.config.support_faq.isEmpty() || !MyApplication.config.support_quick_guide.isEmpty()) {
-                FaqGuideUtils.checkAndOpenUrls(MyApplication.config.support_faq, MyApplication.config.support_quick_guide,this);
+                FaqGuideUtils.checkAndOpenUrls(MyApplication.config.support_faq, MyApplication.config.support_quick_guide, this);
             } else {
                 showSupportDialog();
             }
@@ -942,21 +942,20 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
         } else if (id == R.id.rl_wallpapers) {
             startNewActivity(WallPaperActivity.class);
         } else if (id == R.id.rl_Google) {
-            appname = DBUtils.getInstance(this).getAppNameByTag("icon4");
-            action = DBUtils.getInstance(this).getActionByTag("icon4");
-            LogUtils.d(TAG, " appnameaction" + appname + " " + action);
-            if (appname != null && action != null && !appname.equals("") && !action.equals("")) {
-                if (!AppUtils.startNewApp(MainActivity.this, action)) {
-                    appName = appname;
+            if (Utils.gtvBanner) {
+                if (!AppUtils.startNewApp(MainActivity.this, "com.mm.droid.livetv.gtv")) {
+                    appName = "GTV";
                     requestChannelData();
                 }
             } else {
-                if (Utils.gtvBanner) {
-                    if (!AppUtils.startNewApp(MainActivity.this, "com.mm.droid.livetv.gtv")) {
-                        appName = "GTV";
+                appname = DBUtils.getInstance(this).getAppNameByTag("icon4");
+                action = DBUtils.getInstance(this).getActionByTag("icon4");
+                LogUtils.d(TAG, " appnameaction" + appname + " " + action);
+                if (appname != null && action != null && !appname.equals("") && !action.equals("")) {
+                    if (!AppUtils.startNewApp(MainActivity.this, action)) {
+                        appName = appname;
                         requestChannelData();
                     }
-//                    AppUtils.startNewApp(MainActivity.this, "com.mm.droid.livetv.gtv");
                 } else {
                     AppUtils.startNewApp(MainActivity.this, "com.htc.storeos");
                 }
