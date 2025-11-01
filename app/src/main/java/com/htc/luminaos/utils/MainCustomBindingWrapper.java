@@ -5,6 +5,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.htc.luminaos.databinding.ActivityMainCustom2Binding;
@@ -47,6 +48,7 @@ public class MainCustomBindingWrapper {
     public ImageView icon3;
     public ImageView icon4;
     public Banner gtvBanner;
+    public CardView gtvCardView;
     public ImageView eshareIcon;
     public ImageView hdmiIcon;
     public ImageView settingsIcon;
@@ -102,6 +104,7 @@ public class MainCustomBindingWrapper {
         icon3 = b.icon3;
         icon4 = b.icon4;
         gtvBanner = b.gtvBanner;
+        gtvCardView = b.gtvCardview;
         eshareIcon = b.eshareIcon;
         hdmiIcon = b.hdmiIcon;
         settingsIcon = b.settingsIcon;
@@ -148,6 +151,7 @@ public class MainCustomBindingWrapper {
         icon3 = b.icon3;
         icon4 = b.icon4;
         gtvBanner = b.gtvBanner;
+        gtvCardView = b.gtvCardview;
         eshareIcon = b.eshareIcon;
         hdmiIcon = b.hdmiIcon;
         settingsIcon = b.settingsIcon;
@@ -198,6 +202,7 @@ public class MainCustomBindingWrapper {
         icon3 = b.icon3;
         icon4 = b.icon4;
         gtvBanner = b.gtvBanner;
+        gtvCardView = b.gtvCardview;
         eshareIcon = b.eshareIcon;
         hdmiIcon = b.hdmiIcon;
         settingsIcon = b.settingsIcon;

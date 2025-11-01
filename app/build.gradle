@@ -84,14 +84,14 @@ android {
 }
 
 static def getVersionNames() {
-    return "1.0.42"
+    return "1.0.44"
 }
 
 static def releaseTime() {
     return new Date().format("yyMMddHH", TimeZone.getTimeZone("GMT+8"));
 }
 static def releaseCode() {
-    return Integer.parseInt(releaseTime());
+    return Integer.parseInt("2"+releaseTime());
 }
 
 dependencies {

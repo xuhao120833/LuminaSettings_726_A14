@@ -301,13 +301,22 @@
             android:layout_width="@dimen/x_313"
             android:layout_height="@dimen/y_167"/>
 
-        <com.youth.banner.Banner
-            android:id="@+id/gtv_banner"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/gtv_cardview"
+            android:layout_width="@dimen/x_313"
+            android:layout_height="@dimen/y_167"
             android:layout_gravity="center"
-            app:banner_radius="@dimen/x_20"
-            android:visibility="gone" />
+            android:visibility="gone"
+            app:cardBackgroundColor="@android:color/transparent"
+            app:cardCornerRadius="@dimen/x_20">
+
+            <com.youth.banner.Banner
+                android:id="@+id/gtv_banner"
+                android:layout_width="@dimen/x_313"
+                android:layout_height="@dimen/y_167"
+                android:layout_gravity="center"
+                android:visibility="gone" />
+        </androidx.cardview.widget.CardView>
 
     </RelativeLayout>
 

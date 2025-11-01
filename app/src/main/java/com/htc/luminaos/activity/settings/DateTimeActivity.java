@@ -130,8 +130,14 @@ public class DateTimeActivity extends BaseActivity implements View.OnKeyListener
         // 根据语言环境获取显示名称
 //        String displayName = tz.getDisplayName(false, TimeZone.LONG, locale);
 //        String displayName = getICUTimeZoneDisplayName(tz.getID(), locale);
-        String displayName = searchDisplayName(Utils.list,timeZoneId);
-                StringBuilder builder = new StringBuilder();
+        String displayName = searchDisplayName(Utils.list, timeZoneId);
+        if(displayName == null) {
+            displayName = tz.getDisplayName(false, TimeZone.LONG, locale);
+            long date = Calendar.getInstance().getTimeInMillis();
+            LogUtils.d(TAG, " displayName == null addItem " + timeZoneId+" "+displayName);
+            addItem(Utils.list, timeZoneId, displayName, date);
+        }
+        StringBuilder builder = new StringBuilder();
 
         builder.append(formatOffset(tz.getRawOffset() + (daylight ? tz.getDSTSavings() : 0)))
                 .append(", ")
@@ -139,11 +145,11 @@ public class DateTimeActivity extends BaseActivity implements View.OnKeyListener
         return builder.toString();
     }
 
-    private String searchDisplayName(ArrayList<HashMap> list,String timeZoneId) {
-        LogUtils.d(TAG," TimeZone.getDefault().getID() "+TimeZone.getDefault().getID());
+    private String searchDisplayName(ArrayList<HashMap> list, String timeZoneId) {
+        LogUtils.d(TAG, " TimeZone.getDefault().getID() " + TimeZone.getDefault().getID());
         for (int i = 0; i < list.size(); i++) {
             HashMap map = list.get(i);
-            LogUtils.d(TAG," map.get(Contants.KEY_ID) "+map.get(Contants.KEY_ID));
+            LogUtils.d(TAG, " map.get(Contants.KEY_ID) " + map.get(Contants.KEY_ID));
             if (map.get(Contants.KEY_ID).equals(timeZoneId)) {
                 return map.get(Contants.KEY_DISPLAYNAME).toString();
             }

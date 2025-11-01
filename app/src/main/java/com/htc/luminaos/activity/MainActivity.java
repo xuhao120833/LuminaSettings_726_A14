@@ -1628,6 +1628,7 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
         }
         customBinding.icon4.setVisibility(View.GONE);
         customBinding.gtvBanner.setVisibility(View.VISIBLE);
+        customBinding.gtvCardView.setVisibility(View.VISIBLE);
         customBinding.gtvBanner.start();
         customBinding.gtvBanner.isAutoLoop(true);
         customBinding.gtvBanner.setUserInputEnabled(false);
@@ -1654,6 +1655,7 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
         LogUtils.d(TAG, "hideGtvBanner");
         customBinding.icon4.setVisibility(View.VISIBLE);
         customBinding.gtvBanner.setVisibility(View.GONE);
+        customBinding.gtvCardView.setVisibility(View.GONE);
         if (MyApplication.config.layout_select == 2 || MyApplication.config.layout_select == 3) {
             customBinding.icon4.setImageResource(R.drawable.appstore2);
         } else {
