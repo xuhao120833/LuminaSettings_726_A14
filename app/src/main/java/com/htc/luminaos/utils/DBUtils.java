@@ -173,6 +173,29 @@ public class DBUtils extends SQLiteOpenHelper {
      * @param packagename
      * @return
      */
+//    public long addFavorites(String appName, String packagename, Drawable drawable) {
+//        synchronized (this) {
+//            SQLiteDatabase db = null;
+//            try {
+//                long code = -1;
+//                db = getWritableDatabase();
+//                ContentValues cv = new ContentValues();
+//                cv.put("appName", appName);
+//                cv.put("packagename", packagename);
+//                byte[] iconData = drawableToByteArray(drawable);
+//                cv.put("iconData", iconData);
+//                LogUtils.d(TAG, "iconData length = " + (iconData != null ? iconData.length : 0));
+//                code = db.insert(TABLENAME_FAVORITES, null, cv);
+//                sharedPreferences.edit().putBoolean(Contants.MODIFY, true).apply();
+//                db.close();
+//                return code;
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//                return 0;
+//            }
+//        }
+//    }
+
     public long addFavorites(String appName, String packagename, Drawable drawable) {
         synchronized (this) {
             SQLiteDatabase db = null;
@@ -182,7 +205,19 @@ public class DBUtils extends SQLiteOpenHelper {
                 ContentValues cv = new ContentValues();
                 cv.put("appName", appName);
                 cv.put("packagename", packagename);
-                cv.put("iconData", drawableToByteArray(drawable));
+                byte[] iconData = null;
+                if (drawable != null) {
+                    int width = drawable.getIntrinsicWidth();
+                    int height = drawable.getIntrinsicHeight();
+                    LogUtils.d(TAG, "getIntrinsicWidth " + width+" "+height);
+                    final int MAX_DIMENSION = 2048; // 最大边长
+                    if (width > MAX_DIMENSION || height > MAX_DIMENSION) {
+                        //超过大小什么都不做
+                    } else {
+                        iconData = drawableToByteArray(drawable);
+                    }
+                }
+                cv.put("iconData", iconData);
                 code = db.insert(TABLENAME_FAVORITES, null, cv);
                 sharedPreferences.edit().putBoolean(Contants.MODIFY, true).apply();
                 db.close();
@@ -194,6 +229,19 @@ public class DBUtils extends SQLiteOpenHelper {
         }
     }
 
+    /** Drawable 转 Bitmap */
+    private Bitmap drawableToBitmap(Drawable drawable) {
+        if (drawable instanceof BitmapDrawable) {
+            return ((BitmapDrawable) drawable).getBitmap();
+        }
+        int width = drawable.getIntrinsicWidth() > 0 ? drawable.getIntrinsicWidth() : 128;
+        int height = drawable.getIntrinsicHeight() > 0 ? drawable.getIntrinsicHeight() : 128;
+        Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        drawable.setBounds(0, 0, width, height);
+        drawable.draw(canvas);
+        return bitmap;
+    }
 
     /**
      * 获取收藏

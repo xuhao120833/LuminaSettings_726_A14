@@ -24,11 +24,6 @@ import com.htc.luminaos.widget.RLRelativelayout;
 
 import java.util.ArrayList;
 
-
-/**
- * @author 作�?�：hxd
- * @version 创建时间 2020/9/8 下午3:50:51 类说�?
- */
 public class AppFavoritesAdapter extends BaseAdapter {
 
     private Context mContext;

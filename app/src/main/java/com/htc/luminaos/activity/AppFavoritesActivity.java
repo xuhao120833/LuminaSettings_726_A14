@@ -234,10 +234,13 @@ public class AppFavoritesActivity extends BaseActivity implements AppCallBack {
                         boolean isCheck = list.get(position).isCheck();
                         if (isCheck) {
                             if (!DBUtils.getInstance(AppFavoritesActivity.this).isExistData(list.get(position).getApppackagename())) {
+                                long start = System.currentTimeMillis();
                                 DBUtils.getInstance(AppFavoritesActivity.this)
                                         .addFavorites(list.get(position).getAppname(),
                                                 list.get(position).getApppackagename(),
                                                 list.get(position).getAppicon());
+                                long end = System.currentTimeMillis();
+                                LogUtils.d(tag, "addFavorites cost = " + (end - start) + " ms");
                                 adapter.notifyDataSetChanged();
                             }
                         } else {

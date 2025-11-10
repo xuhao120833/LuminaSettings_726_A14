@@ -91,7 +91,7 @@ static def releaseTime() {
     return new Date().format("yyMMddHH", TimeZone.getTimeZone("GMT+8"));
 }
 static def releaseCode() {
-    return Integer.parseInt("2"+releaseTime());
+    return Integer.parseInt("3"+releaseTime());
 }
 
 dependencies {

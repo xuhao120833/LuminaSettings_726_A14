@@ -40,7 +40,7 @@
         android:paddingEnd="@dimen/x_10"
         android:textColor="@color/white"
         android:textSize="@dimen/x_30"
-        android:maxLength="30"
+        android:maxLength="63"
         android:background="@drawable/edit_bg"
         
         />

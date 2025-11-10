@@ -11,6 +11,7 @@ import com.htc.luminaos.settings.utils.T;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 public class Utils {
     public static boolean hasfocus = false;
@@ -61,6 +62,9 @@ public class Utils {
 
     //全局时区列表
     public static ArrayList<HashMap> list = null;
+
+    //配置的快捷栏icon图标大于2048x2048，不会写入数据库，需要遍历获得iconPath，从而获取到图标
+    public static Map<String, String> iconPathMap = new HashMap<>();
 
     public static boolean btAnim = false;
     public static String cur_language="";

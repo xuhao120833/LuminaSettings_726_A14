@@ -2,6 +2,7 @@ package com.htc.luminaos.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
@@ -31,6 +32,7 @@ import com.htc.luminaos.activity.AppFavoritesActivity;
 import com.htc.luminaos.entry.ShortInfoBean;
 import com.htc.luminaos.utils.AppUtils;
 import com.htc.luminaos.utils.DBUtils;
+import com.htc.luminaos.utils.FileUtils;
 import com.htc.luminaos.utils.LogUtils;
 import com.htc.luminaos.utils.Utils;
 import com.htc.luminaos.view.MyCircleImageView;
@@ -54,7 +56,7 @@ public class ShortcutsAdapterCustom extends RecyclerView.Adapter<ShortcutsAdapte
     android.os.Handler handler = new Handler();
 
     public ShortcutsAdapterCustom(Context mContext, ArrayList<ShortInfoBean> short_list) {
-        LogUtils.d(TAG," 创建ShortcutsAdapterCustom ");
+        LogUtils.d(TAG, " 创建ShortcutsAdapterCustom ");
         this.mContext = mContext;
         this.short_list = short_list;
     }
@@ -76,10 +78,10 @@ public class ShortcutsAdapterCustom extends RecyclerView.Adapter<ShortcutsAdapte
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         MyViewHolder myViewHolder = null;
-        if(MyApplication.config.layout_select == 2 || MyApplication.config.layout_select == 3) {
-            myViewHolder = new MyViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.shortcuts_item_custom3, viewGroup,false));
+        if (MyApplication.config.layout_select == 2 || MyApplication.config.layout_select == 3) {
+            myViewHolder = new MyViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.shortcuts_item_custom3, viewGroup, false));
         } else {
-            myViewHolder = new MyViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.shortcuts_item_custom, viewGroup,false));
+            myViewHolder = new MyViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.shortcuts_item_custom, viewGroup, false));
         }
         myViewHolder.setIsRecyclable(false);
         return myViewHolder;
@@ -88,7 +90,7 @@ public class ShortcutsAdapterCustom extends RecyclerView.Adapter<ShortcutsAdapte
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, final int i) {
         LogUtils.d(TAG, "Shortcuts short_list.size() " + short_list.size());
-        if (i < short_list.size() && short_list.get(i).getAppname() != null && short_list.get(i).getAppicon() != null&& i > 0) {
+        if (i < short_list.size() && short_list.get(i).getAppname() != null && short_list.get(i).getAppicon() != null && i > 0) {
             LogUtils.d(TAG, "Shortcuts appName存在 ");
             myViewHolder.icon.setImageDrawable(short_list.get(i).getAppicon());
             myViewHolder.name.setText(short_list.get(i).getAppname());
@@ -104,7 +106,23 @@ public class ShortcutsAdapterCustom extends RecyclerView.Adapter<ShortcutsAdapte
             if (drawable != null) {
                 myViewHolder.icon.setImageDrawable(drawable);
             } else {
-                myViewHolder.icon.setImageResource(getAppIcon(short_list.get(i).getPackageName()));
+                Drawable icon = getAppIcon(mContext, short_list.get(i).getPackageName());
+                if (icon != null) {
+                    myViewHolder.icon.setImageDrawable(icon);
+                } else {
+                    if (!Utils.iconPathMap.isEmpty() && Utils.iconPathMap.containsKey(short_list.get(i).getPackageName())) {
+                        LogUtils.d(TAG, "!Utils.iconPathMap.isEmpty() ");
+                        icon = FileUtils.loadImageAsDrawable(mContext, Utils.iconPathMap.get(short_list.get(i).getPackageName()));
+                    }
+                    if (icon != null) {
+                        LogUtils.d(TAG, "icon != null ");
+                        myViewHolder.icon.setImageDrawable(icon);
+                    } else {
+                        LogUtils.d(TAG, "icon == null Default icon");
+                        myViewHolder.icon.setImageResource(getAppIcon(short_list.get(i).getPackageName()));
+                    }
+                }
+//                myViewHolder.icon.setImageResource(getAppIcon(short_list.get(i).getPackageName()));
             }
         } else if (i == 0) {
             myViewHolder.icon.setImageDrawable(short_list.get(i).getAppicon());
@@ -188,6 +206,29 @@ public class ShortcutsAdapterCustom extends RecyclerView.Adapter<ShortcutsAdapte
 
     }
 
+    public Drawable getAppIcon(Context context, String packageName) {
+        if (!isAppInstalled(context, packageName)) {
+            // 应用不存在，直接返回 null
+            return null;
+        }
+
+        try {
+            PackageManager pm = context.getPackageManager();
+            return pm.getApplicationIcon(packageName);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public boolean isAppInstalled(Context context, String packageName) {
+        try {
+            context.getPackageManager().getApplicationInfo(packageName, 0);
+            return true;
+        } catch (PackageManager.NameNotFoundException e) {
+            return false;
+        }
+    }
 
     private String getAppName(String pkg) {
         switch (pkg) {

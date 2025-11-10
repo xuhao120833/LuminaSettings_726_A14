@@ -2,8 +2,6 @@ package com.htc.luminaos.activity;
 
 import static com.htc.luminaos.utils.BlurImageView.MAX_BITMAP_SIZE;
 import static com.htc.luminaos.utils.BlurImageView.narrowBitmap;
-import static com.htc.luminaos.utils.Utils.FAQ;
-import static com.htc.luminaos.utils.Utils.QUICK_GUID;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
@@ -35,7 +33,6 @@ import android.os.Bundle;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.htc.luminaos.MyApplication;
@@ -61,7 +58,6 @@ import com.htc.luminaos.utils.FileUtils;
 
 import android.os.Environment;
 import android.os.Handler;
-import android.os.Looper;
 import android.os.Message;
 import android.os.SystemProperties;
 import android.os.storage.StorageManager;
@@ -73,7 +69,6 @@ import android.view.Display;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
-import android.view.RoundedCorners;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -81,7 +76,6 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.htc.luminaos.R;
 import com.google.gson.Gson;
@@ -111,7 +105,6 @@ import com.htc.luminaos.utils.BluetoothUtils;
 import com.htc.luminaos.utils.Constants;
 import com.htc.luminaos.utils.Contants;
 import com.htc.luminaos.utils.DBUtils;
-import com.htc.luminaos.utils.GenerateQrBitmap;
 import com.htc.luminaos.utils.ImageBean;
 import com.htc.luminaos.utils.ImageUtils;
 import com.htc.luminaos.utils.LanguageUtil;
@@ -133,7 +126,6 @@ import com.htc.luminaos.widget.SpacesItemDecoration;
 import com.youth.banner.adapter.BannerImageAdapter;
 import com.youth.banner.holder.BannerImageHolder;
 import com.youth.banner.indicator.CircleIndicator;
-import com.youth.banner.transformer.AlphaPageTransformer;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -145,8 +137,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -1442,6 +1432,7 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
                     if (resident) {
                         residentList.add(packageName);
                     }
+                    Utils.iconPathMap.put(packageName, iconPath);
                     Drawable drawable = FileUtils.loadImageAsDrawable(this, iconPath);
                     if (!DBUtils.getInstance(this).isExistData(packageName)) {
                         long addCode = DBUtils.getInstance(this).addFavorites(appName, packageName, drawable);
@@ -1656,11 +1647,24 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
         customBinding.icon4.setVisibility(View.VISIBLE);
         customBinding.gtvBanner.setVisibility(View.GONE);
         customBinding.gtvCardView.setVisibility(View.GONE);
-        if (MyApplication.config.layout_select == 2 || MyApplication.config.layout_select == 3) {
-            customBinding.icon4.setImageResource(R.drawable.appstore2);
+
+        Drawable drawable = DBUtils.getInstance(this).getIconDataByTag("icon4");
+        if (drawable != null) {
+            customBinding.icon4.setImageDrawable(drawable);
         } else {
-            customBinding.icon4.setImageResource(R.drawable.appstore);
+            if (MyApplication.config.layout_select == 2 || MyApplication.config.layout_select == 3) {
+                customBinding.icon4.setImageResource(R.drawable.appstore2);
+            } else {
+                customBinding.icon4.setImageResource(R.drawable.appstore);
+            }
         }
+
+//        if (MyApplication.config.layout_select == 2 || MyApplication.config.layout_select == 3) {
+//            customBinding.icon4.setImageResource(R.drawable.appstore2);
+//        } else {
+//            customBinding.icon4.setImageResource(R.drawable.appstore);
+//        }
+
         customBinding.gtvBanner.stop();
     }
 
