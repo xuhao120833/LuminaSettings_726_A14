@@ -925,7 +925,8 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
             if (!MyApplication.config.support_faq.isEmpty() || !MyApplication.config.support_quick_guide.isEmpty()) {
                 FaqGuideUtils.checkAndOpenUrls(MyApplication.config.support_faq, MyApplication.config.support_quick_guide, this);
             } else {
-                showSupportDialog();
+//                showSupportDialog();
+                startNewActivity(SupportActivity.class);
             }
         } else if (id == R.id.rl_clear_memory) {
             goAction("com.htc.clearmemory/com.htc.clearmemory.MainActivity");

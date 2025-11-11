@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.htc.luminaos"
     android:sharedUserId="android.uid.system">
-
     <!-- android:sharedUserId="android.uid.system" -->
     <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
     <uses-permission android:name="android.permission.REBOOT" />
@@ -37,7 +36,7 @@
     <uses-permission android:name="android.permission.WRITE_MEDIA_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_DEVICE_CONFIG" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
     <application
         android:name=".MyApplication"
@@ -52,10 +51,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity
+            android:name=".activity.SupportActivity"
+            android:exported="false" />
+
         <receiver
             android:name=".receiver.UnlockReceiver"
             android:enabled="true"
-            android:exported="true"></receiver>
+            android:exported="true" />
         <receiver
             android:name=".receiver.InitAngleReceiver"
             android:enabled="true"
@@ -203,9 +206,9 @@
             android:launchMode="singleInstance" />
         <activity
             android:name=".activity.MainActivity"
+            android:configChanges="locale|layoutDirection"
             android:exported="true"
-            android:launchMode="singleInstance"
-            android:configChanges="locale|layoutDirection">
+            android:launchMode="singleInstance">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
