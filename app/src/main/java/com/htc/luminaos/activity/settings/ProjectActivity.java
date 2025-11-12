@@ -390,7 +390,8 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
         audioManagerEx = new AudioManagerEx(this);
         ArrayList<String> audioDevices = audioManagerEx.getAudioDeviceActive(AudioManagerEx.AUDIO_OUTPUT_ACTIVE);
         if (audioDevices != null && audioDevices.size() > 0)
-            projectBinding.arcSwitch.setChecked(audioDevices.get(0).equals("AUDIO_ARC"));
+//            projectBinding.arcSwitch.setChecked(audioDevices.get(0).equals("AUDIO_ARC"));
+            projectBinding.arcSwitch.setChecked(audioDevices.get(0).equals("OUT_ARC"));
     }
 
     private void updateSzoomTv() {
@@ -596,7 +597,8 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
         } else if (id == R.id.arc_switch || id == R.id.rl_arc_switch) {
             boolean isChecked = projectBinding.arcSwitch.isChecked();
             projectBinding.arcSwitch.setChecked(!isChecked);
-            updateAudioDevice(!isChecked ? "AUDIO_ARC" : "AUDIO_SPEAKER");
+//            updateAudioDevice(!isChecked ? "AUDIO_ARC" : "AUDIO_SPEAKER");
+            updateAudioDevice(!isChecked ? "OUT_ARC" : "OUT_SPK");
         }
     }
 
