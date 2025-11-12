@@ -66,6 +66,14 @@ public class AddNetWorkDialog extends BaseDialog {
     private String ssid = "";
     Dialog connectingDialog = null;
 
+    EditText networkName_et;
+    EditText password_et;
+    TextView wifi_security;
+    CheckBox wifi_password_checkbox;
+    TextView ok;
+    TextView cancel;
+    LinearLayout password_layout;
+
     public AddNetWorkDialog(Context context) {
         super(context);
         mWifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
@@ -88,10 +96,20 @@ public class AddNetWorkDialog extends BaseDialog {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         init();
-
         IntentFilter filter = new IntentFilter();
         filter.addAction(WifiManager.NETWORK_STATE_CHANGED_ACTION);
         mContext.registerReceiver(wifiConnectReceiver, filter);
+    }
+
+    @Override
+    public void show() {
+        super.show();
+        getWindow().getDecorView().post(() -> {
+            // 确保 Dialog 已 attach Window
+            networkName_et.requestFocus();
+            InputMethodManager imm = (InputMethodManager) mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.showSoftInput(networkName_et, InputMethodManager.SHOW_IMPLICIT);
+        });
     }
 
     private BroadcastReceiver wifiConnectReceiver = new BroadcastReceiver() {
@@ -107,7 +125,7 @@ public class AddNetWorkDialog extends BaseDialog {
                 if (info.isConnected()) {
                     LogUtils.d(TAG, "连接成功: " + currentSsid);
                     Toast.makeText(mContext, mContext.getString(R.string.wifi_connect_success) + currentSsid, Toast.LENGTH_SHORT).show();
-                    if(connectingDialog != null & connectingDialog.isShowing())
+                    if (connectingDialog != null & connectingDialog.isShowing())
                         connectingDialog.dismiss();
                     dismiss();
                 }
@@ -140,17 +158,17 @@ public class AddNetWorkDialog extends BaseDialog {
             params.height = (int) (d.getHeight() * 0.7);
             dialogWindow.setAttributes(params);
 
-            final EditText networkName_et = (EditText) view
+            networkName_et = (EditText) view
                     .findViewById(R.id.networkName_et);
-            final EditText password_et = (EditText) view
+            password_et = (EditText) view
                     .findViewById(R.id.password_et);
-            final TextView wifi_security = (TextView) view
+            wifi_security = (TextView) view
                     .findViewById(R.id.wifi_security);
-            CheckBox wifi_password_checkbox = (CheckBox) view
+            wifi_password_checkbox = (CheckBox) view
                     .findViewById(R.id.wifi_password_checkbox);
-            TextView ok = view.findViewById(R.id.ok);
-            TextView cancel = view.findViewById(R.id.cancel);
-            final LinearLayout password_layout = (LinearLayout) view
+            ok = view.findViewById(R.id.ok);
+            cancel = view.findViewById(R.id.cancel);
+            password_layout = (LinearLayout) view
                     .findViewById(R.id.password_layout);
             wifi_security.setText(mContext.getString(R.string.none));
             password_layout.setVisibility(View.GONE);
@@ -166,7 +184,7 @@ public class AddNetWorkDialog extends BaseDialog {
                 }
             });
 
-            InputMethodUtil.openInputMethod(mContext, networkName_et, new Handler());
+//            InputMethodUtil.openInputMethod(mContext, networkName_et, new Handler());
             networkName_et.setOnEditorActionListener(new TextView.OnEditorActionListener() {
                 @Override
                 public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -238,7 +256,7 @@ public class AddNetWorkDialog extends BaseDialog {
                             mWifiManager.disableNetwork(c.networkId);
 
                         }
-                        if(connectingDialog == null) {
+                        if (connectingDialog == null) {
                             connectingDialog = ConectingDialog(mContext, mContext.getString(R.string.connecting_ssid, ssid));
                         }
                         connectingDialog.show();
@@ -255,7 +273,7 @@ public class AddNetWorkDialog extends BaseDialog {
                                 Toast.makeText(mContext, mContext.getString(R.string.wifi_ssid_not_found), Toast.LENGTH_SHORT).show();
                                 mWifiManager.removeNetwork(netID);
                                 mWifiManager.saveConfiguration();
-                                if(connectingDialog != null & connectingDialog.isShowing())
+                                if (connectingDialog != null & connectingDialog.isShowing())
                                     connectingDialog.dismiss();
                                 dismiss();
                             }
@@ -335,7 +353,7 @@ public class AddNetWorkDialog extends BaseDialog {
                     for (WifiConfiguration c : wifiConfigurationList) {
                         mWifiManager.disableNetwork(c.networkId);
                     }
-                    if(connectingDialog == null) {
+                    if (connectingDialog == null) {
                         connectingDialog = ConectingDialog(mContext, mContext.getString(R.string.connecting_ssid, ssid));
                     }
                     connectingDialog.show();
@@ -352,7 +370,7 @@ public class AddNetWorkDialog extends BaseDialog {
                             Toast.makeText(mContext, mContext.getString(R.string.wifi_ssid_not_found), Toast.LENGTH_SHORT).show();
                             mWifiManager.removeNetwork(netID);
                             mWifiManager.saveConfiguration();
-                            if(connectingDialog != null & connectingDialog.isShowing())
+                            if (connectingDialog != null & connectingDialog.isShowing())
                                 connectingDialog.dismiss();
                             dismiss();
                         }
