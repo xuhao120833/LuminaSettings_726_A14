@@ -62,6 +62,10 @@ public class DisplaySettingsReceiver extends BroadcastReceiver implements View.O
     //以下为EQ声音调节
 
     private int sound_mode = 0;//当前声音模式下标
+    //返回键退出时，不能只在sound_mode==4的时候同步,只要切了不同模式就得Sync，防止重启读出来的数值不对
+    //old_mode记录初始值
+    private int old_mode = 0;//初始声音模式下标
+    private int new_mode = 0;//修改后的声音模式下标
     private String[] soundMode_name;
     private int value_100hz = 0;
     private int value_500hz = 0;
@@ -83,6 +87,10 @@ public class DisplaySettingsReceiver extends BroadcastReceiver implements View.O
     private static final String KEY_BQ_8 = "bq_8";
     private static final String KEY_BQ_9 = "bq_9";
     private static final String KEY_BQ_10 = "bq_10";
+    private static final String PQ_AND_EQ = "pq_eq";
+    private static final String PQ = "pq";
+    private static final String EQ = "eq";
+
     private AudioManagerEx mAudioManagerEx = null;
     private Handler handler = new Handler();
     private static String AUDIO_SFX_SYNC_FILE = "audio_sound_effects_sync_file";
@@ -120,30 +128,22 @@ public class DisplaySettingsReceiver extends BroadcastReceiver implements View.O
         String action = intent.getAction();
         if (action.equals(DisplayAction)) {
             try {
-                initData();
                 boolean show = intent.getBooleanExtra("show", false);
-                //displaySettingsBinding.getRoot().isAttachedToWindow()会有极低的概率不生效
-//                if (show && !displaySettingsBinding.getRoot().isAttachedToWindow()) {
-//                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
-//                    String currentTime = sdf.format(new Date());
-//                    LogUtils.d(TAG, "mavts.addView " + currentTime);
-//                    mavts.addView(displaySettingsBinding.getRoot(), lp);
-//                } else if (!show && displaySettingsBinding.getRoot().isAttachedToWindow()) {
-//                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
-//                    String currentTime = sdf.format(new Date());
-//                    LogUtils.d(TAG, "mavts.clearView " + currentTime);
-//                    mavts.clearView(displaySettingsBinding.getRoot());
-//                }
+                String type = intent.getStringExtra("type");
+                type = (type != null) ? type : "";
                 boolean attachedToWindow = SystemProperties.getBoolean("display.attach", false);
                 if (show && !attachedToWindow) {
+                    initData();
                     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
                     String currentTime = sdf.format(new Date());
                     LogUtils.d(TAG, "mavts.addView " + currentTime);
+                    initViewByType(type);
                     mavts.addView(displaySettingsBinding.getRoot(), lp);
                     SystemProperties.set("display.attach", String.valueOf(true));
                 } else if (!show && attachedToWindow) {
-                    if(mAudioManagerEx != null && sound_mode == 4) {
+                    if (mAudioManagerEx != null && ((old_mode != new_mode) || sound_mode == 4)) {
                         mAudioManagerEx.setAudioParameters(AUDIO_SFX_SYNC_FILE, "");
+                        old_mode = new_mode;
                     }
                     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
                     String currentTime = sdf.format(new Date());
@@ -315,6 +315,80 @@ public class DisplaySettingsReceiver extends BroadcastReceiver implements View.O
         displaySettingsBinding.rl18khz.setVisibility(MyApplication.config.Menu18KHZ ? View.VISIBLE : View.GONE);
     }
 
+    private void initViewByType(String type) {
+        switch (type) {
+            case PQ_AND_EQ -> {
+                displaySettingsBinding.changeModeLeft.setVisibility(View.VISIBLE);
+                displaySettingsBinding.changeModeRight.setVisibility(View.VISIBLE);
+                displaySettingsBinding.pictureModeLinear.setVisibility(View.VISIBLE);
+                displaySettingsBinding.audioModeScrollView.setVisibility(View.GONE);
+                displaySettingsBinding.title.setText(mContext.getString(R.string.display_settings));
+                displaySettingsBinding.changeMode.setOnClickListener(this);
+                displaySettingsBinding.changeMode.setOnKeyListener(this);
+                displaySettingsBinding.changeMode.setOnHoverListener(this);
+                displaySettingsBinding.changeMode.setOnFocusChangeListener(this);
+                displaySettingsBinding.changeMode.setFocusable(true);
+                displaySettingsBinding.changeMode.setFocusableInTouchMode(true);
+                displaySettingsBinding.changeMode.requestFocus();
+            }
+            case PQ -> {
+                displaySettingsBinding.changeModeLeft.setVisibility(View.GONE);
+                displaySettingsBinding.changeModeRight.setVisibility(View.GONE);
+                displaySettingsBinding.pictureModeLinear.setVisibility(View.VISIBLE);
+                displaySettingsBinding.audioModeScrollView.setVisibility(View.GONE);
+                displaySettingsBinding.title.setText(mContext.getString(R.string.display_settings));
+                displaySettingsBinding.changeMode.setOnClickListener(null);
+                displaySettingsBinding.changeMode.setOnKeyListener(null);
+                displaySettingsBinding.changeMode.setOnHoverListener(null);
+                displaySettingsBinding.changeMode.setOnFocusChangeListener(null);
+                displaySettingsBinding.changeMode.setFocusable(false);
+                displaySettingsBinding.changeMode.setFocusableInTouchMode(false);
+                displaySettingsBinding.rlPictureMode.requestFocus();
+
+            }
+            case EQ -> {
+                displaySettingsBinding.changeModeLeft.setVisibility(View.GONE);
+                displaySettingsBinding.changeModeRight.setVisibility(View.GONE);
+                displaySettingsBinding.pictureModeLinear.setVisibility(View.GONE);
+                displaySettingsBinding.audioModeScrollView.setVisibility(View.VISIBLE);
+                displaySettingsBinding.title.setText(mContext.getString(R.string.Audio_Settings));
+                displaySettingsBinding.changeMode.setOnClickListener(null);
+                displaySettingsBinding.changeMode.setOnKeyListener(null);
+                displaySettingsBinding.changeMode.setOnHoverListener(null);
+                displaySettingsBinding.changeMode.setOnFocusChangeListener(null);
+                displaySettingsBinding.changeMode.setFocusable(false);
+                displaySettingsBinding.changeMode.setFocusableInTouchMode(false);
+                displaySettingsBinding.rlAudioMode.requestFocus();
+            }
+            default -> {
+                displaySettingsBinding.changeModeLeft.setVisibility(View.VISIBLE);
+                displaySettingsBinding.changeModeRight.setVisibility(View.VISIBLE);
+                displaySettingsBinding.pictureModeLinear.setVisibility(View.VISIBLE);
+                displaySettingsBinding.audioModeScrollView.setVisibility(View.GONE);
+                displaySettingsBinding.title.setText(mContext.getString(R.string.display_settings));
+                displaySettingsBinding.changeMode.setOnClickListener(this);
+                displaySettingsBinding.changeMode.setOnKeyListener(this);
+                displaySettingsBinding.changeMode.setOnHoverListener(this);
+                displaySettingsBinding.changeMode.setOnFocusChangeListener(this);
+                displaySettingsBinding.changeMode.setFocusable(true);
+                displaySettingsBinding.changeMode.setFocusableInTouchMode(true);
+                if (!MyApplication.config.AudioMode) {
+                    displaySettingsBinding.changeModeLeft.setVisibility(View.GONE);
+                    displaySettingsBinding.changeModeRight.setVisibility(View.GONE);
+                    displaySettingsBinding.changeMode.setOnClickListener(null);
+                    displaySettingsBinding.changeMode.setOnKeyListener(null);
+                    displaySettingsBinding.changeMode.setOnHoverListener(null);
+                    displaySettingsBinding.changeMode.setOnFocusChangeListener(null);
+                    displaySettingsBinding.changeMode.setFocusable(false);
+                    displaySettingsBinding.changeMode.setFocusableInTouchMode(false);
+                    displaySettingsBinding.rlPictureMode.requestFocus();
+                } else {
+                    displaySettingsBinding.changeMode.requestFocus();
+                }
+            }
+        }
+    }
+
     private void initData() {
         String pictureName = pqControl.getPictureModeName();
         LogUtils.d(TAG, "pictureName " + pictureName);
@@ -347,6 +421,7 @@ public class DisplaySettingsReceiver extends BroadcastReceiver implements View.O
 
         //EQ
         sound_mode = getSettingModeValue();
+        old_mode = sound_mode;
         LogUtils.d(TAG, "initData sound_mode " + sound_mode);
         displaySettingsBinding.audioModeTv.setText(soundMode_name[sound_mode]);
         updateAllEQValue();
@@ -356,10 +431,14 @@ public class DisplaySettingsReceiver extends BroadcastReceiver implements View.O
     @Override
     public boolean onKey(View v, int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
-            if(mAudioManagerEx != null) {
+            LogUtils.d(TAG, "onKey KEYCODE_BACK");
+            if (mAudioManagerEx != null && ((old_mode != new_mode) || sound_mode == 4)) {
                 mAudioManagerEx.setAudioParameters(AUDIO_SFX_SYNC_FILE, "");
+                old_mode = new_mode;
             }
+            LogUtils.d(TAG, "onKey mAudioManagerEx.setAudioParameters");
             SystemProperties.set("display.attach", String.valueOf(false));
+            LogUtils.d(TAG, "onKey display.attach " + SystemProperties.getBoolean("display.attach", false));
             mavts.clearView(displaySettingsBinding.getRoot());
             return true;
         }
@@ -475,6 +554,7 @@ public class DisplaySettingsReceiver extends BroadcastReceiver implements View.O
                 if (sound_mode == -1) {
                     sound_mode = soundMode_name.length - 1;
                 }
+                new_mode = sound_mode;
                 updateSettingModeValue(sound_mode);
                 displaySettingsBinding.audioModeTv.setText(soundMode_name[sound_mode]);
                 handler.postDelayed(new Runnable() {
@@ -678,6 +758,7 @@ public class DisplaySettingsReceiver extends BroadcastReceiver implements View.O
                 if (sound_mode == soundMode_name.length) {
                     sound_mode = 0;
                 }
+                new_mode = sound_mode;
                 updateSettingModeValue(sound_mode);
                 displaySettingsBinding.audioModeTv.setText(soundMode_name[sound_mode]);
                 handler.postDelayed(new Runnable() {
@@ -951,6 +1032,7 @@ public class DisplaySettingsReceiver extends BroadcastReceiver implements View.O
             if (sound_mode == soundMode_name.length) {
                 sound_mode = 0;
             }
+            new_mode = sound_mode;
             updateSettingModeValue(sound_mode);
             displaySettingsBinding.audioModeTv.setText(soundMode_name[sound_mode]);
             handler.postDelayed(new Runnable() { //延迟200ms再去读取，防止设置的模式还未生效

@@ -782,11 +782,9 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
         registerReceiver(batteryReceiver, batteryFilter);
 
         //监听APPStore发出 特定IP广播，意味着它已经写了Settings ip_country_code 的值
-        IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction("com.htc.refreshApps");
-        registerReceiver(refreshAppsReceiver, intentFilter);
-//        short_list = loadHomeAppData();
-//        handler.sendEmptyMessage(204);
+//        IntentFilter intentFilter = new IntentFilter();
+//        intentFilter.addAction("com.htc.refreshApps");
+//        registerReceiver(refreshAppsReceiver, intentFilter);
 
         //Display Settings悬浮窗
         if (displaySettingsReceiver == null) {
@@ -1715,6 +1713,7 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
         unregisterReceiver(usbDeviceReceiver);
         unregisterReceiver(appReceiver);
         unregisterReceiver(batteryReceiver);
+//        unregisterReceiver(refreshAppsReceiver);
         getApplicationContext().unregisterReceiver(displaySettingsReceiver);
         displaySettingsReceiver = null;
         unregisterReceiver(initAngleReceiver);
