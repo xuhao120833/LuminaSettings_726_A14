@@ -141,8 +141,10 @@ public class DisplaySettingsReceiver extends BroadcastReceiver implements View.O
                     mavts.addView(displaySettingsBinding.getRoot(), lp);
                     SystemProperties.set("display.attach", String.valueOf(true));
                 } else if (!show && attachedToWindow) {
-                    if (mAudioManagerEx != null && ((old_mode != new_mode) || sound_mode == 4)) {
+                    if (mAudioManagerEx != null && ((old_mode != new_mode) || sound_mode == 4 || Utils.audio_change)) {
+                        LogUtils.d(TAG, "onReceive AUDIO_SFX_SYNC_FILE  ");
                         mAudioManagerEx.setAudioParameters(AUDIO_SFX_SYNC_FILE, "");
+                        Utils.audio_change = false;
                         old_mode = new_mode;
                     }
                     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
@@ -432,8 +434,10 @@ public class DisplaySettingsReceiver extends BroadcastReceiver implements View.O
     public boolean onKey(View v, int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
             LogUtils.d(TAG, "onKey KEYCODE_BACK");
-            if (mAudioManagerEx != null && ((old_mode != new_mode) || sound_mode == 4)) {
+            if (mAudioManagerEx != null && ((old_mode != new_mode) || sound_mode == 4 || Utils.audio_change)) {
+                LogUtils.d(TAG, "onKey AUDIO_SFX_SYNC_FILE  ");
                 mAudioManagerEx.setAudioParameters(AUDIO_SFX_SYNC_FILE, "");
+                Utils.audio_change = false;
                 old_mode = new_mode;
             }
             LogUtils.d(TAG, "onKey mAudioManagerEx.setAudioParameters");
@@ -548,7 +552,7 @@ public class DisplaySettingsReceiver extends BroadcastReceiver implements View.O
             } else if (id == R.id.rl_audio_mode) {
                 if (sound_mode == 4 && Utils.audio_change) {
                     mAudioManagerEx.setAudioParameters(AUDIO_SFX_SYNC_FILE, "");
-                    Utils.audio_change = false;
+//                    Utils.audio_change = false;
                 }
                 sound_mode -= 1;
                 if (sound_mode == -1) {
@@ -752,7 +756,7 @@ public class DisplaySettingsReceiver extends BroadcastReceiver implements View.O
             } else if (id == R.id.rl_audio_mode) {
                 if (sound_mode == 4 && Utils.audio_change) {
                     mAudioManagerEx.setAudioParameters(AUDIO_SFX_SYNC_FILE, "");
-                    Utils.audio_change = false;
+//                    Utils.audio_change = false;
                 }
                 sound_mode += 1;
                 if (sound_mode == soundMode_name.length) {
@@ -1026,7 +1030,7 @@ public class DisplaySettingsReceiver extends BroadcastReceiver implements View.O
         } else if (id == R.id.rl_audio_mode) {
             if (sound_mode == 4 && Utils.audio_change) {
                 mAudioManagerEx.setAudioParameters(AUDIO_SFX_SYNC_FILE, "");
-                Utils.audio_change = false;
+//                Utils.audio_change = false;
             }
             sound_mode += 1;
             if (sound_mode == soundMode_name.length) {
@@ -1349,7 +1353,9 @@ public class DisplaySettingsReceiver extends BroadcastReceiver implements View.O
 
     private void updateAudioStatus() {
         if (sound_mode == 4) {
-            displaySettingsBinding.audioModeScrollView.setFocusable(true);
+//            displaySettingsBinding.audioModeScrollView.setFocusable(true);
+//            displaySettingsBinding.audioModeScrollView.setFocusableInTouchMode(true);
+//            displaySettingsBinding.audioModeScrollView.setEnabled(true);
             displaySettingsBinding.rl100hz.setEnabled(true);
             displaySettingsBinding.right100.setEnabled(true);
             displaySettingsBinding.left100.setEnabled(true);
@@ -1392,7 +1398,9 @@ public class DisplaySettingsReceiver extends BroadcastReceiver implements View.O
             displaySettingsBinding.rl14khz.setAlpha(1.0f);
             displaySettingsBinding.rl18khz.setAlpha(1.0f);
         } else {
-            displaySettingsBinding.audioModeScrollView.setFocusable(false);
+//            displaySettingsBinding.audioModeScrollView.setFocusable(false);
+//            displaySettingsBinding.audioModeScrollView.setFocusableInTouchMode(false);
+//            displaySettingsBinding.audioModeScrollView.setEnabled(false);
             displaySettingsBinding.rl100hz.setEnabled(false);
             displaySettingsBinding.right100.setEnabled(false);
             displaySettingsBinding.left100.setEnabled(false);
