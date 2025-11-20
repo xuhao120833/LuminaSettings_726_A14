@@ -9,7 +9,7 @@
     <string name="general">Átlagos</string>
     <string name="weak">Gyenge</string>
     <string name="signalstrength">Jelerősség:</string>
-    <string name="security">Biztonság</string>
+    <string name="security">Biztonság:</string>
     <string name="stateinfo">Állapotinformáció:</string>
     <string name="wifiipaddress">IP cím:</string>
     <string name="wifistate">Csatlakoztatva</string>

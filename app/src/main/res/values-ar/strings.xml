@@ -9,7 +9,7 @@
     <string name="general">عادي</string>
     <string name="weak">ضعيف</string>
     <string name="signalstrength">قوة الإشارة:</string>
-    <string name="security">الأمان</string>
+    <string name="security">الأمان:</string>
     <string name="stateinfo">معلومات الحالة:</string>
     <string name="wifiipaddress">عنوان IP:</string>
     <string name="wifistate">متصل</string>

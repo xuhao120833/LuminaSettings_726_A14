@@ -9,7 +9,7 @@
     <string name="general">普通</string>
     <string name="weak">弱い</string>
     <string name="signalstrength">信号強度:</string>
-    <string name="security">セキュリティ</string>
+    <string name="security">セキュリティ:</string>
     <string name="stateinfo">状態情報:</string>
     <string name="wifiipaddress">IPアドレス:</string>
     <string name="wifistate">接続済み</string>

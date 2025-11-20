@@ -9,7 +9,7 @@
     <string name="general">Geral</string>
     <string name="weak">Fraco</string>
     <string name="signalstrength">Intensidade do sinal:</string>
-    <string name="security">Segurança</string>
+    <string name="security">Segurança:</string>
     <string name="stateinfo">Informações de estado:</string>
     <string name="wifiipaddress">Endereço IP:</string>
     <string name="wifistate">Conectado</string>

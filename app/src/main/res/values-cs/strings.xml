@@ -9,7 +9,7 @@
 	<string name="general">Střední</string>
 	<string name="weak">Slabé</string>
 	<string name="signalstrength">Síla signálu:</string>
-	<string name="security">Zabezpečení</string>
+	<string name="security">Zabezpečení:</string>
 	<string name="stateinfo">Stavové informace:</string>
 	<string name="wifiipaddress">IP adresa:</string>
 	<string name="wifistate">Připojeno</string>

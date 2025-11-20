@@ -9,7 +9,7 @@
     <string name="general">Orta</string>
     <string name="weak">Zayıf</string>
     <string name="signalstrength">Sinyal Gücü:</string>
-    <string name="security">Güvenlik</string>
+    <string name="security">Güvenlik:</string>
     <string name="stateinfo">Durum Bilgisi:</string>
     <string name="wifiipaddress">IP Adresi:</string>
     <string name="wifistate">Bağlı</string>

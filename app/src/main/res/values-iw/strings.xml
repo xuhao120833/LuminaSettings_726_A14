@@ -9,7 +9,7 @@
     <string name="general">כללי</string>
     <string name="weak">חלש</string>
     <string name="signalstrength">עוצמת אות:</string>
-    <string name="security">אבטחה</string>
+    <string name="security">אבטחה:</string>
     <string name="stateinfo">מצב:</string>
     <string name="wifiipaddress">כתובת IP:</string>
     <string name="wifistate">מחובר</string>

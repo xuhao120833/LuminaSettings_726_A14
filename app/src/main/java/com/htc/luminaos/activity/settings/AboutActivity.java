@@ -179,8 +179,8 @@ public class AboutActivity extends BaseActivity {
     }
 
     private void updateTextViewWithModifiedVersion(TextView textView) {
-        String version = SystemProperties.get("ro.build.version.incremental","");
-        String prefix = SystemProperties.get("persist.display.prefix","");
+        String version = SystemProperties.get("ro.build.version.incremental", "");
+        String prefix = SystemProperties.get("persist.display.prefix", "");
 
         if (!version.isEmpty() && !prefix.isEmpty()) {
             // 找第一个点，替换前缀
@@ -193,7 +193,7 @@ public class AboutActivity extends BaseActivity {
                 // 没有点，直接用 prefix
                 textView.setText(prefix);
             }
-        } else if(!version.isEmpty()){
+        } else if (!version.isEmpty()) {
             textView.setText(version); // 如果拿不到prefix，就显示原来的
         }
     }
@@ -232,7 +232,7 @@ public class AboutActivity extends BaseActivity {
             AppUtils.startNewApp(this, "com.htc.htcotaupdate");
         } else if (id == R.id.rl_email_image) {
             if (!MyApplication.config.support_faq.isEmpty() || !MyApplication.config.support_quick_guide.isEmpty()) {
-                FaqGuideUtils.checkAndOpenUrls(MyApplication.config.support_faq, MyApplication.config.support_quick_guide,this);
+                FaqGuideUtils.checkAndOpenUrls(MyApplication.config.support_faq, MyApplication.config.support_quick_guide, this);
             } else {
                 showSupportDialog();
             }
@@ -323,29 +323,30 @@ public class AboutActivity extends BaseActivity {
     private void getStorageSize() {
         long totalSize = ClearMemoryUtils
                 .getRomTotalSizeLong(this);
-        totalSize = totalSize * MyApplication.config.storageScale;
+        LogUtils.d(TAG, "getStorageSize totalSize " + totalSize);
         String total = "8 GB";
+        int number_total = 8;
         try {
             if (totalSize > 64 * GBYTE)
-                total = "128 GB";
+                number_total = 128;
             else if (totalSize > 32 * GBYTE)
-                total = "64 GB";
+                number_total = 64;
             else if (totalSize > 16 * GBYTE)
-                total = "32 GB";
+                number_total = 32;
             else if (totalSize > 8 * GBYTE)
-                total = "16 GB";
+                number_total = 16;
             else if (totalSize > 2 * GBYTE)
-                total = "8 GB";
+                number_total = 8;
             else
-                total = "4 GB";
-
+                number_total = 4;
         } catch (Exception e) {
             // TODO: handle exception
             total = ClearMemoryUtils.getRomTotalSize(this);
         }
+        total = String.valueOf(number_total * MyApplication.config.storageScale)+" GB";
         /*aboutBinding.storageTv.setText(getString(R.string.memory_info,
                 ClearMemoryUtils.getRomAvailableSize(this),total));*/
-
+        LogUtils.d(TAG, "getStorageSize total " + total);
         aboutBinding.storageTv.setText(total + "/"
                 + ClearMemoryUtils.getRomAvailableSize(this, MyApplication.config.storageScale));
     }

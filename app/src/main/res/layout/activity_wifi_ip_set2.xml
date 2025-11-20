@@ -120,6 +120,7 @@
 
                 <EditText
                     android:id="@+id/ip"
+                    android:textDirection="locale"
                     android:layout_width="@dimen/x_368"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
@@ -159,6 +160,7 @@
 
                 <EditText
                     android:id="@+id/gateway"
+                    android:textDirection="locale"
                     android:layout_width="@dimen/x_368"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
@@ -199,6 +201,7 @@
 
                 <EditText
                     android:id="@+id/netmask"
+                    android:textDirection="locale"
                     android:layout_width="@dimen/x_368"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
@@ -238,6 +241,7 @@
 
                 <EditText
                     android:id="@+id/dns1"
+                    android:textDirection="locale"
                     android:layout_width="@dimen/x_368"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
@@ -277,6 +281,7 @@
 
                 <EditText
                     android:id="@+id/dns2"
+                    android:textDirection="locale"
                     android:layout_width="@dimen/x_368"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"

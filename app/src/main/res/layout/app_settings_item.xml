@@ -15,6 +15,7 @@
         android:id="@+id/app_icon"
         android:layout_centerVertical="true"
         android:duplicateParentState="true"
+        android:layout_alignParentStart="true"
         android:layout_marginStart="@dimen/x_50"
         />
 
@@ -27,6 +28,8 @@
         android:layout_marginStart="@dimen/x_15"
         android:textSize="@dimen/x_23"
         android:focusable="true"
+        android:textDirection="ltr"
+        android:textAlignment="viewStart"
         android:textColor="@color/tv_color"
         android:duplicateParentState="true"
         android:singleLine="true"

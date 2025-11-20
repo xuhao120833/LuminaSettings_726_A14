@@ -23,13 +23,13 @@
         android:layout_height="@dimen/y_495"
         android:layout_centerInParent="true"
         android:background="@drawable/correction_background" />
-    
+
 
     <CheckBox
         android:id="@+id/check_lt"
         android:layout_width="@dimen/x_60"
         android:layout_height="@dimen/y_60"
-        android:layout_marginStart="@dimen/x_138"
+        android:layout_marginStart="@dimen/x_123"
         android:layout_marginTop="@dimen/y_78"
         android:background="@drawable/correction_checkbox_bg"
         android:button="@null"
@@ -343,61 +343,92 @@
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="@dimen/y_40"
-        android:background="@drawable/correction_notes_custom"
+        android:background="@drawable/correction_tips_bg"
         android:focusable="false"
         >
 
+        <ImageView
+            android:id="@+id/correction_notes_ok"
+            android:layout_width="@dimen/x_47"
+            android:layout_height="@dimen/y_47"
+            android:layout_marginStart="@dimen/x_50"
+            android:background="@drawable/correction_notes_ok" />
+
         <TextView
             android:id="@+id/select_point_txt"
-            android:layout_width="@dimen/x_120"
+            android:layout_width="@dimen/x_80"
             android:layout_height="match_parent"
             android:textColor="@color/white"
             android:textSize="@dimen/x_21"
             android:gravity="center_vertical"
             android:maxWidth="@dimen/x_230"
-            android:layout_marginStart="@dimen/x_70"
+            android:layout_toEndOf="@+id/correction_notes_ok"
             android:text="@string/select_point"
             android:singleLine="true"
             android:ellipsize="marquee"
             />
 
+        <ImageView
+            android:id="@+id/correction_notes_direction"
+            android:layout_width="@dimen/x_47"
+            android:layout_height="@dimen/y_47"
+            android:layout_toEndOf="@+id/select_point_txt"
+            android:layout_marginStart="@dimen/x_50"
+            android:background="@drawable/correction_notes_direction" />
+
         <TextView
             android:id="@+id/correct_txt"
-            android:layout_width="@dimen/x_120"
+            android:layout_width="@dimen/x_80"
             android:layout_height="match_parent"
             android:textColor="@color/white"
             android:maxWidth="@dimen/x_150"
             android:textSize="@dimen/x_21"
             android:gravity="center_vertical"
-            android:layout_marginStart="@dimen/x_240"
+            android:layout_toEndOf="@+id/correction_notes_direction"
             android:text="@string/correct"
             android:singleLine="true"
             android:ellipsize="marquee"
             />
 
+        <ImageView
+            android:id="@+id/correction_notes_menu"
+            android:layout_width="@dimen/x_47"
+            android:layout_height="@dimen/y_47"
+            android:layout_toEndOf="@+id/correct_txt"
+            android:layout_marginStart="@dimen/x_130"
+            android:background="@drawable/correction_notes_menu" />
+
         <TextView
             android:id="@+id/Menu_reset_txt"
-            android:layout_width="@dimen/x_120"
+            android:layout_width="@dimen/x_80"
             android:layout_height="match_parent"
             android:textColor="@color/white"
             android:maxWidth="@dimen/x_150"
             android:textSize="@dimen/x_21"
+            android:layout_toEndOf="@+id/correction_notes_menu"
             android:gravity="center_vertical"
-            android:layout_marginStart="@dimen/x_450"
             android:text="@string/Menu_reset"
             android:singleLine="true"
             android:ellipsize="marquee"
             />
 
+        <ImageView
+            android:id="@+id/correction_notes_return"
+            android:layout_width="@dimen/x_47"
+            android:layout_height="@dimen/y_47"
+            android:layout_toEndOf="@+id/Menu_reset_txt"
+            android:layout_marginStart="@dimen/x_50"
+            android:background="@drawable/correction_notes_return" />
+
         <TextView
             android:id="@+id/exit_txt"
-            android:layout_width="@dimen/x_120"
+            android:layout_width="@dimen/x_80"
             android:layout_height="match_parent"
             android:maxWidth="@dimen/x_130"
             android:textColor="@color/white"
             android:textSize="@dimen/x_21"
             android:gravity="center_vertical"
-            android:layout_marginStart="@dimen/x_660"
+            android:layout_toEndOf="@+id/correction_notes_return"
             android:text="@string/exit"
             android:singleLine="true"
             android:ellipsize="marquee"

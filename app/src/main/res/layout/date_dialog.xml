@@ -27,8 +27,9 @@
             android:layout_height="@dimen/y_180"
             android:focusable="true"
             android:focusableInTouchMode="true"
-            android:background="@drawable/picker_bg"
             android:nextFocusLeft="@id/enter"
+            android:nextFocusRight="@id/np_month"
+            android:background="@drawable/picker_bg"
             skin:enable="true"
             />
 
@@ -67,9 +68,10 @@
             android:layout_width="@dimen/x_80"
             android:layout_height="@dimen/y_180"
             android:focusable="true"
+            android:nextFocusLeft="@id/np_month"
+            android:nextFocusRight="@id/cancel"
             android:focusableInTouchMode="true"
             android:background="@drawable/picker_bg"
-            android:nextFocusRight="@id/cancel"
             skin:enable="true"
             />
 

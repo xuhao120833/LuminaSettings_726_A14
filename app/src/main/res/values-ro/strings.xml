@@ -9,7 +9,7 @@
     <string name="general">Mediu</string>
     <string name="weak">Slab</string>
     <string name="signalstrength">Intensitatea semnalului:</string>
-    <string name="security">Securitate</string>
+    <string name="security">Securitate:</string>
     <string name="stateinfo">Informații despre stare:</string>
     <string name="wifiipaddress">Adresă IP:</string>
     <string name="wifistate">Conectat</string>

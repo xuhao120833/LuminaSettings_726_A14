@@ -9,7 +9,7 @@
     <string name="general">საშუალო</string>
     <string name="weak">სუსტი</string>
     <string name="signalstrength">სიგნალის ძალა:</string>
-    <string name="security">უსაფრთხოება</string>
+    <string name="security">უსაფრთხოება:</string>
     <string name="stateinfo">სტატუსის ინფორმაცია:</string>
     <string name="wifiipaddress">IP მისამართი:</string>
     <string name="wifistate">დაკავშირებულია</string>

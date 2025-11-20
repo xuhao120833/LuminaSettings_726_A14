@@ -9,7 +9,7 @@
     <string name="general">Загальний</string>
     <string name="weak">Слабкий</string>
     <string name="signalstrength">Сила сигналу:</string>
-    <string name="security">Безпека</string>
+    <string name="security">Безпека:</string>
     <string name="stateinfo">Інформація про стан:</string>
     <string name="wifiipaddress">IP-адреса:</string>
     <string name="wifistate">Підключено</string>

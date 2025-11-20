@@ -22,7 +22,7 @@
         />
 
     <TextView
-        android:layout_width="@dimen/x_400"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/wifi_name"
         android:layout_centerVertical="true"
@@ -83,5 +83,5 @@
         android:background="@drawable/arrow_right_bg"
         android:duplicateParentState="true"
         />
-    
+
 </RelativeLayout>

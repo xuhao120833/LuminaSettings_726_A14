@@ -9,7 +9,7 @@
     <string name="general">Gemiddeld</string>
     <string name="weak">Zwak</string>
     <string name="signalstrength">Signaalsterkte:</string>
-    <string name="security">Beveiliging</string>
+    <string name="security">Beveiliging:</string>
     <string name="stateinfo">Statusinformatie:</string>
     <string name="wifiipaddress">IP-adres:</string>
     <string name="wifistate">Verbonden</string>

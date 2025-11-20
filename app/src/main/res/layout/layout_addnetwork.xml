@@ -28,6 +28,7 @@
         <EditText
             android:id="@+id/networkName_et"
             style="@style/focusStyle"
+            android:textDirection="locale"
             android:layout_width="match_parent"
             android:layout_height="@dimen/x_50"
             android:layout_marginTop="@dimen/x_10"
@@ -101,6 +102,7 @@
             <EditText
                 android:id="@+id/password_et"
                 style="@style/focusStyle"
+                android:textDirection="locale"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/x_50"
                 android:layout_marginTop="@dimen/x_10"

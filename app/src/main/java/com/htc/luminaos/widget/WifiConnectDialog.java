@@ -14,6 +14,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.GradientDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiConfiguration;
@@ -432,6 +433,9 @@ public class WifiConnectDialog extends BaseDialog implements View.OnClickListene
 
     private void showErrorDialog() {
         LogUtils.d(TAG, " showErrorDialog");
+        GradientDrawable dialogBackground = new GradientDrawable();
+        dialogBackground.setColor(Color.WHITE); // 对话框背景色
+        dialogBackground.setCornerRadius(mContext.getResources().getDimension(R.dimen.x_15));
         AlertDialog dialog = new AlertDialog.Builder(mContext)
                 .setTitle(mContext.getString(R.string.hint)) // 对话框标题
                 .setMessage(mContext.getString(R.string.Authentication_error)) // 对话框内容
@@ -458,11 +462,19 @@ public class WifiConnectDialog extends BaseDialog implements View.OnClickListene
         });
 
         dialog.show();
+        if (dialog.getWindow() != null) {
+            dialog.getWindow().setBackgroundDrawable(dialogBackground);
+        }
+
         Button positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
         if (positiveButton != null) {
-            positiveButton.setBackgroundColor(Color.parseColor("#4684f3")); // #80 是 50% 透明度，后面是黑色
-            positiveButton.setTextColor(Color.WHITE); // 白色文字，方便看
-            positiveButton.setPadding(40, 20, 40, 20); // 给按钮留点内边距
+            GradientDrawable buttonBackground = new GradientDrawable();
+            buttonBackground.setColor(Color.parseColor("#4684f3")); // 蓝色背景
+            buttonBackground.setCornerRadius(mContext.getResources().getDimension(R.dimen.x_15)); // 同样的圆角
+            positiveButton.setBackground(buttonBackground);
+
+            positiveButton.setTextColor(Color.WHITE);
+            positiveButton.setPadding(40, 20, 40, 20);
         }
     }
 

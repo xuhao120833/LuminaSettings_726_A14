@@ -31,6 +31,7 @@
         android:layout_width="@dimen/x_1080"
         android:layout_height="@dimen/y_60"
         android:id="@+id/et_password"
+        android:textDirection="locale"
         android:layout_below="@id/connect_wifi_name"
         android:layout_marginTop="@dimen/y_30"
         android:layout_centerHorizontal="true"

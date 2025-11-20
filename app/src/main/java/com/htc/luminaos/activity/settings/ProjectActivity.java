@@ -475,14 +475,6 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
             updateColorTemp(mColorTemp);
         } else if (id == R.id.rl_audio_mode) {
             startNewActivity(AudioModeActivity.class);
-        } else if (id == R.id.rl_power_mode) {
-            old_project_mode = cur_project_mode;
-            if (cur_project_mode == project_name.size() - 1)
-                cur_project_mode = 0;
-            else
-                cur_project_mode++;
-
-            updateProjectMode();
         } else if (id == R.id.rl_manual_keystone) {
             if (getAuto() && projectBinding.rlAutoKeystone.getVisibility() == View.VISIBLE) {
                 ToastUtil.showShortToast(this, getString(R.string.auto_keystone_on));

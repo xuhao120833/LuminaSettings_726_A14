@@ -9,7 +9,7 @@
     <string name="general">Μέτριο</string>
     <string name="weak">Ασθενές</string>
     <string name="signalstrength">Ισχύς σήματος:</string>
-    <string name="security">Ασφάλεια</string>
+    <string name="security">Ασφάλεια:</string>
     <string name="stateinfo">Κατάσταση:</string>
     <string name="wifiipaddress">Διεύθυνση IP:</string>
     <string name="wifistate">Συνδεδεμένο</string>

@@ -141,6 +141,7 @@
 <!--                    />-->
                 <EditText
                     android:id="@+id/ip_address_tv"
+                    android:textDirection="locale"
                     android:layout_width="@dimen/x_368"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
@@ -177,6 +178,7 @@
                     />
                 <EditText
                     android:id="@+id/gateway_tv"
+                    android:textDirection="locale"
                     android:layout_width="@dimen/x_368"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
@@ -214,6 +216,7 @@
 
                 <EditText
                     android:id="@+id/subnet_mask_tv"
+                    android:textDirection="locale"
                     android:layout_width="@dimen/x_368"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
@@ -251,6 +254,7 @@
 
                 <EditText
                     android:id="@+id/dns_tv"
+                    android:textDirection="locale"
                     android:layout_width="@dimen/x_368"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
@@ -288,6 +292,7 @@
 
                 <EditText
                     android:id="@+id/dns2_tv"
+                    android:textDirection="locale"
                     android:layout_width="@dimen/x_368"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
@@ -327,6 +332,7 @@
                     android:id="@+id/mac_tv"
                     style="@style/unfocusStyle"
                     android:clickable="false"
+                    android:textDirection="locale"
                     android:layout_width="@dimen/x_368"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"

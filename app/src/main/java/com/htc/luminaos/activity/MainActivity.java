@@ -226,6 +226,7 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
     private ShortcutsAdapterCustom shortcutsAdapterCustom = null;
     private boolean dataOK = false;
     private NotificationObserver notificationObserver = null;
+    private SpacesItemDecoration itemDecoration = null;
 
     Runnable runnable = new Runnable() {
         @Override
@@ -427,36 +428,10 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
         }
     }
 
-    private void initView() {
-        mainBinding.rlApps.setOnClickListener(this);
-        mainBinding.rlGoogle.setOnClickListener(this);
-        mainBinding.rlSettings.setOnClickListener(this);
-        mainBinding.rlUsb.setOnClickListener(this);
-        mainBinding.rlAv.setOnClickListener(this);
-        mainBinding.rlHdmi1.setOnClickListener(this);
-        mainBinding.rlHdmi2.setOnClickListener(this);
-        mainBinding.rlVga.setOnClickListener(this);
-        mainBinding.rlManual.setOnClickListener(this);
-        mainBinding.rlWifi.setOnClickListener(this);
-        mainBinding.rlBluetooth.setOnClickListener(this);
-        mainBinding.rlWallpapers.setOnClickListener(this);
-        mainBinding.rlApps.setOnHoverListener(this);
-        mainBinding.rlGoogle.setOnHoverListener(this);
-        mainBinding.rlSettings.setOnHoverListener(this);
-        mainBinding.rlUsb.setOnHoverListener(this);
-        mainBinding.rlAv.setOnHoverListener(this);
-        mainBinding.rlHdmi1.setOnHoverListener(this);
-        mainBinding.rlHdmi2.setOnHoverListener(this);
-        mainBinding.rlVga.setOnHoverListener(this);
-        mainBinding.rlManual.setOnHoverListener(this);
-        mainBinding.rlWifi.setOnHoverListener(this);
-        mainBinding.rlBluetooth.setOnHoverListener(this);
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(MainActivity.this);
-        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        mainBinding.shortcutsRv.addItemDecoration(new SpacesItemDecoration(0,
-                (int) (getWindowManager().getDefaultDisplay().getWidth() * 0.03), 0, 0));
-        mainBinding.shortcutsRv.setLayoutManager(layoutManager);
+    private boolean isRTL() {
+        return TextUtils.getLayoutDirectionFromLocale(Locale.getDefault())
+                == View.LAYOUT_DIRECTION_RTL;
     }
 
     private void initViewCustom() {
@@ -544,11 +519,28 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
             }
         };
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-//        customBinding.shortcutsRv.addItemDecoration(new SpacesItemDecoration(0,
-//                (int) (getWindowManager().getDefaultDisplay().getWidth() * 0.03), 0, 0));
         //定义Item之间的间距
-        customBinding.shortcutsRv.addItemDecoration(new SpacesItemDecoration(0,
-                (int) getResources().getDimension(R.dimen.x_43), 0, 0));
+//        customBinding.shortcutsRv.addItemDecoration(new SpacesItemDecoration(0,
+//                (int) getResources().getDimension(R.dimen.x_43), 0, 0));
+
+
+        boolean rtl = isRTL();
+        int spacing = (int) getResources().getDimension(R.dimen.x_43);
+        if (itemDecoration != null) {
+            customBinding.shortcutsRv.removeItemDecoration(itemDecoration);
+        }
+        itemDecoration = rtl
+                ? new SpacesItemDecoration(spacing, 0, 0, 0)
+                : new SpacesItemDecoration(0, spacing, 0, 0);
+        if (rtl) {
+            // RTL：左 → 右，右 → 左，方向反转
+            LogUtils.d(TAG, " rtl true");
+            customBinding.shortcutsRv.addItemDecoration(itemDecoration);
+        } else {
+            // LTR 正常
+            LogUtils.d(TAG, " ltr true");
+            customBinding.shortcutsRv.addItemDecoration(itemDecoration);
+        }
         customBinding.shortcutsRv.setLayoutManager(layoutManager);
 
 //        if (MyApplication.config.layout_select == 2 || MyApplication.config.layout_select == 3) {
@@ -2872,6 +2864,16 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
 
             setListModulesText(db_cur_language);
         }
+
+        boolean rtl = isRTL();
+        int spacing = (int) getResources().getDimension(R.dimen.x_43);
+        if (itemDecoration != null) {
+            customBinding.shortcutsRv.removeItemDecoration(itemDecoration);
+        }
+        itemDecoration = rtl
+                ? new SpacesItemDecoration(spacing, 0, 0, 0)
+                : new SpacesItemDecoration(0, spacing, 0, 0);
+        customBinding.shortcutsRv.addItemDecoration(itemDecoration);
     }
 
     private void updateUITexts(Resources res) {

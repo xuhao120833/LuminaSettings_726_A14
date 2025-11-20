@@ -9,7 +9,7 @@
     <string name="general">Thông thường</string>
     <string name="weak">Yếu</string>
     <string name="signalstrength">Cường độ tín hiệu:</string>
-    <string name="security">Bảo mật</string>
+    <string name="security">Bảo mật:</string>
     <string name="stateinfo">Thông tin trạng thái:</string>
     <string name="wifiipaddress">Địa chỉ IP:</string>
     <string name="wifistate">Đã kết nối</string>
