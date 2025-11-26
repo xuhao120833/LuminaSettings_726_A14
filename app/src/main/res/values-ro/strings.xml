@@ -178,6 +178,7 @@
     <string name="usb_dir">USB</string>
     <string name="auto_focus">Focalizare automată</string>
     <string name="auto_four_corner">Corecție automată a celor patru colțuri</string>
+    <string name="one_touch_calibration">Calibrare cu un singur clic</string>
     <string name="screen_recognition">Recunoaștere ecran</string>
     <string name="intelligent_obstacle">Evitare inteligentă a obstacolelor</string>
     <string name="calibration">Calibrare inteligentă</string>

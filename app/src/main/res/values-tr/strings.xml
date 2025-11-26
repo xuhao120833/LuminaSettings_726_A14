@@ -178,6 +178,7 @@
     <string name="usb_dir">USB</string>
     <string name="auto_focus">Otomatik Odaklama</string>
     <string name="auto_four_corner">Otomatik Dört Köşe Düzeltme</string>
+    <string name="one_touch_calibration">Tek Dokunuşla Kalibrasyon</string>
     <string name="screen_recognition">Ekran Tanıma</string>
     <string name="intelligent_obstacle">Akıllı Engel Tanıma</string>
     <string name="calibration">Akıllı Kalibrasyon</string>

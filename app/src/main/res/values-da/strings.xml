@@ -178,6 +178,7 @@
     <string name="usb_dir">USB</string>
     <string name="auto_focus">Automatisk fokus</string>
     <string name="auto_four_corner">Automatisk firkantkorrektion</string>
+    <string name="one_touch_calibration">Én‑tryk kalibrering</string>
     <string name="screen_recognition">Lærred genkendelse</string>
     <string name="intelligent_obstacle">Intelligent forhindring</string>
     <string name="calibration">Intelligent kalibrering</string>

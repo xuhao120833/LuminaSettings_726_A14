@@ -178,6 +178,7 @@
     <string name="usb_dir">USB</string>
     <string name="auto_focus">التركيز التلقائي</string>
     <string name="auto_four_corner">تصحيح تلقائي لأربع زوايا</string>
+    <string name="one_touch_calibration">المعايرة بنقرة واحدة</string>
     <string name="screen_recognition">التعرف على الشاشة</string>
     <string name="intelligent_obstacle">تجنب العوائق الذكي</string>
     <string name="calibration">المعايرة الذكية</string>

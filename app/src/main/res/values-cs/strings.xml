@@ -178,6 +178,7 @@
 	<string name="usb_dir">USB</string>
 	<string name="auto_focus">Automatické ostření</string>
 	<string name="auto_four_corner">Automatická korekce rohů</string>
+	<string name="one_touch_calibration">Kalibrace jedním dotykem</string>
 	<string name="screen_recognition">Rozpoznání plátna</string>
 	<string name="intelligent_obstacle">Inteligentní vyhýbání se překážkám</string>
 	<string name="calibration">Inteligentní kalibrace</string>

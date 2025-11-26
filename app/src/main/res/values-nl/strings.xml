@@ -178,6 +178,7 @@
     <string name="usb_dir">USB</string>
     <string name="auto_focus">Automatisch scherpstellen</string>
     <string name="auto_four_corner">Automatische vierpuntscorrectie</string>
+    <string name="one_touch_calibration">Kalibreren met één druk</string>
     <string name="screen_recognition">Schermherkenning</string>
     <string name="intelligent_obstacle">Intelligente obstakelvermijding</string>
     <string name="calibration">Slimme kalibratie</string>

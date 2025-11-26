@@ -178,6 +178,7 @@
     <string name="usb_dir">USB</string>
     <string name="auto_focus">פוקוס אוטומטי</string>
     <string name="auto_four_corner">תיקון ארבעת הפינות אוטומטית</string>
+    <string name="one_touch_calibration">כיול בלחיצה אחת</string>
     <string name="screen_recognition">זיהוי מסך</string>
     <string name="intelligent_obstacle">הימנעות חכמה ממכשולים</string>
     <string name="calibration">כייל אוטומטי</string>

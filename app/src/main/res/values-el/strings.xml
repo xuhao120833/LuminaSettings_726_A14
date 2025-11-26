@@ -178,6 +178,7 @@
     <string name="usb_dir">USB</string>
     <string name="auto_focus">Αυτόματη εστίαση</string>
     <string name="auto_four_corner">Αυτόματη διόρθωση τεσσάρων γωνιών</string>
+    <string name="one_touch_calibration">Μονοπάτητη βαθμονόμηση</string>
     <string name="screen_recognition">Αναγνώριση οθόνης</string>
     <string name="intelligent_obstacle">Έξυπνη αποφυγή εμποδίων</string>
     <string name="calibration">Έξυπνη βαθμονόμηση</string>

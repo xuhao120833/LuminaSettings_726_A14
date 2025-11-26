@@ -204,7 +204,7 @@
                     android:layout_centerVertical="true"
                     android:textColor="@color/tv_color"
                     android:textSize="@dimen/x_27"
-                    android:text="@string/security"
+                    android:text="@string/wifi_security"
                     android:duplicateParentState="true"
                     />
 

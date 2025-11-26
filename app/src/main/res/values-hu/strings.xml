@@ -178,6 +178,7 @@
     <string name="usb_dir">USB</string>
     <string name="auto_focus">Automatikus fókusz</string>
     <string name="auto_four_corner">Automatikus négy sarok korrekció</string>
+    <string name="one_touch_calibration">Egyérintéses kalibrálás</string>
     <string name="screen_recognition">Vászonfelismerés</string>
     <string name="intelligent_obstacle">Intelligens akadálykerülés</string>
     <string name="calibration">Intelligens kalibráció</string>

@@ -178,6 +178,7 @@
     <string name="usb_dir">USB</string>
     <string name="auto_focus">Automatische Fokussierung</string>
     <string name="auto_four_corner">Automatische Vier-Ecken-Korrektur</string>
+	<string name="one_touch_calibration">Ein-Klick-Kalibrierung</string>
     <string name="screen_recognition">Leinwand-Erkennung</string>
     <string name="intelligent_obstacle">Intelligente Hindernisvermeidung</string>
     <string name="calibration">Intelligente Kalibrierung</string>

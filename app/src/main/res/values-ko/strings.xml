@@ -178,6 +178,7 @@
     <string name="usb_dir">USB</string>
     <string name="auto_focus">자동 초점</string>
     <string name="auto_four_corner">자동 4코너 보정</string>
+    <string name="one_touch_calibration">원터치 보정</string>
     <string name="screen_recognition">스크린 인식</string>
     <string name="intelligent_obstacle">스마트 장애물 회피</string>
     <string name="calibration">스마트 보정</string>

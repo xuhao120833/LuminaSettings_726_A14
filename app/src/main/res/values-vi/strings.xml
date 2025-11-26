@@ -178,6 +178,7 @@
     <string name="usb_dir">USB</string>
     <string name="auto_focus">Lấy nét tự động</string>
     <string name="auto_four_corner">Hiệu chỉnh tự động bốn góc</string>
+    <string name="one_touch_calibration">Hiệu chỉnh chỉ với một lần chạm</string>
     <string name="screen_recognition">Nhận diện màn hình</string>
     <string name="intelligent_obstacle">Tránh vật cản thông minh</string>
     <string name="calibration">Hiệu chuẩn thông minh</string>

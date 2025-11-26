@@ -178,6 +178,7 @@
     <string name="usb_dir">USB</string>
     <string name="auto_focus">Fokus otomatis</string>
     <string name="auto_four_corner">Koreksi empat sudut otomatis</string>
+    <string name="one_touch_calibration">Kalibrasi Satu Ketuk</string>
     <string name="screen_recognition">Pengenalan layar</string>
     <string name="intelligent_obstacle">Penghindaran rintangan cerdas</string>
     <string name="calibration">Kalibrasi cerdas</string>

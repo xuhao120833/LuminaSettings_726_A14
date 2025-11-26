@@ -178,6 +178,7 @@
     <string name="usb_dir">USB</string>
     <string name="auto_focus">ავტომატური ფოკუსი</string>
     <string name="auto_four_corner">ავტომატური ოთხკუთხა კორექტირება</string>
+    <string name="one_touch_calibration">ერთჯერადი კალიბრაცია</string>
     <string name="screen_recognition">ეკრანის ამოცნობა</string>
     <string name="intelligent_obstacle">ინტელექტუალური დაბრკოლება</string>
     <string name="calibration">ინტელექტუალური კალიბრაცია</string>

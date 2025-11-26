@@ -178,6 +178,7 @@
     <string name="usb_dir">USB</string>
     <string name="auto_focus">โฟกัสอัตโนมัติ</string>
     <string name="auto_four_corner">การปรับเปลี่ยนมุมสี่มุมอัตโนมัติ</string>
+    <string name="one_touch_calibration">การปรับเทียบเพียงคลิกเดียว</string>
     <string name="screen_recognition">การรับรู้หน้าจอ</string>
     <string name="intelligent_obstacle">การหลีกเลี่ยงอุปสรรคอัจฉริยะ</string>
     <string name="calibration">การปรับเทียบอัจฉริยะ</string>

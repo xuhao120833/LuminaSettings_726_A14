@@ -178,6 +178,7 @@
 	<string name="usb_dir">USB</string>
 	<string name="auto_focus">Autofokus</string>
 	<string name="auto_four_corner">Automatisk fyrhörnskorrigering</string>
+	<string name="one_touch_calibration">Kalibrering med ett klick</string>
 	<string name="screen_recognition">Skärmigenkänning</string>
 	<string name="intelligent_obstacle">Intelligent hinderundvikning</string>
 	<string name="calibration">Intelligent kalibrering</string>

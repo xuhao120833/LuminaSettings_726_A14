@@ -178,6 +178,7 @@
 	<string name="usb_dir">USB</string>
 	<string name="auto_focus">自动对焦</string>
 	<string name="auto_four_corner">自动四角矫正</string>
+	<string name="one_touch_calibration">一键校正</string>
 	<string name="screen_recognition">幕布识别</string>
 	<string name="intelligent_obstacle">智能避障</string>
 	<string name="calibration">智能标定</string>

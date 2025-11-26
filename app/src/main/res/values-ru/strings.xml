@@ -178,6 +178,7 @@
     <string name="usb_dir">USB</string>
     <string name="auto_focus">Автофокус</string>
     <string name="auto_four_corner">Автоматическая четырехугольная коррекция</string>
+    <string name="one_touch_calibration">Калибровка одним касанием</string>
     <string name="screen_recognition">Распознавание экрана</string>
     <string name="intelligent_obstacle">Интеллектуальное избегание препятствий</string>
     <string name="calibration">Интеллектуальная калибровка</string>

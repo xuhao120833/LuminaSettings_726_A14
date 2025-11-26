@@ -178,6 +178,7 @@
     <string name="usb_dir">USB</string>
     <string name="auto_focus">Sjálfvirk fókus</string>
     <string name="auto_four_corner">Sjálfvirk fjögurra horna leiðrétting</string>
+    <string name="one_touch_calibration">Einhnappsleiðrétting</string>
     <string name="screen_recognition">Skjávitund</string>
     <string name="intelligent_obstacle">Snjöll hindrunarforðun</string>
     <string name="calibration">Snjöll kvörðun</string>
