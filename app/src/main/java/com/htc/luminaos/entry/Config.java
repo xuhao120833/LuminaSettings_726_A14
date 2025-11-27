@@ -55,6 +55,7 @@ public class Config {
     public boolean powerMode = false;
     //其它设置 谷歌账号切换，默认打开
     public boolean account = true;
+    public String mainIconReplace = "";
 
     public boolean email = false;
     public boolean about_support = false;

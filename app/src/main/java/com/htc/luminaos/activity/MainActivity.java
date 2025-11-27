@@ -13,6 +13,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -2271,6 +2272,62 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
     @Override
     public void appInstall(String packageName) {
         LogUtils.d(TAG, "MainActivity 收到安装广播");
+        replaceMainIcon(packageName);
+    }
+
+    private void replaceMainIcon(String packageName) {
+        if (!MyApplication.config.mainIconReplace.isEmpty()) {
+            String[] replace = MyApplication.config.mainIconReplace.split(",");
+            String appName = getAppNameByPackageName(getApplicationContext(), packageName);
+            if (appName != null && appName.equals(replace[1])) {
+                switch (replace[0]) {
+                    case "icon1":
+                        replaceIcon(customBinding.icon1,appName);
+                        break;
+                    case "icon2":
+                        replaceIcon(customBinding.icon2,appName);
+                        break;
+                    case "icon3":
+                        replaceIcon(customBinding.icon3,appName);
+                        break;
+                    case "icon4":
+                        replaceIcon(customBinding.icon4,appName);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+    }
+
+    private void replaceIcon(ImageView imageView, String AppName) {
+        switch (AppName) {
+            case "Netflix":
+                imageView.setImageResource(R.drawable.home_app_netflix);
+                break;
+            case "Disney+":
+                imageView.setImageResource(R.drawable.home_app_disney);
+                break;
+            case "Youtube":
+                imageView.setImageResource(R.drawable.home_app_youtube);
+                break;
+            default:
+                break;
+        }
+    }
+
+    public String getAppNameByPackageName(Context context, String packageName) {
+        PackageManager packageManager = context.getPackageManager();
+        String appName = null;
+        try {
+            // 获取应用程序的信息（ApplicationInfo）
+            ApplicationInfo appInfo = packageManager.getApplicationInfo(packageName, 0);
+            // 获取应用名称
+            appName = packageManager.getApplicationLabel(appInfo).toString();
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        return appName; // 如果未找到应用，则返回 null
     }
 
     private void CopyResIdToSd(int resId) {
