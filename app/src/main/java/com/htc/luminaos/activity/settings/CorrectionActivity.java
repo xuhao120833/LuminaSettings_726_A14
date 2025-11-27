@@ -6,6 +6,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemProperties;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
@@ -28,6 +29,8 @@ import com.htc.luminaos.utils.KeystoneUtils_726;
 import com.htc.luminaos.utils.LogUtils;
 
 import androidx.annotation.Nullable;
+
+import java.util.Locale;
 
 public class CorrectionActivity extends BaseActivity {
 
@@ -197,7 +200,6 @@ public class CorrectionActivity extends BaseActivity {
         int[] xy = new int[]{0, 0};
         xy = KeystoneUtils_726.getKeystoneLeftAndTopXY();
         textv_lt.setText(xy[0] + "," + xy[1]);
-
     }
 
 
@@ -246,7 +248,7 @@ public class CorrectionActivity extends BaseActivity {
         int keyCode = keyEvent.getKeyCode();
 
         if ((keyCode == KeyEvent.KEYCODE_MENU || keyCode == KeyEvent.KEYCODE_SETTINGS) && action == KeyEvent.ACTION_DOWN) {
-            LogUtils.d(TAG,"dispatchKeyEvent MENU键或者Settings键唤出矫正复位 " +keyCode);
+            LogUtils.d(TAG, "dispatchKeyEvent MENU键或者Settings键唤出矫正复位 " + keyCode);
             menu_press(keyEvent);
             return true;
         }
@@ -350,6 +352,18 @@ public class CorrectionActivity extends BaseActivity {
     }
 
     private boolean calculationValue(int keyCode, KeyEvent keyEvent, int step) {
+        if (isRTL()) {
+            check_lt = (CheckBox) findViewById(R.id.check_rt);
+            check_lb = (CheckBox) findViewById(R.id.check_rb);
+            check_rt = (CheckBox) findViewById(R.id.check_lt);
+            check_rb = (CheckBox) findViewById(R.id.check_lb);
+        } else {
+            check_lt = (CheckBox) findViewById(R.id.check_lt);
+            check_lb = (CheckBox) findViewById(R.id.check_lb);
+            check_rt = (CheckBox) findViewById(R.id.check_rt);
+            check_rb = (CheckBox) findViewById(R.id.check_rb);
+        }
+
         int[] xy = new int[]{0, 0};
         int type = 1;
         LogUtils.d(TAG, " 手动矫正calculationValue g_cur_left " + g_cur_left + " g_cur_right " + g_cur_right + " g_cur_top " + g_cur_top + " g_cur_bottom " + g_cur_bottom);
@@ -367,7 +381,7 @@ public class CorrectionActivity extends BaseActivity {
             if (check_lt.isChecked()) {
                 type = 1;
                 xy = KeystoneUtils_726.getKeystoneLeftAndTopXY();
-                LogUtils.d("test3", "xy[0] " + xy[0] + "xy[1]" + xy[1]);
+                LogUtils.d(TAG, "xy[0] " + xy[0] + "xy[1]" + xy[1]);
             } else if (check_lb.isChecked()) {
                 type = 2;
                 xy = KeystoneUtils_726.getKeystoneLeftAndBottomXY();
@@ -605,18 +619,27 @@ public class CorrectionActivity extends BaseActivity {
             }
             // 更新
             setLRTB(type, left, right, top, bottom);
-            g_cur_left = left;
-            g_cur_right = right;
-            g_cur_top = top;
-            g_cur_bottom = bottom;
+            if(isRTL()) {
+                g_cur_left = right;
+                g_cur_right = left;
+                g_cur_top = top;
+                g_cur_bottom = bottom;
+            }else {
+                g_cur_left = left;
+                g_cur_right = right;
+                g_cur_top = top;
+                g_cur_bottom = bottom;
+            }
 
         }
     }
 
     private void setLRTB(int type, boolean left, boolean right, boolean top, boolean bottom) {
+        boolean rtl = isRTL();
         switch (type) {
             //LT
             case 1:
+
                 direction_x.setBackgroundResource(R.drawable.correction_circle_right);
                 direction_y.setBackgroundResource(R.drawable.correction_circle_down);
                 direction_value_x.setText(KeystoneUtils_726.lt_X + "");
@@ -641,6 +664,14 @@ public class CorrectionActivity extends BaseActivity {
                 rb_left.setVisibility(View.GONE);
                 rb_right.setVisibility(View.GONE);
                 rb_bottom.setVisibility(View.GONE);
+
+                if(rtl) {
+                    direction_x.setBackgroundResource(R.drawable.correction_circle_left);
+                    lt_right.setBackgroundResource(R.drawable.correction_arrow_left);
+                } else {
+                    direction_x.setBackgroundResource(R.drawable.correction_circle_right);
+                    lt_right.setBackgroundResource(R.drawable.correction_arrow_right);
+                }
 
                 break;
             //LB
@@ -669,6 +700,15 @@ public class CorrectionActivity extends BaseActivity {
                 rb_left.setVisibility(View.GONE);
                 rb_right.setVisibility(View.GONE);
                 rb_bottom.setVisibility(View.GONE);
+
+                if(rtl) {
+                    direction_x.setBackgroundResource(R.drawable.correction_circle_left);
+                    lb_right.setBackgroundResource(R.drawable.correction_arrow_left);
+                } else {
+                    direction_x.setBackgroundResource(R.drawable.correction_circle_right);
+                    lb_right.setBackgroundResource(R.drawable.correction_arrow_right);
+                }
+
                 break;
             //RT
             case 3:
@@ -696,6 +736,13 @@ public class CorrectionActivity extends BaseActivity {
                 rb_left.setVisibility(View.GONE);
                 rb_right.setVisibility(View.GONE);
                 rb_bottom.setVisibility(View.GONE);
+                if(rtl) {
+                    direction_x.setBackgroundResource(R.drawable.correction_circle_right);
+                    rt_left.setBackgroundResource(R.drawable.correction_arrow_right);
+                } else {
+                    direction_x.setBackgroundResource(R.drawable.correction_circle_left);
+                    rt_left.setBackgroundResource(R.drawable.correction_arrow_left);
+                }
                 break;
             //RB
             case 4:
@@ -723,7 +770,13 @@ public class CorrectionActivity extends BaseActivity {
                 rb_top.setVisibility(View.VISIBLE);
                 rb_bottom.setVisibility(View.GONE);
                 rb_right.setVisibility(View.GONE);
-
+                if(rtl) {
+                    direction_x.setBackgroundResource(R.drawable.correction_circle_right);
+                    rb_left.setBackgroundResource(R.drawable.correction_arrow_right);
+                } else {
+                    direction_x.setBackgroundResource(R.drawable.correction_circle_left);
+                    rb_left.setBackgroundResource(R.drawable.correction_arrow_left);
+                }
                 break;
         }
 
@@ -980,9 +1033,9 @@ public class CorrectionActivity extends BaseActivity {
             public void onClick(View v) {
                 KeystoneUtils_726.resetKeystone();
                 KeystoneUtils_726.writeGlobalSettings(getApplicationContext(), KeystoneUtils_726.ZOOM_VALUE, 0);
-                KeystoneUtils_726.writeSystemProperties(KeystoneUtils_726.PROP_ZOOM_VALUE,0);
+                KeystoneUtils_726.writeSystemProperties(KeystoneUtils_726.PROP_ZOOM_VALUE, 0);
 
-                KeystoneUtils_726.writeSystemProperties(KeystoneUtils_726.PROP_ZOOM_SCALE,0);
+                KeystoneUtils_726.writeSystemProperties(KeystoneUtils_726.PROP_ZOOM_SCALE, 0);
 
                 SystemProperties.set("persist.sys.keystone_offset", "0");
                 SystemProperties.set("persist.sys.keystonefinalAngle", "0");
@@ -1008,6 +1061,10 @@ public class CorrectionActivity extends BaseActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private boolean isRTL() {
+        return TextUtils.getLayoutDirectionFromLocale(Locale.getDefault()) == View.LAYOUT_DIRECTION_RTL;
     }
 
 }

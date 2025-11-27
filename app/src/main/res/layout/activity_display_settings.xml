@@ -430,6 +430,7 @@
                 android:background="@drawable/display_bg">
 
                 <TextView
+                    style="@style/unfocusStyle"
                     android:id="@+id/audio_mode"
                     android:layout_width="@dimen/x_100"
                     android:layout_height="wrap_content"
@@ -443,6 +444,7 @@
                     android:textSize="@dimen/x_21" />
 
                 <View
+                    style="@style/unfocusStyle"
                     android:id="@+id/audio_mode_right"
                     android:layout_width="@dimen/x_33"
                     android:layout_height="@dimen/y_33"
@@ -453,6 +455,7 @@
                     android:duplicateParentState="true" />
 
                 <View
+                    style="@style/unfocusStyle"
                     android:id="@+id/audio_mode_left"
                     android:layout_width="@dimen/x_33"
                     android:layout_height="@dimen/y_33"
@@ -463,6 +466,7 @@
                     android:duplicateParentState="true" />
 
                 <TextView
+                    style="@style/unfocusStyle"
                     android:id="@+id/audio_mode_tv"
                     android:layout_width="@dimen/x_117"
                     android:layout_height="@dimen/y_33"

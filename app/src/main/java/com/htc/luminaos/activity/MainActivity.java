@@ -66,6 +66,7 @@ import android.os.storage.StorageVolume;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Base64;
+import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -1864,6 +1865,7 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
 
         //MainApp
         setMainApp();
+        checkReplace();
 
         //ListModules
         setListModules();
@@ -2267,6 +2269,7 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
         DBUtils.getInstance(this).deleteFavorites(packageName);
 //        short_list = loadHomeAppData();
 //        handler.sendEmptyMessage(205);
+        checkReplace();
     }
 
     @Override
@@ -2275,10 +2278,83 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
         replaceMainIcon(packageName);
     }
 
+    private void checkReplace() {
+        Log.d(TAG, "checkReplace ");
+        if (!MyApplication.config.mainIconReplace.isEmpty()) {
+            String[] replace = MyApplication.config.mainIconReplace.split(",");
+            Log.d(TAG, "replace[2] " + replace[2]);
+            if (AppUtils.isAppInstalled(getApplicationContext(), replace[2])) {
+                Log.d(TAG, "replace[0] " + replace[0]);
+                switch (replace[0]) {
+                    case "icon1":
+                        replaceIcon(customBinding.icon1, replace[1]);
+                        break;
+                    case "icon2":
+                        replaceIcon(customBinding.icon2, replace[1]);
+                        break;
+                    case "icon3":
+                        replaceIcon(customBinding.icon3, replace[1]);
+                        break;
+                    case "icon4":
+                        Log.d(TAG, "checkReplace icon4 " + replace[0]);
+                        replaceIcon(customBinding.icon4, replace[1]);
+                        break;
+                    default:
+                        break;
+                }
+            } else {
+                setMainAppByReplace(replace[0]);
+            }
+        }
+    }
+
+    private void setMainAppByReplace(String tag) {
+        Log.d(TAG, " setMainAppByReplace ");
+        Drawable drawable = null;
+        switch (tag) {
+            case "icon1":
+                drawable = DBUtils.getInstance(this).getIconDataByTag("icon1");
+                if (drawable != null) {
+                    customBinding.icon1.setImageDrawable(drawable);
+                } else {
+                    customBinding.icon1.setImageResource(R.drawable.home_app_netflix);
+                }
+                break;
+            case "icon2":
+                drawable = DBUtils.getInstance(this).getIconDataByTag("icon2");
+                if (drawable != null) {
+                    customBinding.icon2.setImageDrawable(drawable);
+                } else {
+                    customBinding.icon2.setImageResource(R.drawable.home_app_youtube);
+                }
+                break;
+            case "icon3":
+                drawable = DBUtils.getInstance(this).getIconDataByTag("icon3");
+                if (drawable != null) {
+                    customBinding.icon3.setImageDrawable(drawable);
+                } else {
+                    customBinding.icon3.setImageResource(R.drawable.home_app_disney);
+                }
+                break;
+            case "icon4":
+                drawable = DBUtils.getInstance(this).getIconDataByTag("icon4");
+                if (drawable != null) {
+                    customBinding.icon4.setImageDrawable(drawable);
+                } else {
+                    if (MyApplication.config.layout_select == 2 || MyApplication.config.layout_select == 3) {
+                        customBinding.icon4.setImageResource(R.drawable.appstore2);
+                    } else {
+                        customBinding.icon4.setImageResource(R.drawable.appstore);
+                    }
+                }
+                break;
+        }
+    }
+
     private void replaceMainIcon(String packageName) {
         if (!MyApplication.config.mainIconReplace.isEmpty()) {
             String[] replace = MyApplication.config.mainIconReplace.split(",");
-            String appName = getAppNameByPackageName(getApplicationContext(), packageName);
+            String appName = AppUtils.getAppNameByPackageName(getApplicationContext(), packageName);
             if (appName != null && appName.equals(replace[1])) {
                 switch (replace[0]) {
                     case "icon1":
@@ -2314,20 +2390,6 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
             default:
                 break;
         }
-    }
-
-    public String getAppNameByPackageName(Context context, String packageName) {
-        PackageManager packageManager = context.getPackageManager();
-        String appName = null;
-        try {
-            // 获取应用程序的信息（ApplicationInfo）
-            ApplicationInfo appInfo = packageManager.getApplicationInfo(packageName, 0);
-            // 获取应用名称
-            appName = packageManager.getApplicationLabel(appInfo).toString();
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-        }
-        return appName; // 如果未找到应用，则返回 null
     }
 
     private void CopyResIdToSd(int resId) {

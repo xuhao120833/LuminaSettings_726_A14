@@ -301,4 +301,27 @@ public class AppUtils {
         return result;
     }
 
+    public static String getAppNameByPackageName(Context context, String packageName) {
+        PackageManager packageManager = context.getPackageManager();
+        String appName = null;
+        try {
+            // 获取应用程序的信息（ApplicationInfo）
+            ApplicationInfo appInfo = packageManager.getApplicationInfo(packageName, 0);
+            // 获取应用名称
+            appName = packageManager.getApplicationLabel(appInfo).toString();
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        return appName; // 如果未找到应用，则返回 null
+    }
+
+    public static boolean isAppInstalled(Context context, String packageName) {
+        try {
+            context.getPackageManager().getApplicationInfo(packageName, 0);
+            return true;  // 找到 → 已安装
+        } catch (PackageManager.NameNotFoundException e) {
+            return false; // 没找到 → 未安装
+        }
+    }
+
 }
