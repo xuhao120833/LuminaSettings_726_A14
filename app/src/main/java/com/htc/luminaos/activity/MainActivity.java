@@ -1510,7 +1510,7 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
         shortInfoBeans.add(mshortInfoBean);
         //xuhao
         //特定IP配置
-        setIpShortInfo(shortInfoBeans);
+//        setIpShortInfo(shortInfoBeans);
         ArrayList<AppInfoBean> appList = AppUtils.getApplicationMsg(this);//获取所有的应用(排除了配置文件中拉黑的App)
         LogUtils.d(TAG, " loadHomeAppData快捷图标 appList " + appList.size());
         LogUtils.d(TAG, " loadHomeAppData快捷图标 appSimpleBeans " + appSimpleBeans.size());
