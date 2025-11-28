@@ -5,7 +5,8 @@
     android:id="@+id/rl_main"
     android:focusable="true"
     android:focusableInTouchMode="true"
-    android:background="@drawable/background_main" >
+    android:background="@drawable/background_main"
+    android:layoutDirection="locale" >
 
     <TextView
         android:layout_width="wrap_content"
@@ -29,6 +30,7 @@
         android:id="@+id/check_lt"
         android:layout_width="@dimen/x_60"
         android:layout_height="@dimen/y_60"
+        android:layout_alignParentStart="true"
         android:layout_marginStart="@dimen/x_123"
         android:layout_marginTop="@dimen/y_78"
         android:background="@drawable/correction_checkbox_bg"
@@ -52,10 +54,11 @@
     <View
         android:id="@+id/lt_top"
         style="@style/focusStyle"
-        android:layout_width="@dimen/x_60"
+        android:layout_width="@dimen/x_30"
         android:layout_height="@dimen/y_60"
         android:layout_alignStart="@id/check_lt"
-        android:layout_marginTop="@dimen/y_15"
+        android:layout_marginTop="@dimen/y_30"
+        android:background="@drawable/correction_arrow_up"
         android:visibility="gone"
         />
 
@@ -64,9 +67,10 @@
         android:id="@+id/lt_left"
         style="@style/focusStyle"
         android:layout_width="@dimen/x_60"
-        android:layout_height="@dimen/y_60"
-        android:layout_alignTop="@+id/check_lt"
-        android:layout_marginStart="@dimen/x_15"
+        android:layout_height="@dimen/y_30"
+        android:layout_marginTop="@dimen/y_90"
+        android:layout_marginStart="@dimen/x_68"
+        android:background="@drawable/correction_arrow_left"
         android:visibility="gone"
          />
 
@@ -127,20 +131,23 @@
         android:id="@+id/lb_left"
         style="@style/focusStyle"
         android:layout_width="@dimen/x_60"
-        android:layout_height="@dimen/y_60"
-        android:layout_alignTop="@+id/check_lb"
-        android:layout_marginStart="@dimen/x_15"
+        android:layout_height="@dimen/x_30"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/y_90"
+        android:layout_marginStart="@dimen/x_68"
+        android:background="@drawable/correction_arrow_left"
         android:visibility="gone"
         />
 
     <View
         android:id="@+id/lb_bottom"
         style="@style/focusStyle"
-        android:layout_width="@dimen/x_60"
+        android:layout_width="@dimen/x_30"
         android:layout_height="@dimen/y_60"
         android:layout_alignStart="@+id/check_lb"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="@dimen/y_15"
+        android:layout_marginBottom="@dimen/y_30"
+        android:background="@drawable/correction_arrow_down"
         android:visibility="gone"
         />
 
@@ -181,10 +188,11 @@
     <View
         android:id="@+id/rt_top"
         style="@style/focusStyle"
-        android:layout_width="@dimen/x_60"
+        android:layout_width="@dimen/x_30"
         android:layout_height="@dimen/y_60"
-        android:layout_alignStart="@id/check_rt"
-        android:layout_marginTop="@dimen/y_15"
+        android:layout_alignEnd="@id/check_rt"
+        android:layout_marginTop="@dimen/y_30"
+        android:background="@drawable/correction_arrow_up"
         android:visibility="gone"
         />
 
@@ -202,11 +210,13 @@
         android:id="@+id/rt_right"
         style="@style/focusStyle"
         android:layout_width="@dimen/x_60"
-        android:layout_height="@dimen/y_60"
+        android:layout_height="@dimen/y_30"
         android:layout_alignParentEnd="true"
-        android:layout_alignTop="@id/check_rt"
-        android:layout_marginEnd="@dimen/x_15"
-        android:visibility="gone"/>
+        android:layout_marginTop="@dimen/y_90"
+        android:layout_marginEnd="@dimen/x_68"
+        android:background="@drawable/correction_arrow_right"
+        android:visibility="gone"
+        />
 
     <View
         android:id="@+id/rt_bottom"
@@ -259,10 +269,12 @@
         android:id="@+id/rb_right"
         style="@style/focusStyle"
         android:layout_width="@dimen/x_60"
-        android:layout_height="@dimen/x_60"
+        android:layout_height="@dimen/y_30"
         android:layout_alignParentEnd="true"
-        android:layout_alignTop="@+id/check_rb"
-        android:layout_marginEnd="@dimen/x_15"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/y_90"
+        android:layout_marginEnd="@dimen/x_68"
+        android:background="@drawable/correction_arrow_right"
         android:visibility="gone"
         />
 
@@ -280,17 +292,20 @@
     <View
         android:id="@+id/rb_bottom"
         style="@style/focusStyle"
-        android:layout_width="@dimen/x_60"
+        android:layout_width="@dimen/x_30"
         android:layout_height="@dimen/y_60"
-        android:layout_alignStart="@+id/check_rb"
+        android:layout_alignEnd="@+id/check_rb"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="@dimen/y_15"
-        android:visibility="gone"/>
+        android:layout_marginBottom="@dimen/y_30"
+        android:background="@drawable/correction_arrow_down"
+        android:visibility="gone"
+        />
 
     <RelativeLayout
         android:layout_width="@dimen/x_120"
         android:layout_height="@dimen/y_120"
-        android:layout_centerInParent="true">
+        android:layout_centerInParent="true"
+        android:layoutDirection="ltr">
 
         <ImageView
             android:id="@+id/direction_x"
@@ -345,6 +360,7 @@
         android:layout_marginBottom="@dimen/y_40"
         android:background="@drawable/correction_tips_bg"
         android:focusable="false"
+        android:layoutDirection="ltr"
         >
 
         <ImageView

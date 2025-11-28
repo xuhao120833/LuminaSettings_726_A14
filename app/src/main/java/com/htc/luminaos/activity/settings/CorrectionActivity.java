@@ -80,23 +80,17 @@ public class CorrectionActivity extends BaseActivity {
     private boolean isACTION_DOWN = false;
     private int key_move_step = 1;
     private int touch_move_step = 1;
-    private boolean g_cur_left = true;
-    private boolean g_cur_right = true;
-    private boolean g_cur_top = true;
-    private boolean g_cur_bottom = true;
 
     private String TAG = "CorrectionActivity";
     Handler mHandler = new Handler();
 
-    private static final int LONG_PRESS_THRESHOLD = 1000;
-
-    private static long keyDownTime = 0;
-    private static long keyUpTime = 0;
+    private boolean rtl = false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_correction_activity);
+        rtl = isRTL();
         initFindViewById();
         initData();
     }
@@ -200,6 +194,7 @@ public class CorrectionActivity extends BaseActivity {
         int[] xy = new int[]{0, 0};
         xy = KeystoneUtils_726.getKeystoneLeftAndTopXY();
         textv_lt.setText(xy[0] + "," + xy[1]);
+
     }
 
 
@@ -352,163 +347,262 @@ public class CorrectionActivity extends BaseActivity {
     }
 
     private boolean calculationValue(int keyCode, KeyEvent keyEvent, int step) {
-        if (isRTL()) {
-            check_lt = (CheckBox) findViewById(R.id.check_rt);
-            check_lb = (CheckBox) findViewById(R.id.check_rb);
-            check_rt = (CheckBox) findViewById(R.id.check_lt);
-            check_rb = (CheckBox) findViewById(R.id.check_lb);
-        } else {
-            check_lt = (CheckBox) findViewById(R.id.check_lt);
-            check_lb = (CheckBox) findViewById(R.id.check_lb);
-            check_rt = (CheckBox) findViewById(R.id.check_rt);
-            check_rb = (CheckBox) findViewById(R.id.check_rb);
-        }
-
         int[] xy = new int[]{0, 0};
         int type = 1;
-        LogUtils.d(TAG, " 手动矫正calculationValue g_cur_left " + g_cur_left + " g_cur_right " + g_cur_right + " g_cur_top " + g_cur_top + " g_cur_bottom " + g_cur_bottom);
-        if (keyCode == KeyEvent.KEYCODE_DPAD_LEFT) {
-            if (!g_cur_left) return true;
-        } else if (keyCode == KeyEvent.KEYCODE_DPAD_RIGHT) {
-            if (!g_cur_right) return true;
-        } else if (keyCode == KeyEvent.KEYCODE_DPAD_UP) {
-            if (!g_cur_top) return true;
-        } else if (keyCode == KeyEvent.KEYCODE_DPAD_DOWN) {
-            if (!g_cur_bottom) return true;
-        }
-        if (check_lt != null && check_lb != null && check_rt != null
-                && check_rb != null) {
-            if (check_lt.isChecked()) {
-                type = 1;
-                xy = KeystoneUtils_726.getKeystoneLeftAndTopXY();
-                LogUtils.d(TAG, "xy[0] " + xy[0] + "xy[1]" + xy[1]);
-            } else if (check_lb.isChecked()) {
-                type = 2;
-                xy = KeystoneUtils_726.getKeystoneLeftAndBottomXY();
-            } else if (check_rt.isChecked()) {
-                type = 3;
-                xy = KeystoneUtils_726.getKeystoneRightAndTopXY();
-            } else if (check_rb.isChecked()) {
-                type = 4;
-                xy = KeystoneUtils_726.getKeystoneRightAndBottomXY();
+        if (rtl) {
+            if (check_lt != null && check_lb != null && check_rt != null
+                    && check_rb != null) {
+                if (check_lt.isChecked()) {
+                    type = 1;
+                    xy = KeystoneUtils_726.getKeystoneRightAndTopXY();
+                    Log.d("test3", "xy[0] " + xy[0] + "xy[1]" + xy[1]);
+                } else if (check_lb.isChecked()) {
+                    type = 2;
+                    xy = KeystoneUtils_726.getKeystoneRightAndBottomXY();
+                } else if (check_rt.isChecked()) {
+                    type = 3;
+                    xy = KeystoneUtils_726.getKeystoneLeftAndTopXY();
+                } else if (check_rb.isChecked()) {
+                    type = 4;
+                    xy = KeystoneUtils_726.getKeystoneLeftAndBottomXY();
+                }
             }
-        }
-        if (type == 1) {
-            LogUtils.d("keyCode", "" + keyCode);
-            if (keyCode == KeyEvent.KEYCODE_DPAD_LEFT) {
-                int x = xy[0] - step;
-                xy[0] = x;
-                LogUtils.d("test3", "xy[0] " + xy[0] + "xy[1]" + xy[1]);
-                KeystoneUtils_726.setkeystoneValue(type, xy);
-                refreshState();
-                return true;
-            } else if (keyCode == KeyEvent.KEYCODE_DPAD_RIGHT) {
-                int x = xy[0] + step;
-                xy[0] = x;
-                KeystoneUtils_726.setkeystoneValue(type, xy);
-                refreshState();
-                return true;
-            } else if (keyCode == KeyEvent.KEYCODE_DPAD_UP) {
-                int y = xy[1] - step;
-                xy[1] = y;
-                KeystoneUtils_726.setkeystoneValue(type, xy);
-                refreshState();
-                return true;
-            } else if (keyCode == KeyEvent.KEYCODE_DPAD_DOWN) {
-                int y = xy[1] + step;
-                xy[1] = y;
-                KeystoneUtils_726.setkeystoneValue(type, xy);
-                refreshState();
-                return true;
+            if (type == 3) {
+                Log.d("keyCode", "" + keyCode);
+                if (keyCode == KeyEvent.KEYCODE_DPAD_LEFT) {
+                    int x = xy[0] - step;
+                    xy[0] = x;
+                    Log.d("test3", "xy[0] " + xy[0] + "xy[1]" + xy[1]);
+                    KeystoneUtils_726.setkeystoneValue(type, xy, rtl);
+                    refreshState();
+                    return true;
+                } else if (keyCode == KeyEvent.KEYCODE_DPAD_RIGHT) {
+                    int x = xy[0] + step;
+                    xy[0] = x;
+                    KeystoneUtils_726.setkeystoneValue(type, xy, rtl);
+                    refreshState();
+                    return true;
+                } else if (keyCode == KeyEvent.KEYCODE_DPAD_UP) {
+                    int y = xy[1] - step;
+                    xy[1] = y;
+                    KeystoneUtils_726.setkeystoneValue(type, xy, rtl);
+                    refreshState();
+                    return true;
+                } else if (keyCode == KeyEvent.KEYCODE_DPAD_DOWN) {
+                    int y = xy[1] + step;
+                    xy[1] = y;
+                    KeystoneUtils_726.setkeystoneValue(type, xy, rtl);
+                    refreshState();
+                    return true;
+                }
+            } else if (type == 4) {
+                if (keyCode == KeyEvent.KEYCODE_DPAD_LEFT) {
+                    int x = xy[0] - step;
+                    xy[0] = x;
+                    KeystoneUtils_726.setkeystoneValue(type, xy, rtl);
+                    refreshState();
+                    return true;
+                } else if (keyCode == KeyEvent.KEYCODE_DPAD_RIGHT) {
+                    int x = xy[0] + step;
+                    xy[0] = x;
+                    KeystoneUtils_726.setkeystoneValue(type, xy, rtl);
+                    refreshState();
+                    return true;
+                } else if (keyCode == KeyEvent.KEYCODE_DPAD_UP) {
+                    int y = xy[1] + step;
+                    xy[1] = y;
+                    KeystoneUtils_726.setkeystoneValue(type, xy, rtl);
+                    refreshState();
+                    return true;
+                } else if (keyCode == KeyEvent.KEYCODE_DPAD_DOWN) {
+                    int y = xy[1] - step;
+                    xy[1] = y;
+                    KeystoneUtils_726.setkeystoneValue(type, xy, rtl);
+                    refreshState();
+                    return true;
+                }
+            } else if (type == 1) {
+                if (keyCode == KeyEvent.KEYCODE_DPAD_LEFT) {
+                    int x = xy[0] + step;
+                    xy[0] = x;
+                    KeystoneUtils_726.setkeystoneValue(type, xy, rtl);
+                    refreshState();
+                    return true;
+                } else if (keyCode == KeyEvent.KEYCODE_DPAD_RIGHT) {
+                    int x = xy[0] - step;
+                    xy[0] = x;
+                    KeystoneUtils_726.setkeystoneValue(type, xy, rtl);
+                    refreshState();
+                    return true;
+                } else if (keyCode == KeyEvent.KEYCODE_DPAD_UP) {
+                    int y = xy[1] - step;
+                    xy[1] = y;
+                    KeystoneUtils_726.setkeystoneValue(type, xy, rtl);
+                    refreshState();
+                    return true;
+                } else if (keyCode == KeyEvent.KEYCODE_DPAD_DOWN) {
+                    int y = xy[1] + step;
+                    xy[1] = y;
+                    KeystoneUtils_726.setkeystoneValue(type, xy, rtl);
+                    refreshState();
+                    return true;
+                }
+            } else if (type == 2) {
+                if (keyCode == KeyEvent.KEYCODE_DPAD_LEFT) {
+                    int x = xy[0] + step;
+                    xy[0] = x;
+                    KeystoneUtils_726.setkeystoneValue(type, xy, rtl);
+                    refreshState();
+                    return true;
+                } else if (keyCode == KeyEvent.KEYCODE_DPAD_RIGHT) {
+                    int x = xy[0] - step;
+                    xy[0] = x;
+                    KeystoneUtils_726.setkeystoneValue(type, xy, rtl);
+                    refreshState();
+                    return true;
+                } else if (keyCode == KeyEvent.KEYCODE_DPAD_UP) {
+                    int y = xy[1] + step;
+                    xy[1] = y;
+                    KeystoneUtils_726.setkeystoneValue(type, xy, rtl);
+                    refreshState();
+                    return true;
+                } else if (keyCode == KeyEvent.KEYCODE_DPAD_DOWN) {
+                    int y = xy[1] - step;
+                    xy[1] = y;
+                    KeystoneUtils_726.setkeystoneValue(type, xy, rtl);
+                    refreshState();
+                    return true;
+                }
             }
-        } else if (type == 2) {
-            if (keyCode == KeyEvent.KEYCODE_DPAD_LEFT) {
-                int x = xy[0] - step;
-                xy[0] = x;
-                KeystoneUtils_726.setkeystoneValue(type, xy);
-                refreshState();
-                return true;
-            } else if (keyCode == KeyEvent.KEYCODE_DPAD_RIGHT) {
-                int x = xy[0] + step;
-                xy[0] = x;
-                KeystoneUtils_726.setkeystoneValue(type, xy);
-                refreshState();
-                return true;
-            } else if (keyCode == KeyEvent.KEYCODE_DPAD_UP) {
-                int y = xy[1] + step;
-                xy[1] = y;
-                KeystoneUtils_726.setkeystoneValue(type, xy);
-                refreshState();
-                return true;
-            } else if (keyCode == KeyEvent.KEYCODE_DPAD_DOWN) {
-                int y = xy[1] - step;
-                xy[1] = y;
-                KeystoneUtils_726.setkeystoneValue(type, xy);
-                refreshState();
-                return true;
-            }
-        } else if (type == 3) {
-            if (keyCode == KeyEvent.KEYCODE_DPAD_LEFT) {
-                int x = xy[0] + step;
-                xy[0] = x;
-                KeystoneUtils_726.setkeystoneValue(type, xy);
-                refreshState();
-                return true;
-            } else if (keyCode == KeyEvent.KEYCODE_DPAD_RIGHT) {
-                int x = xy[0] - step;
-                xy[0] = x;
-                KeystoneUtils_726.setkeystoneValue(type, xy);
-                refreshState();
-                return true;
-            } else if (keyCode == KeyEvent.KEYCODE_DPAD_UP) {
-                int y = xy[1] - step;
-                xy[1] = y;
-                KeystoneUtils_726.setkeystoneValue(type, xy);
-                refreshState();
-                return true;
-            } else if (keyCode == KeyEvent.KEYCODE_DPAD_DOWN) {
-                int y = xy[1] + step;
-                xy[1] = y;
-                KeystoneUtils_726.setkeystoneValue(type, xy);
-                refreshState();
-                return true;
-            }
-        } else if (type == 4) {
-            if (keyCode == KeyEvent.KEYCODE_DPAD_LEFT) {
-                int x = xy[0] + step;
-                xy[0] = x;
-                KeystoneUtils_726.setkeystoneValue(type, xy);
-                refreshState();
-                return true;
-            } else if (keyCode == KeyEvent.KEYCODE_DPAD_RIGHT) {
-                int x = xy[0] - step;
-                xy[0] = x;
-                KeystoneUtils_726.setkeystoneValue(type, xy);
-                refreshState();
-                return true;
-            } else if (keyCode == KeyEvent.KEYCODE_DPAD_UP) {
-                int y = xy[1] + step;
-                xy[1] = y;
-                KeystoneUtils_726.setkeystoneValue(type, xy);
-                refreshState();
-                return true;
-            } else if (keyCode == KeyEvent.KEYCODE_DPAD_DOWN) {
-                int y = xy[1] - step;
-                xy[1] = y;
-                KeystoneUtils_726.setkeystoneValue(type, xy);
-                refreshState();
-                return true;
-            }
-        }
-        /*
-         * else if (keyCode == KeyEvent.KEYCODE_DPAD_CENTER || keyCode ==
-         * KeyEvent.KEYCODE_ENTER) { L("----switchDirection--->"); // 切换方向
-         * switchDirection(); return true; }
-         */ //else {
-        return super.onKeyDown(keyCode, keyEvent);
-        //}
-    }
 
+        } else {
+            if (check_lt != null && check_lb != null && check_rt != null
+                    && check_rb != null) {
+                if (check_lt.isChecked()) {
+                    type = 1;
+                    xy = KeystoneUtils_726.getKeystoneLeftAndTopXY();
+                    Log.d("test3", "xy[0] " + xy[0] + "xy[1]" + xy[1]);
+                } else if (check_lb.isChecked()) {
+                    type = 2;
+                    xy = KeystoneUtils_726.getKeystoneLeftAndBottomXY();
+                } else if (check_rt.isChecked()) {
+                    type = 3;
+                    xy = KeystoneUtils_726.getKeystoneRightAndTopXY();
+                } else if (check_rb.isChecked()) {
+                    type = 4;
+                    xy = KeystoneUtils_726.getKeystoneRightAndBottomXY();
+                }
+            }
+            if (type == 1) {
+                Log.d("keyCode", "" + keyCode);
+                if (keyCode == KeyEvent.KEYCODE_DPAD_LEFT) {
+                    int x = xy[0] - step;
+                    xy[0] = x;
+                    Log.d("test3", "xy[0] " + xy[0] + "xy[1]" + xy[1]);
+                    KeystoneUtils_726.setkeystoneValue(type, xy, rtl);
+                    refreshState();
+                    return true;
+                } else if (keyCode == KeyEvent.KEYCODE_DPAD_RIGHT) {
+                    int x = xy[0] + step;
+                    xy[0] = x;
+                    KeystoneUtils_726.setkeystoneValue(type, xy, rtl);
+                    refreshState();
+                    return true;
+                } else if (keyCode == KeyEvent.KEYCODE_DPAD_UP) {
+                    int y = xy[1] - step;
+                    xy[1] = y;
+                    KeystoneUtils_726.setkeystoneValue(type, xy, rtl);
+                    refreshState();
+                    return true;
+                } else if (keyCode == KeyEvent.KEYCODE_DPAD_DOWN) {
+                    int y = xy[1] + step;
+                    xy[1] = y;
+                    KeystoneUtils_726.setkeystoneValue(type, xy, rtl);
+                    refreshState();
+                    return true;
+                }
+            } else if (type == 2) {
+                if (keyCode == KeyEvent.KEYCODE_DPAD_LEFT) {
+                    int x = xy[0] - step;
+                    xy[0] = x;
+                    KeystoneUtils_726.setkeystoneValue(type, xy, rtl);
+                    refreshState();
+                    return true;
+                } else if (keyCode == KeyEvent.KEYCODE_DPAD_RIGHT) {
+                    int x = xy[0] + step;
+                    xy[0] = x;
+                    KeystoneUtils_726.setkeystoneValue(type, xy, rtl);
+                    refreshState();
+                    return true;
+                } else if (keyCode == KeyEvent.KEYCODE_DPAD_UP) {
+                    int y = xy[1] + step;
+                    xy[1] = y;
+                    KeystoneUtils_726.setkeystoneValue(type, xy, rtl);
+                    refreshState();
+                    return true;
+                } else if (keyCode == KeyEvent.KEYCODE_DPAD_DOWN) {
+                    int y = xy[1] - step;
+                    xy[1] = y;
+                    KeystoneUtils_726.setkeystoneValue(type, xy, rtl);
+                    refreshState();
+                    return true;
+                }
+            } else if (type == 3) {
+                if (keyCode == KeyEvent.KEYCODE_DPAD_LEFT) {
+                    int x = xy[0] + step;
+                    xy[0] = x;
+                    KeystoneUtils_726.setkeystoneValue(type, xy, rtl);
+                    refreshState();
+                    return true;
+                } else if (keyCode == KeyEvent.KEYCODE_DPAD_RIGHT) {
+                    int x = xy[0] - step;
+                    xy[0] = x;
+                    KeystoneUtils_726.setkeystoneValue(type, xy, rtl);
+                    refreshState();
+                    return true;
+                } else if (keyCode == KeyEvent.KEYCODE_DPAD_UP) {
+                    int y = xy[1] - step;
+                    xy[1] = y;
+                    KeystoneUtils_726.setkeystoneValue(type, xy, rtl);
+                    refreshState();
+                    return true;
+                } else if (keyCode == KeyEvent.KEYCODE_DPAD_DOWN) {
+                    int y = xy[1] + step;
+                    xy[1] = y;
+                    KeystoneUtils_726.setkeystoneValue(type, xy, rtl);
+                    refreshState();
+                    return true;
+                }
+            } else if (type == 4) {
+                if (keyCode == KeyEvent.KEYCODE_DPAD_LEFT) {
+                    int x = xy[0] + step;
+                    xy[0] = x;
+                    KeystoneUtils_726.setkeystoneValue(type, xy, rtl);
+                    refreshState();
+                    return true;
+                } else if (keyCode == KeyEvent.KEYCODE_DPAD_RIGHT) {
+                    int x = xy[0] - step;
+                    xy[0] = x;
+                    KeystoneUtils_726.setkeystoneValue(type, xy, rtl);
+                    refreshState();
+                    return true;
+                } else if (keyCode == KeyEvent.KEYCODE_DPAD_UP) {
+                    int y = xy[1] + step;
+                    xy[1] = y;
+                    KeystoneUtils_726.setkeystoneValue(type, xy, rtl);
+                    refreshState();
+                    return true;
+                } else if (keyCode == KeyEvent.KEYCODE_DPAD_DOWN) {
+                    int y = xy[1] - step;
+                    xy[1] = y;
+                    KeystoneUtils_726.setkeystoneValue(type, xy, rtl);
+                    refreshState();
+                    return true;
+                }
+            }
+        }
+        return super.onKeyDown(keyCode, keyEvent);
+    }
 
     private void refreshState() {
         refreshStateValueUI();
@@ -521,157 +615,73 @@ public class CorrectionActivity extends BaseActivity {
         if (check_lt != null && check_lb != null && check_rt != null
                 && check_rb != null) {
             int type = -1;
-            boolean left = true, right = true, top = true, bottom = true;
             if (check_lt.isChecked()) {
                 type = 1;
-                // 判断数值
-                int[] xy = KeystoneUtils_726.getKeystoneLeftAndTopXY();
-                int[] xy_OppositeTo = KeystoneUtils_726.getKeystoneOppositeToLeftAndTopXY();
-                int x = xy[0];
-                int y = xy[1];
-                if (x <= KeystoneUtils_726.minX) {
-                    left = false;
-                }
-                int temp = x + xy_OppositeTo[0];
-                LogUtils.d(TAG, " 手动矫正refreshStateValueUI check_lt right = false " + " x " + x + " y " + y + " xy_OppositeTo[0] " + xy_OppositeTo[0] + " xy_OppositeTo[1] " + xy_OppositeTo[1]
-                        + " x + xy_OppositeTo[0] " + x + xy_OppositeTo[0] + " KeystoneUtils_726.minH_size " + KeystoneUtils_726.minH_size + " temp " + temp);
-                if (x + xy_OppositeTo[0] >= 500) {
-                    LogUtils.d(TAG, " 手动矫正refreshStateValueUI check_lt right = false");
-                    right = false;
-                }
-                if (y <= KeystoneUtils_726.minY) {
-                    top = false;
-                }
-                if ((y + xy_OppositeTo[1]) >= 500) {
-                    bottom = false;
-                }
-                textv_lt.setText(String.valueOf(xy[0]) + "," + String.valueOf(xy[1]));
-                LogUtils.d(TAG, " 手动矫正refreshStateValueUI check_lt left " + left + " right " + right + " top " + top + " bottom " + bottom
-                        + " x " + x + " y " + y + " xy_OppositeTo[0] " + xy_OppositeTo[0] + " xy_OppositeTo[1] " + xy_OppositeTo[1]);
-
+                if(rtl)
+                    type = 3;
             } else if (check_lb.isChecked()) {
                 type = 2;
-                // 判断数值
-                int[] xy = KeystoneUtils_726.getKeystoneLeftAndBottomXY();
-                int[] xy_OppositeTo = KeystoneUtils_726.getKeystoneOppositeToLeftAndBottomXY();
-                int x = xy[0];
-                int y = xy[1];
-                if (x <= KeystoneUtils_726.minX) {
-                    left = false;
-                }
-                if ((x + xy_OppositeTo[0]) >= 500) {//KeystoneUtils_726.minH_size
-                    right = false;
-                }
-                if (y <= KeystoneUtils_726.minY) {
-                    bottom = false;
-                }
-                if ((y + xy_OppositeTo[1]) >= 500) {
-                    top = false;
-                }
-                textv_lb.setText(String.valueOf(xy[0]) + "," + String.valueOf(xy[1]));
-                LogUtils.d(TAG, " 手动矫正refreshStateValueUI check_lb left " + left + " right " + right + " top " + top + " bottom " + bottom
-                        + " x " + x + " y " + y + " xy_OppositeTo[0] " + xy_OppositeTo[0] + " xy_OppositeTo[1] " + xy_OppositeTo[1]);
+                if(rtl)
+                    type = 4;
             } else if (check_rt.isChecked()) {
                 type = 3;
-                // 判断数值
-                int[] xy = KeystoneUtils_726.getKeystoneRightAndTopXY();
-                int[] xy_OppositeTo = KeystoneUtils_726.getKeystoneOppositeToRightAndTopXY();
-                int x = xy[0];
-                int y = xy[1];
-                if (x <= KeystoneUtils_726.minX) {
-                    right = false;
-                }
-                if ((x + xy_OppositeTo[0]) >= 500) {
-                    left = false;
-                }
-                if (y <= KeystoneUtils_726.minY) {
-                    top = false;
-                }
-                if ((y + xy_OppositeTo[1]) >= 500) {
-                    bottom = false;
-                }
-                textv_rt.setText(String.valueOf(xy[0]) + "," + String.valueOf(xy[1]));
-
-                LogUtils.d(TAG, " 手动矫正refreshStateValueUI check_rt left " + left + " right " + right + " top " + top + " bottom " + bottom
-                        + " x " + x + " y " + y + " xy_OppositeTo[0] " + xy_OppositeTo[0] + " xy_OppositeTo[1] " + xy_OppositeTo[1]);
+                if(rtl)
+                    type = 1;
             } else if (check_rb.isChecked()) {
                 type = 4;
-                int[] xy = KeystoneUtils_726.getKeystoneRightAndBottomXY();
-                int[] xy_OppositeTo = KeystoneUtils_726.getKeystoneOppositeToRightAndBottomXY();
-                int x = xy[0];
-                int y = xy[1];
-                if (x <= KeystoneUtils_726.minX) {
-                    right = false;
-                }
-                if ((x + xy_OppositeTo[0]) >= 500) {
-                    left = false;
-                }
-                if (y <= KeystoneUtils_726.minY) {
-                    bottom = false;
-                }
-                if ((y + xy_OppositeTo[1]) >= 500) {
-                    top = false;
-                }
-                textv_rb.setText(String.valueOf(xy[0]) + "," + String.valueOf(xy[1]));
-
-                LogUtils.d(TAG, " 手动矫正refreshStateValueUI check_rb left " + left + " right " + right + " top " + top + " bottom " + bottom
-                        + " x " + x + " y " + y + " xy_OppositeTo[0] " + xy_OppositeTo[0] + " xy_OppositeTo[1] " + xy_OppositeTo[1]);
+                if(rtl)
+                    type = 2;
             }
             // 更新
-            setLRTB(type, left, right, top, bottom);
-            if(isRTL()) {
-                g_cur_left = right;
-                g_cur_right = left;
-                g_cur_top = top;
-                g_cur_bottom = bottom;
-            }else {
-                g_cur_left = left;
-                g_cur_right = right;
-                g_cur_top = top;
-                g_cur_bottom = bottom;
-            }
-
+            setLRTB(type);
         }
     }
 
-    private void setLRTB(int type, boolean left, boolean right, boolean top, boolean bottom) {
-        boolean rtl = isRTL();
+    private void setLRTB(int type) {
         switch (type) {
             //LT
             case 1:
-
                 direction_x.setBackgroundResource(R.drawable.correction_circle_right);
                 direction_y.setBackgroundResource(R.drawable.correction_circle_down);
                 direction_value_x.setText(KeystoneUtils_726.lt_X + "");
                 direction_value_y.setText(KeystoneUtils_726.lt_Y + "");
 
-                lt_right.setVisibility(View.VISIBLE);
-                lt_bottom.setVisibility(View.VISIBLE);
-                lt_left.setVisibility(View.GONE);
-                lt_top.setVisibility(View.GONE);
+
+                if(rtl) {
+                    lt_right.setVisibility(View.GONE);
+                    lt_bottom.setVisibility(View.GONE);
+                    lt_left.setVisibility(View.GONE);
+                    lt_top.setVisibility(View.GONE);
+                }else {
+                    lt_right.setVisibility(View.VISIBLE);
+                    lt_bottom.setVisibility(View.VISIBLE);
+                    lt_left.setVisibility(View.GONE);
+                    lt_top.setVisibility(View.GONE);
+                }
 
                 lb_top.setVisibility(View.GONE);
                 lb_left.setVisibility(View.GONE);
                 lb_right.setVisibility(View.GONE);
                 lb_bottom.setVisibility(View.GONE);
 
-                rt_top.setVisibility(View.GONE);
-                rt_left.setVisibility(View.GONE);
-                rt_right.setVisibility(View.GONE);
-                rt_bottom.setVisibility(View.GONE);
+
+                if(rtl) {
+                    rt_top.setVisibility(View.GONE);
+                    rt_left.setVisibility(View.VISIBLE);
+                    rt_left.setBackgroundResource(R.drawable.correction_arrow_right);
+                    rt_right.setVisibility(View.GONE);
+                    rt_bottom.setVisibility(View.VISIBLE);
+                }else {
+                    rt_top.setVisibility(View.GONE);
+                    rt_left.setVisibility(View.GONE);
+                    rt_right.setVisibility(View.GONE);
+                    rt_bottom.setVisibility(View.GONE);
+                }
 
                 rb_top.setVisibility(View.GONE);
                 rb_left.setVisibility(View.GONE);
                 rb_right.setVisibility(View.GONE);
                 rb_bottom.setVisibility(View.GONE);
-
-                if(rtl) {
-                    direction_x.setBackgroundResource(R.drawable.correction_circle_left);
-                    lt_right.setBackgroundResource(R.drawable.correction_arrow_left);
-                } else {
-                    direction_x.setBackgroundResource(R.drawable.correction_circle_right);
-                    lt_right.setBackgroundResource(R.drawable.correction_arrow_right);
-                }
 
                 break;
             //LB
@@ -686,29 +696,37 @@ public class CorrectionActivity extends BaseActivity {
                 lt_right.setVisibility(View.GONE);
                 lt_bottom.setVisibility(View.GONE);
 
-                lb_right.setVisibility(View.VISIBLE);
-                lb_top.setVisibility(View.VISIBLE);
-                lb_bottom.setVisibility(View.GONE);
-                lb_left.setVisibility(View.GONE);
+
+                if(rtl) {
+                    lb_right.setVisibility(View.GONE);
+                    lb_top.setVisibility(View.GONE);
+                    lb_bottom.setVisibility(View.GONE);
+                    lb_left.setVisibility(View.GONE);
+                }else {
+                    lb_right.setVisibility(View.VISIBLE);
+                    lb_top.setVisibility(View.VISIBLE);
+                    lb_bottom.setVisibility(View.GONE);
+                    lb_left.setVisibility(View.GONE);
+                }
 
                 rt_top.setVisibility(View.GONE);
                 rt_left.setVisibility(View.GONE);
                 rt_right.setVisibility(View.GONE);
                 rt_bottom.setVisibility(View.GONE);
 
-                rb_top.setVisibility(View.GONE);
-                rb_left.setVisibility(View.GONE);
-                rb_right.setVisibility(View.GONE);
-                rb_bottom.setVisibility(View.GONE);
 
                 if(rtl) {
-                    direction_x.setBackgroundResource(R.drawable.correction_circle_left);
-                    lb_right.setBackgroundResource(R.drawable.correction_arrow_left);
-                } else {
-                    direction_x.setBackgroundResource(R.drawable.correction_circle_right);
-                    lb_right.setBackgroundResource(R.drawable.correction_arrow_right);
+                    rb_top.setVisibility(View.VISIBLE);
+                    rb_left.setVisibility(View.VISIBLE);
+                    rb_left.setBackgroundResource(R.drawable.correction_arrow_right);
+                    rb_right.setVisibility(View.GONE);
+                    rb_bottom.setVisibility(View.GONE);
+                }else {
+                    rb_top.setVisibility(View.GONE);
+                    rb_left.setVisibility(View.GONE);
+                    rb_right.setVisibility(View.GONE);
+                    rb_bottom.setVisibility(View.GONE);
                 }
-
                 break;
             //RT
             case 3:
@@ -717,32 +735,40 @@ public class CorrectionActivity extends BaseActivity {
                 direction_value_x.setText(KeystoneUtils_726.rt_X + "");
                 direction_value_y.setText(KeystoneUtils_726.rt_Y + "");
 
-                lt_top.setVisibility(View.GONE);
-                lt_left.setVisibility(View.GONE);
-                lt_right.setVisibility(View.GONE);
-                lt_bottom.setVisibility(View.GONE);
+                if(rtl) {
+                    lt_top.setVisibility(View.GONE);
+                    lt_left.setVisibility(View.GONE);
+                    lt_right.setVisibility(View.VISIBLE);
+                    lt_right.setBackgroundResource(R.drawable.correction_arrow_left);
+                    lt_bottom.setVisibility(View.VISIBLE);
+                } else {
+                    lt_top.setVisibility(View.GONE);
+                    lt_left.setVisibility(View.GONE);
+                    lt_right.setVisibility(View.GONE);
+                    lt_bottom.setVisibility(View.GONE);
+                }
 
                 lb_top.setVisibility(View.GONE);
                 lb_left.setVisibility(View.GONE);
                 lb_right.setVisibility(View.GONE);
                 lb_bottom.setVisibility(View.GONE);
 
-                rt_left.setVisibility(View.VISIBLE);
-                rt_bottom.setVisibility(View.VISIBLE);
-                rt_right.setVisibility(View.GONE);
-                rb_top.setVisibility(View.GONE);
+                if(rtl) {
+                    rt_left.setVisibility(View.GONE);
+                    rt_bottom.setVisibility(View.GONE);
+                    rt_right.setVisibility(View.GONE);
+                    rb_top.setVisibility(View.GONE);
+                } else {
+                    rt_left.setVisibility(View.VISIBLE);
+                    rt_bottom.setVisibility(View.VISIBLE);
+                    rt_right.setVisibility(View.GONE);
+                    rb_top.setVisibility(View.GONE);
+                }
 
                 rb_top.setVisibility(View.GONE);
                 rb_left.setVisibility(View.GONE);
                 rb_right.setVisibility(View.GONE);
                 rb_bottom.setVisibility(View.GONE);
-                if(rtl) {
-                    direction_x.setBackgroundResource(R.drawable.correction_circle_right);
-                    rt_left.setBackgroundResource(R.drawable.correction_arrow_right);
-                } else {
-                    direction_x.setBackgroundResource(R.drawable.correction_circle_left);
-                    rt_left.setBackgroundResource(R.drawable.correction_arrow_left);
-                }
                 break;
             //RB
             case 4:
@@ -756,189 +782,40 @@ public class CorrectionActivity extends BaseActivity {
                 lt_right.setVisibility(View.GONE);
                 lt_bottom.setVisibility(View.GONE);
 
-                lb_top.setVisibility(View.GONE);
-                lb_left.setVisibility(View.GONE);
-                lb_right.setVisibility(View.GONE);
-                lb_bottom.setVisibility(View.GONE);
+                if(rtl) {
+                    lb_top.setVisibility(View.VISIBLE);
+                    lb_left.setVisibility(View.GONE);
+                    lb_right.setVisibility(View.VISIBLE);
+                    lb_right.setBackgroundResource(R.drawable.correction_arrow_left);
+                    lb_bottom.setVisibility(View.GONE);
+                } else {
+                    lb_top.setVisibility(View.GONE);
+                    lb_left.setVisibility(View.GONE);
+                    lb_right.setVisibility(View.GONE);
+                    lb_bottom.setVisibility(View.GONE);
+                }
 
                 rt_top.setVisibility(View.GONE);
                 rt_left.setVisibility(View.GONE);
                 rt_right.setVisibility(View.GONE);
                 rt_bottom.setVisibility(View.GONE);
 
-                rb_left.setVisibility(View.VISIBLE);
-                rb_top.setVisibility(View.VISIBLE);
-                rb_bottom.setVisibility(View.GONE);
-                rb_right.setVisibility(View.GONE);
                 if(rtl) {
-                    direction_x.setBackgroundResource(R.drawable.correction_circle_right);
-                    rb_left.setBackgroundResource(R.drawable.correction_arrow_right);
+                    rb_left.setVisibility(View.GONE);
+                    rb_top.setVisibility(View.GONE);
+                    rb_bottom.setVisibility(View.GONE);
+                    rb_right.setVisibility(View.GONE);
                 } else {
-                    direction_x.setBackgroundResource(R.drawable.correction_circle_left);
-                    rb_left.setBackgroundResource(R.drawable.correction_arrow_left);
+                    rb_left.setVisibility(View.VISIBLE);
+                    rb_top.setVisibility(View.VISIBLE);
+                    rb_bottom.setVisibility(View.GONE);
+                    rb_right.setVisibility(View.GONE);
                 }
+
                 break;
         }
 
     }
-
-//    private void setLRTB(int type,boolean left,boolean right,boolean top,boolean bottom){
-//        switch (type) {
-//            case 1:
-//                if(left){
-//                    lt_left.setVisibility(View.VISIBLE);
-//                }else{
-//                    lt_left.setVisibility(View.GONE);
-//                }
-//                if(right){
-//                    lt_right.setVisibility(View.VISIBLE);
-//                }else{
-//                    lt_right.setVisibility(View.GONE);
-//                }
-//                if(top){
-//                    lt_top.setVisibility(View.VISIBLE);
-//                }else{
-//                    lt_top.setVisibility(View.GONE);
-//                }
-//                if(bottom){
-//                    lt_bottom.setVisibility(View.VISIBLE);
-//                }else{
-//                    lt_bottom.setVisibility(View.GONE);
-//                }
-//
-//                lb_top.setVisibility(View.GONE);
-//                lb_left.setVisibility(View.GONE);
-//                lb_right.setVisibility(View.GONE);
-//                lb_bottom.setVisibility(View.GONE);
-//
-//                rt_top.setVisibility(View.GONE);
-//                rt_left.setVisibility(View.GONE);
-//                rt_right.setVisibility(View.GONE);
-//                rt_bottom.setVisibility(View.GONE);
-//
-//                rb_top.setVisibility(View.GONE);
-//                rb_left.setVisibility(View.GONE);
-//                rb_right.setVisibility(View.GONE);
-//                rb_bottom.setVisibility(View.GONE);
-//
-//                break;
-//
-//            case 2:
-//                lt_top.setVisibility(View.GONE);
-//                lt_left.setVisibility(View.GONE);
-//                lt_right.setVisibility(View.GONE);
-//                lt_bottom.setVisibility(View.GONE);
-//
-//                if(left){
-//                    lb_left.setVisibility(View.VISIBLE);
-//                }else{
-//                    lb_left.setVisibility(View.GONE);
-//                }
-//                if(right){
-//                    lb_right.setVisibility(View.VISIBLE);
-//                }else{
-//                    lb_right.setVisibility(View.GONE);
-//                }
-//                if(top){
-//                    lb_top.setVisibility(View.VISIBLE);
-//                }else{
-//                    lb_top.setVisibility(View.GONE);
-//                }
-//                if(bottom){
-//                    lb_bottom.setVisibility(View.VISIBLE);
-//                }else{
-//                    lb_bottom.setVisibility(View.GONE);
-//                }
-//
-//                rt_top.setVisibility(View.GONE);
-//                rt_left.setVisibility(View.GONE);
-//                rt_right.setVisibility(View.GONE);
-//                rt_bottom.setVisibility(View.GONE);
-//
-//                rb_top.setVisibility(View.GONE);
-//                rb_left.setVisibility(View.GONE);
-//                rb_right.setVisibility(View.GONE);
-//                rb_bottom.setVisibility(View.GONE);
-//                break;
-//
-//            case 3:
-//                lt_top.setVisibility(View.GONE);
-//                lt_left.setVisibility(View.GONE);
-//                lt_right.setVisibility(View.GONE);
-//                lt_bottom.setVisibility(View.GONE);
-//
-//                lb_top.setVisibility(View.GONE);
-//                lb_left.setVisibility(View.GONE);
-//                lb_right.setVisibility(View.GONE);
-//                lb_bottom.setVisibility(View.GONE);
-//
-//                if(left){
-//                    rt_left.setVisibility(View.VISIBLE);
-//                }else{
-//                    rt_left.setVisibility(View.GONE);
-//                }
-//                if(right){
-//                    rt_right.setVisibility(View.VISIBLE);
-//                }else{
-//                    rt_right.setVisibility(View.GONE);
-//                }
-//                if(top){
-//                    rt_top.setVisibility(View.VISIBLE);
-//                }else{
-//                    rt_top.setVisibility(View.GONE);
-//                }
-//                if(bottom){
-//                    rt_bottom.setVisibility(View.VISIBLE);
-//                }else{
-//                    rt_bottom.setVisibility(View.GONE);
-//                }
-//
-//                rb_top.setVisibility(View.GONE);
-//                rb_left.setVisibility(View.GONE);
-//                rb_right.setVisibility(View.GONE);
-//                rb_bottom.setVisibility(View.GONE);
-//                break;
-//
-//            case 4:
-//                lt_top.setVisibility(View.GONE);
-//                lt_left.setVisibility(View.GONE);
-//                lt_right.setVisibility(View.GONE);
-//                lt_bottom.setVisibility(View.GONE);
-//
-//                lb_top.setVisibility(View.GONE);
-//                lb_left.setVisibility(View.GONE);
-//                lb_right.setVisibility(View.GONE);
-//                lb_bottom.setVisibility(View.GONE);
-//
-//                rt_top.setVisibility(View.GONE);
-//                rt_left.setVisibility(View.GONE);
-//                rt_right.setVisibility(View.GONE);
-//                rt_bottom.setVisibility(View.GONE);
-//
-//                if(left){
-//                    rb_left.setVisibility(View.VISIBLE);
-//                }else{
-//                    rb_left.setVisibility(View.GONE);
-//                }
-//                if(right){
-//                    rb_right.setVisibility(View.VISIBLE);
-//                }else{
-//                    rb_right.setVisibility(View.GONE);
-//                }
-//                if(top){
-//                    rb_top.setVisibility(View.VISIBLE);
-//                }else{
-//                    rb_top.setVisibility(View.GONE);
-//                }
-//                if(bottom){
-//                    rb_bottom.setVisibility(View.VISIBLE);
-//                }else{
-//                    rb_bottom.setVisibility(View.GONE);
-//                }
-//                break;
-//        }
-//
-//    }
 
     Runnable reset_step_runnable = new Runnable() {
         @Override
@@ -977,40 +854,10 @@ public class CorrectionActivity extends BaseActivity {
         }
     };
 
-//    @Override
-//    public boolean onKey(View v, int keyCode, KeyEvent event) {
-//        LogUtils.d(TAG, " 手动矫正 onKey");
-//        if (event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_MENU) {
-//            LogUtils.d(TAG, " 手动矫正 Enter事件");
-//            if (event.isLongPress()) {
-//                LogUtils.d(TAG, " 手动矫正 Enter键长按事件");
-//                try {
-//                    ShowResetKeystoreDialog();
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//                return true; // 返回 true 表示事件已处理
-//            }
-//
-//        }
-//
-//        return false;
-//    }
-
     private void ShowResetKeystoreDialog() {
         ResetKeystoreLayoutBinding resetKeystoreLayoutBinding = ResetKeystoreLayoutBinding.inflate(LayoutInflater.from(this));
         Dialog dialoge = new Dialog(this, R.style.DialogTheme);
         dialoge.setContentView(resetKeystoreLayoutBinding.getRoot());
-        /*builder.setMessage(getString(R.string.reset_keystore));
-        builder.setPositiveButton(R.string.enter, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                KeystoneUtils.resetKeystone();
-                All =0;
-                updateZoomView();
-                dialog.dismiss();
-            }
-        });*/
         Window window = dialoge.getWindow();
         if (window != null) {
             window.setWindowAnimations(R.style.right_in_right_out_anim);
@@ -1066,5 +913,6 @@ public class CorrectionActivity extends BaseActivity {
     private boolean isRTL() {
         return TextUtils.getLayoutDirectionFromLocale(Locale.getDefault()) == View.LAYOUT_DIRECTION_RTL;
     }
+
 
 }

@@ -1,0 +1,20 @@
+{
+  "version": 3,
+  "artifactType": {
+    "type": "APK",
+    "kind": "Directory"
+  },
+  "applicationId": "com.htc.luminaos",
+  "variantName": "release",
+  "elements": [
+    {
+      "type": "SINGLE",
+      "filters": [],
+      "attributes": [],
+      "versionCode": 325112813,
+      "versionName": "1.0.48",
+      "outputFile": "LuminaOS_726_A14_QZ-V1.0.48-25112813-release.apk"
+    }
+  ],
+  "elementType": "File"
+}

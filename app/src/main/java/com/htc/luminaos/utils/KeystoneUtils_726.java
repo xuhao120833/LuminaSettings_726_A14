@@ -48,13 +48,6 @@ public class KeystoneUtils_726 {
     public static final String PROP_ZOOM_SCALE_OLD = "persist.sys.zoom_scale_old";
     public static final String ZOOM_SCALE_OLD = "zoom_scale_old";
 
-    public static final int minX = 0;
-    public static final int minY = 0;
-    //public static final int minH_size=480;//960/2=480 480-480/4=360
-    //public static final int minV_size=270;//540/2=270 270-270/4=202
-
-    public static int minH_size = 500;//960/2=480 480-480/4=360
-    public static int minV_size = 500;//540/2=270 270-270/4=202
     public static int lcd_w = 1920;
     public static int lcd_h = 1080;
 
@@ -72,18 +65,6 @@ public class KeystoneUtils_726 {
     private static int CoverY(String prop) {
         return SystemProperties.getInt(prop, 0);
     }
-
-    private static IBinder flinger;
-
-    private static final String PROPERTY_LEFT_BOTTOM_X = "persist.display.keystone_lbx";
-    private static final String PROPERTY_LEFT_TOP_X = "persist.display.keystone_ltx";
-    private static final String PROPERTY_RIGHT_BOTTOM_X = "persist.display.keystone_rbx";
-    private static final String PROPERTY_RIGHT_TOP_X = "persist.display.keystone_rtx";
-
-    private static final String PROPERTY_LEFT_BOTTOM_Y = "persist.display.keystone_lby";
-    private static final String PROPERTY_LEFT_TOP_Y = "persist.display.keystone_lty";
-    private static final String PROPERTY_RIGHT_BOTTOM_Y = "persist.display.keystone_rby";
-    private static final String PROPERTY_RIGHT_TOP_Y = "persist.display.keystone_rty";
     private static String TAG = "KeystoneUtils_726";
 
     public static void initKeystoneData() {
@@ -182,104 +163,49 @@ public class KeystoneUtils_726 {
      * @param type 左上 1  左下2  右上 3 右下  4
      * @param xy   坐标
      */
-    public static void setkeystoneValue(int type, int[] xy) {
+    public static void setkeystoneValue(int type, int[] xy, boolean rtl) {
         int x = xy[0];
         int y = xy[1];
-        int[] xy_OppositeTo = new int[]{0, 0};
-        switch (type) {
-            case 1:
-                xy_OppositeTo = getKeystoneOppositeToLeftAndTopXY();
-                if (x >= minX && (x + xy_OppositeTo[0]) <= minH_size) {
-                    ;
-                } else if (x < minX) {
-                    x = 0;
-                } else if ((x + xy_OppositeTo[0]) > minH_size) {
-                    x = minH_size - xy_OppositeTo[0];
-                }
+        int type_1 = 0;
+        if (rtl) {
+            switch (type) {
+                case 1:
+                    type_1 = 3;
+                    break;
 
-                if (y >= minY && (y + xy_OppositeTo[1]) <= minV_size) {
-                    ;
-                } else if (y < minY) {
-                    y = 0;
-                } else if ((y + xy_OppositeTo[1]) > minV_size) {
-                    y = minV_size - xy_OppositeTo[1];
-                }
-                LogUtils.d("test3", "x " + x + "y" + y);
-                //y = lcd_h - y;
+                case 2:
+                    type_1 = 4;
+                    break;
+
+                case 3:
+                    type_1 = 1;
+                    break;
+                case 4:
+                    type_1 = 2;
+                    break;
+            }
+        } else {
+            type_1 = type;
+        }
+        switch (type_1) {
+            case 1:
                 lt_X = x;
                 lt_Y = y;
-                SystemProperties.set(PROP_HTC_KEYSTONE_LT_X, String.valueOf(lt_X));
-                SystemProperties.set(PROP_HTC_KEYSTONE_LT_Y, String.valueOf(lt_Y));
                 UpdateKeystone();
                 break;
             case 2:
-                xy_OppositeTo = getKeystoneOppositeToLeftAndBottomXY();
-                if (x >= minX && (x + xy_OppositeTo[0]) <= minH_size) {
-                    ;
-                } else if (x < minX) {
-                    x = 0;
-                } else if ((x + xy_OppositeTo[0]) > minH_size) {
-                    x = minH_size - xy_OppositeTo[0];
-                }
-
-                if (y >= minY && (y + xy_OppositeTo[1]) <= minV_size) {
-                    ;
-                } else if (y < minY) {
-                    y = 0;
-                } else if ((y + xy_OppositeTo[1]) > minV_size) {
-                    y = minV_size - xy_OppositeTo[1];
-                }
                 lb_X = x;
                 lb_Y = y;
-                SystemProperties.set(PROP_HTC_KEYSTONE_LB_X, String.valueOf(lb_X));
-                SystemProperties.set(PROP_HTC_KEYSTONE_LB_Y, String.valueOf(lb_Y));
                 UpdateKeystone();
                 break;
             case 3:
-                xy_OppositeTo = getKeystoneOppositeToRightAndTopXY();
-                if (x >= minX && (x + xy_OppositeTo[0]) <= minH_size) {
-                    ;
-                } else if (x < minX) {
-                    x = 0;
-                } else if ((x + xy_OppositeTo[0]) > minH_size) {
-                    x = minH_size - xy_OppositeTo[0];
-                }
-                //x = lcd_w - x;
-                if (y >= minY && (y + xy_OppositeTo[1]) <= minV_size) {
-                    ;
-                } else if (y < minY) {
-                    y = 0;
-                } else if ((y + xy_OppositeTo[1]) > minV_size) {
-                    y = minV_size - xy_OppositeTo[1];
-                }
-                //y = lcd_h - y;
                 rt_X = x;
                 rt_Y = y;
-                SystemProperties.set(PROP_HTC_KEYSTONE_RT_X, String.valueOf(rt_X));
-                SystemProperties.set(PROP_HTC_KEYSTONE_RT_Y, String.valueOf(rt_Y));
                 UpdateKeystone();
                 break;
             case 4:
-                xy_OppositeTo = getKeystoneOppositeToRightAndBottomXY();
-                if (x >= minX && (x + xy_OppositeTo[0]) <= minH_size) {
-                    ;
-                } else if (x < minX) {
-                    x = 0;
-                } else if ((x + xy_OppositeTo[0]) > minH_size) {
-                    x = minH_size - xy_OppositeTo[0];
-                }
-                //x = lcd_w - x;
-                if (y >= minY && (y + xy_OppositeTo[1]) <= minV_size) {
-                    ;
-                } else if (y < minY) {
-                    y = 0;
-                } else if ((y + xy_OppositeTo[1]) > minV_size) {
-                    y = minV_size - xy_OppositeTo[1];
-                }
                 rb_X = x;
                 rb_Y = y;
-                SystemProperties.set(PROP_HTC_KEYSTONE_RB_X, String.valueOf(rb_X));
-                SystemProperties.set(PROP_HTC_KEYSTONE_RB_Y, String.valueOf(rb_Y));
                 UpdateKeystone();
                 break;
         }
@@ -293,8 +219,8 @@ public class KeystoneUtils_726 {
     private static void writeParcelToFlinger(int ltx, int lty, int rtx, int rty, int lbx, int lby, int rbx, int rby) {
         try {
 //            AwTvDisplayManager.getInstance().setKeystoreValue(100.0f,100.0f,ltx, lty, rtx, rty, lbx, lby, rbx, rby);
-            LogUtils.d(TAG," writeParcelToFlinger ");
-            AwTvDisplayManager.getInstance().setKeystoreValue(100.0f,100.0f,lbx, lby, rbx, rby,ltx, lty, rtx, rty);
+            LogUtils.d(TAG, " writeParcelToFlinger ");
+            AwTvDisplayManager.getInstance().setKeystoreValue(100.0f, 100.0f, lbx, lby, rbx, rby, ltx, lty, rtx, rty);
         } catch (Exception ex) {
             LogUtils.i(TAG, "error talk with surfaceflinger service");
         }
@@ -427,7 +353,7 @@ public class KeystoneUtils_726 {
         lb_X = lb_x;
         lb_Y = lb_y;
 //        UpdateKeystoneZOOM(true);
-        writeParcelToFlinger(lt_x,lt_y,rt_x,rt_y,lb_x,lb_y,rb_x,rb_y);
+        writeParcelToFlinger(lt_x, lt_y, rt_x, rt_y, lb_x, lb_y, rb_x, rb_y);
         lt_xy = getKeystoneHtcLeftAndTopXY();
         rt_xy = getKeystoneHtcRightAndTopXY();
         lb_xy = getKeystoneHtcLeftAndBottomXY();
@@ -622,11 +548,11 @@ public class KeystoneUtils_726 {
 
     public static void writeSystemProperties(String key, int value) {
 //        Settings.Global.putInt(context.getContentResolver(), key, value);
-        SystemProperties.set(key,String.valueOf(value));
+        SystemProperties.set(key, String.valueOf(value));
     }
 
     public static int readSystemProperties(String key, int def) {
-        return SystemProperties.getInt(key,def);
+        return SystemProperties.getInt(key, def);
     }
 
 
