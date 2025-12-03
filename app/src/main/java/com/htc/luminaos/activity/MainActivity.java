@@ -278,6 +278,7 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
                     break;
                 case DATA_FINISH:
                     requestFlag = false;
+                    LogUtils.d(TAG,"content DATA_FINISH");
                     if (channelData != null && channelData.getData().size() > 0) {
                         startAppFormChannel();
                     }
@@ -1033,20 +1034,13 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
                     appName = appname;
                     requestChannelData();
                 }
-            } else if (!AppUtils.startNewApp(MainActivity.this, "com.netflix.mediaclient")) {
+            } else if (!AppUtils.startNewApp(MainActivity.this, "com.netflix.mediaclient")) {//优先手机版
                 if (!AppUtils.startNewApp(MainActivity.this, "com.netflix.ninja")) {
                     LogUtils.d("xuhao", "打开奈飞 第一个坑位为空");
                     appName = "Netflix";
                     requestChannelData();
                 }
             }
-//                if (!AppUtils.startNewApp(MainActivity.this, "com.netflix.mediaclient")) {
-//                    appName = "Netflix";
-//                    requestChannelData();
-//                }
-//                AppUtils.startNewApp(MainActivity.this, "com.netflix.mediaclient");
-//                com.netflix.mediaclient 手机版
-//                com.netflix.ninja 电视版
         } else if (id == R.id.home_youtube) {
             LogUtils.d("xuhao", "打开YOUtube");
             appname = DBUtils.getInstance(this).getAppNameByTag("icon2");
@@ -1056,15 +1050,10 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
                     appName = appname;
                     requestChannelData();
                 }
-            } else if (!AppUtils.startNewApp(MainActivity.this, "com.google.android.youtube.tv")) {
-                appName = "Youtube";
+            } else if (!AppUtils.startNewApp(MainActivity.this, "com.google.android.youtube")) {//优先手机版
+                appName = "YouTube";
                 requestChannelData();
             }
-//                if (!AppUtils.startNewApp(MainActivity.this, "com.google.android.youtube.tv")) {
-//                    appName = "Youtube";
-//                    requestChannelData();
-//                }
-//                AppUtils.startNewApp(MainActivity.this, "com.google.android.youtube.tv");
         }
 
     }
@@ -1855,7 +1844,16 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
                 return;
             }
         }
-        ToastUtil.showShortToast(this, getString(R.string.data_none));
+        if ("YouTube".equals(appName)) {
+            // 第一次失败 → 换 TV 继续请求
+            if (!AppUtils.startNewApp(MainActivity.this, "com.google.android.youtube.tv")) {
+                appName = "Youtube";
+                requestChannelData();
+            }
+        } else {
+            // TV 也失败了 → 你原来的错误处理
+            ToastUtil.showShortToast(this, getString(R.string.data_none));
+        }
     }
 
     private void setIconOrText() {
@@ -2358,16 +2356,16 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
             if (appName != null && appName.equals(replace[1])) {
                 switch (replace[0]) {
                     case "icon1":
-                        replaceIcon(customBinding.icon1,appName);
+                        replaceIcon(customBinding.icon1, appName);
                         break;
                     case "icon2":
-                        replaceIcon(customBinding.icon2,appName);
+                        replaceIcon(customBinding.icon2, appName);
                         break;
                     case "icon3":
-                        replaceIcon(customBinding.icon3,appName);
+                        replaceIcon(customBinding.icon3, appName);
                         break;
                     case "icon4":
-                        replaceIcon(customBinding.icon4,appName);
+                        replaceIcon(customBinding.icon4, appName);
                         break;
                     default:
                         break;
