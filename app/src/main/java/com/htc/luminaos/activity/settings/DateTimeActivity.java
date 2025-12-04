@@ -263,6 +263,8 @@ public class DateTimeActivity extends BaseActivity implements View.OnKeyListener
         np_day = mView.findViewById(R.id.np_day);
         TextView enter = mView.findViewById(R.id.enter);
         TextView cancel = mView.findViewById(R.id.cancel);
+        enter.setSelected(true);
+        cancel.setSelected(true);
         //获取当前日期
         Calendar c = Calendar.getInstance();
         final int year = c.get(Calendar.YEAR);

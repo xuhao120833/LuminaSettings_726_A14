@@ -65,6 +65,7 @@ public class KeystoneUtils_726 {
     private static int CoverY(String prop) {
         return SystemProperties.getInt(prop, 0);
     }
+
     private static String TAG = "KeystoneUtils_726";
 
     public static void initKeystoneData() {
@@ -166,6 +167,8 @@ public class KeystoneUtils_726 {
     public static void setkeystoneValue(int type, int[] xy, boolean rtl) {
         int x = xy[0];
         int y = xy[1];
+        if (x < 0 || y < 0)
+            return;
         int type_1 = 0;
         if (rtl) {
             switch (type) {
