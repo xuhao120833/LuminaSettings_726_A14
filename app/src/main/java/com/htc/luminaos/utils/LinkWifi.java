@@ -11,7 +11,6 @@ import android.content.Context;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
-import android.util.Log;
 
 import java.util.Collections;
 import java.util.Comparator;

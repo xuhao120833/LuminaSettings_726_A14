@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.wifi.SoftApConfiguration;
 import android.net.wifi.WifiConfiguration;
 import android.os.Bundle;
 import android.os.Handler;
@@ -29,7 +30,7 @@ public class HotspotPasswordDialog extends BaseDialog implements View.OnClickLis
     private HotspotPasswordDialogBinding hotspotPasswordDialogBinding;
     private HotspotPasswordCallBack mcallback;
     private WifiHotUtil wifiHotUtil;
-    private WifiConfiguration wifiConfiguration;
+    private SoftApConfiguration wifiConfiguration;
 
     @Override
     public void onClick(View v) {
@@ -89,7 +90,7 @@ public class HotspotPasswordDialog extends BaseDialog implements View.OnClickLis
     @Override
     protected void onStart() {
         wifiConfiguration = wifiHotUtil.getWifiConfig();
-        hotspotPasswordDialogBinding.hotspotName.setText(wifiConfiguration.SSID);
+        hotspotPasswordDialogBinding.hotspotName.setText(wifiConfiguration.getSsid());
         super.onStart();
     }
 
