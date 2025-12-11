@@ -1,5 +1,6 @@
 package com.htc.luminaos.widget;
 
+import android.app.AppOpsManager;
 import android.app.Dialog;
 import android.app.usage.StorageStats;
 import android.app.usage.StorageStatsManager;
@@ -51,7 +52,7 @@ public class AppDetailDialog extends Dialog implements View.OnClickListener {
     private static final String ATTR_PACKAGE_STATS = "PackageStats";
     private ApplicationInfo info;
 
-    private String TAG = "AppDetailDialog" ;
+    private String TAG = "AppDetailDialog";
 
     @Override
     public void onClick(View v) {
@@ -68,18 +69,19 @@ public class AppDetailDialog extends Dialog implements View.OnClickListener {
     }
 
     public interface OnAppDetailCallBack {
-         void onClear_cache(String packageName);
-         void onUninstall(String packageName);
+        void onClear_cache(String packageName);
+
+        void onUninstall(String packageName);
     }
 
     public AppDetailDialog(Context context) {
         super(context);
-        
+
         this.mContext = context;
     }
 
     public AppDetailDialog(Context context, boolean cancelable,
-                                       DialogInterface.OnCancelListener cancelListener) {
+                           DialogInterface.OnCancelListener cancelListener) {
         super(context, cancelable, cancelListener);
         this.mContext = context;
     }
@@ -87,7 +89,7 @@ public class AppDetailDialog extends Dialog implements View.OnClickListener {
     public AppDetailDialog(Context context, int theme) {
         super(context, theme);
         this.mContext = context;
-        
+
     }
 
     @Override
@@ -97,7 +99,7 @@ public class AppDetailDialog extends Dialog implements View.OnClickListener {
     }
 
     private void init() {
-        LogUtils.d(TAG," 执行AppDetailDialog init");
+        LogUtils.d(TAG, " 执行AppDetailDialog init");
         appDetailLayoutBinding = AppDetailLayoutBinding.inflate(LayoutInflater.from(mContext));
         /*View view = LayoutInflater.from(mContext).inflate(
                 R.layout.wifi_settings_layout, null);*/
@@ -138,23 +140,23 @@ public class AppDetailDialog extends Dialog implements View.OnClickListener {
         appDetailLayoutBinding.uninstall.setSelected(true);
     }
 
-    public void  setData(ApplicationInfo info){
+    public void setData(ApplicationInfo info) {
         this.packapgeName = info.packageName;
         this.info = info;
-        LogUtils.d("packapgeName "+packapgeName);
-        getAppSize(mContext,packapgeName);
+        LogUtils.d("packapgeName " + packapgeName);
+        getAppSize(mContext, packapgeName);
     }
 
-    private void initView(){
+    private void initView() {
         appDetailLayoutBinding.clearCache.setOnClickListener(this);
         appDetailLayoutBinding.uninstall.setOnClickListener(this);
         appDetailLayoutBinding.appIcon.setBackground(info.loadIcon(mContext.getPackageManager()));
         appDetailLayoutBinding.appName.setText(info.loadLabel(mContext.getPackageManager()));
-        appDetailLayoutBinding.appVersionTv.setText(getVersion(mContext,packapgeName));
+        appDetailLayoutBinding.appVersionTv.setText(getVersion(mContext, packapgeName));
     }
 
 
-    public String getVersion(Context context,String pak) {
+    public String getVersion(Context context, String pak) {
         try {
             return context.getPackageManager().getPackageInfo(pak, 0).versionName;
         } catch (PackageManager.NameNotFoundException e) {
@@ -165,7 +167,6 @@ public class AppDetailDialog extends Dialog implements View.OnClickListener {
     public void setOnClickCallBack(OnAppDetailCallBack callback) {
         this.mcallback = callback;
     }
-
 
 
     private Handler mHandler = new Handler(new Handler.Callback() {
@@ -185,10 +186,9 @@ public class AppDetailDialog extends Dialog implements View.OnClickListener {
     });
 
 
-
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public  void getAppSize(Context context, String packageName){
-        if (!hasUsageStatsPermission(context)){
+    public void getAppSize(Context context, String packageName) {
+        if (!hasUsageStatsPermission(context)) {
             requestAppUsagePermission(context);
         } else {
             new Thread(() -> {
@@ -197,40 +197,12 @@ public class AppDetailDialog extends Dialog implements View.OnClickListener {
                 final List<StorageVolume> storageVolumes = storageManager.getStorageVolumes();
                 final UserHandle user = android.os.Process.myUserHandle();
                 try {
-                   /* for (StorageVolume storageVolume : storageVolumes) {
-                        final String uuidStr = storageVolume.getUuid();
-                         UUID uuid;
-                        try {
-                            uuid = uuidStr == null ? StorageManager.UUID_DEFAULT : UUID.fromString(uuidStr);
-                        }catch (Exception e){
-                            LogUtils.d("appDetail","invalid..."+uuidStr);
-                            uuid = StorageManager.UUID_DEFAULT;
-                        }
-                        /*LogUtils.d("AppLog", "storage:" + uuid + " : " + storageVolume.getDescription(context) + " : " + storageVolume.getState());
-                        LogUtils.d("AppLog", "getFreeBytes:" + Formatter.formatShortFileSize(context, storageStatsManager.getFreeBytes(uuid)));
-                        LogUtils.d("AppLog", "getTotalBytes:" + Formatter.formatShortFileSize(context, storageStatsManager.getTotalBytes(uuid)));
-                        StorageStats storageStats = storageStatsManager.queryStatsForPackage(uuid, packageName, user);
-                        /*LogUtils.d("AppLog", "storage stats for app of package name:" + packageName + " : ");
-                        LogUtils.d("AppLog", "getAppBytes:" + Formatter.formatShortFileSize(context, storageStats.getAppBytes()) + " getCacheBytes:" + Formatter.formatShortFileSize(context,
-                                storageStats.getCacheBytes()) + " getDataBytes:" + Formatter.formatShortFileSize(context, storageStats.getDataBytes()));
-                        Message message = mHandler.obtainMessage();
-                        message.what=1;
-                        Bundle bundle =new Bundle();
-                        bundle.putString("appSize",Formatter.formatShortFileSize(context, storageStats.getAppBytes()));
-                        bundle.putString("cacheSize",Formatter.formatShortFileSize(context, storageStats.getCacheBytes()));
-                        message.setData(bundle);
-                        mHandler.sendMessage(message);
-                    }*/
-
                     StorageStats storageStats = storageStatsManager.queryStatsForPackage(StorageManager.UUID_DEFAULT, packageName, user);
-                        /*LogUtils.d("AppLog", "storage stats for app of package name:" + packageName + " : ");
-                        LogUtils.d("AppLog", "getAppBytes:" + Formatter.formatShortFileSize(context, storageStats.getAppBytes()) + " getCacheBytes:" + Formatter.formatShortFileSize(context,
-                                storageStats.getCacheBytes()) + " getDataBytes:" + Formatter.formatShortFileSize(context, storageStats.getDataBytes()));*/
                     Message message = mHandler.obtainMessage();
-                    message.what=1;
-                    Bundle bundle =new Bundle();
-                    bundle.putString("appSize",Formatter.formatShortFileSize(context, storageStats.getAppBytes()+storageStats.getDataBytes()));
-                    bundle.putString("cacheSize",Formatter.formatShortFileSize(context, storageStats.getCacheBytes()));
+                    message.what = 1;
+                    Bundle bundle = new Bundle();
+                    bundle.putString("appSize", Formatter.formatShortFileSize(context, storageStats.getAppBytes() + storageStats.getDataBytes()));
+                    bundle.putString("cacheSize", Formatter.formatShortFileSize(context, storageStats.getCacheBytes()));
                     message.setData(bundle);
                     mHandler.sendMessage(message);
                 } catch (Exception e) {
@@ -241,17 +213,10 @@ public class AppDetailDialog extends Dialog implements View.OnClickListener {
     }
 
     public static boolean hasUsageStatsPermission(Context context) {
-        UsageStatsManager usageStatsManager = null;
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP_MR1) {
-            usageStatsManager = (UsageStatsManager) context.getSystemService(Context.USAGE_STATS_SERVICE);
-        }
-        if (usageStatsManager == null) {
-            return false;
-        }
-        long currentTime = System.currentTimeMillis();
-        // try to get app usage state in last 2 min
-        List<UsageStats> stats = usageStatsManager.queryUsageStats(UsageStatsManager.INTERVAL_DAILY, currentTime - 2 * 60 * 1000, currentTime);
-        return stats != null && stats.size() > 0;
+        AppOpsManager appOps = (AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE);
+        int mode = appOps.checkOpNoThrow(AppOpsManager.OPSTR_GET_USAGE_STATS,
+                android.os.Process.myUid(), context.getPackageName());
+        return mode == AppOpsManager.MODE_ALLOWED;
     }
 
     public static void requestAppUsagePermission(Context context) {
@@ -260,9 +225,8 @@ public class AppDetailDialog extends Dialog implements View.OnClickListener {
         try {
             context.startActivity(intent);
         } catch (ActivityNotFoundException e) {
-            LogUtils.e("AppLog", "Start usage access settings activity fail! "+e);
+            LogUtils.e("AppLog", "Start usage access settings activity fail! " + e);
         }
     }
-
 
 }

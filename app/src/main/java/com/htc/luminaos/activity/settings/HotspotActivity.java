@@ -2,6 +2,7 @@ package com.htc.luminaos.activity.settings;
 
 import static android.net.ConnectivityManager.ACTION_TETHER_STATE_CHANGED;
 import static android.net.wifi.WifiManager.WIFI_AP_STATE_CHANGED_ACTION;
+
 import android.content.BroadcastReceiver;
 import android.content.Intent;
 import android.net.wifi.SoftApConfiguration;
@@ -22,6 +23,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CompoundButton;
+
 import com.htc.luminaos.R;
 import com.htc.luminaos.activity.BaseActivity;
 import com.htc.luminaos.databinding.ActivityHotspotBinding;
@@ -52,7 +54,7 @@ public class HotspotActivity extends BaseActivity implements View.OnKeyListener 
     private WifiManager mWifiManager;
     private static final IntentFilter TETHER_STATE_CHANGE_FILTER;
     TetherChangeReceiver mTetherChangeReceiver;
-    private boolean mRestartWifiApAfterConfigChange =false;
+    private boolean mRestartWifiApAfterConfigChange = false;
 
     static {
         TETHER_STATE_CHANGE_FILTER = new IntentFilter(ACTION_TETHER_STATE_CHANGED);
@@ -211,7 +213,7 @@ public class HotspotActivity extends BaseActivity implements View.OnKeyListener 
             updateSecurity();
         } else if (id == R.id.rl_frequency) {
             apBand = apBand == 1 ? 2 : 1;
-            hotspotBinding.frequencyTv.setText(apBandArray[apBand-1]);
+            hotspotBinding.frequencyTv.setText(apBandArray[apBand - 1]);
             writeConfig();
             LogUtils.d(TAG, " 确认键调整");
         }
@@ -273,7 +275,7 @@ public class HotspotActivity extends BaseActivity implements View.OnKeyListener 
 //                    break;
             } else if (id == R.id.rl_frequency) {
                 apBand = apBand == 1 ? 2 : 1;
-                hotspotBinding.frequencyTv.setText(apBandArray[apBand-1]);
+                hotspotBinding.frequencyTv.setText(apBandArray[apBand - 1]);
                 LogUtils.d(TAG, " 向左调整");
                 writeConfig();
                 return true;
@@ -292,7 +294,7 @@ public class HotspotActivity extends BaseActivity implements View.OnKeyListener 
 //                    break;
             } else if (id == R.id.rl_frequency) {
                 apBand = apBand == 1 ? 2 : 1;
-                hotspotBinding.frequencyTv.setText(apBandArray[apBand-1]);
+                hotspotBinding.frequencyTv.setText(apBandArray[apBand - 1]);
                 writeConfig();
                 LogUtils.d(TAG, " 向右调整");
                 return true;
@@ -429,8 +431,10 @@ public class HotspotActivity extends BaseActivity implements View.OnKeyListener 
         if (band != SoftApConfiguration.BAND_5GHZ) {
             return;
         }
-        LogUtils.d(TAG," setSoftApConfigChannel setChannel(149, band)");
-        configBuilder.setChannel(149, band);
+        LogUtils.d(TAG, " setSoftApConfigChannel setChannel(149, band)");
+        int apBandChannel = SystemProperties.getInt("persist.htc.apband_channel", 0);
+        if (apBandChannel > 0)
+            configBuilder.setChannel(apBandChannel, band);
     }
 
     private boolean is5GhzBandSupported() {
