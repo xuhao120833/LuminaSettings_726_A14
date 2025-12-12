@@ -333,4 +333,10 @@
     <string name="support">תמיכה</string>
     <string name="quick_guide">מדריך להתחלה מהירה</string>
     <string name="faq">FAQ</string>
+    <string name="local_update_tip1">1. הכינו את חבילת העדכון וקראו לה update.zip</string>
+    <string name="local_update_tip2">2. העבירו את חבילת העדכון לתיקיית השורש של כונן ה-USB.</string>
+    <string name="local_update_tip3">3. הכניסו את כונן ה-USB.</string>
+    <string name="local_update_tip4">4. לחצו על "התחל בדיקה".</string>
+    <string name="local_update_tip5">5. המתינו לסיום העדכון.</string>
+    <string name="start_detect">התחל בדיקה</string>
 </resources>

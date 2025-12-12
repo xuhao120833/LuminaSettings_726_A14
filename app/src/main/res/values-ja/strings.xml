@@ -333,4 +333,10 @@
     <string name="support">サポート</string>
     <string name="quick_guide">クイックスタートガイド</string>
     <string name="faq">FAQ</string>
+    <string name="local_update_tip1">1、アップデートパッケージを用意し、update.zip と名前を付けます。</string>
+    <string name="local_update_tip2">2、アップデートパッケージをUSBドライブのルートディレクトリにコピーします。</string>
+    <string name="local_update_tip3">3、USBドライブを挿入します。</string>
+    <string name="local_update_tip4">4、「検出を開始」をクリックします。</string>
+    <string name="local_update_tip5">5、アップデートが完了するまで待ちます。</string>
+    <string name="start_detect">検出を開始</string>
 </resources>

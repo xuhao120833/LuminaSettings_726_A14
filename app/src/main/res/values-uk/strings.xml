@@ -333,5 +333,11 @@
     <string name="support">Підтримка</string>
     <string name="quick_guide">Короткий посібник з налаштування</string>
     <string name="faq">FAQ</string>
+    <string name="local_update_tip1">1. Підготуйте файл оновлення та перейменуйте його на update.zip.</string>
+    <string name="local_update_tip2">2. Скопіюйте файл оновлення в кореневу папку USB-накопичувача.</string>
+    <string name="local_update_tip3">3. Вставте USB-накопичувач.</string>
+    <string name="local_update_tip4">4. Натисніть «Почати перевірку».</string>
+    <string name="local_update_tip5">5. Дочекайтеся завершення оновлення.</string>
+    <string name="start_detect">Почати перевірку</string>
 </resources>
 

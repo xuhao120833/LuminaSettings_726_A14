@@ -333,6 +333,12 @@
     <string name="support">Wsparcie</string>
     <string name="quick_guide">Podręcznik szybkiego startu</string>
     <string name="faq">FAQ</string>
+    <string name="local_update_tip1">1. Przygotuj pakiet aktualizacji i nazwij go update.zip.</string>
+    <string name="local_update_tip2">2. Skopiuj pakiet aktualizacji do katalogu głównego pendrive\'a.</string>
+    <string name="local_update_tip3">3. Włóż pendrive.</string>
+    <string name="local_update_tip4">4. Kliknij „Rozpocznij wykrywanie”.</string>
+    <string name="local_update_tip5">5. Poczekaj na zakończenie aktualizacji.</string>
+    <string name="start_detect">Rozpocznij wykrywanie</string>
 </resources>
 
 

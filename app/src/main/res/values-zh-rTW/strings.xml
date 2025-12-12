@@ -333,4 +333,10 @@
 	<string name="support">支援</string>
 	<string name="quick_guide">快速入門指南</string>
 	<string name="faq">FAQ</string>
+	<string name="local_update_tip1">1、請準備升級檔，並將其命名為 update.zip</string>
+	<string name="local_update_tip2">2、將升級檔複製到 USB 隨身碟的根目錄。</string>
+	<string name="local_update_tip3">3、插入 USB 隨身碟。</string>
+	<string name="local_update_tip4">4、點擊「開始檢測」。</string>
+	<string name="local_update_tip5">5、等待升級完成。</string>
+	<string name="start_detect">開始檢測</string>
 </resources>

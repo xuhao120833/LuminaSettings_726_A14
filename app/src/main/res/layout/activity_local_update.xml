@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.htc.luminaos.settings.widget.RL2Relativelayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/rl_main"
+    android:background="@drawable/background_main">
+
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:gravity="center_horizontal"
+        android:layout_marginStart="@dimen/x_124"
+        android:layout_marginTop="@dimen/y_43"
+        android:text="@string/update_firmware"
+        android:textStyle="bold"
+        android:textSize="@dimen/x_43"
+        />
+
+    <View
+        android:layout_width="@dimen/x_1032"
+        android:layout_height="@dimen/y_6"
+        android:id="@+id/line"
+        android:layout_below="@+id/title"
+        android:layout_marginTop="@dimen/y_33"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/corner_line"
+        />
+
+    <LinearLayout
+        android:id="@+id/update_notes"
+        android:layout_width="@dimen/x_1032"
+        android:layout_height="@dimen/x_340"
+        android:orientation="vertical"
+        android:layout_marginTop="@dimen/y_40"
+        android:layout_below="@+id/line"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/main_settings_bg"
+        android:padding="@dimen/x_30"
+        style="@style/unfocusStyle"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:id="@+id/follow_me"
+            android:layout_width="@dimen/x_850"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:gravity="center_horizontal"
+            android:text="@string/follow_me"
+            android:textStyle="bold"
+            android:ellipsize="marquee"
+            android:singleLine="true"
+            android:textSize="@dimen/x_25"
+            />
+
+        <TextView
+            android:id="@+id/tip1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:layout_marginTop="@dimen/x_10"
+            android:text="@string/local_update_tip1"
+            android:textSize="@dimen/x_25"
+            android:textStyle="bold"
+            android:ellipsize="marquee"
+            android:singleLine="true"
+            android:gravity="start" />
+        <TextView
+            android:id="@+id/tip2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:layout_marginTop="@dimen/x_10"
+            android:text="@string/local_update_tip2"
+            android:textSize="@dimen/x_25"
+            android:textStyle="bold"
+            android:ellipsize="marquee"
+            android:singleLine="true"
+            android:gravity="start" />
+        <TextView
+            android:id="@+id/tip3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:layout_marginTop="@dimen/x_10"
+            android:text="@string/local_update_tip3"
+            android:textSize="@dimen/x_25"
+            android:textStyle="bold"
+            android:ellipsize="marquee"
+            android:singleLine="true"
+            android:gravity="start" />
+        <TextView
+            android:id="@+id/tip4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:layout_marginTop="@dimen/x_10"
+            android:text="@string/local_update_tip4"
+            android:textSize="@dimen/x_25"
+            android:textStyle="bold"
+            android:ellipsize="marquee"
+            android:singleLine="true"
+            android:gravity="start" />
+        <TextView
+            android:id="@+id/tip5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:layout_marginTop="@dimen/x_10"
+            android:text="@string/local_update_tip5"
+            android:textSize="@dimen/x_25"
+            android:textStyle="bold"
+            android:ellipsize="marquee"
+            android:singleLine="true"
+            android:gravity="start" />
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/start_local_update"
+        android:layout_width="@dimen/x_1032"
+        android:layout_height="@dimen/y_70"
+        android:text="@string/start_detect"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/y_80"
+        android:layout_below="@+id/update_notes"
+        style="@style/focusStyle"
+        android:textSize="@dimen/x_35"
+        android:textColor="@color/white"
+        android:background="@drawable/local_update_bg"
+        android:paddingStart="@dimen/x_20"
+        android:paddingEnd="@dimen/x_20"
+        android:gravity="center"
+        android:ellipsize="marquee"
+        android:singleLine="true"
+        android:textStyle="bold">
+
+    </TextView>
+
+</com.htc.luminaos.settings.widget.RL2Relativelayout>

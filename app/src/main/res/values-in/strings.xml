@@ -333,4 +333,10 @@
     <string name="support">Dukungan</string>
     <string name="quick_guide">Panduan Mulai Cepat</string>
     <string name="faq">FAQ</string>
+    <string name="local_update_tip1">1. Persiapkan paket pembaruan dan beri nama update.zip.</string>
+    <string name="local_update_tip2">2. Salin paket pembaruan ke direktori root USB.</string>
+    <string name="local_update_tip3">3. Masukkan USB.</string>
+    <string name="local_update_tip4">4. Klik "Mulai Deteksi".</string>
+    <string name="local_update_tip5">5. Tunggu hingga pembaruan selesai.</string>
+    <string name="start_detect">Mulai Deteksi</string>
 </resources>

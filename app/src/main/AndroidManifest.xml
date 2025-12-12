@@ -109,6 +109,9 @@
             android:name=".activity.settings.InitAngleActivity"
             android:exported="false" />
         <activity
+            android:name=".activity.settings.LocalUpdateActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.settings.AccountActivity"
             android:exported="false" />
         <activity

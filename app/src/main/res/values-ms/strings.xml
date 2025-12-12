@@ -333,4 +333,10 @@
     <string name="support">Sokongan</string>
     <string name="quick_guide">Panduan Pantas</string>
     <string name="faq">Soalan Lazim</string>
+    <string name="local_update_tip1">1. Sediakan pakej naik taraf dan namakan sebagai update.zip.</string>
+    <string name="local_update_tip2">2. Salin pakej naik taraf ke direktori utama pemacu USB.</string>
+    <string name="local_update_tip3">3. Masukkan pemacu USB.</string>
+    <string name="local_update_tip4">4. Tekan "Mula Pengimbasan".</string>
+    <string name="local_update_tip5">5. Tunggu sehingga proses naik taraf selesai.</string>
+    <string name="start_detect">Mula Pengimbasan</string>
 </resources>

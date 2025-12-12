@@ -333,5 +333,11 @@
     <string name="support">การสนับสนุน</string>
     <string name="quick_guide">คู่มือเริ่มต้นอย่างรวดเร็ว</string>
     <string name="faq">FAQ</string>
+    <string name="local_update_tip1">1. เตรียมไฟล์อัปเดตและตั้งชื่อเป็น update.zip</string>
+    <string name="local_update_tip2">2. คัดลอกไฟล์อัปเดตไปที่โฟลเดอร์หลักของ USB</string>
+    <string name="local_update_tip3">3. เสียบ USB เข้ากับอุปกรณ์</string>
+    <string name="local_update_tip4">4. กด "เริ่มการตรวจสอบ"</string>
+    <string name="local_update_tip5">5. รอจนกว่าการอัปเดตจะเสร็จสมบูรณ์</string>
+    <string name="start_detect">เริ่มการตรวจสอบ</string>
 </resources>
 

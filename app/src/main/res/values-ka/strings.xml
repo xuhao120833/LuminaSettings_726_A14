@@ -333,4 +333,10 @@
     <string name="support">მხარდაჭერა</string>
     <string name="quick_guide">სწრაფი დაწყების სახელმძღვანელო</string>
     <string name="faq">FAQ</string>
+    <string name="local_update_tip1">1. მოამზადეთ განახლების პაკეტი და დაარქვით update.zip.</string>
+    <string name="local_update_tip2">2. გადაწერეთ განახლების პაკეტი USB დრაივის ძირეულ დირექტორიაში.</string>
+    <string name="local_update_tip3">3. შეაერთეთ USB დრაივი.</string>
+    <string name="local_update_tip4">4. დააჭირეთ „დაიწყეთ აღმოჩენა“.</string>
+    <string name="local_update_tip5">5. დაელოდეთ განახლების დასრულებას.</string>
+    <string name="start_detect">დაიწყეთ აღმოჩენა</string>
 </resources>

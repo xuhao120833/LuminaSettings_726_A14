@@ -333,4 +333,10 @@
 	<string name="support">Supporto</string>
 	<string name="quick_guide">Guida rapida</string>
 	<string name="faq">FAQ</string>
+	<string name="local_update_tip1">1. Prepara il pacchetto di aggiornamento e rinominalo in update.zip.</string>
+	<string name="local_update_tip2">2. Copia il pacchetto di aggiornamento nella directory principale della chiavetta USB.</string>
+	<string name="local_update_tip3">3. Inserisci la chiavetta USB.</string>
+	<string name="local_update_tip4">4. Clicca su "Avvia rilevamento".</string>
+	<string name="local_update_tip5">5. Attendi il completamento dell\'aggiornamento.</string>
+	<string name="start_detect">Avvia rilevamento</string>
 </resources>

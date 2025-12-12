@@ -333,6 +333,12 @@
     <string name="support">الدعم</string>
     <string name="quick_guide">دليل البدء السريع</string>
     <string name="faq">FAQ</string>
+    <string name="local_update_tip1">1. قم بتحضير حزمة التحديث وقم بتسميتها update.zip</string>
+    <string name="local_update_tip2">2. انسخ حزمة التحديث إلى الدليل الجذر للفلاش USB.</string>
+    <string name="local_update_tip3">3. أدخل الفلاش USB.</string>
+    <string name="local_update_tip4">4. اضغط على "بدء الفحص".</string>
+    <string name="local_update_tip5">5. انتظر حتى يكتمل التحديث.</string>
+    <string name="start_detect">بدء الفحص</string>
 </resources>
 
 

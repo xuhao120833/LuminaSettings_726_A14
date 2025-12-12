@@ -333,4 +333,10 @@
 	<string name="support">支持</string>
 	<string name="quick_guide">快速入门指南</string>
 	<string name="faq">FAQ</string>
+	<string name="local_update_tip1">1、准备升级包，并命名为update.zip。</string>
+	<string name="local_update_tip2">2、将升级包拷贝到U盘根目录。</string>
+	<string name="local_update_tip3">3、插入U盘。</string>
+	<string name="local_update_tip4">4、点击“开始检测“。</string>
+	<string name="local_update_tip5">5、等待升级完成。</string>
+	<string name="start_detect">开始检测</string>
 </resources>

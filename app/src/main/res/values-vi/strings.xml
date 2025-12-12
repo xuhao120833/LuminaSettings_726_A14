@@ -333,6 +333,12 @@
     <string name="support">Hỗ trợ</string>
     <string name="quick_guide">Hướng dẫn khởi động nhanh</string>
     <string name="faq">FAQ</string>
+    <string name="local_update_tip1">1. Chuẩn bị gói cập nhật và đổi tên thành update.zip.</string>
+    <string name="local_update_tip2">2. Sao chép gói cập nhật vào thư mục gốc của USB.</string>
+    <string name="local_update_tip3">3. Cắm USB vào thiết bị.</string>
+    <string name="local_update_tip4">4. Nhấn "Bắt đầu kiểm tra".</string>
+    <string name="local_update_tip5">5. Chờ quá trình cập nhật hoàn tất.</string>
+    <string name="start_detect">Bắt đầu kiểm tra</string>
 </resources>
 
 

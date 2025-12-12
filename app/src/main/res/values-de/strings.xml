@@ -333,5 +333,11 @@
 	<string name="support">Unterstützung</string>
 	<string name="quick_guide">Schnellstartanleitung</string>
 	<string name="faq">FAQ</string>
+	<string name="local_update_tip1">1. Bereiten Sie das Upgrade-Paket vor und benennen Sie es in update.zip um.</string>
+	<string name="local_update_tip2">2. Kopieren Sie das Upgrade-Paket in das Stammverzeichnis des USB-Laufwerks.</string>
+	<string name="local_update_tip3">3. Stecken Sie den USB-Stick ein.</string>
+	<string name="local_update_tip4">4. Klicken Sie auf "Erkennung starten".</string>
+	<string name="local_update_tip5">5. Warten Sie, bis das Upgrade abgeschlossen ist.</string>
+	<string name="start_detect">Erkennung starten</string>
 </resources>
 

@@ -333,4 +333,10 @@
     <string name="support">Support</string>
     <string name="quick_guide">Quick Start Guide</string>
     <string name="faq">FAQ</string>
+    <string name="local_update_tip1">1. Prepare the upgrade package and rename it to update.zip.</string>
+    <string name="local_update_tip2">2. Copy the upgrade package to the root directory of the USB drive.</string>
+    <string name="local_update_tip3">3. Insert the USB drive.</string>
+    <string name="local_update_tip4">4. Tap "Start Detection."</string>
+    <string name="local_update_tip5">5. Wait for the upgrade to complete.</string>
+    <string name="start_detect">Start Detection</string>
 </resources>

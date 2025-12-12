@@ -333,5 +333,11 @@
     <string name="support">Destek</string>
     <string name="quick_guide">Hızlı Başlangıç Kılavuzu</string>
     <string name="faq">FAQ</string>
+    <string name="local_update_tip1">1. Güncelleme paketini hazırlayın ve adını update.zip olarak değiştirin.</string>
+    <string name="local_update_tip2">2. Güncelleme paketini USB belleğin kök dizinine kopyalayın.</string>
+    <string name="local_update_tip3">3. USB belleği takın.</string>
+    <string name="local_update_tip4">4. "Taramayı Başlat" düğmesine tıklayın.</string>
+    <string name="local_update_tip5">5. Güncellemenin tamamlanmasını bekleyin.</string>
+    <string name="start_detect">Taramayı Başlat</string>
 </resources>
 

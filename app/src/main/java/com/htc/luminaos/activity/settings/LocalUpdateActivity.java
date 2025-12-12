@@ -1,136 +1,222 @@
 package com.htc.luminaos.activity.settings;
 
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.Context;
+import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
-import android.os.SystemProperties;
+import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Toast;
-
+import androidx.annotation.NonNull;
 import com.htc.luminaos.R;
 import com.htc.luminaos.activity.BaseActivity;
-import com.htc.luminaos.databinding.InitAngleLayoutBinding;
-import com.htc.luminaos.utils.KeystoneUtils;
-import com.htc.luminaos.utils.KeystoneUtils_726;
+import com.htc.luminaos.databinding.ActivityLocalUpdateBinding;
 import com.htc.luminaos.utils.LogUtils;
-import com.htc.luminaos.utils.ReflectUtil;
+import com.htc.luminaos.widget.UpgradeCheckFailDialog;
+import com.htc.luminaos.widget.UpgradeCheckSuccessDialog;
+import java.io.File;
+import java.io.FileFilter;
 
-public class InitAngleActivity extends BaseActivity {
-    InitAngleLayoutBinding initAngleLayoutBinding;
-    private static String TAG = "InitAngleDialog";
-    Handler handler = new Handler();
-    //是不是主动关闭了自动梯形矫正
-    private boolean activeClose = false;
+public class LocalUpdateActivity extends BaseActivity {
+    ActivityLocalUpdateBinding localUpdateBinding;
+    private static String TAG = "LocalUpdateActivity";
+    private static String OTA_PACKAGE_FILE = "update.zip";
+    private static String USB_ROOT = "/mnt/media_rw";
+    private static String FLASH_ROOT = Environment.getExternalStorageDirectory().getAbsolutePath();
+    private UpgradeCheckFailDialog upgradeCheckFailDialog = null;
+    private UpgradeCheckSuccessDialog upgradeCheckSuccessDialog = null;
+    Handler handler = new Handler(new Handler.Callback() {
+        @Override
+        public boolean handleMessage(@NonNull Message msg) {
+            if (msg.what == 1) {
+                if (progressDialog != null && progressDialog.isShowing())
+                    progressDialog.dismiss();
+                if (msg.obj != null) {
+                    String path = (String) msg.obj;
+//                    startSystemUpdate(path);
+                    showUpgradeCheckSuccessDialog(path);
+                } else {
+                    showUpgradeCheckFailDialog();
+                }
+            }
+            return false;
+        }
+    });
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initAngleLayoutBinding = InitAngleLayoutBinding.inflate(LayoutInflater.from(this));
-        setContentView(initAngleLayoutBinding.getRoot());
+        localUpdateBinding = ActivityLocalUpdateBinding.inflate(LayoutInflater.from(this));
+        setContentView(localUpdateBinding.getRoot());
         initView();
-        initData();
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        if (activeClose) { //主动关闭了，需要恢复打开状态
-            activeClose = false;
-            setAuto();
-        }
-    }
-
-    private void initData() {   //再做初始角度矫正之前，先关闭“自动梯形矫正”开关，重置矫正画面。
-        if (getAuto()) { //打开了先关闭
-            activeClose = true;
-            setAuto();
-        }
-        KeystoneUtils_726.resetKeystone();
-        KeystoneUtils_726.writeGlobalSettings(getApplicationContext(), KeystoneUtils_726.ZOOM_VALUE, 0);
-        KeystoneUtils_726.writeSystemProperties(KeystoneUtils_726.PROP_ZOOM_VALUE,0);
-
-        KeystoneUtils_726.writeSystemProperties(KeystoneUtils_726.PROP_ZOOM_SCALE,0);
-
-        SystemProperties.set("persist.sys.keystone_offset", "0");
-        SystemProperties.set("persist.sys.keystonefinalAngle", "0");
     }
 
     private void initView() {
-        initAngleLayoutBinding.startInitAngle.setOnClickListener(this);
-        initAngleLayoutBinding.followMe.setSelected(true);
-        initAngleLayoutBinding.startInitAngle.setSelected(true);
-        initAngleLayoutBinding.startInitAngle.requestFocus();
+        localUpdateBinding.startLocalUpdate.setOnClickListener(this);
+        localUpdateBinding.startLocalUpdate.setOnHoverListener(this);
+
+        localUpdateBinding.tip1.setSelected(true);
+        localUpdateBinding.tip2.setSelected(true);
+        localUpdateBinding.tip3.setSelected(true);
+        localUpdateBinding.tip4.setSelected(true);
+        localUpdateBinding.tip5.setSelected(true);
     }
 
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.start_init_angle) {
-            initCorrectAngle();
+        int id = v.getId();
+        if(id == R.id.start_local_update) {
+            goFindUpgradeFile();
         }
     }
 
-    private ProgressDialog dialog = null;
-
-    private void initCorrectAngle() {
-        ReflectUtil.invokeSet_angle_offset();
-        dialog = new ProgressDialog(this, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
-        dialog.setMessage(getString(R.string.defaultcorrectionin));
-        dialog.show();
-        handler.postDelayed(new Runnable() {
+    private void goFindUpgradeFile() {
+        showCheckingDialog();
+        new Thread(new Runnable() {
             @Override
             public void run() {
-                if (dialog != null && dialog.isShowing())
-                    dialog.dismiss();
-                Toast.makeText(getApplicationContext(), getText(R.string.init_angle_tip4), Toast.LENGTH_SHORT).show();
-                LogUtils.d("get_angle_offset " + ReflectUtil.invokeGet_angle_offset());
-                finish();
+                String path = findUpdateFile();
+                Message message = handler.obtainMessage();
+                message.what = 1;
+                message.obj = path;
+                handler.sendMessageDelayed(message, 1000);//Android 14 progressDialog一闪而过，加1s延迟
             }
-        }, 3000);
+        }).start();
     }
 
-    public boolean getAuto() {
-        return SystemProperties.getBoolean("persist.sys.tpryauto", false);
-    }
-
-    public void setAuto() {
-        //int auto = PrjScreen.get_prj_auto_keystone_enable();
-        //PrjScreen.set_prj_auto_keystone_enable(auto == 0 ? 1 : 0);
-        boolean auto = getAuto();
-        SystemProperties.set("persist.sys.tpryauto", String.valueOf(auto ? 0 : 1));
-        //自动梯形打开的时候发送一次更新
-        if (!auto) {
-//            sendKeystoneBroadcast();
-            sendKeystoneBroadcastByAuto();
+    private void startSystemUpdate(String path) {
+        LogUtils.d(TAG, "startSystemUpdate path" + path);
+        String newpath = "";
+        if (path.contains("/mnt/media_rw/")) {
+            newpath = path.replaceFirst("/mnt/media_rw/", "/storage/");
+            LogUtils.d(TAG, "startSystemUpdate newpath" + newpath);
+            Intent intent = new Intent();
+            intent.setComponent(new ComponentName("com.softwinner.update", "com.softwinner.update.ui.AbUpdate"));
+            Bundle bundle = new Bundle();
+            bundle.putString("update_path", newpath);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.putExtras(bundle);
+            startActivity(intent);
         } else {
-            updateZoomValue();
+            Intent intent = new Intent();
+            intent.setComponent(new ComponentName("com.softwinner.update", "com.softwinner.update.ui.AbUpdate"));
+            Bundle bundle = new Bundle();
+            bundle.putString("update_path", path);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.putExtras(bundle);
+            startActivity(intent);
         }
     }
 
-    private void sendKeystoneBroadcastByAuto() {
-        Intent intent = new Intent("android.intent.hotack_keystone");
-        intent.addFlags(Intent.FLAG_RECEIVER_FOREGROUND);
-        intent.putExtra("ratio", 1);
-        intent.putExtra("keystone",1);
-        sendBroadcast(intent);
+    /**
+     * 拷贝文件
+     */
+    ProgressDialog progressDialog;
+
+    private void showCheckingDialog() {
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage(getString(R.string.checking));
+        progressDialog.setCancelable(false);
+        progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.show();
     }
 
-    private void updateZoomValue() {
-        String value = SystemProperties.get("persist.sys.zoom.value", "0,0,0,0,0,0,0,0");
-        String[] va = value.split(",");
-        if (va.length == 8) {
-            KeystoneUtils_726.lb_X = Integer.parseInt(va[0]);
-            KeystoneUtils_726.lb_Y = Integer.parseInt(va[1]);
-            KeystoneUtils_726.lt_X = Integer.parseInt(va[2]);
-            KeystoneUtils_726.lt_Y = Integer.parseInt(va[3]);
-            KeystoneUtils_726.rt_X = Integer.parseInt(va[4]);
-            KeystoneUtils_726.rt_Y = Integer.parseInt(va[5]);
-            KeystoneUtils_726.rb_X = Integer.parseInt(va[6]);
-            KeystoneUtils_726.rb_Y = Integer.parseInt(va[7]);
-            KeystoneUtils_726.UpdateKeystoneZOOM(true);
+    private void showUpgradeCheckFailDialog() {
+        if (upgradeCheckFailDialog == null) {
+            upgradeCheckFailDialog = new UpgradeCheckFailDialog(LocalUpdateActivity.this);
+            upgradeCheckFailDialog.setOnClickCallBack(new UpgradeCheckFailDialog.OnClickCallBack() {
+                @Override
+                public void onRetry() {
+                    goFindUpgradeFile();
+                }
+            });
         }
+
+        if (!upgradeCheckFailDialog.isShowing())
+            upgradeCheckFailDialog.show();
+    }
+
+    private void showUpgradeCheckSuccessDialog(String path) {
+        LogUtils.d(TAG, "showUpgradeCheckSuccessDialog " + path);
+        if (upgradeCheckSuccessDialog == null) {
+            LogUtils.d(TAG, "new UpgradeCheckSuccessDialog " + path);
+            upgradeCheckSuccessDialog = new UpgradeCheckSuccessDialog(LocalUpdateActivity.this);
+            upgradeCheckSuccessDialog.setOnClickCallBack(new UpgradeCheckSuccessDialog.OnClickCallBack() {
+                @Override
+                public void upgrade() {
+                    LogUtils.d(TAG, "upgrade path" + path);
+                    startSystemUpdate(path);
+                }
+            });
+        }
+
+        if (!upgradeCheckSuccessDialog.isShowing())
+            upgradeCheckSuccessDialog.show();
+    }
+
+    private String findUpdateFile() {
+        String dataPath = FLASH_ROOT + "/" + OTA_PACKAGE_FILE;
+        if (new File(dataPath).exists())
+            return dataPath;
+        //find usb device update package
+        if (USB_ROOT == null) {
+            return null;
+        }
+        File usbRoot = new File(USB_ROOT);
+        File[] pfiles = usbRoot.listFiles();
+        if (pfiles == null) {
+            return null;
+        }
+        for (File tmp : pfiles) {
+            if (tmp.isDirectory()) {
+                File[] subfiles = tmp.listFiles();
+                if (subfiles == null) {
+                    File file = new File(tmp.getAbsolutePath().replace(USB_ROOT, "/storage"), OTA_PACKAGE_FILE);
+                    if (file.exists())
+                        return file.getAbsolutePath();
+                    continue;
+                }
+                for (File subtmp : subfiles) {
+                    if (subtmp.isDirectory()) {
+                        File[] files = subtmp.listFiles(new FileFilter() {
+                            @Override
+                            public boolean accept(File arg0) {
+                                if (arg0.isDirectory()) {
+                                    return false;
+                                }
+                                if (arg0.getName().equals(OTA_PACKAGE_FILE)) {
+                                    return true;
+                                }
+                                return false;
+                            }
+                        });
+                        if (files != null && files.length > 0) {
+                            return files[0].getAbsolutePath();
+                        }
+                    } else {
+                        if (subtmp.getName().equals(OTA_PACKAGE_FILE)) {
+                            return subtmp.getAbsolutePath();
+                        } else {
+                            continue;
+                        }
+                        //continue;
+                    }
+                }
+            } else if (tmp.isFile()) {
+                if (tmp.getName().equals(OTA_PACKAGE_FILE)) {
+                    return tmp.getAbsolutePath();
+                } else {
+                    continue;
+                }
+            }
+        }
+        return null;
     }
 }

@@ -333,4 +333,10 @@
 	<string name="support">Support</string>
 	<string name="quick_guide">Snabbstartsguide</string>
 	<string name="faq">FAQ</string>
+	<string name="local_update_tip1">1. Förbered uppdateringsfilen och döp den till update.zip.</string>
+	<string name="local_update_tip2">2. Kopiera uppdateringsfilen till USB-enhetens rotmapp.</string>
+	<string name="local_update_tip3">3. Sätt in USB-enheten.</string>
+	<string name="local_update_tip4">4. Klicka på "Starta kontroll".</string>
+	<string name="local_update_tip5">5. Vänta tills uppdateringen är klar.</string>
+	<string name="start_detect">Starta kontroll</string>
 </resources>

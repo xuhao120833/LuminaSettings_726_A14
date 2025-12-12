@@ -333,5 +333,11 @@
     <string name="support">Поддержка</string>
     <string name="quick_guide">Краткое руководство пользователя</string>
     <string name="faq">FAQ</string>
+    <string name="local_update_tip1">1. Подготовьте пакет обновления и переименуйте его в update.zip.</string>
+    <string name="local_update_tip2">2. Скопируйте пакет обновления в корень USB-накопителя.</string>
+    <string name="local_update_tip3">3. Вставьте USB-накопитель.</string>
+    <string name="local_update_tip4">4. Нажмите «Начать проверку».</string>
+    <string name="local_update_tip5">5. Дождитесь завершения обновления.</string>
+    <string name="start_detect">Начать проверку</string>
 </resources>
 

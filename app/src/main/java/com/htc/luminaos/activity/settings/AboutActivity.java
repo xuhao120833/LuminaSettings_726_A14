@@ -71,32 +71,7 @@ public class AboutActivity extends BaseActivity {
     boolean isRecord = false;
     boolean isDebug = false;
     int mPosition = 5;
-    private UpgradeCheckFailDialog upgradeCheckFailDialog = null;
-
-    private UpgradeCheckSuccessDialog upgradeCheckSuccessDialog = null;
     private SharedPreferences sp;
-    private static String OTA_PACKAGE_FILE = "update.zip";
-    private static String USB_ROOT = "/mnt/media_rw";
-    private static String FLASH_ROOT = Environment.getExternalStorageDirectory().getAbsolutePath();
-
-    Handler handler = new Handler(new Handler.Callback() {
-        @Override
-        public boolean handleMessage(@NonNull Message msg) {
-            if (msg.what == 1) {
-                if (progressDialog != null && progressDialog.isShowing())
-                    progressDialog.dismiss();
-                if (msg.obj != null) {
-                    String path = (String) msg.obj;
-//                    startSystemUpdate(path);
-                    showUpgradeCheckSuccessDialog(path);
-
-                } else {
-                    showUpgradeCheckFailDialog();
-                }
-            }
-            return false;
-        }
-    });
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -224,7 +199,7 @@ public class AboutActivity extends BaseActivity {
             }
         } else if (id == R.id.rl_update_firmware) {
             try {
-                goFindUpgradeFile();
+                startNewActivity(LocalUpdateActivity.class);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -238,21 +213,6 @@ public class AboutActivity extends BaseActivity {
             }
         }
         super.onClick(v);
-    }
-
-    private void goFindUpgradeFile() {
-        showCheckingDialog();
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                String path = findUpdateFile();
-                Message message = handler.obtainMessage();
-                message.what = 1;
-                message.obj = path;
-//                handler.sendMessage(message);
-                handler.sendMessageDelayed(message, 1000);//Android 14 progressDialog一闪而过，加1s延迟
-            }
-        }).start();
     }
 
     private void initQuickKey() {
@@ -344,8 +304,6 @@ public class AboutActivity extends BaseActivity {
             total = ClearMemoryUtils.getRomTotalSize(this);
         }
         total = String.valueOf(number_total * MyApplication.config.storageScale)+" GB";
-        /*aboutBinding.storageTv.setText(getString(R.string.memory_info,
-                ClearMemoryUtils.getRomAvailableSize(this),total));*/
         LogUtils.d(TAG, "getStorageSize total " + total);
         aboutBinding.storageTv.setText(total + "/"
                 + ClearMemoryUtils.getRomAvailableSize(this, MyApplication.config.storageScale));
@@ -355,7 +313,6 @@ public class AboutActivity extends BaseActivity {
         DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
         return displayMetrics.widthPixels + " X " + displayMetrics.heightPixels;
     }
-
 
     private String getWlanMacAddress() {
         WifiManager wifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
@@ -401,225 +358,6 @@ public class AboutActivity extends BaseActivity {
                 return false;
         }
         return true;
-    }
-
-//    private String findUpdateFile() {
-//        String dataPath = FLASH_ROOT + "/" + OTA_PACKAGE_FILE;
-//        LogUtils.d("findUpdateFile", " dataPath " + dataPath);
-//        if (new File(dataPath).exists())  //优先检查本地存储有没有 storage/emulated/0/update.zip
-//            return dataPath;
-//        File usbRoot = new File(USB_ROOT);//本地没有，再去检查mnt/media_rw下面是否挂载了U盘
-//        File[] pfiles = usbRoot.listFiles();//支持检测多个U盘
-//        if (pfiles == null) {
-//            return null;
-//        }
-//        for (File tmp : pfiles) {//findUpdateFile:  tmp F3DE-C571 1 /mnt/media_rw/F3DE-C571
-//            LogUtils.d("findUpdateFile", " tmp " + tmp.getName()+" "+pfiles.length+" "+tmp.getAbsolutePath() );
-//            if (tmp.isDirectory()) {
-//                File[] subfiles = tmp.listFiles();
-////                if (subfiles == null) {
-////                    LogUtils.d("findUpdateFile", " subfiles  null ");
-//////                        continue;//跳过当前目录，进入下一个循环
-////                }
-//                if (subfiles == null) {
-//                    LogUtils.d("findUpdateFile", " subfiles  null ");
-//                    File file = new File(tmp.getAbsolutePath().replace(USB_ROOT, "/storage"), OTA_PACKAGE_FILE);
-//                    if (file.exists())
-//                        return file.getAbsolutePath();
-//
-//                    continue;
-//                }
-//                if (subfiles != null) {
-//                    for (File subtmp : subfiles) {
-//
-//                        LogUtils.d("findUpdateFile", " subtmp " + subtmp.getName());
-//                        if (subtmp.isDirectory()) {
-//                            File[] files = subtmp.listFiles(new FileFilter() {
-//                                @Override
-//                                public boolean accept(File arg0) {
-//
-//                                    if (arg0.isDirectory()) {
-//                                        return false;
-//                                    }
-//
-//                                    if (arg0.getName().equals(OTA_PACKAGE_FILE)) {
-//
-//                                        return true;
-//                                    }
-//                                    return false;
-//                                }
-//                            });
-//                            if (files != null && files.length > 0) {
-//
-//                                return files[0].getAbsolutePath();
-//                            }
-//                        } else {
-//                            if (subtmp.getName().equals(OTA_PACKAGE_FILE)) {
-//
-//                                return subtmp.getAbsolutePath();
-//                            } else {
-//                                continue;
-//                            }
-//                            //continue;
-//                        }
-//                    }
-//                }
-//            }
-////            else if (tmp.isFile()) {
-////                if (tmp.getName().equals(OTA_PACKAGE_FILE)) {
-////
-////                    return tmp.getAbsolutePath();
-////                } else {
-////                    continue;
-////                }
-////            }
-//        }
-//
-//
-//        return null;
-//    }
-
-    private String findUpdateFile() {
-        String dataPath = FLASH_ROOT + "/" + OTA_PACKAGE_FILE;
-        if (new File(dataPath).exists())
-            return dataPath;
-        //find usb device update package
-        if (USB_ROOT == null) {
-            return null;
-        }
-        File usbRoot = new File(USB_ROOT);
-        File[] pfiles = usbRoot.listFiles();
-        if (pfiles == null) {
-            return null;
-        }
-        for (File tmp : pfiles) {
-            if (tmp.isDirectory()) {
-                File[] subfiles = tmp.listFiles();
-                if (subfiles == null) {
-                    File file = new File(tmp.getAbsolutePath().replace(USB_ROOT, "/storage"), OTA_PACKAGE_FILE);
-                    if (file.exists())
-                        return file.getAbsolutePath();
-                    continue;
-                }
-                for (File subtmp : subfiles) {
-                    if (subtmp.isDirectory()) {
-                        File[] files = subtmp.listFiles(new FileFilter() {
-                            @Override
-                            public boolean accept(File arg0) {
-                                if (arg0.isDirectory()) {
-                                    return false;
-                                }
-                                if (arg0.getName().equals(OTA_PACKAGE_FILE)) {
-                                    return true;
-                                }
-                                return false;
-                            }
-                        });
-                        if (files != null && files.length > 0) {
-                            return files[0].getAbsolutePath();
-                        }
-                    } else {
-                        if (subtmp.getName().equals(OTA_PACKAGE_FILE)) {
-                            return subtmp.getAbsolutePath();
-                        } else {
-                            continue;
-                        }
-                        //continue;
-                    }
-                }
-            } else if (tmp.isFile()) {
-                if (tmp.getName().equals(OTA_PACKAGE_FILE)) {
-                    return tmp.getAbsolutePath();
-                } else {
-                    continue;
-                }
-            }
-        }
-        return null;
-    }
-
-    private void startSystemUpdate(String path) {
-        LogUtils.d(TAG, "startSystemUpdate path" + path);
-        String newpath = "";
-        if (path.contains("/mnt/media_rw/")) {
-            newpath = path.replaceFirst("/mnt/media_rw/", "/storage/");
-            LogUtils.d(TAG, "startSystemUpdate newpath" + newpath);
-            Intent intent = new Intent();
-            intent.setComponent(new ComponentName("com.softwinner.update", "com.softwinner.update.ui.AbUpdate"));
-            Bundle bundle = new Bundle();
-            bundle.putString("update_path", newpath);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            intent.putExtras(bundle);
-            startActivity(intent);
-        } else {
-            Intent intent = new Intent();
-            intent.setComponent(new ComponentName("com.softwinner.update", "com.softwinner.update.ui.AbUpdate"));
-            Bundle bundle = new Bundle();
-            bundle.putString("update_path", path);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            intent.putExtras(bundle);
-            startActivity(intent);
-        }
-    }
-
-    /**
-     * 拷贝文件
-     */
-    ProgressDialog progressDialog;
-
-    private void showCheckingDialog() {
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage(getString(R.string.checking));
-        progressDialog.setCancelable(false);
-        progressDialog.setCanceledOnTouchOutside(false);
-        progressDialog.show();
-    }
-
-    private void showUpgradeCheckFailDialog() {
-        if (upgradeCheckFailDialog == null) {
-            upgradeCheckFailDialog = new UpgradeCheckFailDialog(AboutActivity.this);
-            upgradeCheckFailDialog.setOnClickCallBack(new UpgradeCheckFailDialog.OnClickCallBack() {
-                @Override
-                public void onRetry() {
-                    goFindUpgradeFile();
-                }
-            });
-        }
-
-        if (!upgradeCheckFailDialog.isShowing())
-            upgradeCheckFailDialog.show();
-    }
-
-    private void showUpgradeCheckSuccessDialog(String path) {
-        LogUtils.d(TAG, "showUpgradeCheckSuccessDialog " + path);
-        if (upgradeCheckSuccessDialog == null) {
-            LogUtils.d(TAG, "new UpgradeCheckSuccessDialog " + path);
-            upgradeCheckSuccessDialog = new UpgradeCheckSuccessDialog(AboutActivity.this);
-            upgradeCheckSuccessDialog.setOnClickCallBack(new UpgradeCheckSuccessDialog.OnClickCallBack() {
-                @Override
-                public void upgrade() {
-                    LogUtils.d(TAG, "upgrade path" + path);
-                    startSystemUpdate(path);
-                }
-            });
-        }
-
-        if (!upgradeCheckSuccessDialog.isShowing())
-            upgradeCheckSuccessDialog.show();
-    }
-
-    public static String getProperty(String key, String defaultValue) {
-        String value = defaultValue;
-
-        try {
-            Class<?> c = Class.forName("android.os.SystemProperties");
-            Method get = c.getMethod("get", String.class, String.class);
-            value = (String) (get.invoke(c, key, defaultValue));
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            return value;
-        }
     }
 
     private void showSupportDialog() {

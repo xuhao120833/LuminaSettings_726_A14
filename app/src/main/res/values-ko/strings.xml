@@ -333,4 +333,10 @@
     <string name="support">지원</string>
     <string name="quick_guide">빠른 시작 가이드</string>
     <string name="faq">FAQ</string>
+    <string name="local_update_tip1">1. 업데이트 패키지를 준비하고 파일 이름을 update.zip으로 지정하세요.</string>
+    <string name="local_update_tip2">2. 업데이트 패키지를 USB 드라이브의 루트 폴더에 복사하세요.</string>
+    <string name="local_update_tip3">3. USB 드라이브를 연결하세요.</string>
+    <string name="local_update_tip4">4. "검사 시작"을 클릭하세요.</string>
+    <string name="local_update_tip5">5. 업데이트가 완료될 때까지 기다리세요.</string>
+    <string name="start_detect">검사 시작</string>
 </resources>

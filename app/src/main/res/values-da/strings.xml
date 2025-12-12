@@ -333,5 +333,11 @@
     <string name="support">Understøttelse</string>
     <string name="quick_guide">Hurtig startvejledning</string>
     <string name="faq">FAQ</string>
+    <string name="local_update_tip1">1. Forbered opdateringspakken, og omdøb den til update.zip.</string>
+    <string name="local_update_tip2">2. Kopiér opdateringspakken til USB-drevets rodmappe.</string>
+    <string name="local_update_tip3">3. Indsæt USB-drevet.</string>
+    <string name="local_update_tip4">4. Klik på "Start kontrol".</string>
+    <string name="local_update_tip5">5. Vent, indtil opdateringen er fuldført.</string>
+    <string name="start_detect">Start kontrol</string>
 </resources>
 

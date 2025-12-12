@@ -333,4 +333,10 @@
     <string name="support">Ondersteuning</string>
     <string name="quick_guide">Snelstartgids</string>
     <string name="faq">FAQ</string>
+    <string name="local_update_tip1">1. Zorg dat je het upgradepakket klaar hebt en noem het update.zip.</string>
+    <string name="local_update_tip2">2. Kopieer het upgradepakket naar de hoofdmap van de USB-stick.</string>
+    <string name="local_update_tip3">3. Steek de USB-stick in.</string>
+    <string name="local_update_tip4">4. Klik op "Start detectie".</string>
+    <string name="local_update_tip5">5. Wacht tot de upgrade is voltooid.</string>
+    <string name="start_detect">Start detectie</string>
 </resources>

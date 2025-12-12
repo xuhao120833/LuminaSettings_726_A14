@@ -333,4 +333,10 @@
     <string name="support">Stuðningur</string>
     <string name="quick_guide">Flýtiræsingarleiðbeiningar</string>
     <string name="faq">FAQ</string>
+    <string name="local_update_tip1">1. Undirbúðu uppfærslupakka og nefndu hann update.zip.</string>
+    <string name="local_update_tip2">2. Afritaðu uppfærslupakkann í rótarskrá USB-minnis.</string>
+    <string name="local_update_tip3">3. Settu USB-minnið í tækið.</string>
+    <string name="local_update_tip4">4. Smelltu á "Byrja að athuga".</string>
+    <string name="local_update_tip5">5. Bíddu þar til uppfærslan er lokið.</string>
+    <string name="start_detect">Byrja að athuga</string>
 </resources>

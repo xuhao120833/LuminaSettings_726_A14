@@ -333,4 +333,10 @@
 	<string name="support">Podpora</string>
 	<string name="quick_guide">Stručná příručka pro rychlý start</string>
 	<string name="faq">FAQ</string>
+	<string name="local_update_tip1">1. Připravte aktualizační balíček a přejmenujte jej na update.zip.</string>
+	<string name="local_update_tip2">2. Zkopírujte aktualizační balíček do kořenového adresáře USB disku.</string>
+	<string name="local_update_tip3">3. Vložte USB disk.</string>
+	<string name="local_update_tip4">4. Klikněte na "Spustit detekci".</string>
+	<string name="local_update_tip5">5. Počkejte na dokončení aktualizace.</string>
+	<string name="start_detect">Spustit detekci</string>
 </resources>

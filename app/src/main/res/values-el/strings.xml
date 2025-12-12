@@ -333,4 +333,10 @@
     <string name="support">Υποστήριξη</string>
     <string name="quick_guide">Οδηγός γρήγορης εκκίνησης</string>
     <string name="faq">Συχνές ερωτήσεις</string>
+    <string name="local_update_tip1">1. Ετοιμάστε το πακέτο αναβάθμισης και ονομάστε το update.zip.</string>
+    <string name="local_update_tip2">2. Αντιγράψτε το πακέτο αναβάθμισης στον ριζικό κατάλογο του USB.</string>
+    <string name="local_update_tip3">3. Εισάγετε το USB.</string>
+    <string name="local_update_tip4">4. Κάντε κλικ στο "Έναρξη ανίχνευσης".</string>
+    <string name="local_update_tip5">5. Περιμένετε μέχρι να ολοκληρωθεί η αναβάθμιση.</string>
+    <string name="start_detect">Έναρξη ανίχνευσης</string>
 </resources>

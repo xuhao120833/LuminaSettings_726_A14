@@ -333,5 +333,11 @@
     <string name="support">Suport</string>
     <string name="quick_guide">Ghid de pornire rapidă</string>
     <string name="faq">FAQ</string>
+    <string name="local_update_tip1">1. Pregătiți pachetul de actualizare și redenumiți-l update.zip.</string>
+    <string name="local_update_tip2">2. Copiați pachetul de actualizare în directorul rădăcină al stick-ului USB.</string>
+    <string name="local_update_tip3">3. Introduceți stick-ul USB.</string>
+    <string name="local_update_tip4">4. Apăsați "Începe detectarea".</string>
+    <string name="local_update_tip5">5. Așteptați finalizarea actualizării.</string>
+    <string name="start_detect">Începe detectarea</string>
 </resources>
 

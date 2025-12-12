@@ -333,6 +333,12 @@
     <string name="support">Suporte</string>
     <string name="quick_guide">Guia de início rápido</string>
     <string name="faq">FAQ</string>
+    <string name="local_update_tip1">1. Prepare o pacote de atualização e renomeie-o para update.zip.</string>
+    <string name="local_update_tip2">2. Copie o pacote de atualização para a pasta principal do pen drive.</string>
+    <string name="local_update_tip3">3. Insira o pen drive.</string>
+    <string name="local_update_tip4">4. Clique em "Iniciar verificação".</string>
+    <string name="local_update_tip5">5. Aguarde a conclusão da atualização.</string>
+    <string name="start_detect">Iniciar verificação</string>
 </resources>
 
 

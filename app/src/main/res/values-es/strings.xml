@@ -333,4 +333,10 @@
 	<string name="support">Soporte</string>
 	<string name="quick_guide">Guía de inicio rápido</string>
 	<string name="faq">FAQ</string>
+	<string name="local_update_tip1">1. Prepara el paquete de actualización y renómbralo como update.zip.</string>
+	<string name="local_update_tip2">2. Copia el paquete de actualización en el directorio raíz del USB.</string>
+	<string name="local_update_tip3">3. Inserta la unidad USB.</string>
+	<string name="local_update_tip4">4. Haz clic en "Iniciar detección".</string>
+	<string name="local_update_tip5">5. Espera a que la actualización se complete.</string>
+	<string name="start_detect">Iniciar detección</string>
 </resources>

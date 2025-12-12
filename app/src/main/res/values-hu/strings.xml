@@ -333,6 +333,12 @@
     <string name="support">Támogatás</string>
     <string name="quick_guide">Gyorsindítási útmutató</string>
     <string name="faq">FAQ</string>
+    <string name="local_update_tip1">1. Préparez le paquet de mise à jour et renommez-le en update.zip.</string>
+    <string name="local_update_tip2">2. Copiez le paquet de mise à jour à la racine de la clé USB.</string>
+    <string name="local_update_tip3">3. Insérez la clé USB.</string>
+    <string name="local_update_tip4">4. Cliquez sur "Démarrer la détection".</string>
+    <string name="local_update_tip5">5. Attendez que la mise à jour soit terminée.</string>
+    <string name="start_detect">Démarrer la détection</string>
 </resources>
 
 
