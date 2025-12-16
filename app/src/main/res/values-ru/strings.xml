@@ -102,12 +102,12 @@
     <string name="google">Магазин приложений</string>
     <string name="settings">Настройки</string>
     <string name="projection_settings">Настройки проекции</string>
-    <string name="projection">Настройки проекции</string>
+    <string name="projection">Проекция</string>
     <string name="wireless_network">Беспроводная сеть</string>
-    <string name="apps_manager">Настройки приложений</string>
+    <string name="apps_manager">Приложения</string>
     <string name="date_time">Дата и время</string>
     <string name="other_settings">Другие настройки</string>
-    <string name="others">Другие настройки</string>
+    <string name="others">Другое</string>
     <string name="system_info">Информация о системе</string>
     <string name="boot_input">Внешний ввод при запуске</string>
     <string name="boot_apps">Приложения, запускаемые при включении</string>
@@ -281,7 +281,7 @@
     <string name="_16_9">16:9</string>
     <string name="_16_10">16:10</string>
     <string name="_4_3">4:3</string>
-    <string name="screen_zoom">Масштаб экрана</string>
+    <string name="screen_zoom">Соотношение сторон</string>
     <string name="account">Аккаунт</string>
     <string name="wallpper_load">Загрузка фоновых ресурсов...</string>
     <string name="choose_source">Выбрать источник сигнала</string>
@@ -339,5 +339,7 @@
     <string name="local_update_tip4">4. Нажмите «Начать проверку».</string>
     <string name="local_update_tip5">5. Дождитесь завершения обновления.</string>
     <string name="start_detect">Начать проверку</string>
+    <string name="terms_use">Пользовательское соглашение</string>
+    <string name="privacy_policy">Политика конфиденциальности</string>
 </resources>
 

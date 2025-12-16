@@ -102,12 +102,12 @@
 	<string name="google">Negozio delle app</string>
 	<string name="settings">Impostazioni</string>
 	<string name="projection_settings">Impostazioni di proiezione</string>
-	<string name="projection">Impostazioni di proiezione</string>
+	<string name="projection">Proiezione</string>
 	<string name="wireless_network">Rete wireless</string>
-	<string name="apps_manager">Impostazioni delle app</string>
+	<string name="apps_manager">Applicazioni</string>
 	<string name="date_time">Data e ora</string>
 	<string name="other_settings">Altre impostazioni</string>
-	<string name="others">Altre impostazioni</string>
+	<string name="others">Altro</string>
 	<string name="system_info">Informazioni di sistema</string>
 	<string name="boot_input">Input esterno all\'avvio</string>
 	<string name="boot_apps">App avviate all\'accensione</string>
@@ -281,7 +281,7 @@
 	<string name="_16_9">16:9</string>
 	<string name="_16_10">16:10</string>
 	<string name="_4_3">4:3</string>
-	<string name="screen_zoom">Zoom dello schermo</string>
+	<string name="screen_zoom">Rapporto d\'aspetto</string>
 	<string name="account">Account</string>
 	<string name="wallpper_load">Caricamento delle risorse di sfondo...</string>
 	<string name="choose_source">Selezionare la sorgente del segnale</string>
@@ -339,4 +339,6 @@
 	<string name="local_update_tip4">4. Clicca su "Avvia rilevamento".</string>
 	<string name="local_update_tip5">5. Attendi il completamento dell\'aggiornamento.</string>
 	<string name="start_detect">Avvia rilevamento</string>
+	<string name="terms_use">Accordo dell\'utente</string>
+	<string name="privacy_policy">Informativa sulla privacy</string>
 </resources>

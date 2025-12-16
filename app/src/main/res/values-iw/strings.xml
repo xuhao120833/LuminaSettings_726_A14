@@ -102,12 +102,12 @@
     <string name="google">חנות האפליקציות</string>
     <string name="settings">הגדרות</string>
     <string name="projection_settings">הגדרות הקרנה</string>
-    <string name="projection">הגדרות הקרנה</string>
+    <string name="projection">הקרנה</string>
     <string name="wireless_network">רשת אלחוטית</string>
-    <string name="apps_manager">הגדרות אפליקציות</string>
+    <string name="apps_manager">יישומים</string>
     <string name="date_time">תאריך ושעה</string>
     <string name="other_settings">הגדרות נוספות</string>
-    <string name="others">הגדרות נוספות</string>
+    <string name="others">אחרים</string>
     <string name="system_info">מידע על המערכת</string>
     <string name="boot_input">קלט חיצוני בהפעלה</string>
     <string name="boot_apps">אפליקציות בהפעלה</string>
@@ -281,7 +281,7 @@
     <string name="_16_9">16:9</string>
     <string name="_16_10">16:10</string>
     <string name="_4_3">4:3</string>
-    <string name="screen_zoom">הגדלת מסך</string>
+    <string name="screen_zoom">יחס גובה-רוחב</string>
     <string name="account">חשבון</string>
     <string name="wallpper_load">טוען משאבי רקע...</string>
     <string name="choose_source">בחר מקור אות</string>
@@ -339,4 +339,6 @@
     <string name="local_update_tip4">4. לחצו על "התחל בדיקה".</string>
     <string name="local_update_tip5">5. המתינו לסיום העדכון.</string>
     <string name="start_detect">התחל בדיקה</string>
+    <string name="terms_use">הסכם משתמש</string>
+    <string name="privacy_policy">מדיניות פרטיות</string>
 </resources>

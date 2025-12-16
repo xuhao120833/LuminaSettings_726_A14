@@ -102,12 +102,12 @@
     <string name="google">Forritabúð</string>
     <string name="settings">Stillingar</string>
     <string name="projection_settings">Varpastillingar</string>
-    <string name="projection">Varpastillingar</string>
+    <string name="projection">Varpa</string>
     <string name="wireless_network">Þráðlaust net</string>
-    <string name="apps_manager">Forritastillingar</string>
+    <string name="apps_manager">Forrit</string>
     <string name="date_time">Dagsetning og tími</string>
     <string name="other_settings">Aðrar stillingar</string>
-    <string name="others">Aðrar stillingar</string>
+    <string name="others">Annað</string>
     <string name="system_info">Kerfisupplýsingar</string>
     <string name="boot_input">Innsláttur við ræsingu</string>
     <string name="boot_apps">Forrit ræst við ræsingu</string>
@@ -281,7 +281,7 @@
     <string name="_16_9">16:9</string>
     <string name="_16_10">16:10</string>
     <string name="_4_3">4:3</string>
-    <string name="screen_zoom">Skjástækkun</string>
+    <string name="screen_zoom">Myndhlutfall</string>
     <string name="account">Aðgangur</string>
     <string name="wallpper_load">Bakgrunnsauðlindir eru að hlaðast...</string>
     <string name="choose_source">Veldu inntaksgjafa</string>
@@ -339,4 +339,6 @@
     <string name="local_update_tip4">4. Smelltu á "Byrja að athuga".</string>
     <string name="local_update_tip5">5. Bíddu þar til uppfærslan er lokið.</string>
     <string name="start_detect">Byrja að athuga</string>
+    <string name="terms_use">Notendaskilmálar</string>
+    <string name="privacy_policy">Persónuverndarstefna</string>
 </resources>

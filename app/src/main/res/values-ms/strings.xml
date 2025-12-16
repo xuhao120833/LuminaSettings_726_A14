@@ -102,12 +102,12 @@
     <string name="google">Kedai aplikasi</string>
     <string name="settings">Tetapan</string>
     <string name="projection_settings">Tetapan Projek</string>
-    <string name="projection">Tetapan Projek</string>
+    <string name="projection">Projektor</string>
     <string name="wireless_network">Rangkaian Tanpa Wayar</string>
-    <string name="apps_manager">Tetapan Aplikasi</string>
+    <string name="apps_manager">Aplikasi</string>
     <string name="date_time">Tarikh dan Masa</string>
     <string name="other_settings">Tetapan Lain</string>
-    <string name="others">Tetapan Lain</string>
+    <string name="others">Lain-lain</string>
     <string name="system_info">Maklumat Sistem</string>
     <string name="boot_input">Input Luaran Semasa Permulaan</string>
     <string name="boot_apps">Aplikasi Mula Semasa Permulaan</string>
@@ -281,7 +281,7 @@
     <string name="_16_9">16:9</string>
     <string name="_16_10">16:10</string>
     <string name="_4_3">4:3</string>
-    <string name="screen_zoom">Zum skrin</string>
+    <string name="screen_zoom">Nisbah aspek</string>
     <string name="account">Akaun</string>
     <string name="wallpper_load">Memuat sumber latar belakang...</string>
     <string name="choose_source">Pilih sumber isyarat</string>
@@ -339,4 +339,6 @@
     <string name="local_update_tip4">4. Tekan "Mula Pengimbasan".</string>
     <string name="local_update_tip5">5. Tunggu sehingga proses naik taraf selesai.</string>
     <string name="start_detect">Mula Pengimbasan</string>
+    <string name="terms_use">Perjanjian Pengguna</string>
+    <string name="privacy_policy">Dasar Privasi</string>
 </resources>

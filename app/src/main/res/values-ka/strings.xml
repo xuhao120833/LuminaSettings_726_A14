@@ -102,12 +102,12 @@
     <string name="google">აპლიკაციების მაღაზია</string>
     <string name="settings">პარამეტრები</string>
     <string name="projection_settings">პროექციის პარამეტრები</string>
-    <string name="projection">პროექციის პარამეტრები</string>
+    <string name="projection">პროექცია</string>
     <string name="wireless_network">უსადენო ქსელი</string>
-    <string name="apps_manager">აპლიკაციის პარამეტრები</string>
+    <string name="apps_manager">აპლიკაციები</string>
     <string name="date_time">თარიღი და დრო</string>
     <string name="other_settings">სხვა პარამეტრები</string>
-    <string name="others">სხვა პარამეტრები</string>
+    <string name="others">სხვა</string>
     <string name="system_info">სისტემის ინფორმაცია</string>
     <string name="boot_input">ჩართვისას გარე შეყვანა</string>
     <string name="boot_apps">ჩართვის აპლიკაცია</string>
@@ -281,7 +281,7 @@
     <string name="_16_9">16:9</string>
     <string name="_16_10">16:10</string>
     <string name="_4_3">4:3</string>
-    <string name="screen_zoom">ეკრანის მასშტაბირება</string>
+    <string name="screen_zoom">ეკრანის შეფარდება</string>
     <string name="account">ანგარიში</string>
     <string name="wallpper_load">ფონის რესურსები იტვირთება...</string>
     <string name="choose_source">სიგნალის წყაროს არჩევა</string>
@@ -339,4 +339,6 @@
     <string name="local_update_tip4">4. დააჭირეთ „დაიწყეთ აღმოჩენა“.</string>
     <string name="local_update_tip5">5. დაელოდეთ განახლების დასრულებას.</string>
     <string name="start_detect">დაიწყეთ აღმოჩენა</string>
+    <string name="terms_use">მომხმარებლის შეთანხმება</string>
+    <string name="privacy_policy">კონფიდენციალურობის პოლიტიკა</string>
 </resources>

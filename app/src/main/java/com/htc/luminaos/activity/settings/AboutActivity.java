@@ -1,7 +1,6 @@
 package com.htc.luminaos.activity.settings;
 
 import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -15,9 +14,6 @@ import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
-import android.os.Handler;
-import android.os.Message;
 import android.os.SystemProperties;
 import android.util.DisplayMetrics;
 import android.view.Display;
@@ -48,12 +44,8 @@ import com.htc.luminaos.utils.LogUtils;
 import com.htc.luminaos.utils.ShareUtil;
 import com.htc.luminaos.utils.ToastUtil;
 import com.htc.luminaos.utils.Utils;
-import com.htc.luminaos.widget.UpgradeCheckFailDialog;
-import com.htc.luminaos.widget.UpgradeCheckSuccessDialog;
 
 import java.io.File;
-import java.io.FileFilter;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -103,6 +95,8 @@ public class AboutActivity extends BaseActivity {
         aboutBinding.rlUpdateFirmware.setOnClickListener(this);
         aboutBinding.rlOnlineUpdate.setOnClickListener(this);
         aboutBinding.rlEmailImage.setOnClickListener(this);
+        aboutBinding.rlTermsUse.setOnClickListener(this);
+        aboutBinding.rlPrivacyPolicy.setOnClickListener(this);
         aboutBinding.rlDeviceModel.requestFocus();
         aboutBinding.rlDeviceModel.requestFocusFromTouch();
 
@@ -118,11 +112,15 @@ public class AboutActivity extends BaseActivity {
         aboutBinding.rlOnlineUpdate.setVisibility(MyApplication.config.onlineUpdate ? View.VISIBLE : View.GONE);
         aboutBinding.rlEmail.setVisibility(MyApplication.config.email ? View.VISIBLE : View.GONE);
         aboutBinding.rlEmailImage.setVisibility(MyApplication.config.about_support ? View.VISIBLE : View.GONE);
+        aboutBinding.rlTermsUse.setVisibility(MyApplication.config.termsUse ? View.VISIBLE : View.GONE);
+        aboutBinding.rlPrivacyPolicy.setVisibility(MyApplication.config.privacyPolicy ? View.VISIBLE : View.GONE);
 
         aboutBinding.rlDeviceModel.setOnHoverListener(this);
         aboutBinding.rlUpdateFirmware.setOnHoverListener(this);
         aboutBinding.rlOnlineUpdate.setOnHoverListener(this);
         aboutBinding.rlEmailImage.setOnHoverListener(this);
+        aboutBinding.rlTermsUse.setOnHoverListener(this);
+        aboutBinding.rlPrivacyPolicy.setOnHoverListener(this);
     }
 
     private void initData() {
@@ -211,6 +209,16 @@ public class AboutActivity extends BaseActivity {
             } else {
                 showSupportDialog();
             }
+        } else if (id == R.id.rl_terms_use) {
+            Intent intent = new Intent(this, TermsActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.putExtra("type", "terms");
+            startActivity(intent);
+        } else if (id == R.id.rl_privacy_policy) {
+            Intent intent = new Intent(this, TermsActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.putExtra("type", "privacy");
+            startActivity(intent);
         }
         super.onClick(v);
     }
@@ -303,7 +311,7 @@ public class AboutActivity extends BaseActivity {
             // TODO: handle exception
             total = ClearMemoryUtils.getRomTotalSize(this);
         }
-        total = String.valueOf(number_total * MyApplication.config.storageScale)+" GB";
+        total = String.valueOf(number_total * MyApplication.config.storageScale) + " GB";
         LogUtils.d(TAG, "getStorageSize total " + total);
         aboutBinding.storageTv.setText(total + "/"
                 + ClearMemoryUtils.getRomAvailableSize(this, MyApplication.config.storageScale));

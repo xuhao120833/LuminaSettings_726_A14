@@ -1,136 +1,128 @@
 package com.htc.luminaos.activity.settings;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemProperties;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Toast;
+
+import androidx.core.text.HtmlCompat;
 
 import com.htc.luminaos.R;
 import com.htc.luminaos.activity.BaseActivity;
+import com.htc.luminaos.databinding.ActivityTermsBinding;
 import com.htc.luminaos.databinding.InitAngleLayoutBinding;
-import com.htc.luminaos.utils.KeystoneUtils;
 import com.htc.luminaos.utils.KeystoneUtils_726;
 import com.htc.luminaos.utils.LogUtils;
 import com.htc.luminaos.utils.ReflectUtil;
 
-public class InitAngleActivity extends BaseActivity {
-    InitAngleLayoutBinding initAngleLayoutBinding;
-    private static String TAG = "InitAngleDialog";
-    Handler handler = new Handler();
-    //是不是主动关闭了自动梯形矫正
-    private boolean activeClose = false;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.util.Locale;
+
+public class TermsActivity extends BaseActivity {
+    private static String TAG = "TermsActivity";
+    private String type = "";
+    private ActivityTermsBinding termsBinding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initAngleLayoutBinding = InitAngleLayoutBinding.inflate(LayoutInflater.from(this));
-        setContentView(initAngleLayoutBinding.getRoot());
+        Intent intent = getIntent();
+        type = intent.getStringExtra("type");
+        if (type.isEmpty())
+            return;
+        LogUtils.d(TAG, " loadTerms type " + type);
+        termsBinding = ActivityTermsBinding.inflate(LayoutInflater.from(getApplicationContext()));
+        setContentView(termsBinding.getRoot());
         initView();
-        initData();
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        if (activeClose) { //主动关闭了，需要恢复打开状态
-            activeClose = false;
-            setAuto();
-        }
     }
 
-    private void initData() {   //再做初始角度矫正之前，先关闭“自动梯形矫正”开关，重置矫正画面。
-        if (getAuto()) { //打开了先关闭
-            activeClose = true;
-            setAuto();
-        }
-        KeystoneUtils_726.resetKeystone();
-        KeystoneUtils_726.writeGlobalSettings(getApplicationContext(), KeystoneUtils_726.ZOOM_VALUE, 0);
-        KeystoneUtils_726.writeSystemProperties(KeystoneUtils_726.PROP_ZOOM_VALUE,0);
-
-        KeystoneUtils_726.writeSystemProperties(KeystoneUtils_726.PROP_ZOOM_SCALE,0);
-
-        SystemProperties.set("persist.sys.keystone_offset", "0");
-        SystemProperties.set("persist.sys.keystonefinalAngle", "0");
-    }
 
     private void initView() {
-        initAngleLayoutBinding.startInitAngle.setOnClickListener(this);
-        initAngleLayoutBinding.followMe.setSelected(true);
-        initAngleLayoutBinding.startInitAngle.setSelected(true);
-        initAngleLayoutBinding.startInitAngle.requestFocus();
+        loadTerms();
     }
 
-    @Override
-    public void onClick(View v) {
-        if (v.getId() == R.id.start_init_angle) {
-            initCorrectAngle();
-        }
-    }
-
-    private ProgressDialog dialog = null;
-
-    private void initCorrectAngle() {
-        ReflectUtil.invokeSet_angle_offset();
-        dialog = new ProgressDialog(this, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
-        dialog.setMessage(getString(R.string.defaultcorrectionin));
-        dialog.show();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if (dialog != null && dialog.isShowing())
-                    dialog.dismiss();
-                Toast.makeText(getApplicationContext(), getText(R.string.init_angle_tip4), Toast.LENGTH_SHORT).show();
-                LogUtils.d("get_angle_offset " + ReflectUtil.invokeGet_angle_offset());
-                finish();
+    private void loadTerms() {
+        String lang = Locale.getDefault().getLanguage();
+        String country = Locale.getDefault().getCountry();
+        LogUtils.d(TAG, "loadTerms lang " + lang + " " + country);
+        String fileName = "";
+        if ("terms".equals(type)) {
+            if ("zh".equals(lang) && !"CN".equals(country)) {
+                fileName = "html/terms/terms_" + lang + country + ".html";
+            } else {
+                fileName = "html/terms/terms_" + lang + ".html";
             }
-        }, 3000);
-    }
+        } else if ("privacy".equals(type)) {
+            if ("zh".equals(lang)&& !"CN".equals(country)) {
+                fileName = "html/privacy/privacy_" + lang + country + ".html";
+            } else {
+                fileName = "html/privacy/privacy_" + lang + ".html";
+            }
+        }
+        LogUtils.d(TAG, "loadTerms fileName " + fileName);
 
-    public boolean getAuto() {
-        return SystemProperties.getBoolean("persist.sys.tpryauto", false);
-    }
-
-    public void setAuto() {
-        //int auto = PrjScreen.get_prj_auto_keystone_enable();
-        //PrjScreen.set_prj_auto_keystone_enable(auto == 0 ? 1 : 0);
-        boolean auto = getAuto();
-        SystemProperties.set("persist.sys.tpryauto", String.valueOf(auto ? 0 : 1));
-        //自动梯形打开的时候发送一次更新
-        if (!auto) {
-//            sendKeystoneBroadcast();
-            sendKeystoneBroadcastByAuto();
-        } else {
-            updateZoomValue();
+        InputStream is = null;
+        try {
+            is = getAssets().open(fileName);
+        } catch (Exception e) {
+            // 文件不存在，回退到英文版本
+            LogUtils.d(TAG, "File not found: " + fileName + ", fallback to English");
+            try {
+                if ("terms".equals(type)) {
+                    is = getAssets().open("html/terms/terms_en.html");
+                } else if ("privacy".equals(type)) {
+                    is = getAssets().open("html/privacy/privacy_en.html");
+                }
+            } catch (Exception d) {
+                d.printStackTrace();
+            }
+        }
+        if (is != null) {
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(is))) {
+                StringBuilder sb = new StringBuilder();
+                String line;
+                boolean inBody = false;
+                while ((line = reader.readLine()) != null) {
+                    line = line.trim();
+                    if (line.contains("<body")) {
+                        inBody = true;
+                        line = line.substring(line.indexOf(">") + 1);
+                    }
+                    if (line.contains("</body>")) {
+                        line = line.substring(0, line.indexOf("</body>"));
+                        inBody = false;
+                    }
+                    if (inBody || (!line.isEmpty() && line.startsWith("<"))) {
+                        sb.append(line);
+                    }
+                }
+                termsBinding.tvTerms.setText(HtmlCompat.fromHtml(sb.toString(), HtmlCompat.FROM_HTML_MODE_LEGACY));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
-    private void sendKeystoneBroadcastByAuto() {
-        Intent intent = new Intent("android.intent.hotack_keystone");
-        intent.addFlags(Intent.FLAG_RECEIVER_FOREGROUND);
-        intent.putExtra("ratio", 1);
-        intent.putExtra("keystone",1);
-        sendBroadcast(intent);
-    }
-
-    private void updateZoomValue() {
-        String value = SystemProperties.get("persist.sys.zoom.value", "0,0,0,0,0,0,0,0");
-        String[] va = value.split(",");
-        if (va.length == 8) {
-            KeystoneUtils_726.lb_X = Integer.parseInt(va[0]);
-            KeystoneUtils_726.lb_Y = Integer.parseInt(va[1]);
-            KeystoneUtils_726.lt_X = Integer.parseInt(va[2]);
-            KeystoneUtils_726.lt_Y = Integer.parseInt(va[3]);
-            KeystoneUtils_726.rt_X = Integer.parseInt(va[4]);
-            KeystoneUtils_726.rt_Y = Integer.parseInt(va[5]);
-            KeystoneUtils_726.rb_X = Integer.parseInt(va[6]);
-            KeystoneUtils_726.rb_Y = Integer.parseInt(va[7]);
-            KeystoneUtils_726.UpdateKeystoneZOOM(true);
-        }
-    }
 }

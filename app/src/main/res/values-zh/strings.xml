@@ -102,12 +102,12 @@
 	<string name="google">应用商店</string>
 	<string name="settings">设置</string>
 	<string name="projection_settings">投影设置</string>
-	<string name="projection">投影设置</string>
+	<string name="projection">投影</string>
 	<string name="wireless_network">无线网络</string>
-	<string name="apps_manager">应用设置</string>
+	<string name="apps_manager">应用</string>
 	<string name="date_time">日期和时间</string>
 	<string name="other_settings">其它设置</string>
-	<string name="others">其它设置</string>
+	<string name="others">其它</string>
 	<string name="system_info">系统信息</string>
 	<string name="boot_input">启动时外部输入</string>
 	<string name="boot_apps">开机启动应用</string>
@@ -281,7 +281,7 @@
 	<string name="_16_9">16:9</string>
 	<string name="_16_10">16:10</string>
 	<string name="_4_3">4:3</string>
-	<string name="screen_zoom">画面缩放</string>
+	<string name="screen_zoom">宽高比</string>
 	<string name="account">账号</string>
 	<string name="wallpper_load">背景资源加载中...</string>
 	<string name="choose_source">选择信号源</string>
@@ -339,4 +339,6 @@
 	<string name="local_update_tip4">4、点击“开始检测“。</string>
 	<string name="local_update_tip5">5、等待升级完成。</string>
 	<string name="start_detect">开始检测</string>
+	<string name="terms_use">用户协议</string>
+	<string name="privacy_policy">隐私政策</string>
 </resources>

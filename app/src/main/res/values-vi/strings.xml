@@ -102,12 +102,12 @@
     <string name="google">Cửa hàng ứng dụng</string>
     <string name="settings">Cài đặt</string>
     <string name="projection_settings">Cài đặt chiếu</string>
-    <string name="projection">Cài đặt chiếu</string>
+    <string name="projection">Chiếu</string>
     <string name="wireless_network">Mạng không dây</string>
-    <string name="apps_manager">Cài đặt ứng dụng</string>
+    <string name="apps_manager">Ứng dụng</string>
     <string name="date_time">Ngày và giờ</string>
     <string name="other_settings">Cài đặt khác</string>
-    <string name="others">Cài đặt khác</string>
+    <string name="others">Khác</string>
     <string name="system_info">Thông tin hệ thống</string>
     <string name="boot_input">Đầu vào khi khởi động</string>
     <string name="boot_apps">Ứng dụng khởi động khi bật máy</string>
@@ -281,7 +281,7 @@
     <string name="_16_9">16:9</string>
     <string name="_16_10">16:10</string>
     <string name="_4_3">4:3</string>
-    <string name="screen_zoom">Phóng to màn hình</string>
+    <string name="screen_zoom">Tỷ lệ khung hình</string>
     <string name="account">Tài khoản</string>
     <string name="wallpper_load">Đang tải tài nguyên nền...</string>
     <string name="choose_source">Chọn nguồn tín hiệu</string>
@@ -339,6 +339,8 @@
     <string name="local_update_tip4">4. Nhấn "Bắt đầu kiểm tra".</string>
     <string name="local_update_tip5">5. Chờ quá trình cập nhật hoàn tất.</string>
     <string name="start_detect">Bắt đầu kiểm tra</string>
+    <string name="terms_use">Thỏa thuận Người dùng</string>
+    <string name="privacy_policy">Chính sách Bảo mật</string>
 </resources>
 
 

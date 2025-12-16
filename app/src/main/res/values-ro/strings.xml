@@ -102,12 +102,12 @@
     <string name="google">Magazin de aplicații</string>
     <string name="settings">Setări</string>
     <string name="projection_settings">Setări proiecție</string>
-    <string name="projection">Setări proiecție</string>
+    <string name="projection">Proiecție</string>
     <string name="wireless_network">Rețea wireless</string>
-    <string name="apps_manager">Setări aplicații</string>
+    <string name="apps_manager">Aplicații</string>
     <string name="date_time">Dată și oră</string>
     <string name="other_settings">Alte setări</string>
-    <string name="others">Alte setări</string>
+    <string name="others">Altele</string>
     <string name="system_info">Informații sistem</string>
     <string name="boot_input">Intrare externă la pornire</string>
     <string name="boot_apps">Aplicații la pornire</string>
@@ -281,7 +281,7 @@
     <string name="_16_9">16:9</string>
     <string name="_16_10">16:10</string>
     <string name="_4_3">4:3</string>
-    <string name="screen_zoom">Zoom ecran</string>
+    <string name="screen_zoom">Raport de aspect</string>
     <string name="account">Cont</string>
     <string name="wallpper_load">Se încarcă resursele fundalului...</string>
     <string name="choose_source">Selectare sursă semnal</string>
@@ -339,5 +339,7 @@
     <string name="local_update_tip4">4. Apăsați "Începe detectarea".</string>
     <string name="local_update_tip5">5. Așteptați finalizarea actualizării.</string>
     <string name="start_detect">Începe detectarea</string>
+    <string name="terms_use">Acordul Utilizatorului</string>
+    <string name="privacy_policy">Politica de Confidențialitate</string>
 </resources>
 

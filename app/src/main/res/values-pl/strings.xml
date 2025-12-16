@@ -102,12 +102,12 @@
     <string name="google">Sklep z aplikacjami</string>
     <string name="settings">Ustawienia</string>
     <string name="projection_settings">Ustawienia projekcji</string>
-    <string name="projection">Ustawienia projekcji</string>
+    <string name="projection">Projektor</string>
     <string name="wireless_network">Sieć bezprzewodowa</string>
-    <string name="apps_manager">Ustawienia aplikacji</string>
+    <string name="apps_manager">Aplikacje</string>
     <string name="date_time">Data i czas</string>
     <string name="other_settings">Inne ustawienia</string>
-    <string name="others">Inne ustawienia</string>
+    <string name="others">Inne</string>
     <string name="system_info">Informacje o systemie</string>
     <string name="boot_input">Auto. włączenie wejścia</string>
     <string name="boot_apps">Aplikacje uruchamiane przy starcie</string>
@@ -281,7 +281,7 @@
     <string name="_16_9">16:9</string>
     <string name="_16_10">16:10</string>
     <string name="_4_3">4:3</string>
-    <string name="screen_zoom">Format obrazu</string>
+    <string name="screen_zoom">Proporcje ekranu</string>
     <string name="account">Konto</string>
     <string name="wallpper_load">Ładowanie zasobów tła...</string>
     <string name="choose_source">Wybierz źródło sygnału</string>
@@ -339,6 +339,8 @@
     <string name="local_update_tip4">4. Kliknij „Rozpocznij wykrywanie”.</string>
     <string name="local_update_tip5">5. Poczekaj na zakończenie aktualizacji.</string>
     <string name="start_detect">Rozpocznij wykrywanie</string>
+    <string name="terms_use">Umowa użytkownika</string>
+    <string name="privacy_policy">Polityka prywatności</string>
 </resources>
 
 

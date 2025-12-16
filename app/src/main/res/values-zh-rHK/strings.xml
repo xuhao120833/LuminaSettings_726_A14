@@ -102,12 +102,12 @@
 	<string name="google">應用商店</string>
 	<string name="settings">設定</string>
 	<string name="projection_settings">投影設定</string>
-	<string name="projection">投影設定</string>
+	<string name="projection">投影</string>
 	<string name="wireless_network">無線網絡</string>
-	<string name="apps_manager">應用設定</string>
+	<string name="apps_manager">應用</string>
 	<string name="date_time">日期和時間</string>
 	<string name="other_settings">其他設定</string>
-	<string name="others">其他設定</string>
+	<string name="others">其他</string>
 	<string name="system_info">系統信息</string>
 	<string name="boot_input">啟動時外部輸入</string>
 	<string name="boot_apps">開機啟動應用</string>
@@ -281,7 +281,7 @@
 	<string name="_16_9">16:9</string>
 	<string name="_16_10">16:10</string>
 	<string name="_4_3">4:3</string>
-	<string name="screen_zoom">畫面縮放</string>
+	<string name="screen_zoom">寬高比</string>
 	<string name="account">帳戶</string>
 	<string name="wallpper_load">背景資源加載中...</string>
 	<string name="choose_source">選擇信號源</string>
@@ -339,4 +339,6 @@
 	<string name="local_update_tip4">4、點擊「開始檢測」。</string>
 	<string name="local_update_tip5">5、等待升級完成。</string>
 	<string name="start_detect">開始檢測</string>
+	<string name="terms_use">用戶協議</string>
+	<string name="privacy_policy">隱私政策</string>
 </resources>

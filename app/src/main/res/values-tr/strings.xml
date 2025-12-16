@@ -102,12 +102,12 @@
     <string name="google">Uygulama Mağazası</string>
     <string name="settings">Ayarlar</string>
     <string name="projection_settings">Projeksiyon Ayarları</string>
-    <string name="projection">Projeksiyon Ayarları</string>
+    <string name="projection">Projeksiyon</string>
     <string name="wireless_network">Kablosuz Ağ</string>
-    <string name="apps_manager">Uygulama Ayarları</string>
+    <string name="apps_manager">Uygulamalar</string>
     <string name="date_time">Tarih ve Saat</string>
     <string name="other_settings">Diğer Ayarlar</string>
-    <string name="others">Diğer Ayarlar</string>
+    <string name="others">Diğerleri</string>
     <string name="system_info">Sistem Bilgisi</string>
     <string name="boot_input">Başlangıçta Dış Giriş</string>
     <string name="boot_apps">Açılışta Başlatılan Uygulamalar</string>
@@ -281,7 +281,7 @@
     <string name="_16_9">16:9</string>
     <string name="_16_10">16:10</string>
     <string name="_4_3">4:3</string>
-    <string name="screen_zoom">Ekran yakınlaştırma</string>
+    <string name="screen_zoom">En-boy oranı</string>
     <string name="account">Hesap</string>
     <string name="wallpper_load">Arka plan kaynakları yükleniyor...</string>
     <string name="choose_source">Sinyal kaynağını seç</string>
@@ -339,5 +339,7 @@
     <string name="local_update_tip4">4. "Taramayı Başlat" düğmesine tıklayın.</string>
     <string name="local_update_tip5">5. Güncellemenin tamamlanmasını bekleyin.</string>
     <string name="start_detect">Taramayı Başlat</string>
+    <string name="terms_use">Kullanıcı Sözleşmesi</string>
+    <string name="privacy_policy">Gizlilik Politikası</string>
 </resources>
 

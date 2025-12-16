@@ -102,12 +102,12 @@
     <string name="google">Alkalmazásbolt</string>
     <string name="settings">Beállítások</string>
     <string name="projection_settings">Vetítési beállítások</string>
-    <string name="projection">Vetítési beállítások</string>
+    <string name="projection">Vetítés</string>
     <string name="wireless_network">Vezeték nélküli hálózat</string>
-    <string name="apps_manager">Alkalmazásbeállítások</string>
+    <string name="apps_manager">Alkalmazások</string>
     <string name="date_time">Dátum és idő</string>
     <string name="other_settings">Egyéb beállítások</string>
-    <string name="others">Egyéb beállítások</string>
+    <string name="others">Egyéb</string>
     <string name="system_info">Rendszerinformáció</string>
     <string name="boot_input">Indításkor külső bemenet</string>
     <string name="boot_apps">Indításkor futtatandó alkalmazások</string>
@@ -281,7 +281,7 @@
     <string name="_16_9">16:9</string>
     <string name="_16_10">16:10</string>
     <string name="_4_3">4:3</string>
-    <string name="screen_zoom">Képernyő nagyítása</string>
+    <string name="screen_zoom">Képarány</string>
     <string name="account">Fiók</string>
     <string name="wallpper_load">Háttérkép betöltése...</string>
     <string name="choose_source">Válasszon jelforrást</string>
@@ -339,6 +339,8 @@
     <string name="local_update_tip4">4. Cliquez sur "Démarrer la détection".</string>
     <string name="local_update_tip5">5. Attendez que la mise à jour soit terminée.</string>
     <string name="start_detect">Démarrer la détection</string>
+    <string name="terms_use">Felhasználói Megállapodás</string>
+    <string name="privacy_policy">Adatvédelmi Szabályzat</string>
 </resources>
 
 

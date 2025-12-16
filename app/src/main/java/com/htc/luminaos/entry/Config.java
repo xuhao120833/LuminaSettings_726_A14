@@ -40,6 +40,8 @@ public class Config {
     public int layout_select = 1;
     public boolean select_border = false;
     public boolean btSpeaker = false;
+    public boolean termsUse = false;
+    public boolean privacyPolicy = false;
 
     public boolean displayPictureModeWeiMiTitle = false;
 
@@ -85,8 +87,8 @@ public class Config {
     //无障碍服务
     public boolean accessibility = false;
 
-    public  String sourceList ="HDMI1";
-    public  String sourceListTitle ="HDMI";
+    public String sourceList = "HDMI1";
+    public String sourceListTitle = "HDMI";
 
     //wifi DHCP、静态IP切换
     public boolean wifiIpSettings = true;
@@ -104,8 +106,8 @@ public class Config {
 
     public boolean manualKeystone = true;
     public boolean resetKeystone = true;
-    public int manualKeystoneWidth = 1000;
-    public int manualKeystoneHeight = 1000;
+    public int manualKeystoneWidth = 500;
+    public int manualKeystoneHeight = 500;
     public boolean autoFocus = true;
     public boolean screenRecognition = true;
     public boolean intelligentObstacle = true;

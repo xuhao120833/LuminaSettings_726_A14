@@ -102,12 +102,12 @@
     <string name="google">App Store</string>
     <string name="settings">Indstillinger</string>
     <string name="projection_settings">Projektindstillinger</string>
-    <string name="projection">Projektindstillinger</string>
+    <string name="projection">Projektion</string>
     <string name="wireless_network">Trådløst netværk</string>
-    <string name="apps_manager">Applikationsindstillinger</string>
+    <string name="apps_manager">Apps</string>
     <string name="date_time">Dato og tid</string>
     <string name="other_settings">Andre indstillinger</string>
-    <string name="others">Andre indstillinger</string>
+    <string name="others">Andre</string>
     <string name="system_info">Systemoplysninger</string>
     <string name="boot_input">Ekstern indgang ved opstart</string>
     <string name="boot_apps">Programmer, der starter op</string>
@@ -281,7 +281,7 @@
     <string name="_16_9">16:9</string>
     <string name="_16_10">16:10</string>
     <string name="_4_3">4:3</string>
-    <string name="screen_zoom">Skærmzoom</string>
+    <string name="screen_zoom">Billedformat</string>
     <string name="account">konto</string>
     <string name="wallpper_load">Baggrundsressourcer indlæses...</string>
     <string name="choose_source">Vælg signalkilde</string>
@@ -339,5 +339,7 @@
     <string name="local_update_tip4">4. Klik på "Start kontrol".</string>
     <string name="local_update_tip5">5. Vent, indtil opdateringen er fuldført.</string>
     <string name="start_detect">Start kontrol</string>
+    <string name="terms_use">Brugeraftale</string>
+    <string name="privacy_policy">Privatlivspolitik</string>
 </resources>
 

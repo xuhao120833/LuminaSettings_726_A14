@@ -102,12 +102,12 @@
     <string name="google">Toko aplikasi</string>
     <string name="settings">Pengaturan</string>
     <string name="projection_settings">Pengaturan proyeksi</string>
-    <string name="projection">Pengaturan proyeksi</string>
+    <string name="projection">Proyeksi</string>
     <string name="wireless_network">Jaringan nirkabel</string>
-    <string name="apps_manager">Pengaturan aplikasi</string>
+    <string name="apps_manager">Aplikasi</string>
     <string name="date_time">Tanggal dan waktu</string>
     <string name="other_settings">Pengaturan lainnya</string>
-    <string name="others">Pengaturan lainnya</string>
+    <string name="others">Lainnya</string>
     <string name="system_info">Informasi sistem</string>
     <string name="boot_input">Input eksternal saat boot</string>
     <string name="boot_apps">Aplikasi startup</string>
@@ -281,7 +281,7 @@
     <string name="_16_9">16:9</string>
     <string name="_16_10">16:10</string>
     <string name="_4_3">4:3</string>
-    <string name="screen_zoom">Perbesaran layar</string>
+    <string name="screen_zoom">Rasio Aspek</string>
     <string name="account">Akun</string>
     <string name="wallpper_load">Memuat sumber daya latar belakang...</string>
     <string name="choose_source">Pilih sumber sinyal</string>
@@ -339,4 +339,6 @@
     <string name="local_update_tip4">4. Klik "Mulai Deteksi".</string>
     <string name="local_update_tip5">5. Tunggu hingga pembaruan selesai.</string>
     <string name="start_detect">Mulai Deteksi</string>
+    <string name="terms_use">Perjanjian Pengguna</string>
+    <string name="privacy_policy">Kebijakan Privasi</string>
 </resources>

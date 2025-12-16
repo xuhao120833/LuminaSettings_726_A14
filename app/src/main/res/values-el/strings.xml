@@ -102,12 +102,12 @@
     <string name="google">Κατάστημα εφαρμογών</string>
     <string name="settings">Ρυθμίσεις</string>
     <string name="projection_settings">Ρυθμίσεις προβολής</string>
-    <string name="projection">Ρυθμίσεις προβολής</string>
+    <string name="projection">Προβολή</string>
     <string name="wireless_network">Ασύρματο δίκτυο</string>
-    <string name="apps_manager">Ρυθμίσεις εφαρμογών</string>
+    <string name="apps_manager">Εφαρμογές</string>
     <string name="date_time">Ημερομηνία και ώρα</string>
     <string name="other_settings">Άλλες ρυθμίσεις</string>
-    <string name="others">Άλλες ρυθμίσεις</string>
+    <string name="others">Άλλα</string>
     <string name="system_info">Πληροφορίες συστήματος</string>
     <string name="boot_input">Εξωτερική είσοδος κατά την εκκίνηση</string>
     <string name="boot_apps">Εκκίνηση εφαρμογών κατά την εκκίνηση</string>
@@ -281,7 +281,7 @@
     <string name="_16_9">16:9</string>
     <string name="_16_10">16:10</string>
     <string name="_4_3">4:3</string>
-    <string name="screen_zoom">Ζουμ εικόνας</string>
+    <string name="screen_zoom">Αναλογία διαστάσεων</string>
     <string name="account">Λογαριασμός</string>
     <string name="wallpper_load">Φόρτωση πόρων φόντου...</string>
     <string name="choose_source">Επιλογή πηγής σήματος</string>
@@ -339,4 +339,6 @@
     <string name="local_update_tip4">4. Κάντε κλικ στο "Έναρξη ανίχνευσης".</string>
     <string name="local_update_tip5">5. Περιμένετε μέχρι να ολοκληρωθεί η αναβάθμιση.</string>
     <string name="start_detect">Έναρξη ανίχνευσης</string>
+    <string name="terms_use">Σύμβαση Χρήστη</string>
+    <string name="privacy_policy">Πολιτική Απορρήτου</string>
 </resources>

@@ -102,12 +102,12 @@
     <string name="google">Loja de aplicativos</string>
     <string name="settings">Configurações</string>
     <string name="projection_settings">Configurações de projeção</string>
-    <string name="projection">Configurações de projeção</string>
+    <string name="projection">Projeção</string>
     <string name="wireless_network">Rede sem fio</string>
-    <string name="apps_manager">Configurações de aplicativos</string>
+    <string name="apps_manager">Aplicativos</string>
     <string name="date_time">Data e hora</string>
     <string name="other_settings">Outras configurações</string>
-    <string name="others">Outras configurações</string>
+    <string name="others">Outros</string>
     <string name="system_info">Informações do sistema</string>
     <string name="boot_input">Entrada externa na inicialização</string>
     <string name="boot_apps">Aplicativos de inicialização</string>
@@ -281,7 +281,7 @@
     <string name="_16_9">16:9</string>
     <string name="_16_10">16:10</string>
     <string name="_4_3">4:3</string>
-    <string name="screen_zoom">Zoom da tela</string>
+    <string name="screen_zoom">Proporção</string>
     <string name="account">Conta</string>
     <string name="wallpper_load">Carregando recursos de fundo...</string>
     <string name="choose_source">Selecionar fonte de sinal</string>
@@ -339,6 +339,8 @@
     <string name="local_update_tip4">4. Clique em "Iniciar verificação".</string>
     <string name="local_update_tip5">5. Aguarde a conclusão da atualização.</string>
     <string name="start_detect">Iniciar verificação</string>
+    <string name="terms_use">Contrato do Usuário</string>
+    <string name="privacy_policy">Política de Privacidade</string>
 </resources>
 
 

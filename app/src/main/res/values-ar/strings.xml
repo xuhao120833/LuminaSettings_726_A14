@@ -102,12 +102,12 @@
     <string name="google">متجر التطبيقات</string>
     <string name="settings">الإعدادات</string>
     <string name="projection_settings">إعدادات العرض</string>
-    <string name="projection">إعدادات العرض</string>
+    <string name="projection">الإسقاط</string>
     <string name="wireless_network">الشبكة اللاسلكية</string>
-    <string name="apps_manager">إعدادات التطبيقات</string>
+    <string name="apps_manager">التطبيقات</string>
     <string name="date_time">التاريخ والوقت</string>
     <string name="other_settings">إعدادات أخرى</string>
-    <string name="others">إعدادات أخرى</string>
+    <string name="others">أخرى</string>
     <string name="system_info">معلومات النظام</string>
     <string name="boot_input">مصدر الإدخال عند التشغيل</string>
     <string name="boot_apps">تشغيل التطبيقات عند بدء التشغيل</string>
@@ -281,7 +281,7 @@
     <string name="_16_9">16:9</string>
     <string name="_16_10">16:10</string>
     <string name="_4_3">4:3</string>
-    <string name="screen_zoom">تكبير الشاشة</string>
+    <string name="screen_zoom">نسبة العرض إلى الارتفاع</string>
     <string name="account">حساب</string>
     <string name="wallpper_load">يتم تحميل موارد الخلفية...</string>
     <string name="choose_source">اختيار مصدر الإشارة</string>
@@ -339,6 +339,8 @@
     <string name="local_update_tip4">4. اضغط على "بدء الفحص".</string>
     <string name="local_update_tip5">5. انتظر حتى يكتمل التحديث.</string>
     <string name="start_detect">بدء الفحص</string>
+    <string name="terms_use">اتفاقية المستخدم</string>
+    <string name="privacy_policy">سياسة الخصوصية</string>
 </resources>
 
 

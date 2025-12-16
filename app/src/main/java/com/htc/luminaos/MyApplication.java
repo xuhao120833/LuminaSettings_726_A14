@@ -163,8 +163,8 @@ public class MyApplication extends Application {
         LogUtils.d(TAG, "screenWidth " + screenWidth + " screenHeight " + screenHeight);
         KeystoneUtils_726.lcd_h = screenHeight;
         KeystoneUtils_726.lcd_w = screenWidth;
-//        KeystoneUtils_726.minH_size = config.manualKeystoneWidth;
-//        KeystoneUtils_726.minV_size = config.manualKeystoneHeight;
+        KeystoneUtils_726.max_X = config.manualKeystoneWidth;
+        KeystoneUtils_726.max_Y = config.manualKeystoneHeight;
     }
 
     private void readBackground() {

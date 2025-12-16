@@ -102,12 +102,12 @@
     <string name="google">Google Play Store</string>
     <string name="settings">การตั้งค่า</string>
     <string name="projection_settings">การตั้งค่าการฉายภาพ</string>
-    <string name="projection">การตั้งค่าการฉายภาพ</string>
+    <string name="projection">โปรเจคเตอร์</string>
     <string name="wireless_network">เครือข่ายไร้สาย</string>
-    <string name="apps_manager">การตั้งค่าแอป</string>
+    <string name="apps_manager">แอปพลิเคชัน</string>
     <string name="date_time">วันที่และเวลา</string>
     <string name="other_settings">การตั้งค่าอื่น ๆ</string>
-    <string name="others">การตั้งค่าอื่น ๆ</string>
+    <string name="others">อื่น ๆ</string>
     <string name="system_info">ข้อมูลระบบ</string>
     <string name="boot_input">การป้อนข้อมูลภายนอกเมื่อบูต</string>
     <string name="boot_apps">แอปที่เริ่มบูต</string>
@@ -281,7 +281,7 @@
     <string name="_16_9">16:9</string>
     <string name="_16_10">16:10</string>
     <string name="_4_3">4:3</string>
-    <string name="screen_zoom">Масштаб экрана</string>
+    <string name="screen_zoom">อัตราส่วนหน้าจอ</string>
     <string name="account">บัญชี</string>
     <string name="wallpper_load">กำลังโหลดทรัพยากรพื้นหลัง...</string>
     <string name="choose_source">เลือกแหล่งสัญญาณ</string>
@@ -339,5 +339,7 @@
     <string name="local_update_tip4">4. กด "เริ่มการตรวจสอบ"</string>
     <string name="local_update_tip5">5. รอจนกว่าการอัปเดตจะเสร็จสมบูรณ์</string>
     <string name="start_detect">เริ่มการตรวจสอบ</string>
+    <string name="terms_use">ข้อตกลงผู้ใช้</string>
+    <string name="privacy_policy">นโยบายความเป็นส่วนตัว</string>
 </resources>
 

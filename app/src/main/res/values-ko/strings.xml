@@ -102,12 +102,12 @@
     <string name="google">앱 스토어</string>
     <string name="settings">설정</string>
     <string name="projection_settings">투영 설정</string>
-    <string name="projection">투영 설정</string>
+    <string name="projection">투사</string>
     <string name="wireless_network">무선 네트워크</string>
-    <string name="apps_manager">앱 설정</string>
+    <string name="apps_manager">앱</string>
     <string name="date_time">날짜 및 시간</string>
     <string name="other_settings">기타 설정</string>
-    <string name="others">기타 설정</string>
+    <string name="others">기타</string>
     <string name="system_info">시스템 정보</string>
     <string name="boot_input">부팅 시 외부 입력</string>
     <string name="boot_apps">부팅 시 시작할 앱</string>
@@ -281,7 +281,7 @@
     <string name="_16_9">16:9</string>
     <string name="_16_10">16:10</string>
     <string name="_4_3">4:3</string>
-    <string name="screen_zoom">화면 확대</string>
+    <string name="screen_zoom">화면 비율</string>
     <string name="account">계정</string>
     <string name="wallpper_load">배경 리소스를 로드하는 중...</string>
     <string name="choose_source">신호원을 선택</string>
@@ -339,4 +339,6 @@
     <string name="local_update_tip4">4. "검사 시작"을 클릭하세요.</string>
     <string name="local_update_tip5">5. 업데이트가 완료될 때까지 기다리세요.</string>
     <string name="start_detect">검사 시작</string>
+    <string name="terms_use">사용자 계약</string>
+    <string name="privacy_policy">개인정보 처리방침</string>
 </resources>

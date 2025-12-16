@@ -102,12 +102,12 @@
 	<string name="google">Appbutik</string>
 	<string name="settings">Inställningar</string>
 	<string name="projection_settings">Projektorinställningar</string>
-	<string name="projection">Projektorinställningar</string>
+	<string name="projection">Projektor</string>
 	<string name="wireless_network">Trådlöst nätverk</string>
-	<string name="apps_manager">Appinställningar</string>
+	<string name="apps_manager">Appar</string>
 	<string name="date_time">Datum och tid</string>
 	<string name="other_settings">Övriga inställningar</string>
-	<string name="others">Övriga inställningar</string>
+	<string name="others">Övrigt</string>
 	<string name="system_info">Systeminformation</string>
 	<string name="boot_input">Extern inmatning vid uppstart</string>
 	<string name="boot_apps">Starta appar vid uppstart</string>
@@ -281,7 +281,7 @@
 	<string name="_16_9">16:9</string>
 	<string name="_16_10">16:10</string>
 	<string name="_4_3">4:3</string>
-	<string name="screen_zoom">Bildzoom</string>
+	<string name="screen_zoom">Bildförhållande</string>
 	<string name="account">Konto</string>
 	<string name="wallpper_load">Bakgrundsresurs laddas...</string>
 	<string name="choose_source">Välj signalkälla</string>
@@ -339,4 +339,6 @@
 	<string name="local_update_tip4">4. Klicka på "Starta kontroll".</string>
 	<string name="local_update_tip5">5. Vänta tills uppdateringen är klar.</string>
 	<string name="start_detect">Starta kontroll</string>
+	<string name="terms_use">Användaravtal</string>
+	<string name="privacy_policy">Integritetspolicy</string>
 </resources>
