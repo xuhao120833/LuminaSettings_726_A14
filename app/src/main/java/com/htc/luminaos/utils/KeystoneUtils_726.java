@@ -61,6 +61,8 @@ public class KeystoneUtils_726 {
     public static int lt_Y = 0;
     public static int rt_X = 0;
     public static int rt_Y = 0;
+    public static int max_X = 500;
+    public static int max_Y = 500;
 
     private static int CoverY(String prop) {
         return SystemProperties.getInt(prop, 0);
@@ -168,6 +170,8 @@ public class KeystoneUtils_726 {
         int x = xy[0];
         int y = xy[1];
         if (x < 0 || y < 0)
+            return;
+        if (x > max_X || y > max_Y)
             return;
         int type_1 = 0;
         if (rtl) {
