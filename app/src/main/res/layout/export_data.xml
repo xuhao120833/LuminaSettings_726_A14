@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/x_600"
+    android:layout_height="@dimen/y_360"
+    android:background="@drawable/white_frame"
+    >
+
+    <TextView
+        android:layout_width="@dimen/x_387"
+        android:layout_height="@dimen/y_200"
+        android:id="@+id/et_password"
+        android:layout_marginTop="@dimen/y_30"
+        android:layout_centerHorizontal="true"
+        android:text="@string/export_data_tips"
+        android:paddingStart="@dimen/x_10"
+        android:paddingEnd="@dimen/x_10"
+        android:textColor="@color/black"
+        android:textSize="@dimen/x_23"
+        android:gravity="center"
+        />
+
+
+    <TextView
+        android:layout_width="@dimen/x_150"
+        android:layout_height="@dimen/y_60"
+        android:id="@+id/enter"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:background="@drawable/button_bg"
+        android:textColor="@color/white"
+        android:text="@string/enter"
+        android:textSize="@dimen/x_25"
+        android:ellipsize="marquee"
+        android:singleLine="true"
+        android:layout_marginStart="@dimen/x_30"
+        android:layout_marginBottom="@dimen/y_30"
+        />
+
+    <TextView
+        android:layout_width="@dimen/x_150"
+        android:layout_height="@dimen/y_60"
+        android:id="@+id/cancel"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:gravity="center"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:background="@drawable/button_bg"
+        android:textColor="@color/white"
+        android:text="@string/cancel"
+        android:textSize="@dimen/x_25"
+        android:ellipsize="marquee"
+        android:singleLine="true"
+        android:layout_marginEnd="@dimen/x_30"
+        android:layout_marginBottom="@dimen/y_30"
+        />
+
+</RelativeLayout>

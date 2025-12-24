@@ -341,4 +341,10 @@
     <string name="start_detect">Start Detection</string>
     <string name="terms_use">Terms of Use</string>
     <string name="privacy_policy">Privacy Policy</string>
+    <string name="privacy_terms">Privacy Policy &amp; User Agreement</string>
+    <string name="agree_privacy_policy">Agree to Privacy Policy</string>
+    <string name="export_data">Export Data</string>
+    <string name="revoke_policy">Revoke Authorization</string>
+    <string name="export_data_tips">The exported data includes OTA upgrade data and app store data. Do you want to export now?</string>
+    <string name="revoke_policy_tips">Disabling authorization will affect normal use. Are you sure you want to disable it?</string>
 </resources>

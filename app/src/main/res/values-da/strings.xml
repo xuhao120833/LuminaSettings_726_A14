@@ -341,5 +341,11 @@
     <string name="start_detect">Start kontrol</string>
     <string name="terms_use">Brugeraftale</string>
     <string name="privacy_policy">Privatlivspolitik</string>
+    <string name="privacy_terms">Privatlivspolitik og brugervilkår</string>
+    <string name="agree_privacy_policy">Accepter privatlivspolitikken</string>
+    <string name="export_data">Eksporter data</string>
+    <string name="revoke_policy">Tilbagekald samtykke</string>
+    <string name="export_data_tips">De eksporterede data inkluderer OTA-opgraderingsdata og appbutiksdata. Vil du eksportere nu?</string>
+    <string name="revoke_policy_tips">Hvis du lukker autorisationen, kan det påvirke normal brug. Er du sikker på, at du vil lukke den?</string>
 </resources>
 

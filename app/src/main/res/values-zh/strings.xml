@@ -341,4 +341,10 @@
 	<string name="start_detect">开始检测</string>
 	<string name="terms_use">用户协议</string>
 	<string name="privacy_policy">隐私政策</string>
+	<string name="privacy_terms">隐私政策与用户协议</string>
+	<string name="agree_privacy_policy">同意隐私政策</string>
+	<string name="export_data">导出数据</string>
+	<string name="revoke_policy">撤销授权</string>
+	<string name="export_data_tips">导出的数据包含OTA升级数据和应用商店数据，是否现在导出？</string>
+	<string name="revoke_policy_tips">关闭授权后会影响正常使用，确认关闭吗？</string>
 </resources>

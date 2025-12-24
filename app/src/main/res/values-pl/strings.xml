@@ -341,6 +341,12 @@
     <string name="start_detect">Rozpocznij wykrywanie</string>
     <string name="terms_use">Umowa użytkownika</string>
     <string name="privacy_policy">Polityka prywatności</string>
+    <string name="privacy_terms">Polityka prywatności i regulamin</string>
+    <string name="agree_privacy_policy">Akceptuję politykę prywatności</string>
+    <string name="export_data">Eksportuj dane</string>
+    <string name="revoke_policy">Cofnij uprawnienia</string>
+    <string name="export_data_tips">Eksportowane dane zawierają dane aktualizacji OTA i dane sklepu z aplikacjami. Czy chcesz je teraz wyeksportować?</string>
+    <string name="revoke_policy_tips">Wyłączenie autoryzacji wpłynie na prawidłowe działanie. Czy na pewno chcesz wyłączyć?</string>
 </resources>
 
 

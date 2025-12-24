@@ -341,6 +341,12 @@
     <string name="start_detect">Démarrer la détection</string>
     <string name="terms_use">Felhasználói Megállapodás</string>
     <string name="privacy_policy">Adatvédelmi Szabályzat</string>
+    <string name="privacy_terms">Adatvédelmi szabályzat és Felhasználási feltételek</string>
+    <string name="agree_privacy_policy">Adatvédelmi szabályzat elfogadása</string>
+    <string name="export_data">Adatok exportálása</string>
+    <string name="revoke_policy">Hozzáférés visszavonása</string>
+    <string name="export_data_tips">A kivitt adatok OTA-frissítési adatokat és az alkalmazásbolt adatait tartalmazzák. Szeretné most exportálni?</string>
+    <string name="revoke_policy_tips">A jogosultság visszavonása befolyásolhatja a normál használatot. Biztosan vissza akarja vonni?</string>
 </resources>
 
 

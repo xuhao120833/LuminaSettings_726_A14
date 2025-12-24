@@ -109,7 +109,7 @@
             android:name=".activity.settings.InitAngleActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.settings.TermsActivity"
+            android:name=".activity.settings.PrivacyTermsActivity"
             android:exported="false" />
         <activity
             android:name=".activity.settings.LocalUpdateActivity"

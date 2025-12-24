@@ -40,8 +40,7 @@ public class Config {
     public int layout_select = 1;
     public boolean select_border = false;
     public boolean btSpeaker = false;
-    public boolean termsUse = false;
-    public boolean privacyPolicy = false;
+    public boolean privacyTerms = false;
 
     public boolean displayPictureModeWeiMiTitle = false;
 

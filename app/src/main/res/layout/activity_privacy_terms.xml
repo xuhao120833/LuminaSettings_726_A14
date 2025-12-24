@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rl_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_main"
+    tools:context=".activity.settings.ProjectActivity">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/x_100"
+        android:layout_marginTop="@dimen/y_40"
+        android:text="@string/privacy_policy"
+        android:textColor="@color/white"
+        android:textSize="@dimen/x_40" />
+
+    <RelativeLayout
+        android:id="@+id/rl_user_consent"
+        style="@style/focusStyle"
+        android:layout_width="@dimen/x_1080"
+        android:layout_height="@dimen/y_80"
+        android:layout_below="@id/title"
+        android:layout_marginStart="@dimen/x_100"
+        android:layout_marginTop="@dimen/y_19"
+        android:background="@drawable/main_settings_bg">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/x_50"
+            android:duplicateParentState="true"
+            android:text="@string/agree_privacy_policy"
+            android:textColor="@color/tv_color"
+            android:textSize="@dimen/x_27" />
+
+        <View
+            android:layout_width="@dimen/x_53"
+            android:layout_height="@dimen/y_53"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="@dimen/x_50"
+            android:background="@drawable/arrow_right_bg"
+            android:duplicateParentState="true"
+            />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_export_data"
+        style="@style/focusStyle"
+        android:layout_width="@dimen/x_1080"
+        android:layout_height="@dimen/y_80"
+        android:layout_below="@id/rl_user_consent"
+        android:layout_marginStart="@dimen/x_100"
+        android:layout_marginTop="@dimen/y_19"
+        android:background="@drawable/main_settings_bg">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/x_50"
+            android:duplicateParentState="true"
+            android:text="@string/export_data"
+            android:textColor="@color/tv_color"
+            android:textSize="@dimen/x_27" />
+
+        <View
+            android:layout_width="@dimen/x_53"
+            android:layout_height="@dimen/y_53"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="@dimen/x_50"
+            android:background="@drawable/arrow_right_bg"
+            android:duplicateParentState="true"
+            />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_uc_off"
+        style="@style/focusStyle"
+        android:layout_width="@dimen/x_1080"
+        android:layout_height="@dimen/y_80"
+        android:layout_below="@id/rl_export_data"
+        android:layout_marginStart="@dimen/x_100"
+        android:layout_marginTop="@dimen/y_19"
+
+        android:background="@drawable/main_settings_bg">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/x_50"
+            android:duplicateParentState="true"
+            android:text="@string/revoke_policy"
+            android:textColor="@color/tv_color"
+            android:textSize="@dimen/x_27" />
+
+        <View
+            android:layout_width="@dimen/x_53"
+            android:layout_height="@dimen/y_53"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="@dimen/x_50"
+            android:background="@drawable/arrow_right_bg"
+            android:duplicateParentState="true"
+            />
+    </RelativeLayout>
+
+</RelativeLayout>

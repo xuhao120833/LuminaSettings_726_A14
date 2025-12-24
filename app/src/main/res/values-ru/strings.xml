@@ -341,5 +341,11 @@
     <string name="start_detect">Начать проверку</string>
     <string name="terms_use">Пользовательское соглашение</string>
     <string name="privacy_policy">Политика конфиденциальности</string>
+    <string name="privacy_terms">Политика конфиденциальности и Пользовательское соглашение</string>
+    <string name="agree_privacy_policy">Согласен с политикой конфиденциальности</string>
+    <string name="export_data">Экспорт данных</string>
+    <string name="revoke_policy">Отозвать разрешение</string>
+    <string name="export_data_tips">Экспортируемые данные включают данные обновления OTA и данные магазина приложений. Хотите экспортировать их сейчас?</string>
+    <string name="revoke_policy_tips">Отключение разрешения повлияет на нормальное использование. Подтвердить отключение?</string>
 </resources>
 

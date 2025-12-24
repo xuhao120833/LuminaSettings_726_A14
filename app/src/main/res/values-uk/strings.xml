@@ -341,5 +341,11 @@
     <string name="start_detect">Почати перевірку</string>
     <string name="terms_use">Користувацька угода</string>
     <string name="privacy_policy">Політика конфіденційності</string>
+    <string name="privacy_terms">Політика конфіденційності та Умови користування</string>
+    <string name="agree_privacy_policy">Прийняти політику конфіденційності</string>
+    <string name="export_data">Експортувати дані</string>
+    <string name="revoke_policy">Відкликати дозвіл</string>
+    <string name="export_data_tips">Експортовані дані містять дані оновлення OTA та дані магазину додатків. Бажаєте експортувати зараз?</string>
+    <string name="revoke_policy_tips">Вимкнення авторизації може вплинути на нормальне використання. Підтвердити вимкнення?</string>
 </resources>
 

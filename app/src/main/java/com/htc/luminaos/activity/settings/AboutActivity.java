@@ -95,8 +95,7 @@ public class AboutActivity extends BaseActivity {
         aboutBinding.rlUpdateFirmware.setOnClickListener(this);
         aboutBinding.rlOnlineUpdate.setOnClickListener(this);
         aboutBinding.rlEmailImage.setOnClickListener(this);
-        aboutBinding.rlTermsUse.setOnClickListener(this);
-        aboutBinding.rlPrivacyPolicy.setOnClickListener(this);
+        aboutBinding.rlPrivacyTerms.setOnClickListener(this);
         aboutBinding.rlDeviceModel.requestFocus();
         aboutBinding.rlDeviceModel.requestFocusFromTouch();
 
@@ -112,15 +111,13 @@ public class AboutActivity extends BaseActivity {
         aboutBinding.rlOnlineUpdate.setVisibility(MyApplication.config.onlineUpdate ? View.VISIBLE : View.GONE);
         aboutBinding.rlEmail.setVisibility(MyApplication.config.email ? View.VISIBLE : View.GONE);
         aboutBinding.rlEmailImage.setVisibility(MyApplication.config.about_support ? View.VISIBLE : View.GONE);
-        aboutBinding.rlTermsUse.setVisibility(MyApplication.config.termsUse ? View.VISIBLE : View.GONE);
-        aboutBinding.rlPrivacyPolicy.setVisibility(MyApplication.config.privacyPolicy ? View.VISIBLE : View.GONE);
+        aboutBinding.rlPrivacyTerms.setVisibility(MyApplication.config.privacyTerms ? View.VISIBLE : View.GONE);
 
         aboutBinding.rlDeviceModel.setOnHoverListener(this);
         aboutBinding.rlUpdateFirmware.setOnHoverListener(this);
         aboutBinding.rlOnlineUpdate.setOnHoverListener(this);
         aboutBinding.rlEmailImage.setOnHoverListener(this);
-        aboutBinding.rlTermsUse.setOnHoverListener(this);
-        aboutBinding.rlPrivacyPolicy.setOnHoverListener(this);
+        aboutBinding.rlPrivacyTerms.setOnHoverListener(this);
     }
 
     private void initData() {
@@ -209,16 +206,8 @@ public class AboutActivity extends BaseActivity {
             } else {
                 showSupportDialog();
             }
-        } else if (id == R.id.rl_terms_use) {
-            Intent intent = new Intent(this, TermsActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            intent.putExtra("type", "terms");
-            startActivity(intent);
-        } else if (id == R.id.rl_privacy_policy) {
-            Intent intent = new Intent(this, TermsActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            intent.putExtra("type", "privacy");
-            startActivity(intent);
+        } else if (id == R.id.rl_privacy_terms) {
+            startNewActivity(PrivacyTermsActivity.class);
         }
         super.onClick(v);
     }

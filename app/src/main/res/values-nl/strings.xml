@@ -341,4 +341,10 @@
     <string name="start_detect">Start detectie</string>
     <string name="terms_use">Gebruikersovereenkomst</string>
     <string name="privacy_policy">Privacybeleid</string>
+    <string name="privacy_terms">Privacybeleid en Gebruikersovereenkomst</string>
+    <string name="agree_privacy_policy">Privacybeleid Akkoord</string>
+    <string name="export_data">Gegevens Exporteren</string>
+    <string name="revoke_policy">Toestemming Intrekken</string>
+    <string name="export_data_tips">De geëxporteerde gegevens bevatten OTA-updates en app store-gegevens. Wilt u nu exporteren?</string>
+    <string name="revoke_policy_tips">Het intrekken van de machtiging kan het normale gebruik beïnvloeden. Weet u zeker dat u wilt intrekken?</string>
 </resources>

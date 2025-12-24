@@ -341,4 +341,10 @@
     <string name="start_detect">Mulai Deteksi</string>
     <string name="terms_use">Perjanjian Pengguna</string>
     <string name="privacy_policy">Kebijakan Privasi</string>
+    <string name="privacy_terms">Kebijakan Privasi &amp; Ketentuan Pengguna</string>
+    <string name="agree_privacy_policy">Setuju dengan Kebijakan Privasi</string>
+    <string name="export_data">Ekspor Data</string>
+    <string name="revoke_policy">Batalkan Izin</string>
+    <string name="export_data_tips">Data yang diekspor mencakup data pembaruan OTA dan data toko aplikasi, apakah ingin mengekspornya sekarang?</string>
+    <string name="revoke_policy_tips">Menonaktifkan otorisasi akan memengaruhi penggunaan normal, yakin ingin menonaktifkannya?</string>
 </resources>

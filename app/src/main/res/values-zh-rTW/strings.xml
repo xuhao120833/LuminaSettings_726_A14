@@ -341,4 +341,10 @@
 	<string name="start_detect">開始檢測</string>
 	<string name="terms_use">用戶協議</string>
 	<string name="privacy_policy">隱私政策</string>
+	<string name="privacy_terms">隱私政策與使用者協議</string>
+	<string name="agree_privacy_policy">同意隱私政策</string>
+	<string name="export_data">匯出資料</string>
+	<string name="revoke_policy">撤銷授權</string>
+	<string name="export_data_tips">匯出的資料包含 OTA 升級資料與應用商店資料，是否現在匯出？</string>
+	<string name="revoke_policy_tips">關閉授權後可能影響正常使用，確認要關閉嗎？</string>
 </resources>

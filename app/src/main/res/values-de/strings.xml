@@ -341,5 +341,11 @@
 	<string name="start_detect">Erkennung starten</string>
 	<string name="terms_use">Nutzervereinbarung</string>
 	<string name="privacy_policy">Datenschutzrichtlinie</string>
+	<string name="privacy_terms">Datenschutzrichtlinie und Nutzungsbedingungen</string>
+	<string name="agree_privacy_policy">Datenschutzrichtlinie akzeptieren</string>
+	<string name="export_data">Daten exportieren</string>
+	<string name="revoke_policy">Einwilligung widerrufen</string>
+	<string name="export_data_tips">Die exportierten Daten enthalten OTA-Update-Daten und App-Store-Daten. Möchten Sie jetzt exportieren?</string>
+	<string name="revoke_policy_tips">Wenn Sie die Berechtigung deaktivieren, kann dies die normale Nutzung beeinträchtigen. Möchten Sie wirklich deaktivieren?</string>
 </resources>
 

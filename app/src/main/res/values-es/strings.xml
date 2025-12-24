@@ -341,4 +341,10 @@
 	<string name="start_detect">Iniciar detección</string>
 	<string name="terms_use">Acuerdo de Usuario</string>
 	<string name="privacy_policy">Política de Privacidad</string>
+	<string name="privacy_terms">Política de privacidad y Términos de uso</string>
+	<string name="agree_privacy_policy">Aceptar la política de privacidad</string>
+	<string name="export_data">Exportar datos</string>
+	<string name="revoke_policy">Revocar autorización</string>
+	<string name="export_data_tips">Los datos exportados incluyen información de actualizaciones OTA y datos de la tienda de aplicaciones. ¿Desea exportarlos ahora?</string>
+	<string name="revoke_policy_tips">Cerrar la autorización afectará el uso normal. ¿Confirma que desea cerrar?</string>
 </resources>
