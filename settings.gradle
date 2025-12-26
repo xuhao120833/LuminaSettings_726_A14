@@ -1,2 +1,2 @@
 include ':app'
-rootProject.name = "LuminaOS_726_a14"
+rootProject.name = "LuminaSettings_726_a14"

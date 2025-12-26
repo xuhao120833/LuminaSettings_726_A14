@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/background_other"
     android:id="@+id/rl_main"
-    tools:context=".activity.settings.MainSettingActivity">
+    tools:context=".activity.MainSettingActivity">
 
     <TextView
         android:layout_width="wrap_content"

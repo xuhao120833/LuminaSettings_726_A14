@@ -1,4 +1,4 @@
-package com.htc.luminaos;
+package com.htc.luminasettings;
 
 import org.junit.Test;
 

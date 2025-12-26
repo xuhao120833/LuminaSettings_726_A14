@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.htc.luminaos.widget.RLRelativelayout
+<com.htc.luminasettings.widget.RLRelativelayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="@dimen/x_180"
     android:layout_height="@dimen/y_160"
@@ -33,4 +33,4 @@
         android:paddingEnd="@dimen/x_10"
         />
 
-</com.htc.luminaos.widget.RLRelativelayout>
+</com.htc.luminasettings.widget.RLRelativelayout>

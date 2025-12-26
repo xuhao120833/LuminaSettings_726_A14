@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.htc.luminaos"
+    package="com.htc.luminasettings"
     android:sharedUserId="android.uid.system">
     <!-- android:sharedUserId="android.uid.system" -->
     <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
@@ -44,10 +44,10 @@
         android:configChanges="fontScale|orientation|screenSize|keyboardHidden|smallestScreenSize|screenLayout"
         android:defaultToDeviceProtectedStorage="true"
         android:directBootAware="true"
-        android:icon="@drawable/luminaos"
+        android:icon="@drawable/logo"
         android:label="@string/app_name"
         android:largeHeap="true"
-        android:roundIcon="@drawable/luminaos"
+        android:roundIcon="@drawable/logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
@@ -106,22 +106,22 @@
             android:value="true" />
 
         <activity
-            android:name=".activity.settings.InitAngleActivity"
+            android:name=".activity.InitAngleActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.settings.PrivacyTermsActivity"
+            android:name=".activity.PrivacyTermsActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.settings.LocalUpdateActivity"
+            android:name=".activity.LocalUpdateActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.settings.AccountActivity"
+            android:name=".activity.AccountActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.settings.WifiIpSetActivity"
+            android:name=".activity.WifiIpSetActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.settings.BluetoothIncomingFileConfirmActivity"
+            android:name=".activity.BluetoothIncomingFileConfirmActivity"
             android:configChanges="keyboard|keyboardHidden|navigation"
             android:excludeFromRecents="true"
             android:exported="true"
@@ -139,37 +139,37 @@
             android:name=".activity.PasswordVerifyActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.settings.DisplaySettingsActivity"
+            android:name=".activity.DisplaySettingsActivity"
             android:exported="true"
             android:theme="@style/TransparentActivity" />
         <activity
-            android:name=".activity.settings.WiredActivity"
+            android:name=".activity.WiredActivity"
             android:exported="true" />
         <activity
-            android:name=".activity.settings.HotspotActivity"
+            android:name=".activity.HotspotActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.settings.NetworkActivity"
+            android:name=".activity.NetworkActivity"
             android:exported="true" />
-        <activity android:name=".activity.settings.DeveloperModeActivity" />
+        <activity android:name=".activity.DeveloperModeActivity" />
         <activity
-            android:name=".activity.settings.PowerActivity"
+            android:name=".activity.PowerActivity"
             android:exported="true"
             android:launchMode="singleTop"
             android:theme="@style/MyDialogStyleBottom" />
-        <activity android:name=".activity.settings.BluetoothSpeakerActivity" />
+        <activity android:name=".activity.BluetoothSpeakerActivity" />
         <activity
             android:name=".activity.WallPaperActivity"
             android:launchMode="singleInstance" />
-        <activity android:name=".activity.settings.AppsManagerActivity" />
+        <activity android:name=".activity.AppsManagerActivity" />
         <activity
             android:name=".activity.AppFavoritesActivity"
             android:launchMode="singleInstance" />
-        <activity android:name=".activity.settings.CorrectionActivity" />
-        <activity android:name=".activity.settings.PictureModeActivity" />
-        <activity android:name=".activity.settings.AudioModeActivity" />
+        <activity android:name=".activity.CorrectionActivity" />
+        <activity android:name=".activity.PictureModeActivity" />
+        <activity android:name=".activity.AudioModeActivity" />
         <activity
-            android:name=".activity.settings.BluetoothActivity"
+            android:name=".activity.BluetoothActivity"
             android:exported="true"
             android:launchMode="singleTop">
             <intent-filter android:priority="999">
@@ -178,12 +178,12 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.settings.DateTimeActivity" />
-        <activity android:name=".activity.settings.LanguageAndKeyboardActivity" />
-        <activity android:name=".activity.settings.AboutActivity" />
-        <activity android:name=".activity.settings.OtherSettingsActivity" />
+        <activity android:name=".activity.DateTimeActivity" />
+        <activity android:name=".activity.LanguageAndKeyboardActivity" />
+        <activity android:name=".activity.AboutActivity" />
+        <activity android:name=".activity.OtherSettingsActivity" />
         <activity
-            android:name=".activity.settings.WifiActivity"
+            android:name=".activity.WifiActivity"
             android:exported="true"
             android:launchMode="singleTop">
             <intent-filter android:priority="999">
@@ -202,36 +202,28 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.settings.ProjectActivity" />
+        <activity android:name=".activity.ProjectActivity" />
+        <activity android:name=".activity.MainActivity" />
         <activity
-            android:name=".activity.settings.MainSettingActivity"
-            android:exported="true"
-            android:launchMode="singleInstance" />
-        <activity
-            android:name=".activity.AppsActivity"
-            android:launchMode="singleInstance" />
-        <activity
-            android:name=".activity.MainActivity"
-            android:configChanges="locale|layoutDirection"
+            android:name=".activity.MainSettingActivity"
             android:exported="true"
             android:launchMode="singleInstance">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.HOME" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            <!-- 按如下格式添加整个intent-filter块，其中data字段只能有一个，其内容是mtj拼接上您的appkey -->
+
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
-
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-
                 <data android:scheme="mtj5dd227fad8" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".activity.AppsActivity"
+            android:launchMode="singleInstance" />
 
         <service
             android:name=".service.TimeOffService"

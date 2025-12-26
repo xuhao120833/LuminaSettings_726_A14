@@ -21,7 +21,7 @@
         android:layout_centerInParent="true"
         >
 
-        <com.htc.luminaos.widget.TextConfigNumberPicker
+        <com.htc.luminasettings.widget.TextConfigNumberPicker
             android:id="@+id/np_hour"
             android:layout_width="@dimen/x_80"
             android:layout_height="@dimen/y_180"
@@ -42,7 +42,7 @@
             skin:enable="true"
             />
 
-        <com.htc.luminaos.widget.TextConfigNumberPicker
+        <com.htc.luminasettings.widget.TextConfigNumberPicker
             android:id="@+id/np_minute"
             android:layout_width="@dimen/x_80"
             android:layout_height="@dimen/y_180"

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">LuminaOS</string>
+    <string name="app_name">LuminaSettings</string>
     <string name="wifi_remembered">保存されました</string>
     <string name="isconnected">(接続済み)</string>
     <string name="wifi_disabled_password_failure">認証に問題があります</string>
@@ -340,10 +340,10 @@
     <string name="local_update_tip5">5、アップデートが完了するまで待ちます。</string>
     <string name="start_detect">検出を開始</string>
     <string name="terms_use">利用規約</string>
-    <string name="privacy_policy">プライバシーポリシー</string>
+    <string name="privacy_policy">プライバシー</string>
     <string name="privacy_terms">プライバシーポリシーと利用規約</string>
     <string name="agree_privacy_policy">プライバシーポリシーに同意する</string>
-    <string name="export_data">データをエクスポート</string>
+    <string name="export_data">自分のデータをエクスポート</string>
     <string name="revoke_policy">権限を取り消す</string>
     <string name="export_data_tips">エクスポートするデータにはOTAアップデートデータとアプリストアデータが含まれます。今エクスポートしますか？</string>
     <string name="revoke_policy_tips">権限を解除すると正常に使用できなくなる可能性があります。解除してもよろしいですか？</string>

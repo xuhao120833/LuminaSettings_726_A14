@@ -12,7 +12,7 @@ extern int check_bd_data(char *pBuf);
 
 extern "C"
 JNIEXPORT jintArray JNICALL
-Java_com_htc_luminaos_utils_PxScale_getpxRatioxy(JNIEnv *env, jobject thiz, jintArray px4, jintArray py4, jint oldRatio, jint newRatio, jfloat scale, jint w, jint h) {
+Java_com_htc_luminasettings_utils_PxScale_getpxRatioxy(JNIEnv *env, jobject thiz, jintArray px4, jintArray py4, jint oldRatio, jint newRatio, jfloat scale, jint w, jint h) {
     jintArray intArray = env->NewIntArray(20);
     jint *intdata = env->GetIntArrayElements(intArray, NULL);
     jint *tpx4 = NULL;
@@ -27,7 +27,7 @@ Java_com_htc_luminaos_utils_PxScale_getpxRatioxy(JNIEnv *env, jobject thiz, jint
     }else{
         tpy4 = NULL;
     }
-    LOGD("CPP: Java_com_htc_luminaosdebug_PxScale_getpxRatioxy");
+    LOGD("CPP: Java_com_htc_luminasettingsdebug_PxScale_getpxRatioxy");
     memset(intdata,0,sizeof(int)*20);
     ratio_tra_point(intdata, tpx4, tpy4, oldRatio,newRatio, scale, w, h);
     env->ReleaseIntArrayElements(intArray, intdata, 0);
@@ -36,12 +36,12 @@ Java_com_htc_luminaos_utils_PxScale_getpxRatioxy(JNIEnv *env, jobject thiz, jint
 
 extern "C"
 JNIEXPORT jint JNICALL
-Java_com_htc_luminaos_utils_PxScale_checkbddata(JNIEnv *env, jobject thiz, jstring data) {
+Java_com_htc_luminasettings_utils_PxScale_checkbddata(JNIEnv *env, jobject thiz, jstring data) {
 	jint ret = 0;
 	int i;
 	char c,checkbuf[2048];
 	const char *str;
-	//LOGD("CPP: Java_com_htc_htcpublicsettings_util_PxScale_checkbddata");
+	//LOGD("CPP: Java_com_htc_luminasettings_util_PxScale_checkbddata");
 	str = env->GetStringUTFChars(data, NULL);
 	if(str == NULL){
 		return 0;

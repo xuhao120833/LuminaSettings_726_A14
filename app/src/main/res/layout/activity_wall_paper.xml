@@ -55,7 +55,7 @@
 
     </TextView>
 
-    <com.htc.luminaos.widget.FocusKeepRecyclerView
+    <com.htc.luminasettings.widget.FocusKeepRecyclerView
         android:id="@+id/wallpaper_rv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">LuminaOS</string>
+    <string name="app_name">LuminaSettings</string>
     <string name="wifi_remembered">Disimpan</string>
     <string name="isconnected">(Sambung)</string>
     <string name="wifi_disabled_password_failure">Masalah pengesahan</string>
@@ -340,10 +340,10 @@
     <string name="local_update_tip5">5. Tunggu sehingga proses naik taraf selesai.</string>
     <string name="start_detect">Mula Pengimbasan</string>
     <string name="terms_use">Perjanjian Pengguna</string>
-    <string name="privacy_policy">Dasar Privasi</string>
+    <string name="privacy_policy">Privasi</string>
     <string name="privacy_terms">Dasar Privasi &amp; Terma Pengguna</string>
     <string name="agree_privacy_policy">Setuju Dasar Privasi</string>
-    <string name="export_data">Eksport Data</string>
+    <string name="export_data">Eksport data saya</string>
     <string name="revoke_policy">Batalkan Kebenaran</string>
     <string name="export_data_tips">Data yang dieksport termasuk data kemas kini OTA dan data Kedai Aplikasi, adakah anda ingin mengeksport sekarang?</string>
     <string name="revoke_policy_tips">Menutup kebenaran akan menjejaskan penggunaan normal, sahkan untuk menutup?</string>

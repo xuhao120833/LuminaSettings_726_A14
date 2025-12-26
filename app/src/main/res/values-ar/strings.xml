@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">LuminaOS</string>
+    <string name="app_name">LuminaSettings</string>
     <string name="wifi_remembered">تم الحفظ</string>
     <string name="isconnected">(متصل)</string>
     <string name="wifi_disabled_password_failure">حدثت مشكلة في التحقق من الهوية</string>
@@ -340,10 +340,10 @@
     <string name="local_update_tip5">5. انتظر حتى يكتمل التحديث.</string>
     <string name="start_detect">بدء الفحص</string>
     <string name="terms_use">اتفاقية المستخدم</string>
-    <string name="privacy_policy">سياسة الخصوصية</string>
+    <string name="privacy_policy">الخصوصية</string>
     <string name="privacy_terms">سياسة الخصوصية واتفاقية المستخدم</string>
     <string name="agree_privacy_policy">الموافقة على سياسة الخصوصية</string>
-    <string name="export_data">تصدير البيانات</string>
+    <string name="export_data">تصدير بياناتي</string>
     <string name="revoke_policy">سحب التفويض</string>
     <string name="export_data_tips">البيانات المصدرة تشمل بيانات تحديث OTA وبيانات متجر التطبيقات، هل ترغب بالتصدير الآن؟</string>
     <string name="revoke_policy_tips">إيقاف التفويض سيؤثر على الاستخدام الطبيعي، هل أنت متأكد من الإيقاف؟</string>

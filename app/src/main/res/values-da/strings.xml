@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">LuminaOS</string>
+    <string name="app_name">LuminaSettings</string>
     <string name="wifi_remembered">Gemmes</string>
     <string name="isconnected">(Forbundet)</string>
     <string name="wifi_disabled_password_failure">Der opstod et problem med godkendelsen</string>
@@ -340,10 +340,10 @@
     <string name="local_update_tip5">5. Vent, indtil opdateringen er fuldført.</string>
     <string name="start_detect">Start kontrol</string>
     <string name="terms_use">Brugeraftale</string>
-    <string name="privacy_policy">Privatlivspolitik</string>
+    <string name="privacy_policy">Privatliv</string>
     <string name="privacy_terms">Privatlivspolitik og brugervilkår</string>
     <string name="agree_privacy_policy">Accepter privatlivspolitikken</string>
-    <string name="export_data">Eksporter data</string>
+    <string name="export_data">Eksportér mine data</string>
     <string name="revoke_policy">Tilbagekald samtykke</string>
     <string name="export_data_tips">De eksporterede data inkluderer OTA-opgraderingsdata og appbutiksdata. Vil du eksportere nu?</string>
     <string name="revoke_policy_tips">Hvis du lukker autorisationen, kan det påvirke normal brug. Er du sikker på, at du vil lukke den?</string>

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">LuminaOS</string>
+    <string name="app_name">LuminaSettings</string>
     <string name="wifi_remembered">შენახულია</string>
     <string name="isconnected">(დაკავშირებულია)</string>
     <string name="wifi_disabled_password_failure">ავტორიზაციის პრობლემა</string>
@@ -340,10 +340,10 @@
     <string name="local_update_tip5">5. დაელოდეთ განახლების დასრულებას.</string>
     <string name="start_detect">დაიწყეთ აღმოჩენა</string>
     <string name="terms_use">მომხმარებლის შეთანხმება</string>
-    <string name="privacy_policy">კონფიდენციალურობის პოლიტიკა</string>
+    <string name="privacy_policy">Მოხშობილება</string>
     <string name="privacy_terms">პირადი მონაცემების პოლიტიკა და მომხმარებლის შეთანხმება</string>
     <string name="agree_privacy_policy">ვეთანხმები პირადი მონაცემების პოლიტიკას</string>
-    <string name="export_data">მონაცემების ექსპორტი</string>
+    <string name="export_data">Შენთვის მონაცემთა ექსპორტი</string>
     <string name="revoke_policy">ხელმისაწვდომობის გაუქმება</string>
     <string name="export_data_tips">ექსპორტირებული მონაცემები შეიცავს OTA განახლების მონაცემებსა და აპლიკაციების მაღაზიის მონაცემებს. გსურთ ახლა ექსპორტი?</string>
     <string name="revoke_policy_tips">მომართვის შეწყვეტა გავლენას მოახდენს ჩვეულებრივ გამოყენებაზე. დარწმუნებული ხართ, რომ გინდათ შეწყვეტა?</string>

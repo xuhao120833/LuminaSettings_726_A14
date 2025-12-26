@@ -1,5 +1,5 @@
 <resources>
-	<string name="app_name">LuminaOS</string>
+	<string name="app_name">LuminaSettings</string>
 	<string name="wifi_remembered">Uloženo</string>
 	<string name="isconnected">(Připojeno)</string>
 	<string name="wifi_disabled_password_failure">Došlo k chybě ověřování</string>
@@ -340,10 +340,10 @@
 	<string name="local_update_tip5">5. Počkejte na dokončení aktualizace.</string>
 	<string name="start_detect">Spustit detekci</string>
 	<string name="terms_use">Uživatelská smlouva</string>
-	<string name="privacy_policy">Zásady ochrany osobních údajů</string>
+	<string name="privacy_policy">Ochrana soukromí</string>
 	<string name="privacy_terms">Zásady ochrany osobních údajů a podmínky používání</string>
 	<string name="agree_privacy_policy">Souhlasím se zásadami ochrany osobních údajů</string>
-	<string name="export_data">Exportovat data</string>
+	<string name="export_data">Exportovat moje data</string>
 	<string name="revoke_policy">Odvolat souhlas</string>
 	<string name="export_data_tips">Exportovaná data obsahují údaje o aktualizacích OTA a údaje z obchodu s aplikacemi. Chcete je nyní exportovat?</string>
 	<string name="revoke_policy_tips">Po zrušení autorizace může dojít k omezení funkčnosti. Opravdu chcete zrušit?</string>

@@ -20,7 +20,7 @@
         android:visibility="gone"
         skin:enable="true"
         />
-    <com.htc.luminaos.settings.widget.RL2Relativelayout
+    <com.htc.luminasettings.settings.widget.RL2Relativelayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/y_64"
         android:id="@+id/rl_current_version"
@@ -59,9 +59,9 @@
             skin:enable="true"
             />
 
-    </com.htc.luminaos.settings.widget.RL2Relativelayout>
+    </com.htc.luminasettings.settings.widget.RL2Relativelayout>
 
-    <com.htc.luminaos.settings.widget.RL2Relativelayout
+    <com.htc.luminasettings.settings.widget.RL2Relativelayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/y_64"
         android:id="@+id/rl_new_version"
@@ -100,7 +100,7 @@
             android:gravity="end"
             skin:enable="true"
             />
-    </com.htc.luminaos.settings.widget.RL2Relativelayout>
+    </com.htc.luminasettings.settings.widget.RL2Relativelayout>
 
     <RelativeLayout
         android:layout_width="match_parent"

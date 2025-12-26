@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/rl_main"
-    tools:context=".activity.settings.ProjectActivity"
+    tools:context=".activity.ProjectActivity"
     android:background="@drawable/background_main"
     >
 
@@ -20,7 +20,7 @@
         android:id="@+id/title"
         />
 
-    <com.htc.luminaos.view.CustomScrollView
+    <com.htc.luminasettings.view.CustomScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/title"
@@ -547,7 +547,7 @@
 
             </RelativeLayout>
         </RelativeLayout>
-    </com.htc.luminaos.view.CustomScrollView>
+    </com.htc.luminasettings.view.CustomScrollView>
 
 
 

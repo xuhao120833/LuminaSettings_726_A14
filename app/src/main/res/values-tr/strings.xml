@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">LuminaOS</string>
+    <string name="app_name">LuminaSettings</string>
     <string name="wifi_remembered">Kaydedildi</string>
     <string name="isconnected">(Bağlı)</string>
     <string name="wifi_disabled_password_failure">Kimlik doğrulama hatası</string>
@@ -340,10 +340,10 @@
     <string name="local_update_tip5">5. Güncellemenin tamamlanmasını bekleyin.</string>
     <string name="start_detect">Taramayı Başlat</string>
     <string name="terms_use">Kullanıcı Sözleşmesi</string>
-    <string name="privacy_policy">Gizlilik Politikası</string>
+    <string name="privacy_policy">Gizlilik</string>
     <string name="privacy_terms">Gizlilik Politikası ve Kullanıcı Sözleşmesi</string>
     <string name="agree_privacy_policy">Gizlilik Politikasını Kabul Et</string>
-    <string name="export_data">Verileri Dışa Aktar</string>
+    <string name="export_data">Verilerimi Dışa Aktar</string>
     <string name="revoke_policy">Yetkiyi Geri Al</string>
     <string name="export_data_tips">Dışa aktarılan veriler OTA güncelleme verilerini ve uygulama mağazası verilerini içerir. Şimdi dışa aktarmak istiyor musunuz?</string>
     <string name="revoke_policy_tips">Yetkilendirmeyi kapatmak normal kullanımı etkileyebilir. Kapatmak istediğinize emin misiniz?</string>

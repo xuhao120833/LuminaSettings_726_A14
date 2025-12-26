@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.htc.luminaos.widget.RLRelativelayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.htc.luminasettings.widget.RLRelativelayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/rl_item"
     style="@style/focusStyle"
     android:clickable="true"
@@ -11,7 +11,7 @@
     android:outlineProvider="none"
     android:background="@drawable/home_app_custom3">
 
-    <com.htc.luminaos.view.MyCircleImageView
+    <com.htc.luminasettings.view.MyCircleImageView
         android:id="@+id/icon"
         android:layout_width="@dimen/x_107"
         android:layout_height="@dimen/y_107"
@@ -29,7 +29,7 @@
     </TextView>
 
 
-</com.htc.luminaos.widget.RLRelativelayout>
+</com.htc.luminasettings.widget.RLRelativelayout>
 
     <!--<?xml version="1.0" encoding="utf-8"?>-->
     <!--<com.htc.luminaos.widget.RLRelativelayout xmlns:android="http://schemas.android.com/apk/res/android"-->

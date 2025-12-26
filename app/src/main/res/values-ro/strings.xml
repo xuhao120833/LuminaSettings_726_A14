@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">LuminaOS</string>
+    <string name="app_name">LuminaSettings</string>
     <string name="wifi_remembered">Salvat</string>
     <string name="isconnected">(Conectat)</string>
     <string name="wifi_disabled_password_failure">A apărut o problemă de autentificare</string>
@@ -340,10 +340,10 @@
     <string name="local_update_tip5">5. Așteptați finalizarea actualizării.</string>
     <string name="start_detect">Începe detectarea</string>
     <string name="terms_use">Acordul Utilizatorului</string>
-    <string name="privacy_policy">Politica de Confidențialitate</string>
+    <string name="privacy_policy">Конфиденциальность</string>
     <string name="privacy_terms">Politica de confidențialitate și Termeni de utilizare</string>
     <string name="agree_privacy_policy">Sunt de acord cu Politica de confidențialitate</string>
-    <string name="export_data">Exportă datele</string>
+    <string name="export_data">Экспорт моих данных</string>
     <string name="revoke_policy">Revocă autorizarea</string>
     <string name="export_data_tips">Datele exportate includ datele de actualizare OTA și datele magazinului de aplicații. Doriți să le exportați acum?</string>
     <string name="revoke_policy_tips">Dezactivarea autorizării va afecta funcționarea normală. Sunteți sigur că doriți să continuați?</string>

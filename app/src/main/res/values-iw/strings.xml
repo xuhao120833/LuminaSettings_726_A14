@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">LuminaOS</string>
+    <string name="app_name">LuminaSettings</string>
     <string name="wifi_remembered">נשמר</string>
     <string name="isconnected">(מחובר)</string>
     <string name="wifi_disabled_password_failure">אירעה בעיה באימות</string>
@@ -340,10 +340,10 @@
     <string name="local_update_tip5">5. המתינו לסיום העדכון.</string>
     <string name="start_detect">התחל בדיקה</string>
     <string name="terms_use">הסכם משתמש</string>
-    <string name="privacy_policy">מדיניות פרטיות</string>
+    <string name="privacy_policy">פרטיות</string>
     <string name="privacy_terms">מדיניות פרטיות ותנאי שימוש</string>
     <string name="agree_privacy_policy">הסכמה למדיניות הפרטיות</string>
-    <string name="export_data">ייצוא נתונים</string>
+    <string name="export_data">יצא את הנתונים שלי</string>
     <string name="revoke_policy">ביטול הרשאה</string>
     <string name="export_data_tips">הנתונים שיוצאו כוללים נתוני עדכון OTA ונתוני חנות האפליקציות, האם לייצא עכשיו?</string>
     <string name="revoke_policy_tips">לאחר ביטול ההרשאה הדבר עלול להשפיע על השימוש הרגיל, האם לאשר ביטול?</string>

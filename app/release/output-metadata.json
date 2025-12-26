@@ -4,16 +4,16 @@
     "type": "APK",
     "kind": "Directory"
   },
-  "applicationId": "com.htc.luminaos",
+  "applicationId": "com.htc.luminasettings",
   "variantName": "release",
   "elements": [
     {
       "type": "SINGLE",
       "filters": [],
       "attributes": [],
-      "versionCode": 325122409,
-      "versionName": "1.0.52",
-      "outputFile": "LuminaOS_726_A14_QZ-V1.0.52-25122409-release.apk"
+      "versionCode": 325122517,
+      "versionName": "1.0.01",
+      "outputFile": "LuminaSettings_A14_QZ-V1.0.01-25122517-release.apk"
     }
   ],
   "elementType": "File"

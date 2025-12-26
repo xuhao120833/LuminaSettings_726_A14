@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">LuminaOS</string>
+    <string name="app_name">LuminaSettings</string>
     <string name="wifi_remembered">Vistað</string>
     <string name="isconnected">(Tengt)</string>
     <string name="wifi_disabled_password_failure">Auðkenning mistókst</string>
@@ -340,10 +340,10 @@
     <string name="local_update_tip5">5. Bíddu þar til uppfærslan er lokið.</string>
     <string name="start_detect">Byrja að athuga</string>
     <string name="terms_use">Notendaskilmálar</string>
-    <string name="privacy_policy">Persónuverndarstefna</string>
+    <string name="privacy_policy">Persónuvernd</string>
     <string name="privacy_terms">Persónuvernd og notendaskilmálar</string>
     <string name="agree_privacy_policy">Samþykkja persónuvernd</string>
-    <string name="export_data">Flytja út gögn</string>
+    <string name="export_data">Flytja gögnin mín út</string>
     <string name="revoke_policy">Afturkalla heimild</string>
     <string name="export_data_tips">Útflutt gögn innihalda OTA uppfærslur og gögn úr app-verslun. Viltu flytja út núna?</string>
     <string name="revoke_policy_tips">Ef þú aftengir heimildina getur það haft áhrif á eðlilega notkun. Viltu staðfesta að aftengja?</string>

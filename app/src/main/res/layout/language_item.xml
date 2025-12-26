@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.htc.luminaos.widget.RL1Relativelayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.htc.luminasettings.widget.RL1Relativelayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="@dimen/x_1080"
     android:layout_height="@dimen/y_60"
     xmlns:skin="http://schemas.android.com/android/skin"
@@ -36,4 +36,4 @@
         android:layout_marginEnd="@dimen/x_50"
         skin:enable="true"
         />
-</com.htc.luminaos.widget.RL1Relativelayout>
+</com.htc.luminasettings.widget.RL1Relativelayout>

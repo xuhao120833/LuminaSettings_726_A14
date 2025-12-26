@@ -1,5 +1,5 @@
 <resources>
-	<string name="app_name">LuminaOS</string>
+	<string name="app_name">LuminaSettings</string>
 	<string name="wifi_remembered">Enregistré</string>
 	<string name="isconnected">(Connecté)</string>
 	<string name="wifi_disabled_password_failure">Problème d\'authentification</string>
@@ -340,10 +340,10 @@
 	<string name="local_update_tip5">5. Attendez que la mise à jour soit terminée.</string>
 	<string name="start_detect">Démarrer la détection</string>
 	<string name="terms_use">Accord Utilisateur</string>
-	<string name="privacy_policy">Politique de Confidentialité</string>
+	<string name="privacy_policy">Confidentialité</string>
 	<string name="privacy_terms">Politique de confidentialité et conditions d’utilisation</string>
 	<string name="agree_privacy_policy">Accepter la politique de confidentialité</string>
-	<string name="export_data">Exporter les données</string>
+	<string name="export_data">Exporter mes données</string>
 	<string name="revoke_policy">Révoquer l\’autorisation</string>
 	<string name="export_data_tips">Les données exportées incluent les mises à jour OTA et les données du magasin d\'applications. Voulez-vous exporter maintenant ?</string>
 	<string name="revoke_policy_tips">La désactivation de l\'autorisation affectera l\'utilisation normale. Confirmez-vous la désactivation ?</string>

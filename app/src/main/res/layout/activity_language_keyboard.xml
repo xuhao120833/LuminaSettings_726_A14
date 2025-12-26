@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/background_main"
     android:id="@+id/rl_main"
-    tools:context=".activity.settings.LanguageAndKeyboardActivity">
+    tools:context=".activity.LanguageAndKeyboardActivity">
 
     <TextView
         android:layout_width="wrap_content"
@@ -70,7 +70,7 @@
 
     </RelativeLayout>
 
-    <com.htc.luminaos.widget.RLRelativelayout
+    <com.htc.luminasettings.widget.RLRelativelayout
         android:layout_width="@dimen/x_1080"
         android:layout_height="@dimen/y_80"
         android:layout_below="@id/rl_language"
@@ -113,7 +113,7 @@
             android:duplicateParentState="true"
             />
 
-    </com.htc.luminaos.widget.RLRelativelayout>
+    </com.htc.luminasettings.widget.RLRelativelayout>
 
     <RelativeLayout
         android:layout_width="@dimen/x_1080"

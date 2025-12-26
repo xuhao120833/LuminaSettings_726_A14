@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">LuminaOS</string>
+    <string name="app_name">LuminaSettings</string>
     <string name="wifi_remembered">บันทึกแล้ว</string>
     <string name="isconnected">(เชื่อมต่อแล้ว)</string>
     <string name="wifi_disabled_password_failure">มีปัญหาการตรวจสอบสิทธิ์</string>
@@ -340,10 +340,10 @@
     <string name="local_update_tip5">5. รอจนกว่าการอัปเดตจะเสร็จสมบูรณ์</string>
     <string name="start_detect">เริ่มการตรวจสอบ</string>
     <string name="terms_use">ข้อตกลงผู้ใช้</string>
-    <string name="privacy_policy">นโยบายความเป็นส่วนตัว</string>
+    <string name="privacy_policy">ความเป็นส่วนตัว</string>
     <string name="privacy_terms">นโยบายความเป็นส่วนตัวและข้อกำหนดการใช้งาน</string>
     <string name="agree_privacy_policy">ยอมรับนโยบายความเป็นส่วนตัว</string>
-    <string name="export_data">ส่งออกข้อมูล</string>
+    <string name="export_data">ส่งออกข้อมูลของฉัน</string>
     <string name="revoke_policy">เพิกถอนสิทธิ์</string>
     <string name="export_data_tips">ข้อมูลที่ส่งออกมีข้อมูลการอัปเดต OTA และข้อมูลจากร้านแอป ต้องการส่งออกตอนนี้หรือไม่?</string>
     <string name="revoke_policy_tips">การปิดการอนุญาตอาจส่งผลต่อการใช้งานปกติ คุณแน่ใจหรือไม่ว่าต้องการปิด?</string>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.htc.luminaos.settings.widget.RL2Relativelayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.htc.luminasettings.settings.widget.RL2Relativelayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/rl_main"
@@ -140,4 +140,4 @@
 
     </TextView>
 
-</com.htc.luminaos.settings.widget.RL2Relativelayout>
+</com.htc.luminasettings.settings.widget.RL2Relativelayout>

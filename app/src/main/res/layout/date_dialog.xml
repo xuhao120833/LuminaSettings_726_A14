@@ -21,7 +21,7 @@
         android:orientation="horizontal"
         android:layout_centerInParent="true"
         >
-        <com.htc.luminaos.widget.TextConfigNumberPicker
+        <com.htc.luminasettings.widget.TextConfigNumberPicker
             android:id="@+id/np_year"
             android:layout_width="@dimen/x_120"
             android:layout_height="@dimen/y_180"
@@ -43,7 +43,7 @@
             skin:enable="true"
             />
 
-        <com.htc.luminaos.widget.TextConfigNumberPicker
+        <com.htc.luminasettings.widget.TextConfigNumberPicker
             android:id="@+id/np_month"
             android:layout_width="@dimen/x_80"
             android:layout_height="@dimen/y_180"
@@ -63,7 +63,7 @@
             skin:enable="true"
             />
 
-        <com.htc.luminaos.widget.TextConfigNumberPicker
+        <com.htc.luminasettings.widget.TextConfigNumberPicker
             android:id="@+id/np_day"
             android:layout_width="@dimen/x_80"
             android:layout_height="@dimen/y_180"

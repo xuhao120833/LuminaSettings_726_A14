@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/background_main"
     android:id="@+id/rl_main"
-    tools:context=".activity.settings.WifiActivity">
+    tools:context=".activity.WifiActivity">
 
     <TextView
         android:layout_width="wrap_content"
@@ -156,7 +156,7 @@
         android:background="@drawable/corner_line"
         />
 
-    <com.htc.luminaos.widget.FocusKeepRecyclerView
+    <com.htc.luminasettings.widget.FocusKeepRecyclerView
         android:layout_width="@dimen/x_1080"
         android:layout_height="wrap_content"
         android:id="@+id/wifi_rv"

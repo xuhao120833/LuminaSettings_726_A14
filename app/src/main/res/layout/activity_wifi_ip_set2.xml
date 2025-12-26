@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_main"
-    tools:context=".activity.settings.BluetoothActivity">
+    tools:context=".activity.BluetoothActivity">
 
     <TextView
         android:id="@+id/title"
@@ -87,7 +87,7 @@
         android:background="@drawable/corner_line" />
 
 
-    <com.htc.luminaos.view.CustomScrollView
+    <com.htc.luminasettings.view.CustomScrollView
         android:id="@+id/scroll_image"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -298,6 +298,6 @@
             </RelativeLayout>
         </RelativeLayout>
 
-    </com.htc.luminaos.view.CustomScrollView>
+    </com.htc.luminasettings.view.CustomScrollView>
 
 </RelativeLayout>

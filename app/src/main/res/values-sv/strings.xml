@@ -1,5 +1,5 @@
 <resources>
-	<string name="app_name">LuminaOS</string>
+	<string name="app_name">LuminaSettings</string>
 	<string name="wifi_remembered">Sparad</string>
 	<string name="isconnected">(Ansluten)</string>
 	<string name="wifi_disabled_password_failure">Autentiseringsproblem</string>
@@ -340,10 +340,10 @@
 	<string name="local_update_tip5">5. Vänta tills uppdateringen är klar.</string>
 	<string name="start_detect">Starta kontroll</string>
 	<string name="terms_use">Användaravtal</string>
-	<string name="privacy_policy">Integritetspolicy</string>
+	<string name="privacy_policy">Sekretess</string>
 	<string name="privacy_terms">Sekretesspolicy och användarvillkor</string>
 	<string name="agree_privacy_policy">Godkänn sekretesspolicy</string>
-	<string name="export_data">Exportera data</string>
+	<string name="export_data">Exportera mina data</string>
 	<string name="revoke_policy">Återkalla behörighet</string>
 	<string name="export_data_tips">De exporterade uppgifterna innehåller OTA-uppdateringsdata och appbutiksdata. Vill du exportera nu?</string>
 	<string name="revoke_policy_tips">Att stänga av auktorisering kan påverka normal användning. Vill du verkligen stänga av?</string>

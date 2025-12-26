@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">LuminaOS</string>
+    <string name="app_name">LuminaSettings</string>
     <string name="wifi_remembered">Mentve</string>
     <string name="isconnected">(Csatlakoztatva)</string>
     <string name="wifi_disabled_password_failure">Hitelesítési hiba</string>
@@ -340,7 +340,7 @@
     <string name="local_update_tip5">5. Attendez que la mise à jour soit terminée.</string>
     <string name="start_detect">Démarrer la détection</string>
     <string name="terms_use">Felhasználói Megállapodás</string>
-    <string name="privacy_policy">Adatvédelmi Szabályzat</string>
+    <string name="privacy_policy">Adatvédelem</string>
     <string name="privacy_terms">Adatvédelmi szabályzat és Felhasználási feltételek</string>
     <string name="agree_privacy_policy">Adatvédelmi szabályzat elfogadása</string>
     <string name="export_data">Adatok exportálása</string>

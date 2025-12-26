@@ -407,7 +407,7 @@
         </RelativeLayout>
     </LinearLayout>
 
-    <com.htc.luminaos.view.CustomScrollView
+    <com.htc.luminasettings.view.CustomScrollView
         android:id="@+id/audio_mode_scroll_view"
         android:layout_width="match_parent"
         android:layout_height="@dimen/y_552"
@@ -1061,6 +1061,6 @@
         </LinearLayout>
 
 
-    </com.htc.luminaos.view.CustomScrollView>
+    </com.htc.luminasettings.view.CustomScrollView>
 
 </LinearLayout>
