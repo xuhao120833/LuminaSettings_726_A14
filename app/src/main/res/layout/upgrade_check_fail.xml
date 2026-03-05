@@ -32,8 +32,6 @@
         android:textColor="@color/white"
         android:text="@string/retry"
         android:textSize="@dimen/x_25"
-        android:ellipsize="marquee"
-        android:singleLine="true"
         android:layout_marginStart="@dimen/x_30"
         android:layout_marginBottom="@dimen/y_30"
         />
@@ -51,8 +49,6 @@
         android:textColor="@color/white"
         android:text="@string/cancel"
         android:textSize="@dimen/x_25"
-        android:ellipsize="marquee"
-        android:singleLine="true"
         android:layout_marginEnd="@dimen/x_30"
         android:layout_marginBottom="@dimen/y_30"
         />

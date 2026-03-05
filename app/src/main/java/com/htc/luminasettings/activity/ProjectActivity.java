@@ -3,11 +3,13 @@ package com.htc.luminasettings.activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.hardware.hdmi.HdmiControlManager;
 import android.media.AudioManagerEx;
 import android.os.Bundle;
 import android.os.Handler;
@@ -105,6 +107,8 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
     private int maxMode = 2;
     AudioManagerEx audioManagerEx;
     DeviceModeManager modeManager;
+    private HdmiControlManager mHdmiControlManager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -137,6 +141,7 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
     }
 
     private void initView() {
+        mHdmiControlManager = (HdmiControlManager)getSystemService(Context.HDMI_CONTROL_SERVICE);
 //        projectBinding.rlDisplaySettings.setOnClickListener(this);
 //        projectBinding.rlDisplaySettings.setOnHoverListener(this);
         projectBinding.rlColorMode.setOnClickListener(this);
@@ -187,6 +192,9 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
         projectBinding.rlManualKeystone.setOnHoverListener(this);
         projectBinding.rlResetKeystone.setOnClickListener(this);
         projectBinding.rlResetKeystone.setOnHoverListener(this);
+        projectBinding.rlHdmiCecSwitch.setOnClickListener(this);
+        projectBinding.rlHdmiCecSwitch.setOnHoverListener(this);
+        projectBinding.hdmiCecSwitch.setOnClickListener(this);
         projectBinding.rlArcSwitch.setOnClickListener(this);
         projectBinding.rlArcSwitch.setOnHoverListener(this);
         projectBinding.arcSwitch.setOnClickListener(this);
@@ -257,6 +265,7 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
         projectBinding.rlDigitalZoom.setVisibility(MyApplication.config.wholeZoom ? View.VISIBLE : View.GONE);
         projectBinding.rlScreenZoom.setVisibility(MyApplication.config.screenZoom ? View.VISIBLE : View.GONE);
         projectBinding.rlAutoKeystone.setVisibility(MyApplication.config.autoKeystone ? View.VISIBLE : View.GONE);
+        projectBinding.rlHdmiCecSwitch.setVisibility(MyApplication.config.hdmi_cec_switch ? View.VISIBLE : View.GONE);
         projectBinding.rlArcSwitch.setVisibility(MyApplication.config.arcSwitch ? View.VISIBLE : View.GONE);
         if ((boolean) ShareUtil.get(this, Contants.KEY_DEVELOPER_MODE, false) || MyApplication.config.initAngleCorrect) {
             projectBinding.rlInitAngle.setVisibility(View.VISIBLE);
@@ -384,6 +393,12 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
         colorTemp_name = getResources().getStringArray(R.array.picture_mode_weimi_choices_no_custom);
         mColorTemp = pqControl.getColorTemperature();
         projectBinding.colorTempTv.setText(colorTemp_name[mColorTemp]);
+
+        if (getHdmiCecEnable()){
+            updateView(1);
+        } else {
+            updateView(0);
+        }
 
         audioManagerEx = new AudioManagerEx(this);
         ArrayList<String> audioDevices = audioManagerEx.getAudioDeviceActive(AudioManagerEx.AUDIO_OUTPUT_ACTIVE);
@@ -590,6 +605,14 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
 //            KeystoneUtils_726.writeGlobalSettings(this, KeystoneUtils_726.ZOOM_SCALE, zoom_scale);
             KeystoneUtils_726.writeSystemProperties(KeystoneUtils_726.PROP_ZOOM_SCALE, zoom_scale);
             updateSzoomTv();
+        }  else if(id == R.id.rl_hdmi_cec_switch || id == R.id.hdmi_cec_switch) {
+            if (projectBinding.hdmiCecSwitch.isChecked()) {
+                updateView(0);
+                enableHdmiCec(false);
+            }else {
+                updateView(1);
+                enableHdmiCec(true);
+            }
         } else if (id == R.id.arc_switch || id == R.id.rl_arc_switch) {
             boolean isChecked = projectBinding.arcSwitch.isChecked();
             projectBinding.arcSwitch.setChecked(!isChecked);
@@ -1314,6 +1337,34 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
         } else {
             SystemProperties.set("hotack.sensor.anti_shake", "0");
         }
+    }
+
+    /**
+     * Gets hdmi cec enable.
+     *
+     * @return the hdmi cec enable
+     */
+    public  boolean getHdmiCecEnable() {
+        return mHdmiControlManager.getHdmiCecEnabled() == HdmiControlManager.HDMI_CEC_CONTROL_ENABLED;
+    }
+
+    /**
+     * Enable hdmi cec.
+     *
+     * @param isEnable the is enable
+     */
+    public void enableHdmiCec(boolean isEnable) {
+        mHdmiControlManager.setHdmiCecEnabled(isEnable ? HdmiControlManager.HDMI_CEC_CONTROL_ENABLED : HdmiControlManager.HDMI_CEC_CONTROL_DISABLED);
+        if(!isEnable) {
+            mHdmiControlManager.setTvSendStandbyOnSleep(HdmiControlManager.TV_SEND_STANDBY_ON_SLEEP_DISABLED);
+            mHdmiControlManager.setTvWakeOnOneTouchPlay(HdmiControlManager.TV_WAKE_ON_ONE_TOUCH_PLAY_DISABLED);
+            mHdmiControlManager.setMenuLanguage(HdmiControlManager.SET_MENU_LANGUAGE_DISABLED);
+            mHdmiControlManager.setHandleUserControl(HdmiControlManager.HANDLE_USER_CONTROL_ENABLED);
+        }
+    }
+
+    private void updateView(int open){
+        projectBinding.hdmiCecSwitch.setChecked(open == 1);
     }
 
 }

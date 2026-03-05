@@ -893,6 +893,45 @@
                 android:layout_width="@dimen/x_1080"
                 android:layout_height="@dimen/y_80"
                 android:layout_below="@id/rl_calibration"
+                android:id="@+id/rl_hdmi_cec_switch"
+                android:layout_marginStart="@dimen/x_100"
+                android:layout_marginBottom="@dimen/y_19"
+                android:background="@drawable/main_settings_bg"
+                style="@style/focusStyle"
+                android:visibility="gone"
+                >
+
+                <TextView
+                    android:id="@+id/hdmi_cec_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/x_50"
+                    android:layout_centerVertical="true"
+                    android:textColor="@color/tv_color"
+                    android:textSize="@dimen/x_27"
+                    android:text="HDMI CEC"
+                    android:duplicateParentState="true"
+                    />
+
+                <androidx.appcompat.widget.SwitchCompat
+                    android:layout_width="@dimen/x_98"
+                    android:layout_height="@dimen/y_60"
+                    android:id="@+id/hdmi_cec_switch"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="@dimen/x_50"
+                    android:layout_centerVertical="true"
+                    android:checked="true"
+                    android:thumb="@drawable/switch_thumb"
+                    app:track="@drawable/switch_bg"
+                    app:switchMinWidth="@dimen/x_90"
+                    />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="@dimen/x_1080"
+                android:layout_height="@dimen/y_80"
+                android:layout_below="@id/rl_hdmi_cec_switch"
                 android:id="@+id/rl_arc_switch"
                 android:layout_marginStart="@dimen/x_100"
                 android:layout_marginBottom="@dimen/y_19"

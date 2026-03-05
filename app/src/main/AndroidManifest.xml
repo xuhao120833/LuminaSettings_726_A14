@@ -5,6 +5,7 @@
     android:sharedUserId="android.uid.system">
     <!-- android:sharedUserId="android.uid.system" -->
     <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+    <uses-permission android:name="android.permission.HDMI_CEC" />
     <uses-permission android:name="android.permission.REBOOT" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
