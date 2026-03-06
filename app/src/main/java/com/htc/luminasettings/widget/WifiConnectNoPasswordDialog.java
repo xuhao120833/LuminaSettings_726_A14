@@ -24,7 +24,7 @@ import com.htc.luminasettings.utils.LogUtils;
  * Date:
  * Description:
  */
-public class WifiConnectNoPasswordDialog extends Dialog implements View.OnClickListener {
+public class WifiConnectNoPasswordDialog extends Dialog implements View.OnClickListener, View.OnFocusChangeListener{
     private Context mContext;
     private View parent;
     private WifiConnectNoDialogBinding wifiConnectNoDialogBinding;
@@ -43,6 +43,12 @@ public class WifiConnectNoPasswordDialog extends Dialog implements View.OnClickL
         } else if (id == R.id.cancel) {
             dismiss();
         }
+    }
+
+    @Override
+    public void onFocusChange(View v, boolean hasFocus) {
+        int id = v.getId();
+        wifiConnectNoDialogBinding.enter.setSelected(id == R.id.enter && hasFocus);
     }
 
     public interface OnWifiConnectNoPasswordCallBack {
@@ -80,6 +86,7 @@ public class WifiConnectNoPasswordDialog extends Dialog implements View.OnClickL
         wifiConnectNoDialogBinding = WifiConnectNoDialogBinding.inflate(LayoutInflater.from(mContext));
         /*View view = LayoutInflater.from(mContext).inflate(
                 R.layout.wifi_settings_layout, null);*/
+        wifiConnectNoDialogBinding.enter.setOnFocusChangeListener(this);
         if (wifiConnectNoDialogBinding.getRoot() != null) {
             setContentView(wifiConnectNoDialogBinding.getRoot());
             initView();

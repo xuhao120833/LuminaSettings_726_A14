@@ -14,19 +14,18 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/y_30"
         />
-    
+
     <TextView
         android:layout_width="@dimen/x_337"
         android:layout_height="wrap_content"
         android:id="@+id/et_password"
-        android:layout_below="@id/connect_wifi_name"
-        android:layout_marginTop="@dimen/y_30"
+        android:layout_marginTop="@dimen/y_50"
         android:layout_centerHorizontal="true"
         android:text="@string/isconnect"
         android:textColor="@color/black"
         android:textSize="@dimen/x_21"
         />
-    
+
 
     <TextView
         android:layout_width="@dimen/x_150"
@@ -38,12 +37,14 @@
         android:focusableInTouchMode="true"
         android:background="@drawable/button_bg"
         android:textColor="@color/white"
+        android:singleLine="true"
+        android:ellipsize="marquee"
         android:text="@string/enter"
         android:textSize="@dimen/x_25"
         android:layout_marginStart="@dimen/x_30"
         android:layout_marginBottom="@dimen/y_30"
         />
-    
+
     <TextView
         android:layout_width="@dimen/x_150"
         android:layout_height="@dimen/y_60"

@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.os.SystemClock;
 import android.provider.Settings;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -25,6 +26,7 @@ import android.view.WindowManager;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 
+import com.htc.luminasettings.MyApplication;
 import com.htc.luminasettings.R;
 import com.htc.luminasettings.activity.BaseActivity;
 import com.htc.luminasettings.databinding.ActivityDateTimeBinding;
@@ -40,6 +42,7 @@ import com.htc.luminasettings.widget.TimezoneDialog;
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -131,10 +134,10 @@ public class DateTimeActivity extends BaseActivity implements View.OnKeyListener
 //        String displayName = tz.getDisplayName(false, TimeZone.LONG, locale);
 //        String displayName = getICUTimeZoneDisplayName(tz.getID(), locale);
         String displayName = searchDisplayName(Utils.list, timeZoneId);
-        if(displayName == null) {
+        if (displayName == null) {
             displayName = tz.getDisplayName(false, TimeZone.LONG, locale);
             long date = Calendar.getInstance().getTimeInMillis();
-            LogUtils.d(TAG, " displayName == null addItem " + timeZoneId+" "+displayName);
+            LogUtils.d(TAG, " displayName == null addItem " + timeZoneId + " " + displayName);
             addItem(Utils.list, timeZoneId, displayName, date);
         }
         StringBuilder builder = new StringBuilder();
@@ -518,8 +521,15 @@ public class DateTimeActivity extends BaseActivity implements View.OnKeyListener
                 if (xrp.getName().equals("timezone")) {
                     String id = xrp.getAttributeValue(0);
                     String displayName = xrp.nextText();
-                    addItem(myData, id, displayName, date);
-//                    LogUtils.d(TAG," getZones "+id+" "+displayName);
+//                    Log.d(TAG," getZones id "+id+" displayName "+displayName);
+                    //屏蔽特定时区
+                    if (blockTimeZones(id)) {
+                        Log.d(TAG, " getZones blockTimeZones " + id);
+                    } else {
+                        Log.d(TAG, " getZones addItem " + id);
+                        addItem(myData, id, displayName, date);
+                    }
+//                    Log.d(TAG," getZones "+id+" "+displayName);
                 }
                 while (xrp.getEventType() != XmlResourceParser.END_TAG) {
                     xrp.next();
@@ -535,8 +545,13 @@ public class DateTimeActivity extends BaseActivity implements View.OnKeyListener
         return myData;
     }
 
-    protected void addItem(List<HashMap> myData, String id, String displayName,
-                           long date) {
+    private boolean blockTimeZones(String id) {
+        Log.d(TAG," blockTimeZones "+ MyApplication.config.blocked_timezones);
+        List<String> timeList = Arrays.asList(MyApplication.config.blocked_timezones.split("\\s*,\\s*"));
+        return timeList.contains(id);
+    }
+
+    protected void addItem(List<HashMap> myData, String id, String displayName, long date) {
         HashMap map = new HashMap();
         map.put(Contants.KEY_ID, id);
         map.put(Contants.KEY_DISPLAYNAME, displayName);
