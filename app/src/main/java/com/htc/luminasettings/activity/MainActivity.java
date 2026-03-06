@@ -1809,7 +1809,7 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
         requestData.put("model", SystemProperties.get("persist.sys.modelName", "project"));
         requestData.put("sysVersion", Constants.getHtcDisplay());
         try {
-            requestData.put("verCode", getPackageManager().getPackageInfo(getPackageName(), 0).versionCode);
+            requestData.put("verCode", getPackageManager().getPackageInfo("com.htc.storeos", 0).versionCode);
         } catch (PackageManager.NameNotFoundException e) {
             requestData.put("verCode", 10);
             throw new RuntimeException(e);
@@ -1832,7 +1832,7 @@ public class MainActivity extends BaseMainActivity implements BluetoothCallBcak,
             if (appName.equals(appsData.getName())) {
                 Intent intent = new Intent();
                 intent.setComponent(new ComponentName("com.htc.storeos", "com.htc.storeos.AppDetailActivity"));
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 intent.putExtra("appData", new Gson().toJson(appsData));
                 startActivity(intent);
                 return;
