@@ -13,6 +13,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.provider.Settings;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.InputMethodInfo;
@@ -183,7 +184,7 @@ public class LanguageAndKeyboardActivity extends BaseActivity {
             String language = "";
             String country = "";
             Locale l = null;
-            if(s.equals("zh") || s.equals("en-XA") || s.equals("en-XC"))//1、中国只处理zh-CN、zh-HK、zh-TW三种情况
+            if(s.equals("zh") || s.equals("en-XA") || s.equals("en-XC"))//1、中国只处理zh-CN、zh-HK、zh-TW三种情况，zh这种没有国家码的不处理
                 continue;//2、Android 14增加了en-XA、en-XC（伪本地化语言)，必须过滤掉
 
             // 检查是否包含国家码
@@ -198,6 +199,13 @@ public class LanguageAndKeyboardActivity extends BaseActivity {
                 language = s;
                 l = new Locale(language);
             }
+
+            //屏蔽掉不需要的语言
+            if(!MyApplication.config.blocked_language.isEmpty() && blockedLanguage(s,language)) {
+                Log.d(TAG," blocked_language屏蔽 "+s);
+                continue;
+            }
+
             if (finalSize == 0) {
                 preprocess[finalSize++] = new Language(toTitleCase(l.getDisplayLanguage(l)), l);
             } else {
@@ -233,10 +241,10 @@ public class LanguageAndKeyboardActivity extends BaseActivity {
             }
         }
         Arrays.sort(mLocales2);
-        for (int b = 0; b < mLocales2.length; b++) {
-            LogUtils.d(TAG, " 语言列表 排序后 getLabel " + mLocales2[b].getLabel() + " " + mLocales2.length
-                    +" "+mLocales2[b].getLocale().getLanguage()+" "+mLocales2[b].getLocale().getCountry());
-        }
+//        for (int b = 0; b < mLocales2.length; b++) {
+//            LogUtils.d(TAG, " 语言列表 排序后 getLabel " + mLocales2[b].getLabel() + " " + mLocales2.length
+//                    +" "+mLocales2[b].getLocale().getLanguage()+" "+mLocales2[b].getLocale().getCountry());
+//        }
         // Arrays.sort(preprocess);
         mLocales = new ArrayList<>(Arrays.asList(mLocales2));
         LogUtils.d(TAG, " buildLangListItem 最后的列表长度 " + mLocales.size());
@@ -293,6 +301,14 @@ public class LanguageAndKeyboardActivity extends BaseActivity {
 //        }
 //    }
 
+    private boolean blockedLanguage(String s, String language) {
+        List<String> languageList = Arrays.asList(MyApplication.config.blocked_language.split("\\s*,\\s*"));
+        if(language.equals("zh") || language.equals("en")){
+            return languageList.contains(s);
+        } else {
+            return languageList.contains(language);
+        }
+    }
 
     /**
      * 首字符大写

@@ -135,6 +135,9 @@ public class Config {
 
     public int audio_par = 100;
     public int audio_nar = -100;
+
+    public String blocked_language = "";
+    public String blocked_timezones = "";
     public boolean wlanMacAddress = true;
     public boolean updateFirmware = true;
     public boolean onlineUpdate = true;
