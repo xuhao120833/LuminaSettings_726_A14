@@ -14,6 +14,7 @@ import android.media.AudioManagerEx;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemProperties;
+import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -265,6 +266,7 @@ public class ProjectActivity extends BaseActivity implements View.OnKeyListener,
         projectBinding.rlDigitalZoom.setVisibility(MyApplication.config.wholeZoom ? View.VISIBLE : View.GONE);
         projectBinding.rlScreenZoom.setVisibility(MyApplication.config.screenZoom ? View.VISIBLE : View.GONE);
         projectBinding.rlAutoKeystone.setVisibility(MyApplication.config.autoKeystone ? View.VISIBLE : View.GONE);
+        Log.d(TAG," config.hdmi_cec_switch "+MyApplication.config.hdmi_cec_switch);
         projectBinding.rlHdmiCecSwitch.setVisibility(MyApplication.config.hdmi_cec_switch ? View.VISIBLE : View.GONE);
         projectBinding.rlArcSwitch.setVisibility(MyApplication.config.arcSwitch ? View.VISIBLE : View.GONE);
         if ((boolean) ShareUtil.get(this, Contants.KEY_DEVELOPER_MODE, false) || MyApplication.config.initAngleCorrect) {

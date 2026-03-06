@@ -131,7 +131,7 @@ public class Config {
     public boolean memory = true;
     public int memoryScale = 1;
     public boolean storage = true;
-    public int storageScale = 1;
+    public float storageScale = 1.0f;
     public boolean wlanMacAddress = true;
     public boolean updateFirmware = true;
     public boolean onlineUpdate = true;

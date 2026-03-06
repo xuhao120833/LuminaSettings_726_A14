@@ -8,6 +8,7 @@ import android.os.Environment;
 import android.os.StatFs;
 import android.os.SystemProperties;
 import android.text.format.Formatter;
+import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -275,7 +276,7 @@ public class ClearMemoryUtils {
      *
      * @return
      */
-    public static String getRomAvailableSize(Context context, int scale) {
+    public static String getRomAvailableSize(Context context, float scale, int number_total) {
         File path = Environment.getDataDirectory();
         StatFs stat = new StatFs(path.getPath());
         long blockSize = stat.getBlockSize();
@@ -289,7 +290,13 @@ public class ClearMemoryUtils {
         int size = SystemProperties.getInt("persist.sys.mem_reserve", 0);
         final long RESERVED_BYTES = (long) size * 1024 * 1024;
 
-        long Available = blockSize * availableBlocks * scale - RESERVED_BYTES * scale;
+        long Available = (long) (blockSize * availableBlocks - RESERVED_BYTES);
+        if (scale == 0.5 && number_total == 16) {
+            Log.d(TAG,"getRomAvailableSize Available "+Available);
+            Available = (long) (Available * scale - 2L * 1024 * 1024 * 1024);
+        } else if (scale > 1) {
+            Available = (long) (Available * scale);
+        }
         if (Available <= 0) {
             return "0B";
         } else {

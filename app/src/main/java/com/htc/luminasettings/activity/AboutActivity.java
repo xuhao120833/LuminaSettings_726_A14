@@ -300,10 +300,16 @@ public class AboutActivity extends BaseActivity {
             // TODO: handle exception
             total = ClearMemoryUtils.getRomTotalSize(this);
         }
-        total = String.valueOf(number_total * MyApplication.config.storageScale) + " GB";
+        if (MyApplication.config.storageScale == 0.5) {
+            if (number_total == 16) {
+                total = String.valueOf(number_total * MyApplication.config.storageScale) + " GB";
+            }
+        } else if (MyApplication.config.storageScale > 1) {
+            total = String.valueOf(number_total * MyApplication.config.storageScale) + " GB";
+        }
         LogUtils.d(TAG, "getStorageSize total " + total);
         aboutBinding.storageTv.setText(total + "/"
-                + ClearMemoryUtils.getRomAvailableSize(this, MyApplication.config.storageScale));
+                + ClearMemoryUtils.getRomAvailableSize(this, MyApplication.config.storageScale, number_total));
     }
 
     private String getResolution() {
