@@ -10,6 +10,7 @@ import android.media.AudioSettingParams;
 import android.os.Build;
 import android.os.Handler;
 import android.os.SystemProperties;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -26,6 +27,7 @@ import com.htc.luminasettings.utils.ReflectUtil;
 import com.htc.luminasettings.utils.Utils;
 import com.softwinner.PQControl;
 import com.softwinner.tv.AwTvDisplayManager;
+import com.softwinner.tv.common.AwTvAudioTypes;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -566,7 +568,7 @@ public class DisplaySettingsReceiver extends BroadcastReceiver implements View.O
                 }
                 audioManager = null;
             } else if (id == R.id.rl_100hz) {
-                if (value_100hz == -100)
+                if (value_100hz == MyApplication.config.audio_nar)
                     return false;
                 value_100hz -= 1;
                 displaySettingsBinding.tv100hz.setText(String.valueOf(value_100hz));
@@ -574,7 +576,7 @@ public class DisplaySettingsReceiver extends BroadcastReceiver implements View.O
                 Utils.audio_change = true;
                 return true;
             } else if (id == R.id.rl_500hz) {
-                if (value_500hz == -100)
+                if (value_500hz == MyApplication.config.audio_nar)
                     return false;
                 value_500hz -= 1;
                 displaySettingsBinding.tv500hz.setText(String.valueOf(value_500hz));
@@ -582,7 +584,7 @@ public class DisplaySettingsReceiver extends BroadcastReceiver implements View.O
                 Utils.audio_change = true;
                 return true;
             } else if (id == R.id.rl_2khz) {
-                if (value_2khz == -100)
+                if (value_2khz == MyApplication.config.audio_nar)
                     return false;
                 value_2khz -= 1;
                 displaySettingsBinding.tv2khz.setText(String.valueOf(value_2khz));
@@ -590,7 +592,7 @@ public class DisplaySettingsReceiver extends BroadcastReceiver implements View.O
                 Utils.audio_change = true;
                 return true;
             } else if (id == R.id.rl_4khz) {
-                if (value_4khz == -100)
+                if (value_4khz == MyApplication.config.audio_nar)
                     return false;
                 value_4khz -= 1;
                 displaySettingsBinding.tv4khz.setText(String.valueOf(value_4khz));
@@ -598,7 +600,7 @@ public class DisplaySettingsReceiver extends BroadcastReceiver implements View.O
                 Utils.audio_change = true;
                 return true;
             } else if (id == R.id.rl_6khz) {
-                if (value_6khz == -100)
+                if (value_6khz == MyApplication.config.audio_nar)
                     return false;
                 value_6khz -= 1;
                 displaySettingsBinding.tv6khz.setText(String.valueOf(value_6khz));
@@ -606,7 +608,7 @@ public class DisplaySettingsReceiver extends BroadcastReceiver implements View.O
                 Utils.audio_change = true;
                 return true;
             } else if (id == R.id.rl_8khz) {
-                if (value_8khz == -100)
+                if (value_8khz == MyApplication.config.audio_nar)
                     return false;
                 value_8khz -= 1;
                 displaySettingsBinding.tv8khz.setText(String.valueOf(value_8khz));
@@ -614,7 +616,7 @@ public class DisplaySettingsReceiver extends BroadcastReceiver implements View.O
                 Utils.audio_change = true;
                 return true;
             } else if (id == R.id.rl_10khz) {
-                if (value_10khz == -100)
+                if (value_10khz == MyApplication.config.audio_nar)
                     return false;
                 value_10khz -= 1;
                 displaySettingsBinding.tv10khz.setText(String.valueOf(value_10khz));
@@ -622,7 +624,7 @@ public class DisplaySettingsReceiver extends BroadcastReceiver implements View.O
                 Utils.audio_change = true;
                 return true;
             } else if (id == R.id.rl_12khz) {
-                if (value_12khz == -100)
+                if (value_12khz == MyApplication.config.audio_nar)
                     return false;
                 value_12khz -= 1;
                 displaySettingsBinding.tv12khz.setText(String.valueOf(value_12khz));
@@ -630,7 +632,7 @@ public class DisplaySettingsReceiver extends BroadcastReceiver implements View.O
                 Utils.audio_change = true;
                 return true;
             } else if (id == R.id.rl_14khz) {
-                if (value_14khz == -100)
+                if (value_14khz == MyApplication.config.audio_nar)
                     return false;
                 value_14khz -= 1;
                 displaySettingsBinding.tv14khz.setText(String.valueOf(value_14khz));
@@ -638,7 +640,7 @@ public class DisplaySettingsReceiver extends BroadcastReceiver implements View.O
                 Utils.audio_change = true;
                 return true;
             } else if (id == R.id.rl_18khz) {
-                if (value_18khz == -100)
+                if (value_18khz == MyApplication.config.audio_nar)
                     return false;
                 value_18khz -= 1;
                 displaySettingsBinding.tv18khz.setText(String.valueOf(value_18khz));
@@ -770,7 +772,7 @@ public class DisplaySettingsReceiver extends BroadcastReceiver implements View.O
                 }
                 audioManager = null;
             } else if (id == R.id.rl_100hz) {
-                if (value_100hz == 100)
+                if (value_100hz == MyApplication.config.audio_par)
                     return false;
                 value_100hz += 1;
                 displaySettingsBinding.tv100hz.setText(String.valueOf(value_100hz));
@@ -778,7 +780,7 @@ public class DisplaySettingsReceiver extends BroadcastReceiver implements View.O
                 Utils.audio_change = true;
                 return true;
             } else if (id == R.id.rl_500hz) {
-                if (value_500hz == 100)
+                if (value_500hz == MyApplication.config.audio_par)
                     return false;
                 value_500hz += 1;
                 displaySettingsBinding.tv500hz.setText(String.valueOf(value_500hz));
@@ -786,7 +788,7 @@ public class DisplaySettingsReceiver extends BroadcastReceiver implements View.O
                 Utils.audio_change = true;
                 return true;
             } else if (id == R.id.rl_2khz) {
-                if (value_2khz == 100)
+                if (value_2khz == MyApplication.config.audio_par)
                     return false;
                 value_2khz += 1;
                 displaySettingsBinding.tv2khz.setText(String.valueOf(value_2khz));
@@ -794,7 +796,7 @@ public class DisplaySettingsReceiver extends BroadcastReceiver implements View.O
                 Utils.audio_change = true;
                 return true;
             } else if (id == R.id.rl_4khz) {
-                if (value_4khz == 100)
+                if (value_4khz == MyApplication.config.audio_par)
                     return false;
                 value_4khz += 1;
                 displaySettingsBinding.tv4khz.setText(String.valueOf(value_4khz));
@@ -802,7 +804,7 @@ public class DisplaySettingsReceiver extends BroadcastReceiver implements View.O
                 Utils.audio_change = true;
                 return true;
             } else if (id == R.id.rl_6khz) {
-                if (value_6khz == 100)
+                if (value_6khz == MyApplication.config.audio_par)
                     return false;
                 value_6khz += 1;
                 displaySettingsBinding.tv6khz.setText(String.valueOf(value_6khz));
@@ -810,7 +812,7 @@ public class DisplaySettingsReceiver extends BroadcastReceiver implements View.O
                 Utils.audio_change = true;
                 return true;
             } else if (id == R.id.rl_8khz) {
-                if (value_8khz == 100)
+                if (value_8khz == MyApplication.config.audio_par)
                     return false;
                 value_8khz += 1;
                 displaySettingsBinding.tv8khz.setText(String.valueOf(value_8khz));
@@ -818,7 +820,7 @@ public class DisplaySettingsReceiver extends BroadcastReceiver implements View.O
                 Utils.audio_change = true;
                 return true;
             } else if (id == R.id.rl_10khz) {
-                if (value_10khz == 100)
+                if (value_10khz == MyApplication.config.audio_par)
                     return false;
                 value_10khz += 1;
                 displaySettingsBinding.tv10khz.setText(String.valueOf(value_10khz));
@@ -826,7 +828,7 @@ public class DisplaySettingsReceiver extends BroadcastReceiver implements View.O
                 Utils.audio_change = true;
                 return true;
             } else if (id == R.id.rl_12khz) {
-                if (value_12khz == 100)
+                if (value_12khz == MyApplication.config.audio_par)
                     return false;
                 value_12khz += 1;
                 displaySettingsBinding.tv12khz.setText(String.valueOf(value_12khz));
@@ -834,7 +836,7 @@ public class DisplaySettingsReceiver extends BroadcastReceiver implements View.O
                 Utils.audio_change = true;
                 return true;
             } else if (id == R.id.rl_14khz) {
-                if (value_14khz == 100)
+                if (value_14khz == MyApplication.config.audio_par)
                     return false;
                 value_14khz += 1;
                 displaySettingsBinding.tv14khz.setText(String.valueOf(value_14khz));
@@ -842,7 +844,7 @@ public class DisplaySettingsReceiver extends BroadcastReceiver implements View.O
                 Utils.audio_change = true;
                 return true;
             } else if (id == R.id.rl_18khz) {
-                if (value_18khz == 100)
+                if (value_18khz == MyApplication.config.audio_par)
                     return false;
                 value_18khz += 1;
                 displaySettingsBinding.tv18khz.setText(String.valueOf(value_18khz));
@@ -1041,70 +1043,70 @@ public class DisplaySettingsReceiver extends BroadcastReceiver implements View.O
 //            updateAllEQValue();
             updateAudioStatus();
         } else if (id == R.id.rl_100hz) {
-            if (value_100hz == 100)
+            if (value_100hz == MyApplication.config.audio_par)
                 return;
             value_100hz += 1;
             displaySettingsBinding.tv100hz.setText(String.valueOf(value_100hz));
             updateSettingIntValue(KEY_BQ_1, value_100hz);
             Utils.audio_change = true;
         } else if (id == R.id.rl_500hz) {
-            if (value_500hz == 100)
+            if (value_500hz == MyApplication.config.audio_par)
                 return;
             value_500hz += 1;
             displaySettingsBinding.tv500hz.setText(String.valueOf(value_500hz));
             updateSettingIntValue(KEY_BQ_2, value_500hz);
             Utils.audio_change = true;
         } else if (id == R.id.rl_2khz) {
-            if (value_2khz == 100)
+            if (value_2khz == MyApplication.config.audio_par)
                 return;
             value_2khz += 1;
             displaySettingsBinding.tv2khz.setText(String.valueOf(value_2khz));
             updateSettingIntValue(KEY_BQ_3, value_2khz);
             Utils.audio_change = true;
         } else if (id == R.id.rl_4khz) {
-            if (value_4khz == 100)
+            if (value_4khz == MyApplication.config.audio_par)
                 return;
             value_4khz += 1;
             displaySettingsBinding.tv4khz.setText(String.valueOf(value_4khz));
             updateSettingIntValue(KEY_BQ_4, value_4khz);
             Utils.audio_change = true;
         } else if (id == R.id.rl_6khz) {
-            if (value_6khz == 100)
+            if (value_6khz == MyApplication.config.audio_par)
                 return;
             value_6khz += 1;
             displaySettingsBinding.tv6khz.setText(String.valueOf(value_6khz));
             updateSettingIntValue(KEY_BQ_5, value_6khz);
             Utils.audio_change = true;
         } else if (id == R.id.rl_8khz) {
-            if (value_8khz == 100)
+            if (value_8khz == MyApplication.config.audio_par)
                 return;
             value_8khz += 1;
             displaySettingsBinding.tv8khz.setText(String.valueOf(value_8khz));
             updateSettingIntValue(KEY_BQ_6, value_8khz);
             Utils.audio_change = true;
         } else if (id == R.id.rl_10khz) {
-            if (value_10khz == 100)
+            if (value_10khz == MyApplication.config.audio_par)
                 return;
             value_10khz += 1;
             displaySettingsBinding.tv10khz.setText(String.valueOf(value_10khz));
             updateSettingIntValue(KEY_BQ_7, value_10khz);
             Utils.audio_change = true;
         } else if (id == R.id.rl_12khz) {
-            if (value_12khz == 100)
+            if (value_12khz == MyApplication.config.audio_par)
                 return;
             value_12khz += 1;
             displaySettingsBinding.tv12khz.setText(String.valueOf(value_12khz));
             updateSettingIntValue(KEY_BQ_8, value_12khz);
             Utils.audio_change = true;
         } else if (id == R.id.rl_14khz) {
-            if (value_14khz == 100)
+            if (value_14khz == MyApplication.config.audio_par)
                 return;
             value_14khz += 1;
             displaySettingsBinding.tv14khz.setText(String.valueOf(value_14khz));
             updateSettingIntValue(KEY_BQ_9, value_14khz);
             Utils.audio_change = true;
         } else if (id == R.id.rl_18khz) {
-            if (value_18khz == 100)
+            if (value_18khz == MyApplication.config.audio_par)
                 return;
             value_18khz += 1;
             displaySettingsBinding.tv18khz.setText(String.valueOf(value_18khz));

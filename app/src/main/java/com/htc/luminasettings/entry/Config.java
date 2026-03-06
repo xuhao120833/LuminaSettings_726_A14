@@ -132,6 +132,9 @@ public class Config {
     public int memoryScale = 1;
     public boolean storage = true;
     public float storageScale = 1.0f;
+
+    public int audio_par = 100;
+    public int audio_nar = -100;
     public boolean wlanMacAddress = true;
     public boolean updateFirmware = true;
     public boolean onlineUpdate = true;
